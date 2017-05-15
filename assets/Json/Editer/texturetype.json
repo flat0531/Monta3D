@@ -1,0 +1,56 @@
+{
+  "maptexture": [
+    {
+      "texturename": "rect.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "normalbox.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "roadgreen.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "wallgreen.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "tree.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "hulffloor.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "hei.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "kanbanidou.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "kanbantobu.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "kanbanattack.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "door.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "renga.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "doorin.png",
+      "isalpha": true
+    }
+  ]
+}

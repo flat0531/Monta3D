@@ -1,0 +1,26 @@
+[
+  {
+   "cameratype": "player"
+  },
+  {
+    "cameratype": "player"
+  },
+  {
+    "cameratype": "player"
+  },
+  {
+    "cameratype": "xlock",
+    "pos": -10
+  },
+  {
+    "cameratype": "ylock",
+    "eyepos": 3,
+    "center": 3
+  },
+  {
+    "cameratype": "xylock",
+    "posx": -30.5,
+    "posy": 9.0,
+    "centery": 3.0
+  }
+]

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0B3350A2-DF33-4E9B-8A6F-4232231FCAD1}</ProjectGuid>
+    <RootNamespace>TemplateProject</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\include;"..\..\cinder_0.8.6_vs2015\include";"..\..\cinder_0.8.6_vs2015\boost";C:\Program Files\Autodesk\FBX\FBX SDK\2017.1\include;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\cinder_0.8.6_vs2015\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset)_d.lib;%(AdditionalDependencies);libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\cinder_0.8.6_vs2015\lib\msw\$(PlatformTarget);C:\Program Files\Autodesk\FBX\FBX SDK\2017.1\lib\vs2015\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "C:\Program Files\Autodesk\FBX\FBX SDK\2017.1\lib\vs2015\$(PlatformTarget)\$(Configuration)\libfbxsdk.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\include;"..\..\cinder_0.8.6_vs2015\include";"..\..\cinder_0.8.6_vs2015\boost";C:\Program Files\Autodesk\FBX\FBX SDK\2017.1\include;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\cinder_0.8.6_vs2015\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset).lib;%(AdditionalDependencies);libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\cinder_0.8.6_vs2015\lib\msw\$(PlatformTarget);C:\Program Files\Autodesk\FBX\FBX SDK\2017.1\lib\vs2015\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding />
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "C:\Program Files\Autodesk\FBX\FBX SDK\2017.1\lib\vs2015\$(PlatformTarget)\$(Configuration)\libfbxsdk.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CharacterAction\CatAction.cpp" />
+    <ClCompile Include="..\src\CharacterAction\Ratton.cpp" />
+    <ClCompile Include="..\src\CharacterAction\SlimeAction.cpp" />
+    <ClCompile Include="..\src\CharacterAction\SparrowAction.cpp" />
+    <ClCompile Include="..\src\CharacterAction\WitchAction.cpp" />
+    <ClCompile Include="..\src\EditerObject\BreakCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\CubeBase.cpp" />
+    <ClCompile Include="..\src\EditerObject\CubeObject.cpp" />
+    <ClCompile Include="..\src\EditerObject\GoalCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\HulfFllorCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\NoneCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\NormalCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\NormalNotDrawCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\TextureObj.cpp" />
+    <ClCompile Include="..\src\GameScene\CourseEditer\CourseEditer.cpp" />
+    <ClCompile Include="..\src\GameScene\Draw\Draw.cpp" />
+    <ClCompile Include="..\src\GameScene\EffectEdit\EffectEdit.cpp" />
+    <ClCompile Include="..\src\GameScene\GameMain\GameMain.cpp" />
+    <ClCompile Include="..\src\GameScene\StageSelect\StageSelect.cpp" />
+    <ClCompile Include="..\src\GameScene\Title\Title.cpp" />
+    <ClCompile Include="..\src\Input\KeyManager.cpp" />
+    <ClCompile Include="..\src\Input\MouseMamager.cpp" />
+    <ClCompile Include="..\src\Scene\SceneManager.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\Point.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\PointRoad.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\StageData.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\StageIcon.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\StageNamePlate.cpp" />
+    <ClCompile Include="..\src\TemplateProjectApp.cpp" />
+    <ClCompile Include="..\src\Top\BGMPlayer.cpp" />
+    <ClCompile Include="..\src\Top\CollisionManager.cpp" />
+    <ClCompile Include="..\src\Top\DrawManager.cpp" />
+    <ClCompile Include="..\src\Top\EasingManager.cpp" />
+    <ClCompile Include="..\src\Top\EasingObj.cpp" />
+    <ClCompile Include="..\src\Top\EasingStream.cpp" />
+    <ClCompile Include="..\src\Top\FadeManager.cpp" />
+    <ClCompile Include="..\src\Top\FontManager.cpp" />
+    <ClCompile Include="..\src\Top\MyJson.cpp" />
+    <ClCompile Include="..\src\Top\MyMesh.cpp" />
+    <ClCompile Include="..\src\Top\MyTexture.cpp" />
+    <ClCompile Include="..\src\Top\SEPlayer.cpp" />
+    <ClCompile Include="..\src\Top\SortManager.cpp" />
+    <ClCompile Include="..\src\Top\SoundManager.cpp" />
+    <ClCompile Include="..\src\Top\SurfaceEffect.cpp" />
+    <ClCompile Include="..\src\Top\TextureManager.cpp" />
+    <ClCompile Include="..\src\UI\ColorObject.cpp" />
+    <ClCompile Include="..\src\UI\DrawMenu.cpp" />
+    <ClCompile Include="..\src\UI\DrawPointer.cpp" />
+    <ClCompile Include="..\src\UI\MainWindow.cpp" />
+    <ClCompile Include="..\src\UI\Pallet.cpp" />
+    <ClCompile Include="..\src\UI\PalletManager.cpp" />
+    <ClCompile Include="..\src\UI\PlayerCanvas.cpp" />
+    <ClCompile Include="..\src\UI\Range.cpp" />
+    <ClCompile Include="..\src\WorldCreater\BulletManager.cpp" />
+    <ClCompile Include="..\src\WorldCreater\CameraMnager.cpp" />
+    <ClCompile Include="..\src\WorldCreater\CharacterManager.cpp" />
+    <ClCompile Include="..\src\WorldCreater\EffectManager.cpp" />
+    <ClCompile Include="..\src\WorldCreater\MapChipManager.cpp" />
+    <ClCompile Include="..\src\WorldCreater\MapManager.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\CatBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\MyToras.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\NormalEnemyBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\ScaleUpBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\SlimeBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\CharacterBase.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBase.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectExplodeburst.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectExplosion.cpp" />
+    <ClCompile Include="..\src\WorldObject\Enemy.cpp" />
+    <ClCompile Include="..\src\WorldObject\Line.cpp" />
+    <ClCompile Include="..\src\WorldObject\Map2d.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\HitBox.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipBase.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipBreak.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipGoal.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipHalfFloor.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipNone.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipNormal.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipNormalNotDraw.cpp" />
+    <ClCompile Include="..\src\WorldObject\Player.cpp" />
+    <ClCompile Include="..\src\WorldObject\ShiftFloorObject.cpp" />
+    <ClCompile Include="..\src\WorldObject\Sky.cpp" />
+    <ClCompile Include="..\src\WorldObject\VerticalLine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h" />
+    <ClInclude Include="..\src\CharacterAction\CatAction.h" />
+    <ClInclude Include="..\src\CharacterAction\ActionBase.h" />
+    <ClInclude Include="..\src\CharacterAction\Ratton.h" />
+    <ClInclude Include="..\src\CharacterAction\SlimeAction.h" />
+    <ClInclude Include="..\src\CharacterAction\SparrowAction.h" />
+    <ClInclude Include="..\src\CharacterAction\WitchAction.h" />
+    <ClInclude Include="..\src\EditerObject\BreakCube.h" />
+    <ClInclude Include="..\src\EditerObject\CubeBase.h" />
+    <ClInclude Include="..\src\EditerObject\CubeObject.h" />
+    <ClInclude Include="..\src\EditerObject\GoalCube.h" />
+    <ClInclude Include="..\src\EditerObject\HulfFllorCube.h" />
+    <ClInclude Include="..\src\EditerObject\NoneCube.h" />
+    <ClInclude Include="..\src\EditerObject\NormalCube.h" />
+    <ClInclude Include="..\src\EditerObject\NormalNotDrawCube.h" />
+    <ClInclude Include="..\src\EditerObject\TextureObj.h" />
+    <ClInclude Include="..\src\GameScene\CourseEditer\CourseEditer.h" />
+    <ClInclude Include="..\src\GameScene\Draw\Draw.h" />
+    <ClInclude Include="..\src\GameScene\EffectEdit\EffectEdit.h" />
+    <ClInclude Include="..\src\GameScene\GameMain\GameMain.h" />
+    <ClInclude Include="..\src\GameScene\StageSelect\StageSelect.h" />
+    <ClInclude Include="..\src\GameScene\Title\Title.h" />
+    <ClInclude Include="..\src\Input\KeyManager.h" />
+    <ClInclude Include="..\src\Input\MouseMamager.h" />
+    <ClInclude Include="..\src\Scene\SceneBase.h" />
+    <ClInclude Include="..\src\Scene\SceneManager.h" />
+    <ClInclude Include="..\src\StageSelectObject\Point.h" />
+    <ClInclude Include="..\src\StageSelectObject\PointRoad.h" />
+    <ClInclude Include="..\src\StageSelectObject\StageData.h" />
+    <ClInclude Include="..\src\StageSelectObject\StageIcon.h" />
+    <ClInclude Include="..\src\StageSelectObject\StageNamePlate.h" />
+    <ClInclude Include="..\src\Top\BGMPlayer.h" />
+    <ClInclude Include="..\src\Top\CollisionManager.h" />
+    <ClInclude Include="..\src\Top\DrawManager.h" />
+    <ClInclude Include="..\src\Top\EasingManager.h" />
+    <ClInclude Include="..\src\Top\EasingObj.h" />
+    <ClInclude Include="..\src\Top\EasingStream.h" />
+    <ClInclude Include="..\src\Top\FadeManager.h" />
+    <ClInclude Include="..\src\Top\FontManager.h" />
+    <ClInclude Include="..\src\Top\MyJson.h" />
+    <ClInclude Include="..\src\Top\MyMesh.h" />
+    <ClInclude Include="..\src\Top\MyTexture.h" />
+    <ClInclude Include="..\src\Top\SEPlayer.h" />
+    <ClInclude Include="..\src\Top\SortManager.h" />
+    <ClInclude Include="..\src\Top\SoundManager.h" />
+    <ClInclude Include="..\src\Top\SurfaceEffect.h" />
+    <ClInclude Include="..\src\Top\TextureManager.h" />
+    <ClInclude Include="..\src\Top\TitleSurface.h" />
+    <ClInclude Include="..\src\Top\Top.h" />
+    <ClInclude Include="..\src\UI\ColorObject.h" />
+    <ClInclude Include="..\src\UI\DrawMenu.h" />
+    <ClInclude Include="..\src\UI\DrawPointer.h" />
+    <ClInclude Include="..\src\UI\MainWindow.h" />
+    <ClInclude Include="..\src\UI\Pallet.h" />
+    <ClInclude Include="..\src\UI\PalletManager.h" />
+    <ClInclude Include="..\src\UI\PlayerCanvas.h" />
+    <ClInclude Include="..\src\UI\Range.h" />
+    <ClInclude Include="..\src\WorldCreater\BulletManager.h" />
+    <ClInclude Include="..\src\WorldCreater\CameraMnager.h" />
+    <ClInclude Include="..\src\WorldCreater\CharacterManager.h" />
+    <ClInclude Include="..\src\WorldCreater\EffectManager.h" />
+    <ClInclude Include="..\src\WorldCreater\MapChipManager.h" />
+    <ClInclude Include="..\src\WorldCreater\MapManager.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\BulletBase.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\CatBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\MyToras.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\NormalEnemyBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\ScaleUpBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\SlimeBullet.h" />
+    <ClInclude Include="..\src\WorldObject\CharacterBase.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBase.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectExplodeburst.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectExplosion.h" />
+    <ClInclude Include="..\src\WorldObject\Enemy.h" />
+    <ClInclude Include="..\src\WorldObject\Line.h" />
+    <ClInclude Include="..\src\WorldObject\Map2d.h" />
+    <ClInclude Include="..\src\WorldObject\Map2dFront.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\HitBox.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipBase.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipBreak.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipGoal.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipHalfFloor.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipNone.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipNormal.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipNormalNotDraw.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipType.h" />
+    <ClInclude Include="..\src\WorldObject\Player.h" />
+    <ClInclude Include="..\src\WorldObject\PlayerDirection.h" />
+    <ClInclude Include="..\src\WorldObject\ShiftFloorObject.h" />
+    <ClInclude Include="..\src\WorldObject\Sky.h" />
+    <ClInclude Include="..\src\WorldObject\VerticalLine.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

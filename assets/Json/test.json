@@ -1,0 +1,22 @@
+{
+  "aho": [
+    {
+      "map": 5,
+      "oko": 1
+    },
+    {
+      "map": 50
+    },
+    {
+      "map": 500,
+      "oko": 100
+    },
+        {
+      "map": 5000
+    }
+  ],
+  "texture": "hage",
+  "object": "negimiku.obj",
+  "pos": [ 0, 0, -3 ,0,0,0],
+  "angle": [ 0, 0, 0 ]
+}

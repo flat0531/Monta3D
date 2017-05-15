@@ -1,0 +1,8 @@
+*.DS_Store
+*.lnk
+
+vc2015/*
+!vc2015/*.rc
+!vc2015/*.sln
+!vc2015/*.vcxproj
+!vc2015/*.vcxproj.filters

@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{b89a4dae-5b3e-4a08-8395-04f125e78904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePad">
+      <UniqueIdentifier>{faa8a272-4319-4b1f-be4b-6a866a13f121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{4b43f471-8a39-42fe-930b-126b3f6944e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\SceneManager">
+      <UniqueIdentifier>{df7a4aa6-1523-429b-9f21-744b61c54b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\GameScene">
+      <UniqueIdentifier>{d5958647-80f8-4f7e-b2d2-cf5ce8da43b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top">
+      <UniqueIdentifier>{1aa90a29-6f70-4657-bf7b-f8885d615d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Texture">
+      <UniqueIdentifier>{a1f9d5c2-9914-463b-b740-49fda09bf91c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Json">
+      <UniqueIdentifier>{75520438-84fe-4e3f-80b7-4075f0b29fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Sound">
+      <UniqueIdentifier>{39f785a1-8863-499f-aa0b-7fd274fd63e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Easing">
+      <UniqueIdentifier>{8f5a3c48-f263-4fbb-82a1-92fe3c0156fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Draw">
+      <UniqueIdentifier>{7afa6b86-3471-4c14-905b-746e446155c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Collision">
+      <UniqueIdentifier>{728b7cb5-f612-4170-877c-9d9234c536c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Font">
+      <UniqueIdentifier>{4c01c915-88cb-4e81-a024-92992aa8040d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct">
+      <UniqueIdentifier>{58d162f5-b5c4-4d23-b5d1-499f9da42f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Creater">
+      <UniqueIdentifier>{4425e592-bd48-44e8-8aa8-30bc45ced6f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Map2d">
+      <UniqueIdentifier>{d1e5f6e2-64bf-4465-a11c-da3e4fce5225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{d1c5c62b-809c-4a5a-bfe1-a999a07bf590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DrawSceneObject">
+      <UniqueIdentifier>{699f4214-fda0-4c42-b8e5-962d3ff794cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Player">
+      <UniqueIdentifier>{dd6d774d-fa62-45cf-9dce-aeab12cb2288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CharacterAction">
+      <UniqueIdentifier>{a08d8df7-51d3-4fdb-b8de-913729ec97b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Bullet">
+      <UniqueIdentifier>{c2230105-4486-4e4b-b911-86326f2c5011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\MapChip">
+      <UniqueIdentifier>{b596c46c-a4e9-4f28-a96c-71859a76fc1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CharacterAction\PlayerAction">
+      <UniqueIdentifier>{60628f07-e685-43f7-bfcc-625691115e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Enemy">
+      <UniqueIdentifier>{fa27b863-b3d8-4d26-b4fb-be4e5148799d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CharacterAction\EnemyAction">
+      <UniqueIdentifier>{2d51b074-6dba-48a8-8e5d-5d1e697fa4e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Bullet\EnemyBullet">
+      <UniqueIdentifier>{6b5ba8ba-7273-41c1-a96e-4642f905a7d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Bullet\PlayerBullet">
+      <UniqueIdentifier>{eb0d2530-fd15-4cbc-8c9a-1d3a2dcff112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Effect">
+      <UniqueIdentifier>{40e90cac-3fb3-4c90-accc-cc8df338eba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EditerObject">
+      <UniqueIdentifier>{05ba008f-af04-4219-9fbc-36dea04a06de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EditerObject\Cube">
+      <UniqueIdentifier>{52b40eb0-625b-4ff7-bfdb-19057a7087ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EditerObject\System">
+      <UniqueIdentifier>{ce1b9742-f861-44d2-bd51-13a4b5b8de49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EditerObject\TextureObj">
+      <UniqueIdentifier>{274b6ea8-2d49-46a6-87d9-0085402e85b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Gimmick">
+      <UniqueIdentifier>{3d77199b-0a40-44c5-add0-0a56c1089d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StageSelectObject">
+      <UniqueIdentifier>{629562d0-be02-41f5-a878-a45284e331b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\TemplateProjectApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TemplateProjectApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClCompile Include="..\src\Input\KeyManager.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Input\MouseMamager.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scene\SceneManager.cpp">
+      <Filter>Source Files\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\Title\Title.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\Draw\Draw.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\SortManager.cpp">
+      <Filter>Source Files\Top</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\TextureManager.cpp">
+      <Filter>Source Files\Top\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\MyTexture.cpp">
+      <Filter>Source Files\Top\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\MyJson.cpp">
+      <Filter>Source Files\Top\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\BGMPlayer.cpp">
+      <Filter>Source Files\Top\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\SoundManager.cpp">
+      <Filter>Source Files\Top\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\EasingManager.cpp">
+      <Filter>Source Files\Top\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\EasingStream.cpp">
+      <Filter>Source Files\Top\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\EasingObj.cpp">
+      <Filter>Source Files\Top\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\SEPlayer.cpp">
+      <Filter>Source Files\Top\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\DrawManager.cpp">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\SurfaceEffect.cpp">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\CollisionManager.cpp">
+      <Filter>Source Files\Top\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\EffectEdit\EffectEdit.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\FontManager.cpp">
+      <Filter>Source Files\Top\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\MapManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\VerticalLine.cpp">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Line.cpp">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Sky.cpp">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Map2d.cpp">
+      <Filter>Source Files\WorldObjct\Map2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\MainWindow.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\DrawPointer.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\ColorObject.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\PalletManager.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\Pallet.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\PlayerCanvas.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\DrawMenu.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\Range.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Player.cpp">
+      <Filter>Source Files\WorldObjct\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\BulletManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\CharacterBase.cpp">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipBase.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\HitBox.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipNormal.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\CharacterManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\CatAction.cpp">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\SlimeAction.cpp">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\MapChipManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipNormalNotDraw.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipHalfFloor.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Enemy.cpp">
+      <Filter>Source Files\WorldObjct\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\Ratton.cpp">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\WitchAction.cpp">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\CatBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\SlimeBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\NormalEnemyBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\MyToras.cpp">
+      <Filter>Source Files\WorldObjct\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\EffectManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBase.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectExplosion.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\CourseEditer\CourseEditer.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\GameMain\GameMain.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\CubeBase.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\NoneCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\NormalCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\NormalNotDrawCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\HulfFllorCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\CubeObject.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipNone.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\TextureObj.cpp">
+      <Filter>Source Files\EditerObject\TextureObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\CameraMnager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\FadeManager.cpp">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\MyMesh.cpp">
+      <Filter>Source Files\Top\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\ScaleUpBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\SparrowAction.cpp">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\ShiftFloorObject.cpp">
+      <Filter>Source Files\WorldObjct\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipGoal.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\GoalCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipBreak.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\BreakCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\StageSelect\StageSelect.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectExplodeburst.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\Point.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\PointRoad.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\StageIcon.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\StageNamePlate.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\StageData.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Input\KeyManager.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Input\MouseMamager.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scene\SceneBase.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scene\SceneManager.h">
+      <Filter>Source Files\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\Title\Title.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\Top.h">
+      <Filter>Source Files\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\Draw\Draw.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\SortManager.h">
+      <Filter>Source Files\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\TextureManager.h">
+      <Filter>Source Files\Top\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\MyTexture.h">
+      <Filter>Source Files\Top\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\MyJson.h">
+      <Filter>Source Files\Top\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\BGMPlayer.h">
+      <Filter>Source Files\Top\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\SoundManager.h">
+      <Filter>Source Files\Top\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\EasingManager.h">
+      <Filter>Source Files\Top\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\EasingStream.h">
+      <Filter>Source Files\Top\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\EasingObj.h">
+      <Filter>Source Files\Top\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\SEPlayer.h">
+      <Filter>Source Files\Top\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\DrawManager.h">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\SurfaceEffect.h">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\CollisionManager.h">
+      <Filter>Source Files\Top\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\EffectEdit\EffectEdit.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\FontManager.h">
+      <Filter>Source Files\Top\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\MapManager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\VerticalLine.h">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Line.h">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Sky.h">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Map2dFront.h">
+      <Filter>Source Files\WorldObjct\Map2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\MainWindow.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\DrawPointer.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\ColorObject.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\PalletManager.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\Pallet.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\PlayerCanvas.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\DrawMenu.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\Range.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\TitleSurface.h">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Player.h">
+      <Filter>Source Files\WorldObjct\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\BulletManager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\CharacterBase.h">
+      <Filter>Source Files\WorldObjct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipBase.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipNormal.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\HitBox.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\CharacterManager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\ActionBase.h">
+      <Filter>Source Files\CharacterAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\CatAction.h">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\SlimeAction.h">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\MapChipManager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipNormalNotDraw.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipHalfFloor.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Enemy.h">
+      <Filter>Source Files\WorldObjct\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\Ratton.h">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\WitchAction.h">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\CatBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\SlimeBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\NormalEnemyBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\MyToras.h">
+      <Filter>Source Files\WorldObjct\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\PlayerDirection.h">
+      <Filter>Source Files\WorldObjct\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\EffectManager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBase.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\BulletBase.h">
+      <Filter>Source Files\WorldObjct\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectExplosion.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\CourseEditer\CourseEditer.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\GameMain\GameMain.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Map2d.h">
+      <Filter>Source Files\WorldObjct\Map2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipType.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\CubeBase.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\NoneCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\NormalCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\NormalNotDrawCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\HulfFllorCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\CubeObject.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipNone.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\TextureObj.h">
+      <Filter>Source Files\EditerObject\TextureObj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\CameraMnager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\FadeManager.h">
+      <Filter>Source Files\Top\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\MyMesh.h">
+      <Filter>Source Files\Top\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\ScaleUpBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\SparrowAction.h">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\ShiftFloorObject.h">
+      <Filter>Source Files\WorldObjct\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipGoal.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\GoalCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipBreak.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\BreakCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\StageSelect\StageSelect.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectExplodeburst.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\Point.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\PointRoad.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\StageIcon.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\StageNamePlate.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\StageData.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

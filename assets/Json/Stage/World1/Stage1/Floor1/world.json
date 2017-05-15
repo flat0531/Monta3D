@@ -1,0 +1,79 @@
+{
+  "sky": [
+    {
+      "pos": [ 0, 0, 0 ],
+      "scale": [ 400, 400, 400 ],
+      "rotate": [ 0, 0, 0 ],
+      "color": [ 1, 1, 1, 1 ],
+      "segment": 100,
+      "texture": "titlesky.png",
+      "update": true
+    }
+  ],
+  "map2d": [
+    {
+      "pos": [ -10, 1.5, -2.0 ],
+      "scale": [ 5, 1.0, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "hei.png",
+      "front": true
+    },
+    {
+      "pos": [ -16, 1.5, -2.0 ],
+      "scale": [ 5, 1.0, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "hei.png",
+      "front": true
+    },
+    {
+      "pos": [ -10, 3, 2 ],
+      "scale": [ 5, 5, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "tree.png",
+      "front": false
+    },
+    {
+      "pos": [ -15, 3, -2.4 ],
+      "scale": [ 5, 5, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "tree.png",
+      "front": true
+    },
+    {
+      "pos": [ -30, 0, 2 ],
+      "scale": [ 5, 5, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "tree.png",
+      "front": false
+    },
+    {
+      "pos": [ -40, 0, 2 ],
+      "scale": [ 5, 5, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "tree.png",
+      "front": false
+    },
+     {
+      "pos": [ -35, 1, 1.6 ],
+      "scale": [ 7, 7, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "tree.png",
+      "front": false
+    },
+     {
+      "pos": [ -60, 5, 1.6 ],
+      "scale": [ 5, 5, 0 ],
+      "rotate": [ 0, 0, 180 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "tree.png",
+      "front": false
+    }
+  ]
+}
