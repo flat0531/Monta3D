@@ -141,9 +141,12 @@
     <ClCompile Include="..\src\StageSelectObject\StageData.cpp" />
     <ClCompile Include="..\src\StageSelectObject\StageIcon.cpp" />
     <ClCompile Include="..\src\StageSelectObject\StageNamePlate.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\StageSelectLogo.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\StringLogo.cpp" />
     <ClCompile Include="..\src\TemplateProjectApp.cpp" />
     <ClCompile Include="..\src\Top\BGMPlayer.cpp" />
     <ClCompile Include="..\src\Top\CollisionManager.cpp" />
+    <ClCompile Include="..\src\Top\DataManager.cpp" />
     <ClCompile Include="..\src\Top\DrawManager.cpp" />
     <ClCompile Include="..\src\Top\EasingManager.cpp" />
     <ClCompile Include="..\src\Top\EasingObj.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="..\src\WorldObject\Effect\EffectExplodeburst.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectExplosion.cpp" />
     <ClCompile Include="..\src\WorldObject\Enemy.cpp" />
+    <ClCompile Include="..\src\WorldObject\Information.cpp" />
     <ClCompile Include="..\src\WorldObject\Line.cpp" />
     <ClCompile Include="..\src\WorldObject\Map2d.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\HitBox.cpp" />
@@ -229,8 +233,11 @@
     <ClInclude Include="..\src\StageSelectObject\StageData.h" />
     <ClInclude Include="..\src\StageSelectObject\StageIcon.h" />
     <ClInclude Include="..\src\StageSelectObject\StageNamePlate.h" />
+    <ClInclude Include="..\src\StageSelectObject\StageSelectLogo.h" />
+    <ClInclude Include="..\src\StageSelectObject\StringLogo.h" />
     <ClInclude Include="..\src\Top\BGMPlayer.h" />
     <ClInclude Include="..\src\Top\CollisionManager.h" />
+    <ClInclude Include="..\src\Top\DataManager.h" />
     <ClInclude Include="..\src\Top\DrawManager.h" />
     <ClInclude Include="..\src\Top\EasingManager.h" />
     <ClInclude Include="..\src\Top\EasingObj.h" />
@@ -272,6 +279,7 @@
     <ClInclude Include="..\src\WorldObject\Effect\EffectExplodeburst.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectExplosion.h" />
     <ClInclude Include="..\src\WorldObject\Enemy.h" />
+    <ClInclude Include="..\src\WorldObject\Information.h" />
     <ClInclude Include="..\src\WorldObject\Line.h" />
     <ClInclude Include="..\src\WorldObject\Map2d.h" />
     <ClInclude Include="..\src\WorldObject\Map2dFront.h" />

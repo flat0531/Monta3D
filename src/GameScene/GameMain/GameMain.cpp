@@ -5,6 +5,7 @@
 #include"../../Top/Top.h"
 #include"../../Top/MyJson.h"
 #include"../../Top/DrawManager.h"
+#include"../../Top/DataManager.h"
 #include"../../Top/TextureManager.h"
 #include"../../Top/SoundManager.h"
 #include"cinder/ObjLoader.h"
@@ -37,15 +38,11 @@ void GameMain::setup()
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 	isshiting = false;
-	worldnum = 1;
-	stagenum = 1;
+	starteffect_isend = false;
+	worldnum = DataM.getWorldNum();
+	stagenum = DataM.getStageNum();
 	floornum = 1;
-
-	mapmanager.ReadData(1, 1, 1);
-
-
-
-
+	mapmanager.ReadData(worldnum, stagenum, 1);
 
 	cameramanager = std::make_shared<CameraManager>();
 
@@ -59,8 +56,8 @@ void GameMain::setup()
 	charactermanager->setBulletManagerPointer(bulletmanager->getThisPointer());
 	charactermanager->setEffectManagerPointer(effectmanager->getThisPointer());
 
-	charactermanager->CreatePlayer(Vec3f(-22.0, 3, 0.0f)*WorldScale);
-	charactermanager->CreateEnemys(1, 1, 1);//
+	charactermanager->CreatePlayer(Vec3f(-22.0, 2, 0.0f)*WorldScale);
+	charactermanager->CreateEnemys(worldnum, stagenum, floornum);//
 
 	charactermanager->setBulletManagerPtrToPlayer();
 	charactermanager->setBulletManagerPtrToEnemys();
@@ -80,7 +77,7 @@ void GameMain::setup()
 	mainwindow->setCharacterManagerPtr(charactermanager->getThisPointer());
 
 	mapchipmanager->setGoal(std::bind(&GameMain::shiftGoal, this));
-	mapchipmanager->setup(1, 1, 1);
+	mapchipmanager->setup(worldnum, stagenum, floornum);
 
 	
 
@@ -92,16 +89,31 @@ void GameMain::setup()
 	cameramanager->update();
 
 	FadeM.StartFadeOut(false);
+
 	cretateShiftFloorObject();
 
 	mainwindow->setSelectTextureNum(1);
 
 	playBGM();
+
+	charactermanager->update();
+
+	bulletmanager->update();
+
+	mapchipmanager->update();
 }
 
 void GameMain::update()
 {
-	if (!FadeM.getIsfadeIn()) {
+	if (FadeM.getIsfadeoutEnd() && (!starteffect_isend)) {
+		information.setIsStageStart(true);
+		starteffect_isend = true;
+	}
+	if (information.getIsEffecting()) {
+		information.update();
+	}
+	
+	if (!FadeM.getIsFading()&&(!isgoal)&&(!information.getIsEffecting())) {
 
 		charactermanager->update();
 
@@ -166,7 +178,7 @@ void GameMain::draw2D()
 	gl::pushModelView();
 
 	mainwindow->draw();
-
+	information.draw();
 	gl::popModelView();
 }
 
@@ -189,7 +201,7 @@ void GameMain::shiftNextFloor()
 
 void GameMain::shiftGoal()
 {
-
+	isgoal = true;
 }
 
 void GameMain::ReCreateStage()

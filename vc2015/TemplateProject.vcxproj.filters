@@ -16,9 +16,6 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{b89a4dae-5b3e-4a08-8395-04f125e78904}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GamePad">
-      <UniqueIdentifier>{faa8a272-4319-4b1f-be4b-6a866a13f121}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Scene">
       <UniqueIdentifier>{4b43f471-8a39-42fe-930b-126b3f6944e2}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,9 @@
     </Filter>
     <Filter Include="Source Files\StageSelectObject">
       <UniqueIdentifier>{629562d0-be02-41f5-a878-a45284e331b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Top\Data">
+      <UniqueIdentifier>{e3c9ebef-53ba-4a19-bcd8-31bff2f4bbe5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -371,6 +371,18 @@
     </ClCompile>
     <ClCompile Include="..\src\StageSelectObject\StageData.cpp">
       <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Top\DataManager.cpp">
+      <Filter>Source Files\Top\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\StageSelectLogo.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\StringLogo.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Information.cpp">
+      <Filter>Source Files\WorldObjct</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -646,6 +658,18 @@
     </ClInclude>
     <ClInclude Include="..\src\StageSelectObject\StageData.h">
       <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Top\DataManager.h">
+      <Filter>Source Files\Top\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\StageSelectLogo.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\StringLogo.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Information.h">
+      <Filter>Source Files\WorldObjct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

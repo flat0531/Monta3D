@@ -130,6 +130,22 @@ void DrawManager::drawTextureArea(const cinder::Vec2f pos, const ci::Vec2f scale
 	gl::popModelView();
 }
 
+void DrawManager::drawTextureBoxBottom(const ci::Vec2f pos, const ci::Vec2f size, const float angle, const ci::gl::Texture & tex, const ci::ColorA color)
+{
+	float sort = SortManager::getSort().getSortCount();
+	gl::pushModelView();
+	gl::translate(Vec3f(pos.x, pos.y, sort));
+	gl::rotate(angle);
+	gl::scale(-size);
+	gl::color(color);
+	tex.enableAndBind();
+	gl::drawSolidRect(Rectf(Vec2f(0.5f, 1.f), Vec2f(-0.5f, 0)));
+
+	tex.disable();
+	gl::popModelView();
+	SortManager::getSort().SortCountUp();
+}
+
 void DrawManager::drawTextureBox(const ci::Vec2f pos, const ci::Vec2f size, const float angle, const ci::gl::Texture& tex, const ci::ColorA color)
 {
 	float sort = SortManager::getSort().getSortCount();

@@ -23,4 +23,5 @@ public:
 	void setLoopBegin(const double begintime);
 	void setLoopEnd(const double endtime);
 	void bgmDelete();
+	float getGain();
 };

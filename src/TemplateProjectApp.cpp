@@ -15,6 +15,7 @@ using namespace ci::app;
 #include"Top/SortManager.h"
 #include"Top\EasingStream.h"
 #include"Top/FadeManager.h"
+#include"Top/SoundManager.h"
 void drawGrid(float size,float step) {
 	//for (float i = -size;i <= size; i += step) {
 	//	gl::drawLine(Vec3f(i, 0.0f, -size), Vec3f(i, 0.0f, size));
@@ -119,6 +120,7 @@ void TemplateProjectApp::update()
 	SceneManager::update();
 	FadeM.update();
 	EasStr.update();
+	SoundM.updateGainFadeT();
 }
 
 void TemplateProjectApp::draw()

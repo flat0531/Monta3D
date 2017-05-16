@@ -1,4 +1,5 @@
 #include"SoundManager.h"
+#include"EasingManager.h"
 #include "MyJson.h"
 using namespace ci;
 using namespace ci::app;
@@ -8,6 +9,19 @@ using namespace ci::app;
 
 SoundManager::SoundManager()
 {
+
+}
+
+void SoundManager::updateGainFadeT()
+{
+	if (!isfading)return;
+	EasingManager::tCount(fade_t, fadetime);
+	float gain = EasingLinear(fade_t, begingain, endgain);
+	bgmmap[nowplaybgmname].changeGain(gain);
+	if (EasingManager::tCountEnd(fade_t)) {
+		isfading = false;
+		bgmmap[nowplaybgmname].stop();
+	}
 
 }
 
@@ -21,7 +35,7 @@ void SoundManager::PlayBGM(const std::string name, float gain)
 	else {
 		bgmmap[name].PlayGainChanage(gain);
 	}
-
+	nowplaybgmname = name;
 }
 
 void SoundManager::StopBGM(std::string name)
@@ -87,6 +101,18 @@ void SoundManager::SetLoopTimeBGM(const std::string name, const double begintime
 	}
 }
 
+float SoundManager::getBGMGain(const std::string name)
+{
+	auto it = bgmmap.find(name);
+	if (it == bgmmap.end()) {
+
+	}
+	else {
+		return it->second.getGain();
+	}
+	return 0.0f;
+}
+
 void SoundManager::eraseBGM(const std::string name)
 {
 	auto it = bgmmap.find(name);
@@ -97,6 +123,11 @@ void SoundManager::eraseBGM(const std::string name)
 		it->second.stop();
 		bgmmap.erase(it);
 	}
+}
+
+std::string SoundManager::getNowPlayBGMString()
+{
+	return nowplaybgmname;
 }
 
 
@@ -166,5 +197,14 @@ void SoundManager::CreateSE(const std::string name)
 	else {
 
 	}
+}
+
+void SoundManager::FadeNowBGM(float _endgain, float _fadetime)
+{
+	fade_t = 0.0f;
+	begingain = bgmmap[nowplaybgmname].getGain();
+	endgain = _endgain;
+	fadetime = _fadetime;
+	isfading = true;
 }
 

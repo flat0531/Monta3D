@@ -4,10 +4,12 @@
 #include"../../Top/DrawManager.h"
 #include"../../Input/KeyManager.h"
 #include"../../GameScene/Title/Title.h"
+#include"../../GameScene/GameMain/GameMain.h"
 #include"../../Top/TextureManager.h"
 #include"../../Top/MyJson.h"
 #include"../../Top/SoundManager.h"
 #include"../../Top/FadeManager.h"
+#include"../../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 
@@ -31,8 +33,8 @@ void StageSelect::setup()
 	SoundM.CreateSE("moveicon.wav");
 	SoundM.PlayBGM("stageselectworld1.wav",0.3f);
 	SoundM.SetLoopBGM("stageselectworld1.wav", true);
-	stagenum = 1;
-	worldnum = 1;
+	stagenum = DataM.getStageNum();
+	worldnum = DataM.getWorldNum();
 	isiconmoving = false;
 	icon_move_t = 1.0f;
 	is_move_to_next = false;
@@ -43,6 +45,7 @@ void StageSelect::setup()
 	playericonpos = stagepos[stagenum - 1];
 	animation_count = 0;
 	stagenameplate = StageNamePlate(worldnum, stagenum, stagedatas[stagenum - 1]);
+	roadStageName();
 	FadeM.StartFadeOut(false);
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
@@ -51,17 +54,18 @@ void StageSelect::setup()
 void StageSelect::update()
 {
 	Vec2f buffplayericonpos = playericonpos;
+
 	for (auto& it : pointroads) {
 		it.update();
 	}
 	for (auto&it : stageicons) {
 		it.update(isiconmoving,stagenum);
 	}
-
+	stageselectlogo.update();
 	selectStage();
 	updatePlayerIcon();
 	stagenameplate.update();
-
+	FadeInGameMain();
 
 	playericonspeed = buffplayericonpos - playericonpos;
 	animation_count++;
@@ -89,7 +93,7 @@ void StageSelect::draw2D()
 	gl::setMatrices(ortho);
 
 	drawBackGround();
-	drawTitle();
+	
 	
 	for (auto it : pointroads) {
 		it.draw();
@@ -98,13 +102,19 @@ void StageSelect::draw2D()
 	drawStageIcon();
 	drawPlayerIcon();
 	stagenameplate.draw();
-
+	drawTitle();
 }
 
 void StageSelect::shift()
 {
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_t)) {
 		SceneManager::createScene(Title());
+	}
+	if (FadeM.getIsfadeinEnd()) {
+		if (DataM.getNextscene() == SceneType::GANEMAIN_SCENE) {
+		
+			SceneManager::createScene(GameMain());
+		}
 	}
 }
 
@@ -119,7 +129,7 @@ void StageSelect::createpointRoads()
 	JsonTree roadpos(loadAsset(path + "/stagepos.json"));
 	for (int i = 0;i < roadpos.getNumChildren();i++) {
 		if (i == 0) {
-
+			//do nothing
 		}
 		else {
 			if (!stagedatas[i - 1].getIsClear())break;
@@ -188,9 +198,10 @@ void StageSelect::roadStageData()
 
 void StageSelect::drawTitle()
 {
-	Vec2f pos=Vec2f(290,110);
+	/*Vec2f pos=Vec2f(290,110);
 	Vec2f size = Vec2f(500,250);
-	DrawM.drawTextureBox(pos,size,0,TextureM.getTexture("UI/stageselect.png"));
+	DrawM.drawTextureBox(pos,size,0,TextureM.getTexture("UI/stageselect.png"));*/
+	stageselectlogo.draw();
 }
 
 void StageSelect::selectStage()
@@ -215,7 +226,7 @@ void StageSelect::selectStage()
 		isiconmoving = true;
 		is_move_to_back = true;
 		icon_move_t = 1.0f;
-		stagenameplate.SlideOut(worldnum,stagenum);
+		stagenameplate.SlideOut(worldnum, stagenum);
 		SoundM.PlaySE("moveicon.wav", 0.5f);
 		return;
 	}
@@ -267,4 +278,30 @@ void StageSelect::drawPlayerIcon()
 	std::string texturepath = "UI/moveicon" + std::to_string(((animation_count / animationspeed) % 2) + 1) + ".png";
 	DrawM.drawTextureBox(playericonpos, Vec2f(65*direction, 65), 0.f,
 		TextureM.getTexture(texturepath), ColorA(1, 1, 1, 1));
+}
+
+void StageSelect::FadeInGameMain()
+{
+	if (isiconmoving)return;
+	if (FadeM.getIsFading())return;
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_l)) {
+		FadeM.StartFadeIn();
+		DataM.setStageNum(stagenum);
+		DataM.setWorldNum(worldnum);
+		DataM.setPrevScene(SceneType::STAGESELECT_SCENE);
+		DataM.setNextScene(SceneType::GANEMAIN_SCENE);
+		DataM.setStageName(stagename[stagenum - 1]);
+		SoundM.FadeNowBGM(0.0f,1.5f);
+	}
+}
+
+void StageSelect::roadStageName()
+{
+	stagename.clear();
+	std::string path = "Json/StageSelect/World" + std::to_string(worldnum);
+	JsonTree stageicon(loadAsset(path + "/stagepos.json"));
+	for (int i = 0;i < stageicon.getNumChildren();i++) {
+		JsonTree child = stageicon.getChild(i);
+		stagename.push_back(child.getValueForKey<std::string>("name"));
+	}
 }

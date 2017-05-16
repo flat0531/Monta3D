@@ -82,3 +82,8 @@ void BGMPlayer::bgmDelete()
 {
 	
 }
+
+float BGMPlayer::getGain()
+{
+	return gain->getValue();
+}

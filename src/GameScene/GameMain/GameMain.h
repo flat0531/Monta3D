@@ -7,6 +7,7 @@
 #include"../../WorldCreater/MapManager.h"
 #include"../../WorldCreater/CharacterManager.h"
 #include"../../WorldCreater/MapChipManager.h"
+#include"../../WorldObject/Information.h"
 #include<vector>
 #include<memory>
 #include"../../UI/MainWindow.h"
@@ -36,15 +37,14 @@ private:
 	std::vector<std::shared_ptr<ShiftFloorObject>> shiftfloorobjects;
 	ci::CameraPersp camera;
 	ci::CameraOrtho ortho;
-	std::vector<Line>lines;
-	std::vector<VerticalLine>verticallines;
+	Information information;
 	std::shared_ptr<MainWindow>mainwindow;
-	float angle;
 	int worldnum;
 	int stagenum;
 	int floornum;
 	ci::Vec3f nextplayerpos;
 	bool isshiting = false;
+	bool isgoal = false;
 	void shiftNextFloor();
 	void shiftGoal();
 	void ReCreateStage();
@@ -55,4 +55,5 @@ private:
 	void updateShiftFloorObject();
 	void drawShiftFloorObject();
 	void playBGM();
+	bool starteffect_isend;
 };

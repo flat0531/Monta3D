@@ -23,6 +23,7 @@ public:
 	void drawBox(const ci::Vec2f pos, const  ci::Vec2f size, const float angle, const ci::ColorA color,float sort);
 	void drawBoxEdge(const ci::Vec2f pos, const ci::Vec2f size, const ci::ColorA color = ci::ColorA::white());
 	void drawTextureArea(const cinder::Vec2f pos, const ci::Vec2f scale, const ci::gl::Texture&tex, cinder::Area area, float size);
+	void drawTextureBoxBottom(const ci::Vec2f pos, const ci::Vec2f size, const float angle, const ci::gl::Texture& tex, const ci::ColorA color = ci::ColorA::white());
 	void drawTextureBox(const ci::Vec2f pos, const ci::Vec2f size, const float angle, const ci::gl::Texture& tex, const ci::ColorA color = ci::ColorA::white());
 	void drawTextureBox(const ci::Vec2f pos, const ci::Vec2f size, const float angle, const ci::gl::Texture& tex, const ci::ColorA color, const float sort);
 	void drawTextureBoxEdge(const ci::Vec2f pos, const ci::Vec2f size, const ci::gl::Texture& tex, const ci::ColorA color = ci::ColorA::white());

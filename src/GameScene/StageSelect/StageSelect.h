@@ -7,6 +7,7 @@
 #include"../../StageSelectObject/PointRoad.h"
 #include"../../StageSelectObject/StageIcon.h"
 #include"../../StageSelectObject/StageNamePlate.h"
+#include"../../StageSelectObject/StageSelectLogo.h"
 class StageSelect :public SceneBase {
 public:
 	void setup() override;
@@ -29,7 +30,9 @@ private:
 	ci::CameraOrtho ortho;
 	std::vector<PointRoad>pointroads;
 	std::vector<StageIcon>stageicons;
+	std::vector<std::string>stagename;
 	StageNamePlate stagenameplate;
+	StageSelectLogo stageselectlogo;
 	void drawBackGround();
 	void createpointRoads();
 	void createStageIcon();
@@ -43,5 +46,7 @@ private:
 	void selectStage();
 	void updatePlayerIcon();
 	void drawPlayerIcon();
+	void FadeInGameMain();
+	void roadStageName();
 	int animation_count = 0;
 };

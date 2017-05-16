@@ -16,6 +16,7 @@ public:
 		return sound;
 	}
 	SoundManager::SoundManager();
+	void updateGainFadeT();
 	void PlayBGM(const std::string name, float gain = 0.3f);
 	void StopBGM(const std::string name);
 	void GainBGM(const std::string name, const float value);
@@ -25,8 +26,9 @@ public:
 	void SetBeginLoopBGM(const std::string name, const double begintime);
 	void SetEndLoopBGM(const std::string name, const double endtime);
 	void SetLoopTimeBGM(const std::string name, const double begintime, const double endtime);
-
+	float getBGMGain(const std::string name);
 	void eraseBGM(const std::string name);
+	std::string getNowPlayBGMString();
 
 	void PlaySE(const std::string name, float gain = 1.0f);
 	void StopSE(const std::string name);
@@ -36,9 +38,15 @@ public:
 	bool GetLoopSE(const std::string name);
 	void eraseSE(const std::string name);
 	void CreateSE(const std::string name);
+	void FadeNowBGM(float _endgain,float _fadetime);
 private:
-
+	std::string nowplaybgmname = "";
 	std::map<std::string, BGMPlayer> bgmmap;
 	std::map<std::string, SEPlayer> semap;
+	float fade_t = 1.0f;
+	float fadetime = 1.0f;
+	bool isfading = false;
+	float begingain;
+	float endgain;
 };
 #define SoundM (SoundManager::getSound().getSound())
