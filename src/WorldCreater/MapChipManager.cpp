@@ -15,6 +15,7 @@
 #include"../WorldObject/MapChip/MapChipHalfFloor.h"
 #include"../WorldObject/MapChip/MapChipGoal.h"
 #include"../WorldObject/MapChip/MapChipBreak.h"
+#include"../WorldObject/MapChip/MapChipApple.h"
 #include"../Top/CollisionManager.h"
 #include"../Top/TextureManager.h"
 
@@ -36,10 +37,12 @@ void MapChipManager::setup(const int worldnum, const int stagenum, const int flo
 
 void MapChipManager::update()
 {
+	updateMapChip();
 	CollisionPlayerToMap();
 	CollisionEnemysToMap();
 	CollisionPlayerBulletToMap();
 	CollisionEnemyBulletToMap();
+
 }
 
 void MapChipManager::draw()
@@ -140,6 +143,10 @@ void MapChipManager::CreateMap(const int worldnum, const int stagenum, const int
 				buf.push_back(std::make_shared<MapChipBreak>
 					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale,effectmanagerptr));
 				break;
+			case MapChipType::APPLE_CHIP:
+				buf.push_back(std::make_shared<MapChipApple>
+					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale));
+				break;
 			default:
 				break;
 			}
@@ -157,6 +164,27 @@ ci::Vec2f MapChipManager::getChipsSize()
 void MapChipManager::setGoal(const std::function<void()> func)
 {
 	goal = func;
+}
+
+void MapChipManager::updateMapChip()
+{
+	int hitscalex = 25;
+	int hitscaley = 10;
+	int WorldScaleInt = int(WorldScale);
+	int collision_pos_y = (int(characterManagerptr->getPlayer()->getPos2f().y) / WorldScaleInt);
+	int collision_pos_x = (int(-(characterManagerptr->getPlayer()->getPos2f().x)) / WorldScaleInt);
+
+	for (int y = collision_pos_y - hitscaley;
+	y <= collision_pos_y + hitscaley;y++) {
+		if ((y < 0) || y >= mapchips.size())continue;
+		for (int x = collision_pos_x - hitscalex;
+		x <= collision_pos_x + hitscalex;x++) {
+			if ((x < 0) || x >= mapchips[y].size())continue;
+			mapchips[y][x]->update();
+
+		}
+
+	}
 }
 
 void MapChipManager::CollisionPlayerToMap()

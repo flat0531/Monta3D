@@ -26,6 +26,7 @@ private:
 	BulletManager* bulletmanagerptr;
 	CharacterManager* characterManagerptr;
 	EffectManager* effectmanagerptr;
+	void updateMapChip();
 	void CollisionPlayerToMap();
 	void CollisionEnemysToMap();
 	void CollisionPlayerBulletToMap();

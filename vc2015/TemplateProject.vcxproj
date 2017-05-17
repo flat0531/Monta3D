@@ -118,6 +118,7 @@
     <ClCompile Include="..\src\CharacterAction\SlimeAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\SparrowAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\WitchAction.cpp" />
+    <ClCompile Include="..\src\EditerObject\AppleCube.cpp" />
     <ClCompile Include="..\src\EditerObject\BreakCube.cpp" />
     <ClCompile Include="..\src\EditerObject\CubeBase.cpp" />
     <ClCompile Include="..\src\EditerObject\CubeObject.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="..\src\WorldObject\Line.cpp" />
     <ClCompile Include="..\src\WorldObject\Map2d.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\HitBox.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipApple.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipBase.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipBreak.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipGoal.cpp" />
@@ -209,6 +211,7 @@
     <ClInclude Include="..\src\CharacterAction\SlimeAction.h" />
     <ClInclude Include="..\src\CharacterAction\SparrowAction.h" />
     <ClInclude Include="..\src\CharacterAction\WitchAction.h" />
+    <ClInclude Include="..\src\EditerObject\AppleCube.h" />
     <ClInclude Include="..\src\EditerObject\BreakCube.h" />
     <ClInclude Include="..\src\EditerObject\CubeBase.h" />
     <ClInclude Include="..\src\EditerObject\CubeObject.h" />
@@ -284,6 +287,7 @@
     <ClInclude Include="..\src\WorldObject\Map2d.h" />
     <ClInclude Include="..\src\WorldObject\Map2dFront.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\HitBox.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipApple.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipBase.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipBreak.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipGoal.h" />

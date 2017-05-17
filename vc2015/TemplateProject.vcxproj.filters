@@ -384,6 +384,12 @@
     <ClCompile Include="..\src\WorldObject\Information.cpp">
       <Filter>Source Files\WorldObjct</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\EditerObject\AppleCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipApple.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -670,6 +676,12 @@
     </ClInclude>
     <ClInclude Include="..\src\WorldObject\Information.h">
       <Filter>Source Files\WorldObjct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\AppleCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipApple.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

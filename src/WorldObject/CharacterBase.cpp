@@ -348,8 +348,8 @@ void CharacterBase::setMaxHp(int _maxhp)
 void CharacterBase::addHpValue(int value)
 {
 	hp += value;
-	/*hp = std::max(value, 0);
-	hp = std::min(value, maxhp);*/
+	if (hp >= 100)hp = 100;
+	if (hp < 0)hp = 0;
 }
 
 bool CharacterBase::getIsAlive()
