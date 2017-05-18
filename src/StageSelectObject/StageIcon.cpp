@@ -2,10 +2,13 @@
 #include"../Top/DrawManager.h"
 #include"../Top/TextureManager.h"
 #include"../Top/EasingManager.h"
+
 using namespace ci;
 using namespace ci::app;
+
 StageIcon::StageIcon()
 {
+
 }
 
 StageIcon::StageIcon(const ci::Vec2f _pos, const ci::Vec2f _size, const ci::ColorA _color, const bool _isclear,const int _number)

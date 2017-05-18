@@ -24,7 +24,7 @@ void MapChipApple::draw()
 	gl::scale(scale*scalerate);
 	gl::rotate(Vec3f(0,rotate.y,0));
 	gl::translate(ci::Vec3f(0, - 1.f/scalerate/2.f, 0));
-	gl::rotate(Vec3f(rotate.x,0,0));
+	gl::rotate(Vec3f(rotate.x, 0, 0));
 	gl::color(ColorA(1, 1, 1, 1));
 	TextureM.getTexture("Mesh/apple.png").enableAndBind();
 	gl::draw(TextureM.getMesh("apple.obj"));

@@ -19,6 +19,7 @@ Information::Information()
 	blackbox_delay_t = 0.0f;
 	blackbox_return_t = 0.0f;
 	CreateBlackBox();
+	CreateClearTextures();
 	coloredstagenamepos = Vec2f(0,WINDOW_HEIGHT/2.f);
 	blackstagenamepos = Vec2f(0, WINDOW_HEIGHT / 2.f);
 	stagenametex = TextureM.CreateTexture("UI/stagename/stagename" + std::to_string(worldnum) + "_" + std::to_string(stagenum) + ".png");
@@ -59,6 +60,11 @@ void Information::setIsStageStart(const bool _is)
 bool Information::getIsEffecting()
 {
 	return (isstagestart || isgoal);
+}
+
+bool Information::getGoalEffectEnd()
+{
+	return EasingManager::tCountEnd(goaleasingtime_t);
 }
 
 void Information::endInit()
@@ -114,6 +120,37 @@ void Information::updateBlackBoxreturn()
 		}
 	}
 
+}
+
+void Information::CreateClearTextures()
+{
+	Vec2f beginpos = Vec2f(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
+	Vec2f beginsize = Vec2f(100, 100);
+	float endposy = WINDOW_HEIGHT / 2.f - 150.f;
+	Vec2f endsize = Vec2f(200,200);
+	CreateClearTexture(beginpos, beginsize, beginpos, Vec2f(WINDOW_WIDTH / 2.f - 200, endposy), beginsize, endsize, TextureM.CreateTexture("UI/Clear/clear_c.png"));
+	CreateClearTexture(beginpos, beginsize, beginpos, Vec2f(WINDOW_WIDTH / 2.f - 100, endposy), beginsize, endsize, TextureM.CreateTexture("UI/Clear/clear_l.png"));
+	CreateClearTexture(beginpos, beginsize, beginpos, Vec2f(WINDOW_WIDTH / 2.f, endposy+25.f), beginsize, endsize, TextureM.CreateTexture("UI/Clear/clear_e.png"));
+	CreateClearTexture(beginpos, beginsize, beginpos, Vec2f(WINDOW_WIDTH / 2.f+100, endposy + 25.f), beginsize, endsize, TextureM.CreateTexture("UI/Clear/clear_a.png"));
+	CreateClearTexture(beginpos, beginsize, beginpos, Vec2f(WINDOW_WIDTH / 2.f +200, endposy + 25.f), beginsize, endsize, TextureM.CreateTexture("UI/Clear/clear_r.png"));
+}
+
+void Information::CreateClearTexture(ci::Vec2f pos, ci::Vec2f size, ci::Vec2f beginpos, ci::Vec2f endpos, ci::Vec2f beginsize, ci::Vec2f endsize, ci::gl::Texture tex)
+{
+	ClearTexture buff;
+	buff.pos = pos;
+	buff.size = size;
+	buff.beginpos = beginpos;
+	buff.endpos = endpos;
+	buff.beginsize = beginsize;
+	buff.endsize = endsize;
+	buff.tex = tex;
+	buff.size_t_ = 0.0f;
+	buff.angle_t_ = 0.0f;
+	buff.angle = 0.0f;
+	buff.color = ColorA(1, 1, 1, 1);
+	buff.delay_t_ = 0.0f;
+	cleartextures.push_back(buff);
 }
 
 void Information::drawStageStart()
@@ -182,4 +219,71 @@ void Information::updateNameEnd()
 	coloredstagenamepos.x = EasingCubicIn(end_name_t, WINDOW_WIDTH / 2.f, 2400.f);
 	blackstagenamepos.x = EasingCubicIn(end_name_t, WINDOW_WIDTH / 2.f, -800.f );
 	name_alfa = 1.f - end_name_t;
+}
+
+void Information::updateClearTexture()
+{
+	updateTranceClearTexture();
+	updateRotateClearTexture();
+	updateDelayClearTexture();
+}
+
+void Information::updateTranceClearTexture()
+{
+	if (EasingManager::tCountEnd(cleartextures[cleartextures.size() - 1].size_t_))return;
+	for (int i = 0;i < cleartextures.size();i++) {
+		EasingManager::tCount(cleartextures[i].size_t_, 0.5f);
+		cleartextures[i].pos.x = EasingCubicOut(cleartextures[i].size_t_, cleartextures[i].beginpos.x, cleartextures[i].endpos.x);
+		cleartextures[i].pos.y = EasingCubicOut(cleartextures[i].size_t_, cleartextures[i].beginpos.y, cleartextures[i].endpos.y);
+		cleartextures[i].size.x = EasingCubicOut(cleartextures[i].size_t_, cleartextures[i].beginsize.x, cleartextures[i].endsize.x);
+		cleartextures[i].size.y = EasingCubicOut(cleartextures[i].size_t_, cleartextures[i].beginsize.y, cleartextures[i].endsize.y);
+	}
+}
+
+void Information::updateRotateClearTexture()
+{
+	if (!EasingManager::tCountEnd(cleartextures[cleartextures.size() - 1].size_t_))return;
+
+	EasingManager::tCount(goaleasingtime_t,6.0f);
+
+	for (int i = 0;i < cleartextures.size();i++) {
+		float colorspeed = 60.f;
+		cleartextures[i].color = ColorA(1, 0.75+0.5f*sin(goaleasingtime_t*colorspeed),0.5f+0.5f*sin(goaleasingtime_t*colorspeed), 1);//ƒJƒ‰[‚ð•Ï‚¦‚Ü‚·
+	}
+
+
+	if (EasingManager::tCountEnd(cleartextures[cleartextures.size() - 1].angle_t_))return;
+
+	for (int i = 0;i < cleartextures.size();i++) {
+		EasingManager::tCount(cleartextures[i].angle_t_, 0.5f);
+		float endrotate = (i % 2 == 0 ? 360.f : -360.f);
+		cleartextures[i].angle = EasingCubicOut(cleartextures[i].angle_t_, 0.0f, endrotate);
+		cleartextures[i].pos.y = EasingReturn(cleartextures[i].angle_t_, cleartextures[i].endpos.y, -30.f);
+		cleartextures[i].size.x = EasingReturn(cleartextures[i].angle_t_, cleartextures[i].endsize.x, 30.f);
+		cleartextures[i].size.y = EasingReturn(cleartextures[i].angle_t_, cleartextures[i].endsize.y, 30.f);
+	}
+}
+
+void Information::updateDelayClearTexture()
+{
+	if (!EasingManager::tCountEnd(cleartextures[cleartextures.size() - 1].angle_t_))return;
+	if (EasingManager::tCountEnd(cleartextures[cleartextures.size() - 1].delay_t_))return;
+	for (int i = 0;i < cleartextures.size();i++) {
+		EasingManager::tCount(cleartextures[i].delay_t_, 1.0f);
+	}
+	if (EasingManager::tCountEnd(cleartextures[cleartextures.size() - 1].delay_t_)) {
+		for (int i = 0;i < cleartextures.size();i++) {
+			cleartextures[i].angle_t_ = 0.0f;
+			cleartextures[i].delay_t_ = 0.0f;
+		}
+	}
+}
+
+void Information::drawClearTexture()
+{
+	for (int i = 0;i < cleartextures.size();i++) {
+		DrawM.drawTextureBox(cleartextures[i].pos + Vec2f(4, -4), cleartextures[i].size, cleartextures[i].angle, cleartextures[i].tex, ColorA(0, 0, 0, 1));
+		DrawM.drawTextureBox(cleartextures[i].pos,cleartextures[i].size,cleartextures[i].angle,cleartextures[i].tex,cleartextures[i].color);
+		
+	}
 }

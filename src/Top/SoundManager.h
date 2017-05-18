@@ -19,6 +19,7 @@ public:
 	void updateGainFadeT();
 	void PlayBGM(const std::string name, float gain = 0.3f);
 	void StopBGM(const std::string name);
+	void StopNowBGM();
 	void GainBGM(const std::string name, const float value);
 	void GainBGMDifference(const std::string name, const float value);
 	void SetLoopBGM(const std::string name, bool isloop);

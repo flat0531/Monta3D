@@ -45,6 +45,9 @@ private:
 	ci::Vec3f nextplayerpos;
 	bool isshiting = false;
 	bool isgoal = false;
+	bool isgoaleffecting = false;
+	bool isgoaleffecingend = false;
+	bool isshiftstageselect = false;
 	void shiftNextFloor();
 	void shiftGoal();
 	void ReCreateStage();
@@ -55,5 +58,6 @@ private:
 	void updateShiftFloorObject();
 	void drawShiftFloorObject();
 	void playBGM();
+	void updateGoal();
 	bool starteffect_isend;
 };

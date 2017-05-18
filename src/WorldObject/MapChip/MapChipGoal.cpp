@@ -4,6 +4,7 @@
 #include"../../Input/KeyManager.h"
 MapChipGoal::MapChipGoal()
 {
+
 }
 MapChipGoal::MapChipGoal(ci::Vec3f _pos, ci::Vec3f _scale, std::function<void()>& _goal)
 {
@@ -15,11 +16,12 @@ MapChipGoal::MapChipGoal(ci::Vec3f _pos, ci::Vec3f _scale, std::function<void()>
 
 void MapChipGoal::draw()
 {
-	DrawM.drawStrokeCube(pos, scale, ci::Vec3f(0, 0, 0), ci::ColorA(1, 0, 0, 1));
+	DrawM.drawStrokeCube(pos, scale, ci::Vec3f(0, 0, 0), ci::ColorA(0, 0, 1, 1));
 }
 
 void MapChipGoal::update()
 {
+
 }
 
 void MapChipGoal::InCollisionEnter(CharacterBase * characterbase)

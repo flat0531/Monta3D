@@ -2,19 +2,20 @@
 #include"../../Input/KeyManager.h"
 #include"../../Scene/SceneManager.h"
 #include"../../GameScene/Title/Title.h"
+#include"../../GameScene/StageSelect/StageSelect.h"
 #include"../../Top/Top.h"
 #include"../../Top/MyJson.h"
 #include"../../Top/DrawManager.h"
 #include"../../Top/DataManager.h"
 #include"../../Top/TextureManager.h"
 #include"../../Top/SoundManager.h"
-#include"cinder/ObjLoader.h"
 #include"../../WorldObject/Player.h"
 #include"../../WorldCreater/BulletManager.h"
 #include"../../WorldCreater/EffectManager.h"
 #include"../../WorldCreater/CameraMnager.h"
 #include"../../Top/FadeManager.h"
 #include"../../WorldObject/ShiftFloorObject.h"
+#include"../../Top/DataManager.h"
 #include"../../Top/MyJson.h"
 #include"../../Top/CollisionManager.h"
 using namespace ci;
@@ -93,6 +94,7 @@ void GameMain::setup()
 	cretateShiftFloorObject();
 
 	mainwindow->setSelectTextureNum(1);
+	SoundM.CreateSE("stageclear.wav");
 
 	playBGM();
 
@@ -105,6 +107,8 @@ void GameMain::setup()
 
 void GameMain::update()
 {
+	isgoaleffecingend = false;
+
 	if (FadeM.getIsfadeoutEnd() && (!starteffect_isend)) {
 		information.setIsStageStart(true);
 		starteffect_isend = true;
@@ -129,7 +133,7 @@ void GameMain::update()
 	effectmanager->update();
 	mainwindow->update();
 	updateShiftFloorObject();
-
+	updateGoal();
 	ReCreateStage();
 }
 
@@ -179,6 +183,9 @@ void GameMain::draw2D()
 
 	mainwindow->draw();
 	information.draw();
+	if (isgoal) {
+		information.drawClearTexture();
+	}
 	gl::popModelView();
 }
 
@@ -189,6 +196,11 @@ void GameMain::shift()
 	}
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_t)) {
 		SceneManager::createScene(Title());
+	}
+	if (FadeM.getIsfadeinEnd()&&isshiftstageselect) {
+		DataM.setPrevScene(SceneType::GANEMAIN_SCENE);
+		DataM.setNextScene(SceneType::STAGESELECT_SCENE);
+		SceneManager::createScene(StageSelect());
 	}
 }
 
@@ -202,6 +214,8 @@ void GameMain::shiftNextFloor()
 void GameMain::shiftGoal()
 {
 	isgoal = true;
+	SoundM.FadeNowBGM(0.0f,0.5f);
+	SoundM.PlaySE("stageclear.wav",0.5f);
 }
 
 void GameMain::ReCreateStage()
@@ -284,7 +298,22 @@ void GameMain::drawShiftFloorObject()
 
 void GameMain::playBGM()
 {
-	std::string path = "enjoy.wav";
-	SoundM.PlayBGM(path);
-	SoundM.SetLoopBGM(path, true);
+	JsonTree bgm(loadAsset("Json/bgm.json"));
+	std::string bgmname= bgm.getValueForKey<std::string>(std::to_string(worldnum)+"_"+std::to_string(stagenum))+".wav";
+	SoundM.PlayBGM(bgmname,0.4f);
+	SoundM.SetLoopBGM(bgmname, true);
+}
+
+void GameMain::updateGoal()
+{
+	if (isgoal) {
+		information.updateClearTexture();
+		if (information.getGoalEffectEnd()) {
+			isgoaleffecingend = true;
+		}
+	}
+	if (isgoaleffecingend&&(!FadeM.getIsFading())) {
+		FadeM.StartFadeIn();
+		isshiftstageselect = true;
+	}
 }
