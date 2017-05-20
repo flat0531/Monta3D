@@ -59,6 +59,8 @@ public:
 	void setQuat(ci::Quatf _quat);
 	void setBulletQuat(ci::Quatf _quat);
 	void setJumpPower();
+	void RsetDeathColorT();
+	void updateDeath(float time);
 	CharacterManager* getCharacterManager();
 	BulletManager* getBulletManagerPointer();
 	CharacterType getCharacterType();
@@ -68,6 +70,7 @@ public:
 	ci::Quatf getQuat();
 	ci::Quatf getBulletQuat();
 	bool getIsStan();
+	bool updateDeathEnd();
 	void setIsStun(const bool is);
 	void setIsinvincible(const bool is);
 	bool getIsInvincible();
@@ -75,6 +78,7 @@ public:
 	ci::ColorA getColor();
 	ci::ColorA getUniqueColor();
 	void setUniqueColor(ci::ColorA _color);
+
 	template<class T>
 	void setCharacterAction(T);
 protected:
@@ -93,6 +97,7 @@ protected:
 	bool isclear = false;
 	bool isstun = false;
 	bool issnvincible = false;
+	float death_color_t = 0.0f;
 	int invinciblecount = 0;
 	int stuncount = 0;
 	int jumpcount = 0;

@@ -18,6 +18,7 @@
 #include"../WorldObject/MapChip/MapChipApple.h"
 #include"../Top/CollisionManager.h"
 #include"../Top/TextureManager.h"
+#include"../Top/SoundManager.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -26,6 +27,7 @@ MapChipManager::MapChipManager()
 	TextureM.CreateTexture("Map/normalbox.png");
 	TextureM.CreateTexture("Map/hulffloor.png");
 	TextureM.CreateTexture("Map/renga.png");
+	SoundM.CreateSE("onground.wav");
 }
 
 void MapChipManager::setup(const int worldnum, const int stagenum, const int floornum)

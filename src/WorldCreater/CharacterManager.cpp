@@ -74,7 +74,7 @@ void CharacterManager::setEnemysAction()
 
 void CharacterManager::setup()
 {
-	CreateEnemys(1,1,1);
+	CreateEnemys(1,1,1);//////////////
 }
 
 void CharacterManager::update()
@@ -88,13 +88,22 @@ void CharacterManager::update()
 		}
 		else
 		{
-			effectmanager->CreateEffect(EffectExplosion((*itr)->getPos(), (*itr)->getScale(),ci::Vec3f(0,0,0)));
-			itr = enemys.erase(itr);
-			SoundM.PlaySE("enemy_die.wav",0.5f);
+			(*itr)->updateDeath(0.75f);
+			if ((*itr)->updateDeathEnd()) {
+				effectmanager->CreateEffect(EffectExplosion((*itr)->getPos(), (*itr)->getScale(), ci::Vec3f(0, 0, 0)));
+				itr = enemys.erase(itr);
+				SoundM.PlaySE("enemy_die.wav", 0.5f);
+			}
+			else {
+				itr++;
+			}
+
 		}
 	}
 	for (auto& itr : enemys) {
-		itr->update();
+		if ((itr)->getIsAlive()) {
+			itr->update();
+		}
 	}
 	CollisionPlayerToEnemy();
 }
@@ -138,6 +147,11 @@ CharacterManager * CharacterManager::getThisPointer()
 	return this;
 }
 
+void CharacterManager::updatePlayerDeath()
+{
+	player->updateDeath(1.5f);
+}
+
 std::shared_ptr<CharacterBase> CharacterManager::getPlayer()
 {
 	return player;
@@ -154,7 +168,10 @@ void CharacterManager::CollisionPlayerToEnemy()
 	enemy_itr != enemys.end();) {
 
 		if (CollisionM.isAABBAABB(player->getAABB(), (*enemy_itr)->getAABB())) {
-			
+			if (!(*enemy_itr)->getIsAlive()) {
+				enemy_itr++;
+				continue;
+			}
 			if (!player->getIsInvincible()) {
 				player->addHpValue(-10);
 				player->setIsStun(true);
@@ -176,16 +193,8 @@ void CharacterManager::CollisionPlayerToEnemy()
 				mainwondow->setEnemyStatuts((*enemy_itr)->getName(), (*enemy_itr)->getMaxHp(),
 					(*enemy_itr)->getHp(), (*enemy_itr)->getId(), (*enemy_itr)->getUniqueColor());
 			}
-		
-			if ((*enemy_itr)->getIsAlive()) {
-				enemy_itr++;
-				continue;
-			}
-			else {
-				effectmanager->CreateEffect(EffectExplosion((*enemy_itr)->getPos(), (*enemy_itr)->getScale(), ci::Vec3f(0, 0, 0)));
-				enemy_itr = enemys.erase(enemy_itr);
-				SoundM.PlaySE("enemy_die.wav", 0.5f);
-			}
+			enemy_itr++;
+			continue;
 		}
 		else
 		{

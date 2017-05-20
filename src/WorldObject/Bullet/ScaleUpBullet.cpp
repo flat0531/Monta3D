@@ -64,5 +64,5 @@ void ScaleUpBullet::draw()
 
 bool ScaleUpBullet::deleteThis()
 {
-	return (timecount >= deleettime)|| compulsiondelete;
+	return (timecount >= deleettime)|| compulsiondelete||(!enemyptr->getIsAlive());
 }

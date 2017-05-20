@@ -95,7 +95,7 @@ void GameMain::setup()
 
 	mainwindow->setSelectTextureNum(1);
 	SoundM.CreateSE("stageclear.wav");
-
+	SoundM.CreateSE("deathse.wav");
 	playBGM();
 
 	charactermanager->update();
@@ -117,7 +117,7 @@ void GameMain::update()
 		information.update();
 	}
 	
-	if (!FadeM.getIsFading()&&(!isgoal)&&(!information.getIsEffecting())) {
+	if (!FadeM.getIsFading()&&(!isgoal)&&(!information.getIsEffecting())&& charactermanager->getPlayer()->getIsAlive()) {
 
 		charactermanager->update();
 
@@ -132,6 +132,7 @@ void GameMain::update()
 	cameramanager->update();
 	effectmanager->update();
 	mainwindow->update();
+	updateDeath();
 	updateShiftFloorObject();
 	updateGoal();
 	ReCreateStage();
@@ -141,8 +142,8 @@ void GameMain::draw()
 {
 
 
-	camera.setEyePoint(cameramanager->getSetEyePoint());
-	camera.setCenterOfInterestPoint(cameramanager->getSetCenterofinterestPoint());
+	camera.setEyePoint(cameramanager->getSetEyePoint()+cameramanager->getSetEyePointTrance());
+	camera.setCenterOfInterestPoint(cameramanager->getSetCenterofinterestPoint()+cameramanager->getSetCenterofinterestPointTrance());
 	/*camera.setCenterOfInterestPoint(Vec3f(charactermanager->getPlayer()->getPos().x - WorldScale*2.f, 
 		charactermanager->getPlayer()->getPos().y / 1.5f + camerapos.y*WorldScale,
 		charactermanager->getPlayer()->getPos().z));*/
@@ -191,9 +192,6 @@ void GameMain::draw2D()
 
 void GameMain::shift()
 {
-	if (!charactermanager->getPlayer()->getIsAlive()) {
-		SceneManager::createScene(Title());
-	}
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_t)) {
 		SceneManager::createScene(Title());
 	}
@@ -320,7 +318,11 @@ void GameMain::updateGoal()
 
 void GameMain::updateDeath()
 {
-	if (!charactermanager->getPlayer()->getIsAlive()) {
-
+	if ((!charactermanager->getPlayer()->getIsAlive())||(charactermanager->getPlayer()->getPos().y<-2.f*WorldScale)) {
+		cameramanager->updateCameraTrance();
+		charactermanager->updatePlayerDeath();
+	}
+	if (cameramanager->getDeathCameraEnd()) {
+		SoundM.PlaySE("deathse.wav");
 	}
 }

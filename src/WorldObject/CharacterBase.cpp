@@ -4,6 +4,7 @@
 #include"../CharacterAction/Ratton.h"
 #include"../CharacterAction/WitchAction.h"
 #include"../CharacterAction/SparrowAction.h"
+#include"../Top/EasingManager.h"
 using namespace ci;
 using namespace ci::app;
 CharacterBase::CharacterBase()
@@ -245,6 +246,12 @@ void CharacterBase::setJumpPower()
 	action->setJumpPower(action->getMaxJumpPower());
 }
 
+void CharacterBase::RsetDeathColorT()
+{
+	death_color_t = 0.0f;
+	color = defaultcolor;
+}
+
 ci::Quatf CharacterBase::getQuat()
 {
 	return quat;
@@ -258,6 +265,11 @@ ci::Quatf CharacterBase::getBulletQuat()
 bool CharacterBase::getIsStan()
 {
 	return isstun;
+}
+
+bool CharacterBase::updateDeathEnd()
+{
+	return EasingManager::tCountEnd(death_color_t);
 }
 
 void CharacterBase::setIsStun(const bool is)
@@ -294,6 +306,16 @@ ci::ColorA CharacterBase::getUniqueColor()
 void CharacterBase::setUniqueColor(ci::ColorA _color)
 {
 	uniquecolor = _color;
+}
+
+void CharacterBase::updateDeath(float time)
+{
+	if (!getIsAlive()) {
+		EasingManager::tCount(death_color_t,time);
+		color.r = EasingLinear(death_color_t, defaultcolor.r, 0.0f);
+		color.g = EasingLinear(death_color_t, defaultcolor.g, 0.0f);
+		color.b = EasingLinear(death_color_t, defaultcolor.b, 0.0f);
+	}
 }
 
 void CharacterBase::updateStun()

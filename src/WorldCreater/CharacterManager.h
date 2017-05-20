@@ -27,7 +27,7 @@ public:
 	void draw();
 	void CreateEnemys(const int worldnum, const int stagenum, const int floornum);
 	CharacterManager* getThisPointer();
-	
+	void updatePlayerDeath();
 	std::shared_ptr<CharacterBase> getPlayer();
 	std::list<std::shared_ptr<CharacterBase>>& getEnemys();
 private:

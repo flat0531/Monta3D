@@ -101,6 +101,8 @@ void SlimeAction::operate()
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k) && playerptr->getCanJump()) {
 		playerptr->setCanJump(false);
 		playerptr->setJumming(true);
+		playerptr->setSpeedY(0.0f);
+		playerptr->setJumpPower();
 	}
 	if (KeyManager::getkey().isPress(KeyEvent::KEY_k) && playerptr->IsJumpping()) {
 		playerptr->AddForth(Vec3f(0, jumppower, 0));

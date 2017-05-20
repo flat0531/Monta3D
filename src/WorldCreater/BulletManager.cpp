@@ -85,7 +85,7 @@ void BulletManager::CollisionPlayerBulletToEnemys()
 		bool isdelete = false;
 		for (auto enemysitr = charactermanagerptr->getEnemys().begin();
 		enemysitr != charactermanagerptr->getEnemys().end();enemysitr++) {
-			if ((*enemysitr)->getIsInvincible()) {
+			if ((*enemysitr)->getIsInvincible()|| (!(*enemysitr)->getIsAlive())) {
 				continue;
 			}
 			if (CollisionM.isAABBAABB((*playerbullet_itr)->getAABB(), (*enemysitr)->getAABB())) {
@@ -93,7 +93,6 @@ void BulletManager::CollisionPlayerBulletToEnemys()
 				(*enemysitr)->setIsinvincible(true);
 				mainwindowptr->setPrevEnemyHp((*enemysitr)->getHp());
 				(*enemysitr)->addHpValue(-((*playerbullet_itr)->getAttackPoint()));
-				if((*enemysitr)->getHp()>=1)
 				SoundM.PlaySE("damage.wav",0.5f);
 				if (mainwindowptr->getEnemyId() == (*enemysitr)->getId()) {
 					mainwindowptr->setEnemyHp((*enemysitr)->getHp());
@@ -134,7 +133,7 @@ void BulletManager::CollisionPlayerBulletToEnemyBullet()
 				(*playerbullet_itr)->AddHpValue(-((*enemybullet_itr)->getAttackPoint()));
 
 				if ((*enemybullet_itr)->isActive()) {
-
+				
 				}
 				else {
 					effectmanagerptr->CreateEffect(EffectExplodeburst((*enemybullet_itr)->getPos(), (*enemybullet_itr)->getScale(),

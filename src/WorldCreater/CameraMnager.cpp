@@ -2,6 +2,7 @@
 #include"../Top/Top.h"
 #include"../Top/EasingManager.h"
 #include"../Top/MyJson.h"
+#include"../Top/SoundManager.h"
 using namespace ci;
 using namespace ci::app;
 CameraManager::CameraManager()
@@ -15,13 +16,17 @@ CameraManager::CameraManager()
 	cameralockpos_x = 0.0f;
 	cameralockeyepos_y = 0.0f;
 	lockcenterofinterestpoint_y = 0.0f;
+	deathcamera_t = 0.0f;
 	cameratrancex = 0.0f;
 	trancex_t = 0.0f;
 	isplayerrightmove = true;
+	SoundM.CreateSE("montavoice.wav");
 }
 
 void CameraManager::update()
 {
+	deathcameraend = false;
+
 	switch (cameraupdatetype)
 	{
 	case PLAYER_CAMERA:
@@ -64,6 +69,16 @@ void CameraManager::unitPrevCenterOfInterestPoint(const ci::Vec3f prevpos)
 void CameraManager::setPlayerSpeed(const ci::Vec3f _speed)
 {
 	playerspeed = _speed;
+}
+
+bool CameraManager::getDeathCameraEnd()
+{
+	return deathcameraend;
+}
+
+void CameraManager::setDeatCameraT(float _t)
+{
+	deathcamera_t = _t;
 }
 
 void CameraManager::updatePlayerCameraType()
@@ -208,6 +223,41 @@ void CameraManager::updateXYLockCameraType()
 	prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
+void CameraManager::updateCameraTrance()
+{
+	if (EasingManager::tCountEnd(deathdelay_t))return;
+
+	if (EasingManager::tCountEnd(deathcamera_t)) {
+		EasingManager::tCount(deathdelay_t, 1.0f);
+		if (EasingManager::tCountEnd(deathdelay_t)){
+			deathcameraend = true;
+			console() << "‚Í‚¢‚Á‚½0" << std::endl;
+		}
+	}
+	else {
+		EasingManager::tCount(deathcamera_t, 0.5f);
+		if (EasingManager::tCountEnd(deathcamera_t)) {
+			SoundM.FadeNowBGM(0.0f, 1.0f);
+			SoundM.PlaySE("montavoice.wav");
+		}
+		float value = EasingLinear(deathcamera_t, 150.f, 0);
+		float speed = 50.f;
+		float length = value*sin(deathcamera_t*speed);
+		setcenterofinterestpointtrance.x = -length*cos(M_PI / 4.f);
+		setcenterofinterestpointtrance.y = length*sin(M_PI / 4.f);
+		seteyepointtrance.x = -length*cos(M_PI / 4.f);
+		seteyepointtrance.y = length*sin(M_PI / 4.f);
+	}
+
+}
+
+void CameraManager::ResetT()
+{
+	deathcamera_t = 0.0f;
+	deathdelay_t = 0.0f;
+	deathcameraend = false;
+}
+
 CamaraUpdateType CameraManager::stringToCameraType(const std::string type)
 {
 
@@ -287,8 +337,15 @@ CamaraUpdateType CameraManager::JsonReadCameraType(const int worldnum, const int
 	return type;
 }
 
+ci::Vec3f CameraManager::getSetEyePointTrance()
+{
+	return seteyepointtrance;
+}
 
-
+ci::Vec3f CameraManager::getSetCenterofinterestPointTrance()
+{
+	return setcenterofinterestpointtrance;
+}
 ci::Vec3f CameraManager::getSetEyePoint()
 {
 	return seteyepoint;

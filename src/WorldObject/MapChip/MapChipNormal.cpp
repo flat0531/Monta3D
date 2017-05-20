@@ -1,6 +1,7 @@
 #include "MapChipNormal.h"
 #include"../../Top/DrawManager.h"
 #include"../../Top/TextureManager.h"
+#include"../../Top/SoundManager.h"
 MapChipNormal::MapChipNormal(ci::Vec3f _pos, ci::Vec3f _scale)
 {
 	pos = _pos;
@@ -22,6 +23,10 @@ void MapChipNormal::UpCollisionEnter(CharacterBase * characterbase)
 	characterbase->setPosY(pos.y + (scale.y / 2.f + characterbase->getScale().y / 2.f));
 	if (characterbase->getSpeed().y <= 0.0f) {
 		characterbase->setCanJumpCount(0);
+		if (characterbase->getSpeed().y < (-10.f)) {
+			float gain = std::min(characterbase->getSpeed().y / (-50.f), 1.0f);
+			SoundM.PlaySE("onground.wav", gain);
+		}
 		characterbase->setSpeedY(0.0f);
 		characterbase->setJumpPower();
 	}

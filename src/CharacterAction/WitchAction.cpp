@@ -152,7 +152,7 @@ void WitchAction::attack()
 		(enemyptr->getPos()+ trancepos,
 			ci::Vec3f(0, 0, 0)*WorldScale, ci::Vec3f(1.1, 1.1, 1.1)*WorldScale,
 			speed*WorldScale*0.15f,
-			enemyptr->getRotate() + Vec3f(0, 0, 0),enemyptr,8,8,atackdelay,ColorA(1,0,0),180));
+			enemyptr->getRotate() + Vec3f(0, 0, 0),enemyptr,100,8,atackdelay,ColorA(1,0,0),180));
 	actioncount = 0;
 	atackstart = true;
 	//SoundM.PlaySE("slime_skil.wav", 0.3f);
