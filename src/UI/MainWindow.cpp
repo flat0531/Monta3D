@@ -17,9 +17,11 @@ MainWindow::MainWindow()
 	TextureM.CreateTexture("UI/hpbarframe.png");
 	TextureM.CreateTexture("UI/hpbarframered.png");
 	TextureM.CreateTexture("UI/hpbarframebase.png");
+	zankiicontex = TextureM.CreateTexture("UI/montaicon.png");
 	font = Font("Comic Sans MS", 65.0f);
 	easing_hp_rate = 1.0f;
 	prevhp_rate = 1.0f;
+	zanki = 3;
 }
 
 void MainWindow::draw()
@@ -28,10 +30,12 @@ void MainWindow::draw()
 	drawPlayerTexture();
 	drawPlayerStatus();
 	drawPlayerHp();
+	drawZanki();
 	if (enemyid == 0)return;
 	drawEnemyTexture();
 	drawEnemyName();
 	drawEnemyHp();
+
 }
 
 void MainWindow::setup()
@@ -128,6 +132,16 @@ int MainWindow::getEnemyId()
 	return enemyid;
 }
 
+int MainWindow::getZankiNum()
+{
+	return zanki;
+}
+
+void MainWindow::setZankiNum(const int _zanki)
+{
+	zanki = _zanki;
+}
+
 void MainWindow::drawBackGround()
 {
 	Vec2f size = Vec2f(WINDOW_WIDTH, 230);
@@ -213,6 +227,12 @@ void MainWindow::drawPlayerHp()
 
 	
 }
+void MainWindow::drawZanki()
+{
+	DrawM.drawFont(u8"‚Ì‚±‚è      ~ " + std::to_string(zanki), Vec2f(400, 830), Vec2f(0.8f, 0.8f), 0.0f, ColorA(0, 0, 0, 1), font);
+	DrawM.drawTextureBox(Vec2f(535,860),Vec2f(60,60),0.0f,zankiicontex,ColorA(1,1,1,1));
+}
+
 //int num = 0;
 //for (std::tr2::sys::directory_iterator it("../assets/Texture/Draw/"+
 //	charactermanager->getPlayer()->getName()+"/play"), end; it != end; it++)

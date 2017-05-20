@@ -60,4 +60,6 @@ private:
 	void playBGM();
 	void updateGoal();
 	bool starteffect_isend;
+	void updateDeath();
+	bool playerdead = false;
 };

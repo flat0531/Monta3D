@@ -317,3 +317,10 @@ void GameMain::updateGoal()
 		isshiftstageselect = true;
 	}
 }
+
+void GameMain::updateDeath()
+{
+	if (!charactermanager->getPlayer()->getIsAlive()) {
+
+	}
+}

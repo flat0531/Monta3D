@@ -1,6 +1,7 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include"cinder/gl/Texture.h"
 class CharacterManager;
 class MainWindow {
 public:
@@ -15,6 +16,8 @@ public:
 	void setPrevEnemyHp(const int hp);
 	MainWindow* getThisPtr();
 	int getEnemyId();
+	int getZankiNum();
+	void setZankiNum(const int _zanki);
 private:
 	void drawBackGround();
 	int enemyid = 0;
@@ -34,6 +37,7 @@ private:
 	float end_hprate = 1.0f;
 	std::string backgroundpath;
 	std::string enemyname;
+	ci::gl::Texture zankiicontex;
 	CharacterManager* charactermanager;
 	ci::Font font;
 	std::string playertexturepath = "";
@@ -44,7 +48,9 @@ private:
 	void drawEnemyHp();
 	void drawPlayerStatus();
 	void drawPlayerHp();
+	void drawZanki();
 	void updatePlayerHpBar();
 	void updateEnemyHpBar();
 	int selecttexturenum = 1;
+	int zanki;
 };
