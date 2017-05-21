@@ -99,7 +99,9 @@ void GameMain::setup()
 	SoundM.CreateSE("deathse.wav");
 	SoundM.CreateSE("haretu.wav");
 	TextureM.CreateTexture("UI/montaicon.png");
+	TextureM.CreateTexture("UI/nisemonta.png");
 	font = Font("Comic Sans MS", 65.0f);
+	
 	playBGM();
 
 	charactermanager->update();
@@ -349,10 +351,16 @@ void GameMain::drawZankiIcon()
 	if (EasingManager::tCountEnd(deathblackbox_t)){
 		Vec2f iconpos = Vec2f(WINDOW_WIDTH/2.f-100.f,WINDOW_HEIGHT/2.f);
 		Vec2f iconsize = Vec2f(200,200);
-		DrawM.drawTextureBox(iconpos,iconsize,0.0f, TextureM.getTexture("UI/montaicon.png"),ColorA(1,1,1, zankicolor_t));
 		DrawM.drawFont(u8"~", iconpos + Vec2f(100, -70), Vec2f(2, 2), 0.0f, ColorA(1, 1, 1, zankicolor_t), font);
-		if(mainwindow->getZankiNum()>=0)
-		DrawM.drawFont(std::to_string(mainwindow->getZankiNum()), iconpos + Vec2f(200,-70+zanki_trancepos_y), Vec2f(2, 2)*zankisizerate, 0.0f, ColorA(1, 1, 1, zankicolor_t), font);
+		if (mainwindow->getZankiNum() >= 0) {
+			DrawM.drawTextureBox(iconpos, iconsize, 0.0f, TextureM.getTexture("UI/montaicon.png"), ColorA(1, 1, 1, zankicolor_t));
+			DrawM.drawFont(std::to_string(mainwindow->getZankiNum()), iconpos + Vec2f(200, -70 + zanki_trancepos_y), Vec2f(2, 2)*zankisizerate, 0.0f, ColorA(1, 1, 1, zankicolor_t), font);
+		}
+		else {
+			DrawM.drawTextureBox(iconpos, iconsize, 0.0f, TextureM.getTexture("UI/nisemonta.png"), ColorA(1, 1, 1, zankicolor_t));
+			
+		}
+	
 	}
 }
 

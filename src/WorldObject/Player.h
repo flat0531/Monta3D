@@ -26,7 +26,7 @@ public:
 	void setT(const float t);
 	bool GetIsOperate();
 	void SetIsOpetate(const bool is);
-
+	bool getIsJummping();
 private:
 	bool canjump = true;
 	bool jumpping = false;

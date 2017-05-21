@@ -1,5 +1,6 @@
 #pragma once
 #include"ActionBase.h"
+#include"cinder/gl/gl.h"
 #include<memory>
 class Player;
 class CharacterBase;
@@ -18,4 +19,6 @@ private:
 	int atackdelaycount;
 	int atackdelaytime = 60;
 	bool IsAtackDelay();
+	float rotateangle = 0.0f;
+	ci::Vec3f drawrotate;
 };

@@ -80,7 +80,6 @@ public:
 	ci::ColorA getUniqueColor();
 	ci::ColorA getDefaultColor();
 	void setUniqueColor(ci::ColorA _color);
-
 	template<class T>
 	void setCharacterAction(T);
 protected:

@@ -151,6 +151,11 @@ void Player::SetIsOpetate(const bool is)
 	isoperate = is;
 }
 
+bool Player::getIsJummping()
+{
+	return jumpping;
+}
+
 PlayerDirection Player::disideDirection()
 {
 	bool isleft = KeyManager::getkey().isPress(KeyEvent::KEY_a);
