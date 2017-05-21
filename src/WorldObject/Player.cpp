@@ -55,7 +55,9 @@ void Player::update()
 
 
 	updateStun();
-
+	if (pos.y <= -WorldScale*5.f) {
+		hp = 0.0f;
+	}
 	action->update();
 }
 

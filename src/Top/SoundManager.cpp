@@ -20,7 +20,7 @@ void SoundManager::updateGainFadeT()
 	bgmmap[nowplaybgmname].changeGain(gain);
 	if (EasingManager::tCountEnd(fade_t)) {
 		isfading = false;
-		bgmmap[nowplaybgmname].stop();
+		eraseBGM(nowplaybgmname);
 	}
 
 }

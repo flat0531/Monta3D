@@ -58,6 +58,7 @@ void GameMain::setup()
 	charactermanager->setEffectManagerPointer(effectmanager->getThisPointer());
 
 	charactermanager->CreatePlayer(Vec3f(-22.0, 2, 0.0f)*WorldScale);
+	nextplayerpos = Vec3f(-22.0, 2, 0.0f)*WorldScale;////
 	charactermanager->CreateEnemys(worldnum, stagenum, floornum);//
 
 	charactermanager->setBulletManagerPtrToPlayer();
@@ -96,6 +97,9 @@ void GameMain::setup()
 	mainwindow->setSelectTextureNum(1);
 	SoundM.CreateSE("stageclear.wav");
 	SoundM.CreateSE("deathse.wav");
+	SoundM.CreateSE("haretu.wav");
+	TextureM.CreateTexture("UI/montaicon.png");
+	font = Font("Comic Sans MS", 65.0f);
 	playBGM();
 
 	charactermanager->update();
@@ -136,6 +140,7 @@ void GameMain::update()
 	updateShiftFloorObject();
 	updateGoal();
 	ReCreateStage();
+	DeathFadeInend();
 }
 
 void GameMain::draw()
@@ -187,6 +192,7 @@ void GameMain::draw2D()
 	if (isgoal) {
 		information.drawClearTexture();
 	}
+	drawDeathBlackBox();
 	gl::popModelView();
 }
 
@@ -225,6 +231,7 @@ void GameMain::ReCreateStage()
 		charactermanager->setEnemysAction();
 		mapchipmanager->setup(worldnum, stagenum, floornum);
 		charactermanager->getPlayer()->setPos(nextplayerpos);
+		charactermanager->getPlayer()->setSpeed(Vec3f(0,0,0));
 		cameramanager->setMaxValue(mapchipmanager->getChipsSize()*WorldScale);
 		cameramanager->setMinValue(Vec2f(0, 0));
 		cameramanager->setCameraUpdateType(cameramanager->JsonReadCameraType(worldnum, stagenum, floornum));
@@ -297,7 +304,7 @@ void GameMain::drawShiftFloorObject()
 void GameMain::playBGM()
 {
 	JsonTree bgm(loadAsset("Json/bgm.json"));
-	std::string bgmname= bgm.getValueForKey<std::string>(std::to_string(worldnum)+"_"+std::to_string(stagenum))+".wav";
+	bgmname = bgm.getValueForKey<std::string>(std::to_string(worldnum) + "_" + std::to_string(stagenum)) + ".wav";
 	SoundM.PlayBGM(bgmname,0.4f);
 	SoundM.SetLoopBGM(bgmname, true);
 }
@@ -318,11 +325,113 @@ void GameMain::updateGoal()
 
 void GameMain::updateDeath()
 {
-	if ((!charactermanager->getPlayer()->getIsAlive())||(charactermanager->getPlayer()->getPos().y<-2.f*WorldScale)) {
+	if ((!charactermanager->getPlayer()->getIsAlive())) {
 		cameramanager->updateCameraTrance();
 		charactermanager->updatePlayerDeath();
 	}
 	if (cameramanager->getDeathCameraEnd()) {
-		SoundM.PlaySE("deathse.wav");
+		SoundM.PlaySE("deathse.wav",0.5f);
+		isdeathblackboxstart = true;
+	}
+	updateDeathBlackBox();
+	updateZanki();
+}
+
+void GameMain::drawDeathBlackBox()
+{
+	if (!isdeathblackboxstart)return;
+	DrawM.drawBox(Vec2f(WINDOW_WIDTH/2.f,WINDOW_HEIGHT/2.f),deathblackboxsize,deathblackboxangle,ColorA(0,0,0,1));
+	drawZankiIcon();
+}
+
+void GameMain::drawZankiIcon()
+{
+	if (EasingManager::tCountEnd(deathblackbox_t)){
+		Vec2f iconpos = Vec2f(WINDOW_WIDTH/2.f-100.f,WINDOW_HEIGHT/2.f);
+		Vec2f iconsize = Vec2f(200,200);
+		DrawM.drawTextureBox(iconpos,iconsize,0.0f, TextureM.getTexture("UI/montaicon.png"),ColorA(1,1,1, zankicolor_t));
+		DrawM.drawFont(u8"~", iconpos + Vec2f(100, -70), Vec2f(2, 2), 0.0f, ColorA(1, 1, 1, zankicolor_t), font);
+		if(mainwindow->getZankiNum()>=0)
+		DrawM.drawFont(std::to_string(mainwindow->getZankiNum()), iconpos + Vec2f(200,-70+zanki_trancepos_y), Vec2f(2, 2)*zankisizerate, 0.0f, ColorA(1, 1, 1, zankicolor_t), font);
+	}
+}
+
+void GameMain::updateDeathBlackBox()
+{
+	if (EasingManager::tCountEnd(zanki_delay_t))return;
+	if (isdeathblackboxstart) {
+		EasingManager::tCount(deathblackbox_t,2.0f);
+		deathblackboxsize.x = EasingQuadIn(deathblackbox_t, 0.0f, WINDOW_WIDTH);
+		deathblackboxsize.y = EasingQuadOut(deathblackbox_t, 0.0f, WINDOW_HEIGHT);
+		deathblackboxangle = EasingQuadIn(deathblackbox_t, 0.0f, 720.f);
+	}
+	
+	if (EasingManager::tCountEnd(deathblackbox_t)) {
+		EasingManager::tCount(zankicolor_t, 1.0f);
+		if (EasingManager::tCountEnd(zankicolor_t)) {
+			EasingManager::tCount(zanki_delay_t, 1.0f);
+			if (EasingManager::tCountEnd(zanki_delay_t)) {
+				mainwindow->setZankiNum(mainwindow->getZankiNum()-1);
+				SoundM.PlaySE("haretu.wav");
+			}
+		}
+	}
+}
+
+void GameMain::updateZanki()
+{
+	if (EasingManager::tCountEnd(zanki_size_t))return;
+	if (EasingManager::tCountEnd(zanki_delay_t)) {
+		EasingManager::tCount(zanki_size_t,0.3f);
+		zankisizerate = EasingReturn(zanki_size_t,1.0f,0.3f);
+		zanki_trancepos_y = EasingReturn(zanki_size_t, 0, -100.f);
+		if (EasingManager::tCountEnd(zanki_size_t)) {
+
+			FadeM.StartFadeIn();
+			isshiftdeath = true;
+			if (mainwindow->getZankiNum() < 0) {
+				isshiftstageselect = true;
+			}
+			//////////////////////////
+	
+		}
+	}
+}
+
+void GameMain::DeathFadeInend()
+{
+	if (isshiftdeath&&FadeM.getIsfadeinEnd()) {
+		if (mainwindow->getZankiNum() >= 0) {
+
+			FadeM.StartFadeOut(false);
+			isshiftdeath = false;
+			   playerdead = false;
+			isdeathblackboxstart = false;
+			deathblackbox_t = 0.0f;
+			zankicolor_t = 0.0f;
+			zanki_delay_t = 0.0f;
+			zanki_size_t = 0.0f;
+			zankisizerate = 1.0f;
+			zanki_trancepos_y = 0.0f;
+			mapmanager.ReadData(worldnum, stagenum, floornum);
+			charactermanager->CreateEnemys(worldnum, stagenum, floornum);
+			charactermanager->setBulletManagerPtrToEnemys();
+			charactermanager->setEnemysAction();
+			mapchipmanager->setup(worldnum, stagenum, floornum);
+			charactermanager->getPlayer()->setPos(nextplayerpos);
+			cameramanager->setMaxValue(mapchipmanager->getChipsSize()*WorldScale);
+			cameramanager->setMinValue(Vec2f(0, 0));
+			cameramanager->setCameraUpdateType(cameramanager->JsonReadCameraType(worldnum, stagenum, floornum));
+			cretateShiftFloorObject();
+			isshiting = false;
+			mainwindow->setup();
+			charactermanager->getPlayer()->setSpeed(Vec3f(0, 0, 0));
+			charactermanager->getPlayer()->setHp(charactermanager->getPlayer()->getMaxHp());
+			charactermanager->getPlayer()->RsetDeathColorT();
+			charactermanager->getPlayer()->setIsinvincible(false);
+			charactermanager->getPlayer()->setIsStun(false);
+			cameramanager->ResetT();
+			playBGM();
+		}
 	}
 }

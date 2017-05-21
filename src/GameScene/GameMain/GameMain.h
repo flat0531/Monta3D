@@ -39,9 +39,11 @@ private:
 	ci::CameraOrtho ortho;
 	Information information;
 	std::shared_ptr<MainWindow>mainwindow;
+	std::string bgmname;
 	int worldnum;
 	int stagenum;
 	int floornum;
+	ci::Font font;
 	ci::Vec3f nextplayerpos;
 	bool isshiting = false;
 	bool isgoal = false;
@@ -61,5 +63,22 @@ private:
 	void updateGoal();
 	bool starteffect_isend;
 	void updateDeath();
+
 	bool playerdead = false;
+	bool isdeathblackboxstart = false;
+	float deathblackbox_t = 0.0f;
+	float zankicolor_t = 0.0f;
+	float zanki_delay_t = 0.0f;
+	float zanki_size_t = 0.0f;
+	float zankisizerate = 1.0f;
+	float zanki_trancepos_y = 0.0f;
+	void drawDeathBlackBox();
+	void drawZankiIcon();
+	void updateDeathBlackBox();
+	void updateZanki();
+	ci::Vec2f deathblackboxsize = ci::Vec2f(0, 0);
+	float deathblackboxangle = 0.0f;
+	bool isshiftdeath = false;
+	bool isdeathshifttitle = false;
+	void DeathFadeInend();
 };

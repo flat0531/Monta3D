@@ -53,8 +53,8 @@ private:
 	float blackbox_t;
 	float blackbox_delay_t;
 	float blackbox_return_t;
-	float begin_name_t;
-	float delay_name_t;
+	float begin_name_t=0.0f;
+	float delay_name_t=0.0f;
 	float end_name_t;
 	float goaleasingtime_t = 0.0f;
 	void endInit();

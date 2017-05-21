@@ -56,6 +56,7 @@ void BGMPlayer::PlayGainChanage(float gain)
 {
 	changeGain(gain);
 	file_player->start();
+	
 }
 
 void BGMPlayer::SetIsLoop(bool isloop)
@@ -81,6 +82,11 @@ void BGMPlayer::setLoopEnd(const double endtime)
 void BGMPlayer::bgmDelete()
 {
 	
+}
+
+void BGMPlayer::setSeek()
+{
+	file_player->seek(0);
 }
 
 float BGMPlayer::getGain()

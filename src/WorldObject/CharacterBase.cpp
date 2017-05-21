@@ -293,6 +293,11 @@ void CharacterBase::setDefalutColor(const ci::ColorA _color)
 	defaultcolor = _color;
 }
 
+void CharacterBase::setColor(const ci::ColorA _color)
+{
+	color = _color;
+}
+
 ci::ColorA CharacterBase::getColor()
 {
 	return color;
@@ -303,6 +308,10 @@ ci::ColorA CharacterBase::getUniqueColor()
 	return uniquecolor;
 }
 
+ci::ColorA CharacterBase::getDefaultColor()
+{
+	return defaultcolor;
+}
 void CharacterBase::setUniqueColor(ci::ColorA _color)
 {
 	uniquecolor = _color;

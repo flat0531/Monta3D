@@ -45,7 +45,7 @@ private:
 	float cameralockpos_x;
 	float cameralockeyepos_y;
 	float lockcenterofinterestpoint_y;
-	float deathcamera_t=0.0f;
+	float deathcamera_t = 0.0f;
 	float deathdelay_t = 0.0f;
 	bool deathcameraend = false;
 	void updatePlayerCameraType();

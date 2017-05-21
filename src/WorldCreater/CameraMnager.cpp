@@ -168,8 +168,6 @@ void CameraManager::updateXLockCameraType()
 void CameraManager::updateYLockCameraType()
 {
 
-	///////////x軸をプレイヤーの進行方向別にイージング///////////
-
 	float easingtime = 2.0f;
 	EasingManager::tCount(trancex_t, easingtime);
 
@@ -231,7 +229,6 @@ void CameraManager::updateCameraTrance()
 		EasingManager::tCount(deathdelay_t, 1.0f);
 		if (EasingManager::tCountEnd(deathdelay_t)){
 			deathcameraend = true;
-			console() << "はいった0" << std::endl;
 		}
 	}
 	else {

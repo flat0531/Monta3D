@@ -75,8 +75,10 @@ public:
 	void setIsinvincible(const bool is);
 	bool getIsInvincible();
 	void setDefalutColor(const ci::ColorA _color);
+	void setColor(const ci::ColorA _color);
 	ci::ColorA getColor();
 	ci::ColorA getUniqueColor();
+	ci::ColorA getDefaultColor();
 	void setUniqueColor(ci::ColorA _color);
 
 	template<class T>
