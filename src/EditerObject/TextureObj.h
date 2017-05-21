@@ -1,6 +1,7 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include"cinder\gl\Texture.h"
 class TextureObj {
 public:
 	TextureObj();
@@ -26,5 +27,6 @@ private:
 	ci::Vec3f rotate;
 	std::string path;
 	ci::ColorA color;
+	ci::gl::Texture tex;
 	bool isalpha;
 };

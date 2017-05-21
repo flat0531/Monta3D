@@ -20,6 +20,7 @@ void SoundManager::updateGainFadeT()
 	bgmmap[nowplaybgmname].changeGain(gain);
 	if (EasingManager::tCountEnd(fade_t)) {
 		isfading = false;
+		if(iserace)
 		eraseBGM(nowplaybgmname);
 	}
 
@@ -36,6 +37,7 @@ void SoundManager::PlayBGM(const std::string name, float gain)
 		bgmmap[name].PlayGainChanage(gain);
 	}
 	nowplaybgmname = name;
+	playstartgain = gain;
 }
 
 void SoundManager::StopBGM(std::string name)
@@ -204,12 +206,18 @@ void SoundManager::CreateSE(const std::string name)
 	}
 }
 
-void SoundManager::FadeNowBGM(float _endgain, float _fadetime)
+void SoundManager::FadeNowBGM(float _endgain, float _fadetime, bool isenderace)
 {
 	fade_t = 0.0f;
 	begingain = bgmmap[nowplaybgmname].getGain();
 	endgain = _endgain;
 	fadetime = _fadetime;
 	isfading = true;
+	iserace = isenderace;
+}
+
+float SoundManager::getPlayStartGain()
+{
+	return playstartgain;
 }
 

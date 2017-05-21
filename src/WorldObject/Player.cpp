@@ -71,28 +71,17 @@ void Player::setup(ci::Vec3f _pos)
 	
 }
 
-
-
 bool Player::IsJumpping()
 {
 	return jumpping;
 }
 
-bool Player::getCanJump()
-{
-	return canjump;
-}
 
 int Player::getjumpCount()
 {
 	return jumpcount;
 }
 
-
-void Player::setCanJump(const bool is)
-{
-	canjump = is;
-}
 
 void Player::setJumming(const bool is)
 {
@@ -149,11 +138,6 @@ bool Player::GetIsOperate()
 void Player::SetIsOpetate(const bool is)
 {
 	isoperate = is;
-}
-
-bool Player::getIsJummping()
-{
-	return jumpping;
 }
 
 PlayerDirection Player::disideDirection()

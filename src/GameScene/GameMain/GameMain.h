@@ -81,4 +81,5 @@ private:
 	bool isshiftdeath = false;
 	bool isdeathshifttitle = false;
 	void DeathFadeInend();
+	void StartActionSelectMode();
 };

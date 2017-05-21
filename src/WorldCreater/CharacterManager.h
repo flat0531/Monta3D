@@ -30,6 +30,10 @@ public:
 	void updatePlayerDeath();
 	std::shared_ptr<CharacterBase> getPlayer();
 	std::list<std::shared_ptr<CharacterBase>>& getEnemys();
+	void setActionSelectMode(const bool is);
+	bool getActionSelectMode();
+	void updateActionSelectMode();
+	void drawActionSelectMode();
 private:
 	std::shared_ptr<CharacterBase>player;
 	std::list<std::shared_ptr<CharacterBase>> enemys;
@@ -39,4 +43,11 @@ private:
 	void CollisionPlayerToEnemy();
 	ActionType stringToActionType(const std::string name);
 	void SelectPlayerFolm();
+	bool actionselectmode = false;
+	void updateBackGround();
+	void drawBackGround();
+	float background_t = 0.0f;
+	bool isbeginselectmode = true;
+	bool isendselectmode = false;
+	ci::Vec2f backgroundsize = ci::Vec2f(0,0);
 };

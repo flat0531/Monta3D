@@ -15,9 +15,8 @@ public:
 	void draw()override;
 	void setup(ci::Vec3f _pos)override;
 	bool IsJumpping();
-	bool getCanJump();
 	int getjumpCount();
-	void setCanJump(const bool is);
+
 	void setJumming(const bool is);
 	void CanJumpCountUp();
 	PlayerDirection getplayerdirection();
@@ -26,9 +25,8 @@ public:
 	void setT(const float t);
 	bool GetIsOperate();
 	void SetIsOpetate(const bool is);
-	bool getIsJummping();
 private:
-	bool canjump = true;
+
 	bool jumpping = false;
 	PlayerDirection playerdirection;
 	PlayerDirection disideDirection();

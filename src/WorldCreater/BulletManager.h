@@ -26,6 +26,9 @@ public:
 	void setMainWindowPtr(MainWindow* mainwindow);
 	std::list<std::shared_ptr<BulletBase>>& getPlayerBullets();
 	std::list<std::shared_ptr<BulletBase>>& getEnemyBullets();
+	void ClearEnemyBullets();
+	void ClearPlayerBullets();
+	void ClearBullets();
 private:
 	void CollisionPlayerBulletToEnemys();
 	void CollisionPlayerBulletToEnemyBullet();

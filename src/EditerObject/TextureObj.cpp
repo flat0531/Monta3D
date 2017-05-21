@@ -13,6 +13,7 @@ TextureObj::TextureObj(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _rotate, std:
 	rotate = _rotate;
 	path = _path;
 	isalpha = _isalpha;
+	tex = TextureM.CreateTexture(path);
 	color = ci::ColorA(1, 1, 1, 1);
 }
 
@@ -88,5 +89,5 @@ void TextureObj::setColor(const ci::ColorA _color)
 
 void TextureObj::draw()
 {
-	DrawM.drawTextureCube(pos,scale,rotate,TextureM.getTexture(path),color);
+	DrawM.drawTextureCube(pos,scale,rotate, tex,color);
 }

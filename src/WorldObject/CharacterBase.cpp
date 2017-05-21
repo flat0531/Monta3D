@@ -317,6 +317,16 @@ void CharacterBase::setUniqueColor(ci::ColorA _color)
 	uniquecolor = _color;
 }
 
+bool CharacterBase::getCanJump()
+{
+	return canjump;
+}
+
+void CharacterBase::setCanJump(const bool is)
+{
+	canjump = is;
+}
+
 void CharacterBase::updateDeath(float time)
 {
 	if (!getIsAlive()) {

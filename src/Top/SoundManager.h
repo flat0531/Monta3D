@@ -39,7 +39,8 @@ public:
 	bool GetLoopSE(const std::string name);
 	void eraseSE(const std::string name);
 	void CreateSE(const std::string name);
-	void FadeNowBGM(float _endgain,float _fadetime);
+	void FadeNowBGM(float _endgain,float _fadetime, const bool isenderace = true);
+	float getPlayStartGain();
 private:
 	std::string nowplaybgmname = "";
 	std::map<std::string, BGMPlayer> bgmmap;
@@ -49,5 +50,7 @@ private:
 	bool isfading = false;
 	float begingain;
 	float endgain;
+	bool iserace = false;
+	float playstartgain = 0.0f;
 };
 #define SoundM (SoundManager::getSound().getSound())

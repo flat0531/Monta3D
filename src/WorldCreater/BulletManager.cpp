@@ -77,6 +77,22 @@ std::list<std::shared_ptr<BulletBase>>& BulletManager::getEnemyBullets()
 	return enemybullets;
 }
 
+void BulletManager::ClearEnemyBullets()
+{
+	enemybullets.clear();
+}
+
+void BulletManager::ClearPlayerBullets()
+{
+	playerbullets.clear();
+}
+
+void BulletManager::ClearBullets()
+{
+	ClearEnemyBullets();
+	ClearPlayerBullets();
+}
+
 
 void BulletManager::CollisionPlayerBulletToEnemys()
 {

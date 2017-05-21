@@ -98,6 +98,7 @@ void GameMain::setup()
 	SoundM.CreateSE("stageclear.wav");
 	SoundM.CreateSE("deathse.wav");
 	SoundM.CreateSE("haretu.wav");
+	SoundM.CreateSE("actionselectbegin.wav");
 	TextureM.CreateTexture("UI/montaicon.png");
 	TextureM.CreateTexture("UI/nisemonta.png");
 	font = Font("Comic Sans MS", 65.0f);
@@ -124,25 +125,39 @@ void GameMain::update()
 	}
 	
 	if (!FadeM.getIsFading()&&(!isgoal)&&(!information.getIsEffecting())&& charactermanager->getPlayer()->getIsAlive()) {
+		if (!charactermanager->getActionSelectMode()) {
+			StartActionSelectMode();
+		}
+		
+		if (!charactermanager->getActionSelectMode()) {
+			charactermanager->update();
 
-		charactermanager->update();
+			bulletmanager->update();
 
-		bulletmanager->update();
-
-		mapchipmanager->update();
+			mapchipmanager->update();
+		}
+		
 	}
+
+	if (!charactermanager->getActionSelectMode()) {
+
+		cameramanager->setPlayerPos(charactermanager->getPlayer()->getPos());
+		cameramanager->setPlayerSpeed(charactermanager->getPlayer()->getSpeed());
+		cameramanager->update();
+		effectmanager->update();
+		mainwindow->update();
+		updateDeath();
+		updateShiftFloorObject();
+		updateGoal();
+		ReCreateStage();
+		DeathFadeInend();
+	}
+	else {
+		charactermanager->updateActionSelectMode();
+	}
+
 	
 
-	cameramanager->setPlayerPos(charactermanager->getPlayer()->getPos());
-	cameramanager->setPlayerSpeed(charactermanager->getPlayer()->getSpeed());
-	cameramanager->update();
-	effectmanager->update();
-	mainwindow->update();
-	updateDeath();
-	updateShiftFloorObject();
-	updateGoal();
-	ReCreateStage();
-	DeathFadeInend();
 }
 
 void GameMain::draw()
@@ -194,6 +209,9 @@ void GameMain::draw2D()
 	if (isgoal) {
 		information.drawClearTexture();
 	}
+	if (charactermanager->getActionSelectMode()) {
+		charactermanager->drawActionSelectMode();
+	}
 	drawDeathBlackBox();
 	gl::popModelView();
 }
@@ -227,6 +245,7 @@ void GameMain::shiftGoal()
 void GameMain::ReCreateStage()
 {
 	if (isshiting&&FadeM.getIsfadeinEnd()) {
+		bulletmanager->ClearBullets();
 		mapmanager.ReadData(worldnum, stagenum, floornum);
 		charactermanager->CreateEnemys(worldnum, stagenum, floornum);
 		charactermanager->setBulletManagerPtrToEnemys();
@@ -421,6 +440,7 @@ void GameMain::DeathFadeInend()
 			zanki_size_t = 0.0f;
 			zankisizerate = 1.0f;
 			zanki_trancepos_y = 0.0f;
+			bulletmanager->ClearBullets();
 			mapmanager.ReadData(worldnum, stagenum, floornum);
 			charactermanager->CreateEnemys(worldnum, stagenum, floornum);
 			charactermanager->setBulletManagerPtrToEnemys();
@@ -442,4 +462,16 @@ void GameMain::DeathFadeInend()
 			playBGM();
 		}
 	}
+}
+
+void GameMain::StartActionSelectMode()
+{
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_i)) {
+		if (charactermanager->getPlayer()->getCanJump()) {
+			charactermanager->setActionSelectMode(true);
+			SoundM.FadeNowBGM(0.05f, 0.5f, false);
+			SoundM.PlaySE("actionselectbegin.wav");
+		}
+	}
+	
 }

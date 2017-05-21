@@ -7,16 +7,19 @@
 #include"../Top/CollisionManager.h"
 #include"../WorldCreater/EffectManager.h"
 #include"../WorldObject/Effect/EffectExplosion.h"
+#include"../Top/EasingManager.h"
 #include"../Top/SoundManager.h"
 #include"../WorldCreater/EffectManager.h"
 #include"../Input/KeyManager.h"
 #include"../Top/MyJson.h"
 #include"../UI/MainWindow.h"
+#include"../Top/DrawManager.h"
 using namespace ci;
 using namespace ci::app;
 CharacterManager::CharacterManager()
 {
 	SoundM.CreateSE("enemy_die.wav");
+	SoundM.CreateSE("actionselectend.wav");
 }
 
 void CharacterManager::CreateCharacter(CharacterBase character)
@@ -162,6 +165,60 @@ std::list<std::shared_ptr<CharacterBase>>& CharacterManager::getEnemys()
 	return enemys;
 }
 
+void CharacterManager::setActionSelectMode(const bool is)
+{
+	actionselectmode = is;
+}
+
+bool CharacterManager::getActionSelectMode()
+{
+	return actionselectmode;
+}
+
+void CharacterManager::updateActionSelectMode()
+{
+	if (isbeginselectmode) {
+		EasingManager::tCount(background_t,0.3f);
+		backgroundsize.x = EasingQuadOut(background_t, 0.f, WINDOW_WIDTH);
+		backgroundsize.y = EasingQuadOut(background_t, 0.f, WINDOW_HEIGHT);
+		if (EasingManager::tCountEnd(background_t)) {
+			isbeginselectmode = false;
+			background_t = 0.0f;
+		}
+	}
+	if (isendselectmode) {
+		EasingManager::tCount(background_t, 0.3f);
+		backgroundsize.x = EasingQuadIn(background_t, WINDOW_WIDTH, 0.0f);
+		backgroundsize.y = EasingQuadIn(background_t, WINDOW_HEIGHT, 0.0f);
+		if (EasingManager::tCountEnd(background_t)) {
+			isendselectmode = false;
+			isbeginselectmode = true;
+			actionselectmode = false;
+			SoundM.FadeNowBGM(SoundM.getPlayStartGain(),0.5f,false);
+			background_t = 0.0f;
+		}
+	}
+	if ((!isbeginselectmode)&&(!isendselectmode)) {
+		if (KeyManager::getkey().isPush(KeyEvent::KEY_i)) {
+			isendselectmode = true;
+			SoundM.PlaySE("actionselectend.wav");
+		}
+	}
+
+}
+
+void CharacterManager::drawActionSelectMode()
+{
+	if (actionselectmode) {
+		float alfa = 0.2f;
+		DrawM.drawBoxEdge(Vec2f(0, WINDOW_HEIGHT), Vec2f(backgroundsize.x,-backgroundsize.y), ColorA(1, 0, 0, alfa));
+		DrawM.drawBoxEdge(Vec2f(WINDOW_WIDTH,0), Vec2f(-backgroundsize.x,backgroundsize.y), ColorA(0, 1, 0, alfa));
+		DrawM.drawBoxEdge(Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT), -backgroundsize, ColorA(0, 0, 1, alfa));
+		DrawM.drawBoxEdge(Vec2f(0, 0), backgroundsize, ColorA(0, 0, 0, alfa));
+	}
+	
+}
+
 void CharacterManager::CollisionPlayerToEnemy()
 {
 	for (auto enemy_itr = enemys.begin();
@@ -233,4 +290,12 @@ void CharacterManager::SelectPlayerFolm()
 			player->setActionType(CAT);
 		}
 	}
+}
+
+void CharacterManager::updateBackGround()
+{
+}
+
+void CharacterManager::drawBackGround()
+{
 }

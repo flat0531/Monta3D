@@ -80,6 +80,8 @@ public:
 	ci::ColorA getUniqueColor();
 	ci::ColorA getDefaultColor();
 	void setUniqueColor(ci::ColorA _color);
+	bool getCanJump();
+	void setCanJump(const bool is);
 	template<class T>
 	void setCharacterAction(T);
 protected:
@@ -98,6 +100,7 @@ protected:
 	bool isclear = false;
 	bool isstun = false;
 	bool issnvincible = false;
+	bool canjump = true;
 	float death_color_t = 0.0f;
 	int invinciblecount = 0;
 	int stuncount = 0;
