@@ -89,6 +89,11 @@ void Title::update()
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_g)&&(!FadeM.getIsFading())) {
 		FadeM.StartFadeIn();
 	}
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_o)) {
+		TextureM.CreateTexture("UI/montaicon.png");
+		Surface test = TextureM.getTexture("UI/montaicon.png");
+		scaledown.WirteImage(test, 4, "../assets/SaveData/UserPlay/testttttttt.png");
+	}
 }
 
 void Title::draw()

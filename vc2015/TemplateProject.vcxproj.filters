@@ -390,6 +390,9 @@
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipApple.cpp">
       <Filter>Source Files\WorldObjct\MapChip</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\WorldObject\SurfaceScaleDown.cpp">
+      <Filter>Source Files\DrawSceneObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -682,6 +685,9 @@
     </ClInclude>
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipApple.h">
       <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\SurfaceScaleDown.h">
+      <Filter>Source Files\DrawSceneObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

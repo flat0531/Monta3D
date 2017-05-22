@@ -4,6 +4,7 @@
 #include"cinder/Camera.h"
 #include "../../WorldObject/Map2d.h"
 #include"../../Top/SurfaceEffect.h"
+#include"../../WorldObject/SurfaceScaleDown.h"
 class Title :public SceneBase {
 public:
 	void setup() override;
@@ -14,7 +15,7 @@ public:
 private:
 	ci::CameraPersp camera;
 	ci::CameraOrtho ortho;
-
+	SurfaceScaleDown scaledown;
 	ci::Vec3f skyrotate;
 	ci::Vec3f skypos;
 	std::vector<Map2d> map2d;

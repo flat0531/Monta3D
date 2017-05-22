@@ -201,6 +201,7 @@
     <ClCompile Include="..\src\WorldObject\Player.cpp" />
     <ClCompile Include="..\src\WorldObject\ShiftFloorObject.cpp" />
     <ClCompile Include="..\src\WorldObject\Sky.cpp" />
+    <ClCompile Include="..\src\WorldObject\SurfaceScaleDown.cpp" />
     <ClCompile Include="..\src\WorldObject\VerticalLine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +301,7 @@
     <ClInclude Include="..\src\WorldObject\PlayerDirection.h" />
     <ClInclude Include="..\src\WorldObject\ShiftFloorObject.h" />
     <ClInclude Include="..\src\WorldObject\Sky.h" />
+    <ClInclude Include="..\src\WorldObject\SurfaceScaleDown.h" />
     <ClInclude Include="..\src\WorldObject\VerticalLine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
