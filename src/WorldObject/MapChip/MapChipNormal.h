@@ -1,8 +1,10 @@
 #pragma once
 #include"MapChipBase.h"
+#include"cinder/gl/Texture.h"
+class EffectManager;
 class MapChipNormal : public MapChipBase {
 public:
-	MapChipNormal(ci::Vec3f _pos,ci::Vec3f _scale);
+	MapChipNormal(ci::Vec3f _pos,ci::Vec3f _scale, EffectManager* _effectmanager);
 	void draw();
 	void update();
 	void UpCollisionEnter(CharacterBase * characterbase) override;
@@ -11,5 +13,6 @@ public:
 	void LeftCollisionEnter(CharacterBase * characterbase)override;
 	void BulletCollison(BulletBase * bulletbase, bool isbreak)override;
 private:
-
+	EffectManager* effectmanager;
+	ci::gl::Texture tex;
 };

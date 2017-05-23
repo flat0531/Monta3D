@@ -88,7 +88,7 @@ void RattonAction::attack()
 
 	enemyptr->getBulletManagerPointer()->CreateEnemyBullet(NormalEnemyBullet
 		(enemyptr->getPos() + speed*WorldScale,
-			ci::Vec3f(1, 1, 1)*WorldScale,
+			ci::Vec3f(0.9, 0.9, 0.9)*WorldScale,
 			speed*WorldScale*0.1f,
 			enemyptr->getRotate() + Vec3f(0, 0, 0),enemyptr,5, 5, 60, ColorA(1, 1, 0, 1), 180));
 	atackcount = 0;

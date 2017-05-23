@@ -20,6 +20,7 @@ CharacterManager::CharacterManager()
 {
 	SoundM.CreateSE("enemy_die.wav");
 	SoundM.CreateSE("actionselectend.wav");
+	selectaction = std::make_shared<SelectAction>();
 }
 
 void CharacterManager::CreateCharacter(CharacterBase character)
@@ -204,7 +205,9 @@ void CharacterManager::updateActionSelectMode()
 			SoundM.PlaySE("actionselectend.wav");
 		}
 	}
-
+	if ((!isbeginselectmode) && (!isendselectmode)) {
+		selectaction->update();////////////‚±‚±
+	}
 }
 
 void CharacterManager::drawActionSelectMode()
@@ -215,8 +218,38 @@ void CharacterManager::drawActionSelectMode()
 		DrawM.drawBoxEdge(Vec2f(WINDOW_WIDTH,0), Vec2f(-backgroundsize.x,backgroundsize.y), ColorA(0, 1, 0, alfa));
 		DrawM.drawBoxEdge(Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT), -backgroundsize, ColorA(0, 0, 1, alfa));
 		DrawM.drawBoxEdge(Vec2f(0, 0), backgroundsize, ColorA(0, 0, 0, alfa));
+		if ((!isbeginselectmode) && (!isendselectmode)) {
+			selectaction->draw();
+		}
 	}
 	
+}
+
+void CharacterManager::drawActionSelecBackGround()
+{
+	Vec2f pos=Vec2f(WINDOW_WIDTH/2.f,WINDOW_HEIGHT/2.f);
+	Vec2f size = Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT);
+	DrawM.drawTextureBox(pos,Vec2f(size.x,-size.y),0.0f,background,ColorA(1,1,1,1));
+}
+
+void CharacterManager::setActionSelectBackGround(const ci::gl::Texture & tex)
+{
+	background = tex;
+}
+
+float CharacterManager::getBackGround_T()
+{
+	return background_t;
+}
+
+bool CharacterManager::getIsBegin()
+{
+	return isbeginselectmode;
+}
+
+bool CharacterManager::getIsEnd()
+{
+	return isendselectmode;
 }
 
 void CharacterManager::CollisionPlayerToEnemy()

@@ -12,12 +12,15 @@ MapChipBreak::MapChipBreak(ci::Vec3f _pos, ci::Vec3f _scale, EffectManager * _ef
 	iscollision = true;
 	effectmanager = _effectmanager;
 	SoundM.CreateSE("haretu.wav");
+	tex = TextureM.getTexture("Map/renga.png");
 }
 
 void MapChipBreak::draw()
 {
-	if (isactive)
-		DrawM.drawTextureCube(pos, scale, ci::Vec3f(0, 0, 0), TextureM.getTexture("Map/renga.png"), ci::ColorA(1, 1, 1, 1));
+	if (isactive) {
+		DrawM.drawTextureCube(pos, scale, ci::Vec3f(0, 0, 0), tex, ci::ColorA(1, 1, 1, 1));
+	}
+		
 }
 
 void MapChipBreak::update()

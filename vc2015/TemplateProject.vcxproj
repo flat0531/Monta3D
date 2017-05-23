@@ -162,6 +162,7 @@
     <ClCompile Include="..\src\Top\SoundManager.cpp" />
     <ClCompile Include="..\src\Top\SurfaceEffect.cpp" />
     <ClCompile Include="..\src\Top\TextureManager.cpp" />
+    <ClCompile Include="..\src\UI\ActionIcon.cpp" />
     <ClCompile Include="..\src\UI\ColorObject.cpp" />
     <ClCompile Include="..\src\UI\DrawMenu.cpp" />
     <ClCompile Include="..\src\UI\DrawPointer.cpp" />
@@ -169,7 +170,11 @@
     <ClCompile Include="..\src\UI\Pallet.cpp" />
     <ClCompile Include="..\src\UI\PalletManager.cpp" />
     <ClCompile Include="..\src\UI\PlayerCanvas.cpp" />
+    <ClCompile Include="..\src\UI\PlayTexture.cpp" />
+    <ClCompile Include="..\src\UI\PlayTextureList.cpp" />
     <ClCompile Include="..\src\UI\Range.cpp" />
+    <ClCompile Include="..\src\UI\SelectAction.cpp" />
+    <ClCompile Include="..\src\UI\StatusBars.cpp" />
     <ClCompile Include="..\src\WorldCreater\BulletManager.cpp" />
     <ClCompile Include="..\src\WorldCreater\CameraMnager.cpp" />
     <ClCompile Include="..\src\WorldCreater\CharacterManager.cpp" />
@@ -258,6 +263,7 @@
     <ClInclude Include="..\src\Top\TextureManager.h" />
     <ClInclude Include="..\src\Top\TitleSurface.h" />
     <ClInclude Include="..\src\Top\Top.h" />
+    <ClInclude Include="..\src\UI\ActionIcon.h" />
     <ClInclude Include="..\src\UI\ColorObject.h" />
     <ClInclude Include="..\src\UI\DrawMenu.h" />
     <ClInclude Include="..\src\UI\DrawPointer.h" />
@@ -265,7 +271,11 @@
     <ClInclude Include="..\src\UI\Pallet.h" />
     <ClInclude Include="..\src\UI\PalletManager.h" />
     <ClInclude Include="..\src\UI\PlayerCanvas.h" />
+    <ClInclude Include="..\src\UI\PlayTexture.h" />
+    <ClInclude Include="..\src\UI\PlayTextureList.h" />
     <ClInclude Include="..\src\UI\Range.h" />
+    <ClInclude Include="..\src\UI\SelectAction.h" />
+    <ClInclude Include="..\src\UI\StatusBars.h" />
     <ClInclude Include="..\src\WorldCreater\BulletManager.h" />
     <ClInclude Include="..\src\WorldCreater\CameraMnager.h" />
     <ClInclude Include="..\src\WorldCreater\CharacterManager.h" />

@@ -393,6 +393,21 @@
     <ClCompile Include="..\src\WorldObject\SurfaceScaleDown.cpp">
       <Filter>Source Files\DrawSceneObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\UI\SelectAction.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\StatusBars.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\ActionIcon.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\PlayTextureList.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\PlayTexture.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -688,6 +703,21 @@
     </ClInclude>
     <ClInclude Include="..\src\WorldObject\SurfaceScaleDown.h">
       <Filter>Source Files\DrawSceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\SelectAction.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\StatusBars.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\ActionIcon.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\PlayTextureList.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\PlayTexture.h">
+      <Filter>Source Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include"MapChipBase.h"
+#include"cinder/gl/Texture.h"
 class EffectManager;
 class MapChipBreak : public MapChipBase {
 public:
@@ -13,4 +14,5 @@ public:
 	void BulletCollison(BulletBase * bulletbase, bool isbreak)override;
 private:
 	EffectManager* effectmanager;
+	ci::gl::Texture tex;
 };

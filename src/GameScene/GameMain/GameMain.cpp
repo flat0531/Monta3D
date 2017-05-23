@@ -103,6 +103,8 @@ void GameMain::setup()
 	TextureM.CreateTexture("UI/nisemonta.png");
 	font = Font("Comic Sans MS", 65.0f);
 	
+	
+
 	playBGM();
 
 	charactermanager->update();
@@ -153,6 +155,17 @@ void GameMain::update()
 		DeathFadeInend();
 	}
 	else {
+		if (charactermanager->getIsBegin() || charactermanager->getIsEnd()) {
+			float rate = 0.0f;
+			float end = 10.0f;
+			if (charactermanager->getIsBegin()) {
+				rate =EasingLinear(charactermanager->getBackGround_T(), 1.0f, end);
+			}
+			if (charactermanager->getIsEnd()) {
+				rate = EasingLinear(charactermanager->getBackGround_T(), end, 1.0f);
+			}
+			charactermanager->setActionSelectBackGround(ofsCrean(rate));
+		}
 		charactermanager->updateActionSelectMode();
 	}
 
@@ -178,21 +191,26 @@ void GameMain::draw()
 
 	gl::pushModelView();
 
-	mapmanager.drawSky();
-	//mapmanager.drawMap2d();
+	if (!charactermanager->getActionSelectMode()) {
+		mapmanager.drawSky();
+		//mapmanager.drawMap2d();
+
+		mapchipmanager->draw();
+		drawPlayer();
+		charactermanager->draw();
+		bulletmanager->draw();
+		drawShiftFloorObject();
+		effectmanager->draw();
+		mapmanager.drawTexureObjct(camera);
+
+		//mapmanager.drawMap2dFront();
+	}
 	
-	mapchipmanager->draw();
-	drawPlayer();
-	charactermanager->draw();
-	bulletmanager->draw();
-	drawShiftFloorObject();
-	effectmanager->draw();
-	mapmanager.drawTexureObjct();
-	
-	//mapmanager.drawMap2dFront();
 
 	
 	gl::popModelView();
+
+
 }
 
 void GameMain::draw2D()
@@ -203,7 +221,9 @@ void GameMain::draw2D()
 	gl::setMatrices(ortho);
 
 	gl::pushModelView();
-
+	if (charactermanager->getActionSelectMode()) {
+		charactermanager->drawActionSelecBackGround();
+	}
 	mainwindow->draw();
 	information.draw();
 	if (isgoal) {
@@ -471,7 +491,38 @@ void GameMain::StartActionSelectMode()
 			charactermanager->setActionSelectMode(true);
 			SoundM.FadeNowBGM(0.05f, 0.5f, false);
 			SoundM.PlaySE("actionselectbegin.wav");
+			charactermanager->setActionSelectBackGround(ofsCrean(1.0f));
 		}
 	}
 	
+}
+
+ci::gl::Texture GameMain::ofsCrean(const float rate)
+{
+	ci::gl::Fbo fbo;
+	fbo = gl::Fbo(WINDOW_WIDTH / rate, WINDOW_HEIGHT / rate, true, true, true);
+	fbo.bindFramebuffer();
+	gl::setViewport(fbo.getBounds());
+
+	gl::clear(Color(0, 0, 0));
+	gl::enable(GL_CULL_FACE);
+	gl::enableDepthRead();
+	gl::enableDepthWrite();
+	gl::enableAlphaBlending();
+	gl::setMatrices(camera);
+	mapmanager.drawSky();
+	//mapmanager.drawMap2d();
+
+	mapchipmanager->draw();
+	drawPlayer();
+	charactermanager->draw();
+	bulletmanager->draw();
+	drawShiftFloorObject();
+	effectmanager->draw();
+	mapmanager.drawTexureObjct(camera);
+	// •`‰æ‘ÎÛ‚ğŒ³‚É–ß‚·
+	gl::Fbo::unbindFramebuffer();
+	gl::setViewport(getWindowBounds());
+
+	return fbo.getTexture();
 }

@@ -1,16 +1,20 @@
 #include "MapChipNormalNotDraw.h"
 #include"../../Top/DrawManager.h"
 #include"../../Top/SoundManager.h"
-MapChipNormalNotDraw::MapChipNormalNotDraw(ci::Vec3f _pos, ci::Vec3f _scale)
+#include"../../WorldCreater/EffectManager.h"
+#include"../../WorldObject/Effect/EffectExplodeburst.h"
+MapChipNormalNotDraw::MapChipNormalNotDraw(ci::Vec3f _pos, ci::Vec3f _scale, EffectManager * _effectmanager)
 {
 	pos = _pos;
 	scale = _scale;
 	iscollision = true;
+	effectmanager = _effectmanager;
+	SoundM.CreateSE("haretu.wav");
 }
 
 void MapChipNormalNotDraw::draw()
 {
-	DrawM.drawStrokeCube(pos, scale, ci::Vec3f(0, 0, 0), ci::ColorA(1, 0, 0, 1));
+	//DrawM.drawStrokeCube(pos, scale, ci::Vec3f(0, 0, 0), ci::ColorA(1, 0, 0, 1));
 }
 
 void MapChipNormalNotDraw::update()
@@ -51,5 +55,9 @@ void MapChipNormalNotDraw::LeftCollisionEnter(CharacterBase * characterbase)
 
 void MapChipNormalNotDraw::BulletCollison(BulletBase * bulletbase, bool isbreak)
 {
+	if (bulletbase->getismapcollision_endddelet()) {
+		SoundM.PlaySE("haretu.wav", 0.2f);
+		effectmanager->CreateEffect(EffectExplodeburst(bulletbase->getPos(), bulletbase->getScale(), ci::Vec3f(0, 0, 0), ci::ColorA(1, 1, 0.5f, 1), 0.3f));
+	}
 	bulletbase->setCompulsiondelete(bulletbase->getismapcollision_endddelet());
 }

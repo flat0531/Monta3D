@@ -6,6 +6,7 @@
 #include "../WorldObject/Map2d.h"
 #include"../WorldObject/Line.h"
 #include"../WorldObject/VerticalLine.h"
+#include"cinder/Camera.h"
 #include<memory>
 class TextureObj;
 class MapManager {
@@ -24,7 +25,7 @@ public:
 	void drawSky();
 	void drawMap2d();
 	void drawMap2dFront();
-	void drawTexureObjct();
+	void drawTexureObjct(const ci::CameraPersp& camera);
 	std::vector<Line> getline() {
 		return lines;
 	}

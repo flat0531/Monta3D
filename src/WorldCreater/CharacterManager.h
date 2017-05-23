@@ -3,6 +3,8 @@
 #include<list>
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include"cinder\gl\Texture.h"
+#include"../UI/SelectAction.h"
 class CharacterBase;
 class Player;
 class Enemy;
@@ -34,12 +36,18 @@ public:
 	bool getActionSelectMode();
 	void updateActionSelectMode();
 	void drawActionSelectMode();
+	void drawActionSelecBackGround();
+	void setActionSelectBackGround(const ci::gl::Texture& tex);
+	float getBackGround_T();
+	bool getIsBegin();
+	bool getIsEnd();
 private:
 	std::shared_ptr<CharacterBase>player;
 	std::list<std::shared_ptr<CharacterBase>> enemys;
 	BulletManager* bulletmanager;
 	EffectManager* effectmanager;
 	MainWindow* mainwondow;
+	std::shared_ptr<SelectAction>selectaction;
 	void CollisionPlayerToEnemy();
 	ActionType stringToActionType(const std::string name);
 	void SelectPlayerFolm();
@@ -50,4 +58,5 @@ private:
 	bool isbeginselectmode = true;
 	bool isendselectmode = false;
 	ci::Vec2f backgroundsize = ci::Vec2f(0,0);
+	ci::gl::Texture background;
 };

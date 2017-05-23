@@ -13,7 +13,7 @@
 #include"../../UI/MainWindow.h"
 #include"cinder\TriMesh.h"
 #include"cinder\gl\Texture.h"
-
+#include"cinder\gl/Fbo.h"
 class Player;
 class BulletManager;
 class EffectManager;
@@ -37,6 +37,9 @@ private:
 	std::vector<std::shared_ptr<ShiftFloorObject>> shiftfloorobjects;
 	ci::CameraPersp camera;
 	ci::CameraOrtho ortho;
+
+
+
 	Information information;
 	std::shared_ptr<MainWindow>mainwindow;
 	std::string bgmname;
@@ -72,14 +75,15 @@ private:
 	float zanki_size_t = 0.0f;
 	float zankisizerate = 1.0f;
 	float zanki_trancepos_y = 0.0f;
-	void drawDeathBlackBox();
-	void drawZankiIcon();
-	void updateDeathBlackBox();
-	void updateZanki();
 	ci::Vec2f deathblackboxsize = ci::Vec2f(0, 0);
 	float deathblackboxangle = 0.0f;
 	bool isshiftdeath = false;
 	bool isdeathshifttitle = false;
+	void drawDeathBlackBox();
+	void drawZankiIcon();
+	void updateDeathBlackBox();
+	void updateZanki();
 	void DeathFadeInend();
 	void StartActionSelectMode();
+	ci::gl::Texture ofsCrean(const float rate);
 };

@@ -127,11 +127,11 @@ void MapChipManager::CreateMap(const int worldnum, const int stagenum, const int
 				break;
 			case MapChipType::NORMAL_CHIP:
 				buf.push_back(std::make_shared<MapChipNormal>
-					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale));
+					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale,effectmanagerptr));
 				break;
 			case MapChipType::NORMAL_NOTDRAW_CHIP:
 				buf.push_back(std::make_shared<MapChipNormalNotDraw>
-					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale));
+					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale, effectmanagerptr));
 				break;
 			case MapChipType::Half_FLOOR_CHIP:
 				buf.push_back(std::make_shared<MapChipHalfFloor>

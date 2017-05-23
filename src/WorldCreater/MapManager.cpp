@@ -3,6 +3,7 @@
 #include"../Top/MyJson.h"
 #include"../Top/TextureManager.h"
 #include"../EditerObject/TextureObj.h"
+#include"../Top/CollisionManager.h"
 using namespace ci;
 using namespace ci::app;
 
@@ -228,7 +229,7 @@ void MapManager::drawMap2dFront()
 	}
 }
 
-void MapManager::drawTexureObjct()
+void MapManager::drawTexureObjct(const ci::CameraPersp & camera)
 {
 	auto cemeravec = gl::getModelView().transformVec(Vec3f::zAxis());
 	std::sort(textureobject.begin(), textureobject.end(), [&](std::shared_ptr<TextureObj> left, std::shared_ptr<TextureObj> right)
@@ -250,9 +251,14 @@ void MapManager::drawTexureObjct()
 	}
 	);
 	for (int i = 0;i < textureobject.size();i++) {
-		textureobject[i]->draw();
+		Vec2f screen_position = camera.worldToScreen(textureobject[i]->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(-WINDOW_WIDTH*0.75f,-WINDOW_HEIGHT*0.75f), Vec2f(WINDOW_WIDTH*2.5f, WINDOW_HEIGHT*2.5f))) {
+			textureobject[i]->draw();
+		}
 	}
 }
+
 
 ci::Vec3f MapManager::getVec3(const ci::JsonTree & _json, const std::string key)
 {
