@@ -1,0 +1,57 @@
+[
+   {
+      "color" : [ 255, 255, 255 ],
+      "name" : "white",
+      "release" : true
+   },
+   {
+      "color" : [ 255, 0, 0 ],
+      "name" : "red",
+      "release" : true
+   },
+   {
+      "color" : [ 255, 88, 0 ],
+      "name" : "orange",
+      "release" : true
+   },
+   {
+      "color" : [ 0, 255, 255 ],
+      "name" : "water",
+      "release" : true
+   },
+   {
+      "color" : [ 255, 255, 0 ],
+      "name" : "yellow",
+      "release" : true
+   },
+   {
+      "color" : [ 175, 76, 229 ],
+      "name" : "purple",
+      "release" : true
+   },
+   {
+      "color" : [ 255, 153, 237 ],
+      "name" : "pink",
+      "release" : true
+   },
+   {
+      "color" : [ 0, 0, 255 ],
+      "name" : "blue",
+      "release" : true
+   },
+   {
+      "color" : [ 0, 255, 0 ],
+      "name" : "green",
+      "release" : false
+   },
+   {
+      "color" : [ 153, 86, 51 ],
+      "name" : "tea",
+      "release" : false
+   },
+   {
+      "color" : [ 0, 0, 0 ],
+      "name" : "black",
+      "release" : false
+   }
+]

@@ -8,6 +8,7 @@
 #include"../../StageSelectObject/StageIcon.h"
 #include"../../StageSelectObject/StageNamePlate.h"
 #include"../../StageSelectObject/StageSelectLogo.h"
+#include"../../StageSelectObject/InformationWindowList.h"
 class StageSelect :public SceneBase {
 public:
 	void setup() override;
@@ -33,6 +34,7 @@ private:
 	std::vector<std::string>stagename;
 	StageNamePlate stagenameplate;
 	StageSelectLogo stageselectlogo;
+	InformationWindowList informationwindowlist;
 	void drawBackGround();
 	void createpointRoads();
 	void createStageIcon();
@@ -48,5 +50,6 @@ private:
 	void drawPlayerIcon();
 	void FadeInGameMain();
 	void roadStageName();
+	void ShiftDrawScene();
 	int animation_count = 0;
 };

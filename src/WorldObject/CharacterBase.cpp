@@ -1,9 +1,15 @@
 #include "CharacterBase.h"
 #include"../CharacterAction/SlimeAction.h"
 #include"../CharacterAction/CatAction.h"
+#include"../CharacterAction/BirdAction.h"
+#include"../CharacterAction/EnjelAction.h"
+#include"../CharacterAction/MoguraAction.h"
+
 #include"../CharacterAction/Ratton.h"
 #include"../CharacterAction/WitchAction.h"
 #include"../CharacterAction/SparrowAction.h"
+#include"../CharacterAction/GhostAction.h"
+#include"../CharacterAction/PumpmanAction.h"
 #include"../Top/EasingManager.h"
 using namespace ci;
 using namespace ci::app;
@@ -172,21 +178,38 @@ void CharacterBase::decideAction(ActionType folm)
 	{
 	case SLIME:
 		setCharacterAction(SlimeAction());
-		return;
+		break;
 	case CAT:
 		setCharacterAction(CatAction());
-		return;
+		break;
+	case BIRD:
+		setCharacterAction(BirdAction());
+		break;
+	case ENJEL:
+		setCharacterAction(EnjelAction());
+		break;
+	case MOGURA:
+		setCharacterAction(MoguraAction());
+		break;
 	case RATTON:
 		setCharacterAction(RattonAction());
-		return;
+		break;
 	case WITCH:
 		setCharacterAction(WitchAction());
 		break;
 	case SPARROW:
 		setCharacterAction(SparrowAction());
 		break;
+	case GHOST:
+		setCharacterAction(GhostAction());
+		break;
+	case PUMPMAN:
+		setCharacterAction(PumpmanAction());
+		break;
+	case NONE:
+		break;
 	default:
-		return;
+		break;
 	}
 }
 
@@ -325,6 +348,16 @@ bool CharacterBase::getCanJump()
 void CharacterBase::setCanJump(const bool is)
 {
 	canjump = is;
+}
+
+void CharacterBase::onRightWall()
+{
+	action->onRightWall();
+}
+
+void CharacterBase::onLeftWall()
+{
+	action->onLeftWall();
 }
 
 void CharacterBase::updateDeath(float time)

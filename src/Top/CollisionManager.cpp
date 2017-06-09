@@ -46,6 +46,13 @@ bool CollisionManager::isAABBAABB(const ci::AxisAlignedBox3f & a, const ci::Axis
 	return true;
 }
 
+bool CollisionManager::isSphereSphere(const ci::Vec3f pos1, const ci::Vec3f pos2, const float r_1, const float r_2)
+{
+	float length = (pos1.x - pos2.x)*(pos1.x - pos2.x) + (pos1.y - pos2.y)*(pos1.y - pos2.y) + (pos1.z - pos2.z)*(pos1.z - pos2.z);
+	float radius = (r_1 + r_2)*(r_1 + r_2);
+	return (length <= radius);
+}
+
 float CollisionManager::getIntersectZaabb(const ci::Ray & ray, ci::AxisAlignedBox3f & aabb)
 {
 

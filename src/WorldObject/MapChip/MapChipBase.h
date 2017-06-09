@@ -1,6 +1,7 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include"cinder\AxisAlignedBox.h"
 #include"../CharacterBase.h"
 #include"../Bullet/BulletBase.h"
 #include<memory>
@@ -31,10 +32,12 @@ public:
 	void setIsHit(bool is);
 	bool getIsHit();
 	bool getIsActive();
+	ci::AxisAlignedBox3f getaabb();
 protected:
 	ci::Vec3f pos;
 	ci::Vec3f scale;
 	ci::Vec3f rotate;
+	ci::AxisAlignedBox3f aabb;
 	bool iscollision = false;
 	bool ishit = false;
 	float distance;

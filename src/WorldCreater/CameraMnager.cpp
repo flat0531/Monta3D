@@ -3,6 +3,7 @@
 #include"../Top/EasingManager.h"
 #include"../Top/MyJson.h"
 #include"../Top/SoundManager.h"
+#include"../WorldObject/CharacterBase.h"
 using namespace ci;
 using namespace ci::app;
 CameraManager::CameraManager()
@@ -66,10 +67,6 @@ void CameraManager::unitPrevCenterOfInterestPoint(const ci::Vec3f prevpos)
 	prevcenterrofinterstpoint = prevpos;
 }
 
-void CameraManager::setPlayerSpeed(const ci::Vec3f _speed)
-{
-	playerspeed = _speed;
-}
 
 bool CameraManager::getDeathCameraEnd()
 {
@@ -85,13 +82,13 @@ void CameraManager::updatePlayerCameraType()
 {
 	/////////y軸徐々にプレイヤーのポスに近づける///////////
 	float cameraposy;
-	cameraposy = 2 * WorldScale + playerpos.y;
-	cameraposy = std::min(cameraposy, maxvalue.y - 3 * WorldScale);//上限
-	cameraposy = std::max(cameraposy, 2 * WorldScale);//下限
+	cameraposy = 2.f * WorldScale + playerptr->getPos().y;
+	cameraposy = std::min(cameraposy, maxvalue.y - 3.f * WorldScale);//上限
+	cameraposy = std::max(cameraposy, 2.f * WorldScale);//下限
 	float trancespeed = 40.f;//プレイヤーがカメラから上に向かっているとき遅く
-	if (((cameraposy - 2 * WorldScale) - prevcenterrofinterstpoint.y)<=0.0f)trancespeed = 10.0f;//プレイヤーがカメラから上に向かっているとき素早く
+	if (((cameraposy - 2.f * WorldScale) - prevcenterrofinterstpoint.y)<=0.0f)trancespeed = 10.0f;//プレイヤーがカメラから上に向かっているとき素早く
 	//カメラを前のフレームから少し目的値まで近づける
-	setcenterofinterestpoint.y = prevcenterrofinterstpoint.y+(((cameraposy-2*WorldScale)-prevcenterrofinterstpoint.y) / trancespeed);
+	setcenterofinterestpoint.y = prevcenterrofinterstpoint.y+(((cameraposy-2.f*WorldScale)-prevcenterrofinterstpoint.y) / trancespeed);
 	///////////////////////////////////////////////////
 
 
@@ -101,7 +98,7 @@ void CameraManager::updatePlayerCameraType()
 	EasingManager::tCount(trancex_t, easingtime);
 
 	if (isplayerrightmove) {
-		if (playerspeed.x > 0) {
+		if (playerptr->getSpeed().x > 0) {
 			isplayerrightmove = false;
 			trancex_t = 0.0f;
 			begincameratrancex = cameratrancex;
@@ -109,7 +106,7 @@ void CameraManager::updatePlayerCameraType()
 		}
 	}
 	else {
-		if (playerspeed.x < 0) {
+		if (playerptr->getSpeed().x < 0) {
 			isplayerrightmove = true;
 			trancex_t = 0.0f;
 			begincameratrancex = cameratrancex;
@@ -117,13 +114,13 @@ void CameraManager::updatePlayerCameraType()
 		}
 	}
 
-	float centerofinterestpointx = playerpos.x+cameratrancex*1.5f;
+	float centerofinterestpointx = playerptr->getPos().x+cameratrancex*1.5f;
 	centerofinterestpointx = std::min(centerofinterestpointx, -minvalue.x - WorldScale * 17.f);
 	centerofinterestpointx = std::max(centerofinterestpointx, -maxvalue.x + WorldScale * 17.f);
 
 	cameratrancex = EasingQuadOut(trancex_t, begincameratrancex, endcameratrancex);
 
-	float seteyepointx = playerpos.x + cameratrancex;
+	float seteyepointx = playerptr->getPos().x + cameratrancex;
 	seteyepointx = std::min(seteyepointx, -minvalue.x - WorldScale * 19.f);
 	seteyepointx = std::max(seteyepointx, -maxvalue.x + WorldScale * 19.f);
 
@@ -131,10 +128,13 @@ void CameraManager::updatePlayerCameraType()
 
 	seteyepoint = Vec3f(seteyepointx,
 		setcenterofinterestpoint.y+2*WorldScale,
-		-10.5*WorldScale);
+		-10.5f*WorldScale);
+
 	setcenterofinterestpoint = Vec3f(centerofinterestpointx,
 		setcenterofinterestpoint.y,
-		playerpos.z);
+		playerptr->getPos().z);
+
+
 	prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
@@ -146,7 +146,7 @@ void CameraManager::updateEventCameraType()
 void CameraManager::updateXLockCameraType()
 {
 	float cameraposy;
-	cameraposy = 2 * WorldScale + playerpos.y;
+	cameraposy = 2 * WorldScale + playerptr->getPos().y;
 	cameraposy = std::min(cameraposy, maxvalue.y - 3 * WorldScale);//上限
 	cameraposy = std::max(cameraposy, 2 * WorldScale);//下限
 	float trancespeed = 40.f;//プレイヤーがカメラから上に向かっているとき遅く
@@ -161,7 +161,7 @@ void CameraManager::updateXLockCameraType()
 
 	setcenterofinterestpoint = Vec3f(cameralockpos_x,
 		setcenterofinterestpoint.y,
-		playerpos.z);
+		playerptr->getPos().z);
 	prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
@@ -172,7 +172,7 @@ void CameraManager::updateYLockCameraType()
 	EasingManager::tCount(trancex_t, easingtime);
 
 	if (isplayerrightmove) {
-		if (playerspeed.x > 0) {
+		if (playerptr->getSpeed().x > 0) {
 			isplayerrightmove = false;
 			trancex_t = 0.0f;
 			begincameratrancex = cameratrancex;
@@ -180,7 +180,7 @@ void CameraManager::updateYLockCameraType()
 		}
 	}
 	else {
-		if (playerspeed.x < 0) {
+		if (playerptr->getSpeed().x < 0) {
 			isplayerrightmove = true;
 			trancex_t = 0.0f;
 			begincameratrancex = cameratrancex;
@@ -189,13 +189,13 @@ void CameraManager::updateYLockCameraType()
 	}
 
 
-	float centerofinterestpointx = playerpos.x + cameratrancex*1.5f;
+	float centerofinterestpointx = playerptr->getPos().x + cameratrancex*1.5f;
 	centerofinterestpointx = std::min(centerofinterestpointx, -minvalue.x - WorldScale * 17.f);
 	centerofinterestpointx = std::max(centerofinterestpointx, -maxvalue.x + WorldScale * 17.f);
 
 	cameratrancex = EasingQuadOut(trancex_t, begincameratrancex, endcameratrancex);
 
-	float seteyepointx = playerpos.x + cameratrancex;
+	float seteyepointx = playerptr->getPos().x + cameratrancex;
 	seteyepointx = std::min(seteyepointx, -minvalue.x - WorldScale * 19.f);
 	seteyepointx = std::max(seteyepointx, -maxvalue.x + WorldScale * 19.f);
 
@@ -206,7 +206,7 @@ void CameraManager::updateYLockCameraType()
 		-10.5*WorldScale);
 	setcenterofinterestpoint = Vec3f(centerofinterestpointx,
 		lockcenterofinterestpoint_y,
-		playerpos.z);
+		playerptr->getPos().z);
 	prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
@@ -217,7 +217,7 @@ void CameraManager::updateXYLockCameraType()
 		-10.5*WorldScale);
 	setcenterofinterestpoint = Vec3f(cameralockpos_x,
 		lockcenterofinterestpoint_y,
-		playerpos.z);
+		playerptr->getPos().z);
 	prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
@@ -353,10 +353,7 @@ ci::Vec3f CameraManager::getSetCenterofinterestPoint()
 	return setcenterofinterestpoint;
 }
 
-void CameraManager::setPlayerPos(const ci::Vec3f _pos)
-{
-	playerpos = _pos;
-}
+
 
 void CameraManager::setCameraUpdateType(const CamaraUpdateType _cameratype)
 {
@@ -366,4 +363,9 @@ void CameraManager::setCameraUpdateType(const CamaraUpdateType _cameratype)
 CamaraUpdateType CameraManager::getCameraUpdateType()
 {
 	return cameraupdatetype;
+}
+
+void CameraManager::setPlayerPtr(CharacterBase * _playerptr)
+{
+	playerptr = _playerptr;
 }

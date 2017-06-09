@@ -11,6 +11,7 @@
 #include"../../Top/EasingManager.h"
 #include"../../Top/EasingStream.h"
 #include"../../Top/CollisionManager.h"
+#include"../../Top/SoundManager.h"
 #include<vector>
 using namespace ci;
 using namespace ci::app;
@@ -30,11 +31,14 @@ void Draw::setup()
 	ortho = CameraOrtho(0, WINDOW_WIDTH,
 		WINDOW_HEIGHT, 0,
 		1, 101);
+	SoundM.PlayBGM("drawscene.wav", 0.3f);
+
 	charactername = "slime";
+
 	framepath = "Draw/frame.png";
-	characterframepath = "Draw/" + charactername + "/" + charactername + "frame.png";
+	characterframepath = "Draw/" + charactername + "/frame.png";
 	charactercoloredpath = "Draw/" + charactername + "/" + charactername + "color.png";
-	characterplaypath = "Draw/" + charactername + "/" + charactername + "colorplay.png";
+	characterplaypath = "Draw/" + charactername + "/" + "default.png";
 	TextureM.CreateTexture(framepath);
 	
 	TextureM.CreateTexture(charactercoloredpath);
@@ -49,17 +53,9 @@ void Draw::setup()
 	TextureM.CreateTexture("UI/bar.png");
 	Vec2f playercanvaspos = Vec2f(WINDOW_WIDTH / 2 + WINDOW_WIDTH / 18-256, WINDOW_HEIGHT /2.0-256);
 	playercanvas.setup(playercanvaspos, Vec2f(512, 512), charactername);
-	
 
-	//effects.push_back(SurfaceEffect(effecttex, effecttex.getSize() / 7.f, effecttex.getSize()*(1.f - (1.f / 7.f)),
-	//	Vec3f(-1, 0, 3), Vec3f(2, 2, 0), Vec3f(0, -30, -180),
-	//	EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
-	//	-M_PI / 4.f, 0.0f, 0.2f, effecttex.getSize().x*0.4f*1.414f, 2.0f));
-
-	//effects.push_back(SurfaceEffect(effecttex2, effecttex2.getSize() / 7.f, effecttex2.getSize()*(1.f - (1.f / 7.f)),
-	//	Vec3f(-1 , 0, 3.01), Vec3f(2, 2, 0), Vec3f(0, -30, -180),
-	//	EasingManager::EasType::Linear, EasingManager::EasType::Return, 60.f,
-	//	-M_PI / 4.f, 0.0f, 0.2f, effecttex2.getSize().x*0.4f*1.414f, 2.0f, 0.0f, ColorA(0, 1, 0, 0.35)));
+	uifront.CreateUI("Json/UI/drawscenefront.json");
+	uiback.CreateUI("Json/UI/drawsceneback.json");
 }
 void Draw::update()
 {
@@ -69,18 +65,10 @@ void Draw::update()
 
 	palletmanager.update();
 	drawpointer.setCircleSize(drawmenu.getSizeRangeValue());
-	/*if (KeyManager::getkey().isPush(KeyEvent::KEY_UP)) {
-		drawpointer.setCircleSize(std::min(100.f, drawpointer.getCircleSize() + 1.f));
-	}
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_DOWN)) {
-		drawpointer.setCircleSize(std::max(1.f, drawpointer.getCircleSize() - 1.f));
-	}*/
+	
 	drawpointer.setCircleColor(palletmanager.getSelectcolor());
 	drawmenu.setCircleColor(palletmanager.getSelectcolor());
 	drawmenu.setSampleCircleSize(drawpointer.getCircleSize());
-	//if (KeyManager::getkey().isPress(KeyEvent::KEY_l)) {
-	//	playercanvas.updateCanvas(palletmanager.getSelectcolor(), drawpointer.getPos(), drawpointer.getCircleSize());
-	//}
 	drawpointer.setIsCircledraw(CollisionM.isBoxPoint(drawpointer.getPos(),playercanvas.getPos(),playercanvas.getSIze()));
 	if (MouseManager::getMouse().isPress(MouseEvent::RIGHT_DOWN)) {
 		playercanvas.updateCanvas(ColorA(1,1,1,0), drawpointer.getPos(), drawpointer.getCircleSize());
@@ -90,20 +78,13 @@ void Draw::update()
 	}
 	testup();
 	check();
-	//for (int i = 0;i < effects.size();i++) {
-	//	effects[i].update();
-	//}
-	//console() << palletmanager.getSelectcolor() << std::endl;
 }
 
 void Draw::draw()
 {
 	gl::setMatrices(camera);
 	gl::pushModelView();
-	//DrawM.drawTextureCube(Vec3f(-1, 0, 3.02), Vec3f(2, 2, 0), Vec3f(0, -30, -180), TextureM.getTexture(framepath), ColorA(1, 1, 1, 1));
-	//effects[1].draw();
-	//effects[0].draw();
-	//DrawM.drawTextureCube(Vec3f(-1 , 0, 2.99), Vec3f(2, 2, 0), Vec3f(0, -30, -180), TextureM.getTexture(characterframepath), ColorA(1, 1, 1, 1));
+
 	gl::popModelView();
 }
 
@@ -111,16 +92,14 @@ void Draw::draw2D()
 {
 	gl::setMatrices(ortho);
 	gl::pushModelView();
-	drawbackGround();
+	uiback.draw();
 	drawmenu.draw();
-	drawCanvas();
 	drawSample();
 	playercanvas.draw();
 	palletmanager.draw();
-	drawTitle();
-	//effects[1].draw2D();
 	drawpointer.draw();
 	drawcheckpoint();
+	uifront.draw();
 	gl::popModelView();
 }
 
@@ -153,13 +132,6 @@ bool Draw::isCirclePointvalue(ci::Vec2f circlepos, ci::Vec2f pointpos, float cir
 	return false;
 }
 
-void Draw::drawbackGround()
-{
-	Vec2f pos = Vec2f(0, 0);
-	Vec2f size = Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT);
-	DrawM.drawTextureBoxEdge(pos, size, TextureM.getTexture("UI/canvas.png"), ColorA(1, 1, 1, 1));
-}
-
 void Draw::drawSample()
 {
 	Vec2f pos = Vec2f(WINDOW_WIDTH / 4.5, WINDOW_HEIGHT / 2.f);
@@ -168,21 +140,6 @@ void Draw::drawSample()
 	DrawM.drawTextureBox(pos, size, 0, TextureM.getTexture(charactercoloredpath), ColorA(1, 1, 1, 1));
 	//DrawM.drawTextureBox(pos2, size, 0, TextureM.getTexture(characterframepath), ColorA(1, 1, 1, 1));
 }
-
-void Draw::drawTitle()
-{
-	Vec2f pos = Vec2f(240, 70);
-	Vec2f size = Vec2f(512, 128);
-	DrawM.drawTextureBox(pos, size, -10, TextureM.getTexture("UI/nuriemode.png"), ColorA(1, 1, 1, 1));
-}
-
-void Draw::drawCanvas()
-{
-	Vec2f pos = Vec2f((WINDOW_WIDTH / 4.5+WINDOW_WIDTH / 2 + WINDOW_WIDTH / 18)/2.f, WINDOW_HEIGHT / 2.0);
-	Vec2f size = Vec2f(1200, 650);
-	DrawM.drawTextureBox(pos, size, 0, TextureM.getTexture("UI/book.png"), ColorA(1, 1, 1, 1));
-}
-
 void Draw::drawColorPallet()
 {
 	

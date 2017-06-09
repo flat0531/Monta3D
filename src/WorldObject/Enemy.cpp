@@ -16,6 +16,7 @@ Enemy::Enemy(ci::Vec3f _pos, ActionType _type, int _id)
 	actiontype = _type;
 	hp = 100;
 	id = _id;
+	isstun = false;
 }
 
 

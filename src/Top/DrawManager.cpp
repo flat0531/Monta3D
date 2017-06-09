@@ -78,6 +78,30 @@ void DrawManager::drawTaurus(const ci::Vec3f pos, const float sizeout, const flo
 	gl::drawTorus(sizeout,sizein,segmentout,segmentin);
 	gl::popModelView();
 }
+void DrawManager::drawTextureAreaCube(const cinder::Vec3f pos, const ci::Vec3f scale, const ci::Vec3f rotate, const ci::gl::Texture & tex, Vec2i begin, Vec2i end)
+{
+	gl::pushModelView();
+	gl::translate(pos);
+	gl::rotate(rotate);
+	gl::scale(scale);
+	gl::color(Color::white());
+	Surface surface;
+	Surface texture = tex;
+	surface = Surface(end.x - begin.x, end.y - begin.y, true);
+	for (int y = 0; y <surface.getSize().y; y++)
+	{
+		for (int x = 0; x < surface.getSize().x; x++)
+		{
+			surface.setPixel(Vec2i(x, y), texture.getPixel(Vec2i(begin + Vec2i(x, y))));
+		}
+	}
+	ci::gl::Texture drawtex(surface);
+	drawtex.enableAndBind();
+	gl::drawCube(Vec3f(0,0,0), Vec3f(1, 1, 1));
+	drawtex.unbind();
+	gl::popModelView();
+}
+
 /////////////////////////////////////////////       2D        //////////////////////////////////////////////////////////////
 void DrawManager::drawBox(const ci::Vec2f pos,const ci::Vec2f size, const float angle,const ci::ColorA color)
 {

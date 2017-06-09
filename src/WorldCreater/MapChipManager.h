@@ -19,6 +19,8 @@ public:
 	void CreateMap(const int worldnum, const int stagenum,const int floornum ,const int zvalue);
 	ci::Vec2f getChipsSize();
 	void setGoal(const std::function<void()> func);
+	MapChipManager* getThisPtr();
+	std::vector<std::vector<std::shared_ptr<MapChipBase>>> getMapChips();
 private:
 	//std::vector<std::shared_ptr<MapChipBase>> mapchips;
 	std::function<void()> goal;

@@ -43,3 +43,8 @@ void ActionIcon::setIsSelected(const bool _isselected)
 {
 	isselected = _isselected;
 }
+
+std::string ActionIcon::getName()
+{
+	return name;
+}

@@ -1,0 +1,163 @@
+[
+   {
+      "isalpha" : false,
+      "pos" : [ -2600, 350, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 300, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -2900, 550, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 300, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -3650, 550, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -3650, 150, -400 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 0, 800 ],
+      "texturename" : "Map/wallgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4250, 500, 0 ],
+      "rotate" : [ 0, 0, 90 ],
+      "scale" : [ 100, 0, 800 ],
+      "texturename" : "Map/rect.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4350, 400, 0 ],
+      "rotate" : [ 0, 0, 90 ],
+      "scale" : [ 100, 0, 800 ],
+      "texturename" : "Map/rect.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4300, 450, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 100, 0, 800 ],
+      "texturename" : "Map/rect.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4300, 100, -400 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 100, 0, 700 ],
+      "texturename" : "Map/rect.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4950, 350, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4950, 50, -400 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 0, 600 ],
+      "texturename" : "Map/wallgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -6150, 50, -400 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 0, 600 ],
+      "texturename" : "Map/wallgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -6150, 350, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -4660, 605, 340 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/tree.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -5310, 605, 350 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/tree.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -5830, 545, 230 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 450, 0, 450 ],
+      "texturename" : "Map/tree.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -3060, 715, -320 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 400, 0, 400 ],
+      "texturename" : "Map/tree.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -3720, 665, -350 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 300, 0, 300 ],
+      "texturename" : "Map/tree.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -6510, 510, 220 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 550, 300, 250 ],
+      "texturename" : "Map/renga.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -6500, 410, 90 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 263, 0, 264 ],
+      "texturename" : "Map/door.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -7350, 50, -400 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 0, 600 ],
+      "texturename" : "Map/wallgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -7350, 350, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -8750, 50, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 400, 0, 800 ],
+      "texturename" : "Map/rect.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -8750, -350, -400 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 400, 0, 800 ],
+      "texturename" : "Map/roadgreen.png"
+   }
+]

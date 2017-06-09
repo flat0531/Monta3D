@@ -11,7 +11,7 @@ public:
 	void setup();
 	ci::ColorA getSelectcolor();
 private:
-	std::vector<Pallet>pallets;
+	Pallet pallet;
 	int effectcount = 0;
 	int effectnexttime = 3;
 	bool effectend();

@@ -5,6 +5,7 @@
 #include "cinder/imageIo.h"
 #include"cinder\Camera.h"
 #include"SurfaceEffect.h"
+#include"../WorldObject/SurfaceScaleDown.h"
 #include<vector>
 enum FadeInStep {
 	FADEIN_SCALEUP,FADEIN_SURFACE,FADEIN_MAX
@@ -34,6 +35,12 @@ private:
 	bool isfadeinend = false;
 	bool isfadeoutend = false;
 	bool isfadeoutsound;
+	std::string actionname;
+	std::string getFadePath();
+	ci::gl::Texture fadetexture;
+	ci::gl::Texture frametexture;
+	ci::gl::Texture scaletexture;
+	SurfaceScaleDown scaledown;
 	std::vector<ci::Vec2f>texturepos;
 	ci::Vec2f maxtexturescale;
 	ci::Vec2f texturescale;
@@ -43,5 +50,6 @@ private:
 	std::vector<float>easingtime;
 	int easingtype = 0;
 	SurfaceEffect surface;
+	int countFileNum(std::string path);
 };
 #define FadeM (FadeManager::getFade().getFade())

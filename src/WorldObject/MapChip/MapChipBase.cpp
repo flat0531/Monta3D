@@ -2,6 +2,9 @@
 
 MapChipBase::MapChipBase()
 {
+	pos = ci::Vec3f(0, 0, 0);
+	scale = ci::Vec3f(0, 0, 0);
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 ci::Vec3f MapChipBase::getPos3f()
@@ -62,4 +65,9 @@ bool MapChipBase::getIsHit()
 bool MapChipBase::getIsActive()
 {
 	return isactive;
+}
+
+ci::AxisAlignedBox3f MapChipBase::getaabb()
+{
+	return aabb;
 }

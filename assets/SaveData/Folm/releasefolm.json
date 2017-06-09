@@ -1,0 +1,37 @@
+[
+   {
+      "candraw" : true,
+      "name" : "slime",
+      "release" : true
+   },
+   {
+      "candraw" : true,
+      "name" : "cat",
+      "release" : true
+   },
+   {
+      "candraw" : true,
+      "name" : "bird",
+      "release" : true
+   },
+   {
+      "candraw" : true,
+      "name" : "angel",
+      "release" : true
+   },
+   {
+      "candraw" : true,
+      "name" : "mogura",
+      "release" : true
+   },
+   {
+      "candraw" : false,
+      "name" : "masic",
+      "release" : false
+   },
+   {
+      "candraw" : false,
+      "name" : "dragon",
+      "release" : false
+   }
+]

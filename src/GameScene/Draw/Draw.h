@@ -14,6 +14,7 @@
 #include"../../UI/PalletManager.h"
 #include"../../UI/PlayerCanvas.h"
 #include"../../UI/DrawMenu.h"
+#include"../../UI/UICreater.h"
 class Draw :public SceneBase {
 public:
 	Draw::Draw();
@@ -29,6 +30,8 @@ private:
 	PalletManager palletmanager;
 	PlayerCanvas playercanvas;
 	DrawMenu drawmenu;
+	UICretaer uiback;
+	UICretaer uifront;
 	std::vector<SurfaceEffect> effects;
 	std::vector<ci::ColorA> color;
 	std::string charactername;
@@ -37,10 +40,7 @@ private:
 	std::string charactercoloredpath;
 	std::string characterplaypath;
 	bool isCirclePointvalue(ci::Vec2f circlepos, ci::Vec2f pointpos, float circlesize, float& value, float underlimit = 0.0f);
-	void drawbackGround();
 	void drawSample();
-	void drawTitle();
-	void drawCanvas();
 	void drawColorPallet();
 	void testup();
 	void check();

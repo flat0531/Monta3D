@@ -3,12 +3,14 @@
 #include "cinder/gl/gl.h"
 #include"cinder/gl/Texture.h"
 class CharacterManager;
+class ItemManager;
 class MainWindow {
 public:
 	MainWindow();
 	void draw();
 	void setup();
 	void setCharacterManagerPtr(CharacterManager* _charactermanager);
+	void setItemManagerPtr(ItemManager* _itemmanager);
 	void setSelectTextureNum(const int num);
 	void setEnemyStatuts(std::string _enemyname, int _maxhp, int _hp, int id,ci::ColorA _uniquecolor);
 	void update();
@@ -20,6 +22,8 @@ public:
 	void setZankiNum(const int _zanki);
 private:
 	void drawBackGround();
+	CharacterManager* charactermanager;
+	ItemManager* itemmanager;
 	int enemyid = 0;
 	int enemymaxhp = 0;
 	int enemyhp = 0;
@@ -37,10 +41,12 @@ private:
 	float end_hprate = 1.0f;
 	std::string backgroundpath;
 	std::string enemyname;
+	ci::gl::Texture pallettex;
+	ci::gl::Texture itemwindow;
 	ci::gl::Texture zankiicontex;
-	CharacterManager* charactermanager;
 	ci::Font font;
 	std::string playertexturepath = "";
+	std::string playerframepath = "";
 	std::string enemytexturepath = "";
 	void drawPlayerTexture();
 	void drawEnemyTexture();
@@ -51,6 +57,7 @@ private:
 	void drawZanki();
 	void updatePlayerHpBar();
 	void updateEnemyHpBar();
+	void drawItemWindow();
 	int selecttexturenum = 1;
 	int zanki;
 };

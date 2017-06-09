@@ -19,6 +19,7 @@ public:
 	void update();
 	void draw();
 	void draw2D();
+	void draw2D(const ci::Vec2f pos,const ci::Vec2f size);
 	void setDrawtPos(const ci::Vec3f _pos);
 	void setDrawSize(const ci::Vec3f _size);
 	void setDrawRotate(const ci::Vec3f _rotate);
@@ -28,7 +29,7 @@ public:
 	bool getIsUp();
 	void ChangeTexture(const ci::gl::Texture _texture);
 	void ChangeColor(const ci::ColorA _color);
-	ci::gl::Texture getTexture();
+	const ci::gl::Texture getTexture();
 private:
 	ci::Surface surface;
 	ci::Vec2i estartpos;
@@ -50,6 +51,5 @@ private:
 	ci::Vec3f drawsize;
 	ci::Vec3f drawrotate;
 	ci::Vec2i pixcelsize;
-
 	void reverseUpdate();
 };

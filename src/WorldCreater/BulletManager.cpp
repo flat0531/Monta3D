@@ -7,8 +7,10 @@
 #include"../UI/MainWindow.h"
 #include"../WorldCreater/EffectManager.h"
 #include"../WorldObject/Effect/EffectExplodeburst.h"
+
 using namespace ci;
 using namespace ci::app;
+
 BulletManager::BulletManager()
 {
 	SoundM.CreateSE("damage.wav");

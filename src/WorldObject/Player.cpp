@@ -6,6 +6,7 @@
 #include"../CharacterAction/CatAction.h"
 #include"../WorldObject/PlayerDirection.h"
 #include"../Top/EasingManager.h"
+#include"../WorldCreater/ShadowManager.h"
 using namespace ci;
 using namespace ci::app;
 Player::Player()
@@ -13,7 +14,7 @@ Player::Player()
 	
 }
 
-Player::Player(ci::Vec3f _pos, ActionType _actiontype)
+Player::Player(ci::Vec3f _pos, ActionType _actiontype, ShadowManager * _shadowmanager)
 {
 	pos = _pos;
 	speed = Vec3f(0, 0, 0);
@@ -31,13 +32,13 @@ Player::Player(ci::Vec3f _pos, ActionType _actiontype)
 	isoperate = true;
 	maxhp = 100;
 	hp = maxhp;
+	shadowmanager = _shadowmanager;
 }
 
 void Player::update()
 {
 	prevpos = pos;
-	
-	pos += speed;
+
 
 	if (isoperate&&(!isstun)) {
 		PlayerDirection buf = playerdirection;
@@ -47,11 +48,11 @@ void Player::update()
 			easing_start_rotate = rotate.y;
 		}
 	}
+	RotateEasing();
 	
-	rotate.y = EasingLinear(direction_t, easing_start_rotate, getAttackRotate());
 	EasingManager::tCount(direction_t, 0.15f);
 	jumpcount++;
-	drawpos = pos;
+
 
 
 	updateStun();
@@ -59,6 +60,9 @@ void Player::update()
 		hp = 0.0f;
 	}
 	action->update();
+
+	pos += speed;
+	drawpos = pos;
 }
 
 void Player::draw()
@@ -69,6 +73,11 @@ void Player::draw()
 void Player::setup(ci::Vec3f _pos)
 {
 	
+}
+
+void Player::Reset(ci::Vec3f rotate)
+{
+	action->setup(rotate);
 }
 
 bool Player::IsJumpping()
@@ -86,6 +95,11 @@ int Player::getjumpCount()
 void Player::setJumming(const bool is)
 {
 	jumpping = is;
+}
+
+void Player::RotateEasing()
+{
+	rotate.y = EasingLinear(direction_t, easing_start_rotate, getAttackRotate());
 }
 
 

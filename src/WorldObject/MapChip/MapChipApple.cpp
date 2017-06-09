@@ -12,7 +12,7 @@ MapChipApple::MapChipApple(ci::Vec3f _pos, ci::Vec3f _scale)
 	TextureM.CreateTexture("Mesh/apple.png");
 	TextureM.CreateMesh("apple.obj");
 	SoundM.CreateSE("change.wav");
-
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 void MapChipApple::draw()
@@ -52,6 +52,7 @@ void MapChipApple::InCollisionEnter(CharacterBase * characterbase)
 	if (isactive) {
 		characterbase->addHpValue(30);
 		SoundM.PlaySE("change.wav");
+		iscollision = false;
 		isactive = false;
 	}
 }

@@ -7,6 +7,7 @@
 #include"../../WorldCreater/MapManager.h"
 #include"../../WorldCreater/CharacterManager.h"
 #include"../../WorldCreater/MapChipManager.h"
+#include"../../WorldCreater/ItemManager.h"
 #include"../../WorldObject/Information.h"
 #include<vector>
 #include<memory>
@@ -18,6 +19,7 @@ class Player;
 class BulletManager;
 class EffectManager;
 class CameraManager;
+class ShadowManager;
 class ShiftFloorObject;
 class GameMain :public SceneBase {
 public:
@@ -34,39 +36,25 @@ private:
 	std::shared_ptr<CharacterManager> charactermanager;
 	std::shared_ptr<MapChipManager> mapchipmanager;
 	std::shared_ptr<EffectManager> effectmanager;
+	std::shared_ptr<ItemManager>itemmanager;
+	std::shared_ptr<ShadowManager>shadowmanager;
+	std::shared_ptr<MainWindow>mainwindow;
 	std::vector<std::shared_ptr<ShiftFloorObject>> shiftfloorobjects;
 	ci::CameraPersp camera;
 	ci::CameraOrtho ortho;
-
-
-
 	Information information;
-	std::shared_ptr<MainWindow>mainwindow;
 	std::string bgmname;
 	int worldnum;
 	int stagenum;
 	int floornum;
 	ci::Font font;
 	ci::Vec3f nextplayerpos;
+	ci::Vec3f nextplayerrotate;
 	bool isshiting = false;
 	bool isgoal = false;
 	bool isgoaleffecting = false;
 	bool isgoaleffecingend = false;
 	bool isshiftstageselect = false;
-	void shiftNextFloor();
-	void shiftGoal();
-	void ReCreateStage();
-	void drawPlayer();
-	void updatePlayer();
-	void updateLinetoPlayer();
-	void cretateShiftFloorObject();
-	void updateShiftFloorObject();
-	void drawShiftFloorObject();
-	void playBGM();
-	void updateGoal();
-	bool starteffect_isend;
-	void updateDeath();
-
 	bool playerdead = false;
 	bool isdeathblackboxstart = false;
 	float deathblackbox_t = 0.0f;
@@ -79,11 +67,24 @@ private:
 	float deathblackboxangle = 0.0f;
 	bool isshiftdeath = false;
 	bool isdeathshifttitle = false;
+	bool starteffect_isend;
+
+	void shiftNextFloor();
+	void shiftGoal();
+	void ReCreateStage();
+	void cretateShiftFloorObject();
+	void updateShiftFloorObject();
+	void drawShiftFloorObject();
+	void playBGM();
+	void updateGoal();
+	void updateDeath();
 	void drawDeathBlackBox();
 	void drawZankiIcon();
 	void updateDeathBlackBox();
 	void updateZanki();
 	void DeathFadeInend();
 	void StartActionSelectMode();
-	ci::gl::Texture ofsCrean(const float rate);
+	void drawShadow();
+	void setStartPos();
+	ci::gl::Texture ofScrean(const float rate);
 };

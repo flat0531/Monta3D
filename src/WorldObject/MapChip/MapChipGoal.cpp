@@ -12,6 +12,7 @@ MapChipGoal::MapChipGoal(ci::Vec3f _pos, ci::Vec3f _scale, std::function<void()>
 	scale = _scale;
 	iscollision = true;
 	goal = _goal;
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 void MapChipGoal::draw()

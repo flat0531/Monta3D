@@ -8,7 +8,7 @@ class SlimeAction :public ActionBase{
 public:
 	SlimeAction();
 	SlimeAction(CharacterBase* _player);
-	void setup() override;
+	void setup(ci::Vec3f rotate) override;
 	void update() override;
 	void draw()  override;
 	void jump() override;

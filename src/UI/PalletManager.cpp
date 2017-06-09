@@ -2,6 +2,7 @@
 #include"../Top/DrawManager.h"
 #include"../Top/TextureManager.h"
 #include"../Input/KeyManager.h"
+#include"../Top/MyJson.h"
 using namespace ci;
 using namespace ci::app;
 PalletManager::PalletManager()
@@ -9,41 +10,41 @@ PalletManager::PalletManager()
 	TextureM.CreateTexture("UI/pletbase.png");
 	TextureM.CreateTexture("UI/paintpen.png");
 	TextureM.CreateTexture("UI/color.png");
-	pallets.push_back(Pallet());
-	int num = 30;
-	//for (int i = 0;i < num;i++) {
-	//	pallets[0].addColorObject(ColorA(1, 1, 1, 1), false, num);
-	//}
-	pallets[0].addColorObject(ColorA(1, 1, 1, 1), false,6);
-	pallets[0].addColorObject(ColorA(0, 1, 1, 1), false,6);
-	pallets[0].addColorObject(ColorA(1, 0, 1, 1), false,6);
-	pallets[0].addColorObject(ColorA(1, 1, 0, 1), false,6);
-	pallets[0].addColorObject(ColorA(235.0f/255.0f, 97.f/255.f, 1.f/255.f, 255.f/255.f), false,6);
-	pallets[0].addColorObject(ColorA(1, 0, 0, 1), false,6);
-	pallets[0].setup();
+	
+	std::string path = "SaveData/Color/releasecolor.json";
+	JsonTree color(loadAsset(path));
+	int createnum = 0;
+	for (int i = 0;i < color.getNumChildren();i++) {
+		if (color.getChild(i).getValueForKey<bool>("release")) {
+			createnum++;
+		}
+	}
+	for (int i = 0;i < color.getNumChildren();i++) {
+		if (color.getChild(i).getValueForKey<bool>("release")) {
+			float color_r = color.getChild(i).getChild("color").getValueAtIndex<float>(0) / 255.f;
+			float color_g = color.getChild(i).getChild("color").getValueAtIndex<float>(1) / 255.f;
+			float color_b = color.getChild(i).getChild("color").getValueAtIndex<float>(2) / 255.f;
+			pallet.addColorObject(ColorA(color_r, color_g, color_b, 1), false,createnum);
+		}
+	}
+
+	pallet.setup();
 }
 
 void PalletManager::draw()
 {
-	for (auto itr : pallets) {
-		itr.draw();
-	}
+	pallet.draw();
 }
 
 void PalletManager::update()
 {
-	for (auto& itr : pallets) {
-		//if (KeyManager::getkey().isPush(KeyEvent::KEY_j)||(effectnext()&&(!effectend()))) {
-		//	itr.selectcolor();
-		//}
-		if ((effectnext() && (!effectend()))) {
-			itr.selectcolor();
-		}
-		if (effectend()) {
-			itr.selectColorPosition();
-		}
-		itr.update();
+	if ((effectnext() && (!effectend()))) {
+		pallet.selectcolor();
 	}
+	if (effectend()) {
+		pallet.selectColorPosition();
+	}
+	pallet.update();
 	effectCountup();
 }
 
@@ -53,12 +54,12 @@ void PalletManager::setup()
 
 ci::ColorA PalletManager::getSelectcolor()
 {
-	return pallets[0].getSelectColor();
+	return pallet.getSelectColor();
 }
 
 bool PalletManager::effectend()
 {
-	return effectcount >= effectnexttime* pallets[0].getColorObjectNum();
+	return effectcount >= effectnexttime* pallet.getColorObjectNum();
 }
 
 bool PalletManager::effectnext()

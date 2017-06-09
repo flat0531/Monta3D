@@ -15,7 +15,7 @@ void SurfaceScaleDown::WirteImage(const ci::Surface & surface, const int downrat
 	Surface buff;
 	buff = Surface(texturesize.x, texturesize.y, true);
 
-	for (int y = 0; y <texturesize.y; y++)
+	for (int y = 0; y < texturesize.y; y++)
 	{
 		for (int x = 0; x < texturesize.x; x++)
 		{
@@ -39,9 +39,11 @@ void SurfaceScaleDown::WirteImage(const ci::Surface & surface, const int downrat
 					color.a += (rate*rate)*(float(surface.getPixel(Vec2i((x*downrate) + in_x, (y*downrate) + in_y)).a)) / 255.f;
 				}
 			}
-			//console() << color.r << std::endl;
 			buff.setPixel(Vec2i(x, y), color);
 		}
 	}
-	ci::writeImage(pathname, buff);
+
+	auto datasourceref =  DataTargetPath::createRef(getAppPath().string() + pathname);
+
+	ci::writeImage(datasourceref, buff);
 }

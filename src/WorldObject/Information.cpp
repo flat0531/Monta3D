@@ -9,7 +9,7 @@ using namespace ci::app;
 Information::Information()
 {
 	worldnum = DataM.getWorldNum();
-	stagenum = DataM.getWorldNum();
+	stagenum = DataM.getStageNum();
 
 	isstagestartend =false;
 	isstagestart = false;

@@ -5,6 +5,8 @@
 #include"../Top/TextureManager.h"
 #include"../Top/SoundManager.h"
 #include"cinder\Rand.h"
+#include"../Top/MyJson.h"
+#include<filesystem>
 using namespace ci;
 using namespace ci::app;
 void FadeManager::setup()
@@ -50,7 +52,7 @@ void FadeManager::draw()
 			ColorA color = ColorA(randomrgb[0] ? 1 : a, 1, randomrgb[2] ? 1 : a, 1);//g‚ð‚P‚ÅŒÅ’è‚µ‚½•û‚ª‚æ‚©‚Á‚½‚½‚ß‚±‚Ì‚Ü‚Ü‚Å
 			DrawM.drawBox(texturepos[i] + maxtexturescale / 2.f, texturescale, texturerotate,color);
 			DrawM.drawTextureBox(texturepos[i] + maxtexturescale / 2.f, texturescale, texturerotate, surface.getTexture(), ColorA(1, 1, 1, 1));
-			DrawM.drawTextureBox(texturepos[i] + maxtexturescale / 2.f, texturescale, texturerotate, TextureM.getTexture("UI/fadeframe.png"), ColorA(1, 1, 1, 1));
+			DrawM.drawTextureBox(texturepos[i] + maxtexturescale / 2.f, texturescale, texturerotate, frametexture, ColorA(1, 1, 1, 1));
 		}
 	}
 
@@ -78,13 +80,24 @@ void FadeManager::StartFadeIn()
 
 	randSeed(app::getElapsedFrames()%10000);
 	
-	easingtype = randInt(0, EasingManager::EasType::Return);
-	gl::Texture backeefect = TextureM.CreateTexture("UI/fadeslime.png");
-	TextureM.CreateTexture("UI/fadeframe.png");
-	surface = SurfaceEffect(backeefect, backeefect.getSize() / 7.f, backeefect.getSize()*(1.f - (1.f / 7.f)),
+
+
+	scaletexture = TextureM.CreateTexture(getFadePath());
+
+	scaledown.WirteImage(Surface(scaletexture), 4, "assets/Texture/fadetexture.png");
+
+	TextureM.eraseTexture("fadetexture.png");
+
+	fadetexture = TextureM.CreateTexture("fadetexture.png");
+	
+
+	frametexture = TextureM.CreateTexture("Draw/" + actionname + "/frame.png");
+
+	surface = SurfaceEffect(fadetexture, fadetexture.getSize() / 7.f, fadetexture.getSize()*(1.f - (1.f / 7.f)),
 		Vec3f(0, 0, 0), Vec3f(0, 0, 0), Vec3f(0, 0, 0),
 		EasingManager::EasType::Linear, EasingManager::EasType::Return, 30.f,
-		-M_PI / 4.f, 0.0f, 0.25f, backeefect.getSize().x*0.4f*1.414f,easingtime[FadeInStep::FADEIN_SURFACE], 0.0f, ColorA(0, 1, 0, 0.5f));
+		-M_PI / 4.f, 0.0f, 0.25f, fadetexture.getSize().x*0.4f*1.414f,easingtime[FadeInStep::FADEIN_SURFACE], 0.0f, ColorA(1, 1, 1, 1));
+
 	for (int i = 0;i < 3;i++) {
 		randomrgb[i] = randBool();
 	}
@@ -176,4 +189,41 @@ void FadeManager::updateFadeOut()
 			easingtime.clear();
 		}
 	}
+}
+
+
+std::string FadeManager::getFadePath()
+{
+
+	if (countFileNum("Texture/UserPlay/slime")==0) {
+		actionname = "slime";
+		return "UI/defaultslime.png";
+	}
+	else {
+		std::vector<std::string>names;
+		std::string path = "SaveData/Folm/releasefolm.json";
+		JsonTree folm(loadAsset(path));
+		for (int i = 0;i < folm.getNumChildren();i++) {
+			JsonTree child = folm.getChild(i);
+			if (child.getValueForKey<bool>("release")) {
+				names.push_back((child.getValueForKey<std::string>("name")));
+			}
+		}
+		int selectnum = randInt(names.size());
+		actionname = names[selectnum];
+		int playturexturenum = randInt(countFileNum("Texture/UserPlay/" + names[selectnum])) + 1;
+		return "UserPlay/" + actionname + "/play" + std::to_string(playturexturenum) + ".png";
+	}
+	
+}
+
+int FadeManager::countFileNum(std::string path)
+{
+	int num = 0;
+
+	for (std::tr2::sys::directory_iterator it(app::getAssetPath(path).string()), end; it != end; it++)
+	{
+		num++;
+	}
+	return num;
 }

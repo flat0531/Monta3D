@@ -1,0 +1,16 @@
+[
+  {
+    "pos": [ 240, 70 ],
+    "size": [ 512, 128 ],
+    "rotate": -10,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/nuriemode.png"
+  },
+  {
+    "pos": [ 1350, 250 ],
+    "size": [ 200, 100 ],
+    "rotate": 0,
+    "color": [ 1, 0, 0, 1 ],
+    "texture": "UI/scale.png"
+  }
+]

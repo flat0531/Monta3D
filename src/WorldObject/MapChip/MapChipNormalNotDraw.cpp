@@ -10,6 +10,7 @@ MapChipNormalNotDraw::MapChipNormalNotDraw(ci::Vec3f _pos, ci::Vec3f _scale, Eff
 	iscollision = true;
 	effectmanager = _effectmanager;
 	SoundM.CreateSE("haretu.wav");
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 void MapChipNormalNotDraw::draw()
@@ -46,11 +47,13 @@ void MapChipNormalNotDraw::DownCollisionEnter(CharacterBase * characterbase)
 void MapChipNormalNotDraw::RightCollisionEnter(CharacterBase * characterbase)
 {
 	characterbase->setPosX(pos.x + (scale.x / 2.f + characterbase->getScale().x / 2.f));
+	characterbase->onRightWall();
 }
 
 void MapChipNormalNotDraw::LeftCollisionEnter(CharacterBase * characterbase)
 {
 	characterbase->setPosX(pos.x - (scale.x / 2.f + characterbase->getScale().x / 2.f));
+	characterbase->onLeftWall();
 }
 
 void MapChipNormalNotDraw::BulletCollison(BulletBase * bulletbase, bool isbreak)

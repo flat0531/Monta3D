@@ -34,10 +34,6 @@ SparrowAction::SparrowAction(CharacterBase * _enemy)
 	TextureM.CreateTexture("Mesh/sparrowrw.png");
 }
 
-void SparrowAction::setup()
-{
-}
-
 void SparrowAction::update()
 {
 	wingangle += 0.15f;
@@ -91,5 +87,15 @@ void SparrowAction::draw()
 void SparrowAction::damaged()
 {
 	enemyptr->setSpeed(Vec3f(0, 0, 0));
+}
+
+void SparrowAction::onLeftWall()
+{
+	enemyptr->setQuat(Quatf(0, -M_PI / 2.f, 0));
+}
+
+void SparrowAction::onRightWall()
+{
+	enemyptr->setQuat(Quatf(0, M_PI / 2.f, 0));
 }
 

@@ -46,6 +46,12 @@ void StageSelect::setup()
 	animation_count = 0;
 	stagenameplate = StageNamePlate(worldnum, stagenum, stagedatas[stagenum - 1]);
 	roadStageName();
+
+	if (DataM.getPrevscene() == SceneType::GANEMAIN_SCENE) {
+		informationwindowlist.CreateInformationWindows();
+	}
+
+
 	FadeM.StartFadeOut(false);
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
@@ -65,6 +71,9 @@ void StageSelect::update()
 	selectStage();
 	updatePlayerIcon();
 	stagenameplate.update();
+	if (!FadeM.getIsFading()) {
+		informationwindowlist.update();
+	}
 	FadeInGameMain();
 
 	playericonspeed = buffplayericonpos - playericonpos;
@@ -103,6 +112,7 @@ void StageSelect::draw2D()
 	drawPlayerIcon();
 	stagenameplate.draw();
 	drawTitle();
+	informationwindowlist.draw();
 }
 
 void StageSelect::shift()
@@ -112,7 +122,7 @@ void StageSelect::shift()
 	}
 	if (FadeM.getIsfadeinEnd()) {
 		if (DataM.getNextscene() == SceneType::GANEMAIN_SCENE) {
-		
+			DataM.roadGetItems(worldnum, stagenum);
 			SceneManager::createScene(GameMain());
 		}
 	}
@@ -208,6 +218,7 @@ void StageSelect::selectStage()
 {
 	if (FadeM.getIsFading())return;
 	if (isiconmoving)return;//
+	if (!informationwindowlist.isEnd())return;
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_d)&&(!(stagenum == stagepos.size()))) {
 		easing_icon_beginpos = playericonpos;
 		easing_icon_endpos = stagepos[stagenum];
@@ -283,6 +294,7 @@ void StageSelect::drawPlayerIcon()
 void StageSelect::FadeInGameMain()
 {
 	if (isiconmoving)return;
+	if (!informationwindowlist.isEnd())return;
 	if (FadeM.getIsFading())return;
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_l)) {
 		FadeM.StartFadeIn();
@@ -303,5 +315,12 @@ void StageSelect::roadStageName()
 	for (int i = 0;i < stageicon.getNumChildren();i++) {
 		JsonTree child = stageicon.getChild(i);
 		stagename.push_back(child.getValueForKey<std::string>("name"));
+	}
+}
+
+void StageSelect::ShiftDrawScene()
+{
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_q)) {
+
 	}
 }

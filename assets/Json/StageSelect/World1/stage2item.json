@@ -1,0 +1,14 @@
+[
+  {
+    "floor": 1,
+   "pos": [ -15, 7,0 ],
+    "type": "color",
+    "name": "green"
+  },
+  {
+    "floor": 2,
+   "pos": [ -15, 7,0 ],
+    "type": "folm",
+    "name": "angel"
+  }
+]

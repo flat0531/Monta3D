@@ -15,6 +15,7 @@ public:
 	virtual void update() {};
 	virtual void draw() {};
 	virtual void setup(ci::Vec3f _pos) {};
+	virtual void Reset(ci::Vec3f rotate) {};
 	int getHp();
 	int getMaxHp();
 	int getId();
@@ -82,6 +83,8 @@ public:
 	void setUniqueColor(ci::ColorA _color);
 	bool getCanJump();
 	void setCanJump(const bool is);
+	void onLeftWall();
+	void onRightWall();
 	template<class T>
 	void setCharacterAction(T);
 protected:

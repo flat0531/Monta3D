@@ -168,6 +168,16 @@ void MapChipManager::setGoal(const std::function<void()> func)
 	goal = func;
 }
 
+MapChipManager * MapChipManager::getThisPtr()
+{
+	return this;
+}
+
+std::vector<std::vector<std::shared_ptr<MapChipBase>>> MapChipManager::getMapChips()
+{
+	return mapchips;
+}
+
 void MapChipManager::updateMapChip()
 {
 	int hitscalex = 25;
@@ -193,7 +203,7 @@ void MapChipManager::CollisionPlayerToMap()
 {
 	
 	std::vector<HitBox> hitbox;
-	int hitscale = 1;
+	int hitscale = 2;
 	int WorldScaleInt = int(WorldScale);
 	int collision_pos_y = (int(characterManagerptr->getPlayer()->getPos2f().y) / WorldScaleInt);
 	int collision_pos_x = (int(-(characterManagerptr->getPlayer()->getPos2f().x)) / WorldScaleInt);
@@ -254,7 +264,7 @@ void MapChipManager::CollisionPlayerToMap()
 	
 	}
 	hitbox.clear();
-
+	
 
 
 }

@@ -1,0 +1,20 @@
+[
+  {
+    "floor": 1,
+    "pos": [ -58, 10,0 ],
+    "type": "color",
+    "name": "blue"
+  },
+  {
+    "floor": 2,
+    "pos": [ -53, 5,8 ],
+    "type": "folm",
+    "name": "cat"
+  },
+   {
+    "floor": 2,
+    "pos": [ -100, 9,0 ],
+    "type": "folm",
+    "name": "bird"
+  }
+]

@@ -11,6 +11,7 @@
 #include"../../Top/SoundManager.h"
 #include"../../WorldObject/Player.h"
 #include"../../WorldCreater/BulletManager.h"
+#include"../../WorldCreater/ShadowManager.h"
 #include"../../WorldCreater/EffectManager.h"
 #include"../../WorldCreater/CameraMnager.h"
 #include"../../Top/FadeManager.h"
@@ -18,6 +19,8 @@
 #include"../../Top/DataManager.h"
 #include"../../Top/MyJson.h"
 #include"../../Top/CollisionManager.h"
+#include"../../WorldObject/Bullet/BulletBase.h"
+#include"../../WorldObject/ItemObject.h"
 using namespace ci;
 using namespace ci::app;
 
@@ -44,21 +47,24 @@ void GameMain::setup()
 	stagenum = DataM.getStageNum();
 	floornum = 1;
 	mapmanager.ReadData(worldnum, stagenum, 1);
-
 	cameramanager = std::make_shared<CameraManager>();
 
 	bulletmanager = std::make_shared<BulletManager>();
 	charactermanager = std::make_shared<CharacterManager>();
 	mapchipmanager = std::make_shared<MapChipManager>();
 	effectmanager = std::make_shared<EffectManager>();
+	itemmanager = std::make_shared<ItemManager>();
+	shadowmanager = std::make_shared<ShadowManager>();
 	mainwindow = std::make_shared<MainWindow>();
 
 
 	charactermanager->setBulletManagerPointer(bulletmanager->getThisPointer());
 	charactermanager->setEffectManagerPointer(effectmanager->getThisPointer());
+	charactermanager->setShadowManagerPointer(shadowmanager->getThisPtr());
+	setStartPos();
+	charactermanager->CreatePlayer(nextplayerpos);
 
-	charactermanager->CreatePlayer(Vec3f(-22.0, 2, 0.0f)*WorldScale);
-	nextplayerpos = Vec3f(-22.0, 2, 0.0f)*WorldScale;////
+
 	charactermanager->CreateEnemys(worldnum, stagenum, floornum);//
 
 	charactermanager->setBulletManagerPtrToPlayer();
@@ -66,6 +72,7 @@ void GameMain::setup()
 	charactermanager->setMainWindowPointer(mainwindow->getThisPtr());
 
 	charactermanager->setPlayerAction(ActionType::SLIME);
+	charactermanager->getPlayer()->Reset(nextplayerrotate);///
 	charactermanager->setEnemysAction();
 
 	bulletmanager->setCharacterManagerPtr(charactermanager->getThisPointer());
@@ -77,16 +84,22 @@ void GameMain::setup()
 	mapchipmanager->setEffectManagerPointer(effectmanager->getThisPointer());
 
 	mainwindow->setCharacterManagerPtr(charactermanager->getThisPointer());
+	mainwindow->setItemManagerPtr(itemmanager->getThisPointer());
 
 	mapchipmanager->setGoal(std::bind(&GameMain::shiftGoal, this));
 	mapchipmanager->setup(worldnum, stagenum, floornum);
 
-	
+	itemmanager->SetCharacterManagerPtr(charactermanager->getThisPointer());
+	itemmanager->SetEffectManagerPtr(effectmanager->getThisPointer());
+	itemmanager->SetBulletManagerPtr(bulletmanager->getThisPointer());
+	itemmanager->CreateItem(worldnum,stagenum,floornum);
 
-	cameramanager->setPlayerPos(charactermanager->getPlayer()->getPos());
+	shadowmanager->setMapChipManager(mapchipmanager->getThisPtr());
+	
 	cameramanager->unitPrevCenterOfInterestPoint(charactermanager->getPlayer()->getPos());
 	cameramanager->setMaxValue(mapchipmanager->getChipsSize()*WorldScale);
 	cameramanager->setMinValue(Vec2f(0, 0));
+	cameramanager->setPlayerPtr(charactermanager->getPlayer()->getThisPointer());
 	cameramanager->setCameraUpdateType(cameramanager->JsonReadCameraType(worldnum, stagenum, floornum));
 	cameramanager->update();
 
@@ -95,6 +108,7 @@ void GameMain::setup()
 	cretateShiftFloorObject();
 
 	mainwindow->setSelectTextureNum(1);
+
 	SoundM.CreateSE("stageclear.wav");
 	SoundM.CreateSE("deathse.wav");
 	SoundM.CreateSE("haretu.wav");
@@ -103,11 +117,9 @@ void GameMain::setup()
 	TextureM.CreateTexture("UI/nisemonta.png");
 	font = Font("Comic Sans MS", 65.0f);
 	
-	
-
 	playBGM();
 
-	charactermanager->update();
+	charactermanager->update(camera);
 
 	bulletmanager->update();
 
@@ -132,19 +144,18 @@ void GameMain::update()
 		}
 		
 		if (!charactermanager->getActionSelectMode()) {
-			charactermanager->update();
+			charactermanager->update(camera);
 
 			bulletmanager->update();
 
 			mapchipmanager->update();
+
+			itemmanager->update(camera);
 		}
 		
 	}
 
 	if (!charactermanager->getActionSelectMode()) {
-
-		cameramanager->setPlayerPos(charactermanager->getPlayer()->getPos());
-		cameramanager->setPlayerSpeed(charactermanager->getPlayer()->getSpeed());
 		cameramanager->update();
 		effectmanager->update();
 		mainwindow->update();
@@ -164,7 +175,7 @@ void GameMain::update()
 			if (charactermanager->getIsEnd()) {
 				rate = EasingLinear(charactermanager->getBackGround_T(), end, 1.0f);
 			}
-			charactermanager->setActionSelectBackGround(ofsCrean(rate));
+			charactermanager->setActionSelectBackGround(ofScrean(rate));
 		}
 		charactermanager->updateActionSelectMode();
 	}
@@ -175,7 +186,6 @@ void GameMain::update()
 
 void GameMain::draw()
 {
-
 
 	camera.setEyePoint(cameramanager->getSetEyePoint()+cameramanager->getSetEyePointTrance());
 	camera.setCenterOfInterestPoint(cameramanager->getSetCenterofinterestPoint()+cameramanager->getSetCenterofinterestPointTrance());
@@ -196,13 +206,17 @@ void GameMain::draw()
 		//mapmanager.drawMap2d();
 
 		mapchipmanager->draw();
-		drawPlayer();
-		charactermanager->draw();
+		charactermanager->draw(camera);
 		bulletmanager->draw();
+		itemmanager->draw();
+
 		drawShiftFloorObject();
 		effectmanager->draw();
+		
 		mapmanager.drawTexureObjct(camera);
+		drawShadow();
 
+	
 		//mapmanager.drawMap2dFront();
 	}
 	
@@ -225,6 +239,7 @@ void GameMain::draw2D()
 		charactermanager->drawActionSelecBackGround();
 	}
 	mainwindow->draw();
+	effectmanager->draw2D();
 	information.draw();
 	if (isgoal) {
 		information.drawClearTexture();
@@ -233,6 +248,7 @@ void GameMain::draw2D()
 		charactermanager->drawActionSelectMode();
 	}
 	drawDeathBlackBox();
+	
 	gl::popModelView();
 }
 
@@ -260,6 +276,8 @@ void GameMain::shiftGoal()
 	isgoal = true;
 	SoundM.FadeNowBGM(0.0f,0.5f);
 	SoundM.PlaySE("stageclear.wav",0.5f);
+	DataM.saveStageData(worldnum, stagenum, true);
+	itemmanager->saveItems(worldnum,stagenum);
 }
 
 void GameMain::ReCreateStage()
@@ -272,7 +290,8 @@ void GameMain::ReCreateStage()
 		charactermanager->setEnemysAction();
 		mapchipmanager->setup(worldnum, stagenum, floornum);
 		charactermanager->getPlayer()->setPos(nextplayerpos);
-		charactermanager->getPlayer()->setSpeed(Vec3f(0,0,0));
+		charactermanager->getPlayer()->Reset(nextplayerrotate);
+		itemmanager->CreateItem(worldnum, stagenum, floornum);
 		cameramanager->setMaxValue(mapchipmanager->getChipsSize()*WorldScale);
 		cameramanager->setMinValue(Vec2f(0, 0));
 		cameramanager->setCameraUpdateType(cameramanager->JsonReadCameraType(worldnum, stagenum, floornum));
@@ -282,18 +301,6 @@ void GameMain::ReCreateStage()
 		FadeM.StartFadeOut(true);
 	}
 	
-}
-
-void GameMain::drawPlayer()
-{
-}
-
-void GameMain::updatePlayer()
-{
-}
-
-void GameMain::updateLinetoPlayer()
-{
 }
 
 void GameMain::cretateShiftFloorObject()
@@ -306,11 +313,12 @@ void GameMain::cretateShiftFloorObject()
 
 	for (int i = 0;i < shiftfllorjson.getNumChildren();i++) {
 		JsonTree child = shiftfllorjson.getChild(i);
-		Vec3f pos = JsonM.getVec3(child, "pos");
-		Vec3f scale = JsonM.getVec3(child, "size");
+		Vec3f pos = JsonM.getVec3(child, "pos")*WorldScale;
+		Vec3f scale = JsonM.getVec3(child, "size")*WorldScale;
 		int next = child.getValueForKey<int>("next");
-		Vec3f nextpos = JsonM.getVec3(child, "nextplayerpos");
-		shiftfloorobjects.push_back(std::make_shared<ShiftFloorObject>(pos,scale, next,nextpos));
+		Vec3f playerpos = JsonM.getVec3(child, "nextplayerpos")*WorldScale;
+		Vec3f playerrotate= JsonM.getVec3(child, "nextplayerrotate");
+		shiftfloorobjects.push_back(std::make_shared<ShiftFloorObject>(pos,scale, next,playerpos, playerrotate));
 	}
 
 
@@ -328,6 +336,7 @@ void GameMain::updateShiftFloorObject()
 				Vec2f(shiftfloorobjects[i]->getPos().x-shiftfloorobjects[i]->getSize().x / 2.f, shiftfloorobjects[i]->getPos().y- shiftfloorobjects[i]->getSize().y / 2.f),
 				Vec2f(shiftfloorobjects[i]->getSize().x, shiftfloorobjects[i]->getSize().y))) {
 				nextplayerpos = shiftfloorobjects[i]->getNextPlayerPos();
+				nextplayerrotate = shiftfloorobjects[i]->getNextPlayerRotate();
 				floornum = shiftfloorobjects[i]->getNextFloorNum();
 				shiftNextFloor();
 			}
@@ -448,11 +457,11 @@ void GameMain::updateZanki()
 void GameMain::DeathFadeInend()
 {
 	if (isshiftdeath&&FadeM.getIsfadeinEnd()) {
-		if (mainwindow->getZankiNum() >= 0) {
+		if (mainwindow->getZankiNum() >= 0){
 
 			FadeM.StartFadeOut(false);
 			isshiftdeath = false;
-			   playerdead = false;
+			playerdead = false;
 			isdeathblackboxstart = false;
 			deathblackbox_t = 0.0f;
 			zankicolor_t = 0.0f;
@@ -467,6 +476,7 @@ void GameMain::DeathFadeInend()
 			charactermanager->setEnemysAction();
 			mapchipmanager->setup(worldnum, stagenum, floornum);
 			charactermanager->getPlayer()->setPos(nextplayerpos);
+			itemmanager->CreateItem(worldnum, stagenum, floornum);
 			cameramanager->setMaxValue(mapchipmanager->getChipsSize()*WorldScale);
 			cameramanager->setMinValue(Vec2f(0, 0));
 			cameramanager->setCameraUpdateType(cameramanager->JsonReadCameraType(worldnum, stagenum, floornum));
@@ -476,8 +486,7 @@ void GameMain::DeathFadeInend()
 			charactermanager->getPlayer()->setSpeed(Vec3f(0, 0, 0));
 			charactermanager->getPlayer()->setHp(charactermanager->getPlayer()->getMaxHp());
 			charactermanager->getPlayer()->RsetDeathColorT();
-			charactermanager->getPlayer()->setIsinvincible(false);
-			charactermanager->getPlayer()->setIsStun(false);
+			charactermanager->getPlayer()->Reset(nextplayerrotate);
 			cameramanager->ResetT();
 			playBGM();
 		}
@@ -491,13 +500,58 @@ void GameMain::StartActionSelectMode()
 			charactermanager->setActionSelectMode(true);
 			SoundM.FadeNowBGM(0.05f, 0.5f, false);
 			SoundM.PlaySE("actionselectbegin.wav");
-			charactermanager->setActionSelectBackGround(ofsCrean(1.0f));
+			charactermanager->setActionSelectBackGround(ofScrean(1.0f));
 		}
 	}
 	
 }
 
-ci::gl::Texture GameMain::ofsCrean(const float rate)
+void GameMain::drawShadow()
+{
+	gl::enableDepthWrite(false);
+	for (auto it : charactermanager->getEnemys()) {
+		Vec2f screen_position = camera.worldToScreen(it->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
+			shadowmanager->draw(it->getPos(), it->getScale());
+		}
+	}
+	for (auto it : bulletmanager->getPlayerBullets()) {
+		Vec2f screen_position = camera.worldToScreen(it->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
+			shadowmanager->draw(it->getPos(), it->getScale());
+		}
+	}
+	for (auto it : bulletmanager->getEnemyBullets()) {
+		Vec2f screen_position = camera.worldToScreen(it->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
+			shadowmanager->draw(it->getPos(), it->getScale());
+		}
+	}
+	for (auto it : itemmanager->getIteObjects()) {
+		if (it.getIsGet())continue;
+		Vec2f screen_position = camera.worldToScreen(it.getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
+			shadowmanager->draw(it.getPos(), it.getScale());
+		}
+	}
+	shadowmanager->draw(charactermanager->getPlayer()->getPos(), charactermanager->getPlayer()->getScale());
+	gl::enableAlphaBlending();
+	gl::enableDepthWrite(true);
+}
+
+void GameMain::setStartPos()
+{
+	JsonTree set(loadAsset("Json/Stage/World"+std::to_string(worldnum)+"/startpos.json"));
+	JsonTree child = set.getChild(stagenum - 1);
+	nextplayerpos = JsonM.getVec3(child,"pos")*WorldScale;
+	nextplayerrotate = JsonM.getVec3(child, "rotate");
+}
+
+ci::gl::Texture GameMain::ofScrean(const float rate)
 {
 	ci::gl::Fbo fbo;
 	fbo = gl::Fbo(WINDOW_WIDTH / rate, WINDOW_HEIGHT / rate, true, true, true);
@@ -514,12 +568,14 @@ ci::gl::Texture GameMain::ofsCrean(const float rate)
 	//mapmanager.drawMap2d();
 
 	mapchipmanager->draw();
-	drawPlayer();
-	charactermanager->draw();
+	charactermanager->draw(camera);
 	bulletmanager->draw();
+	itemmanager->draw();
 	drawShiftFloorObject();
 	effectmanager->draw();
+
 	mapmanager.drawTexureObjct(camera);
+	drawShadow();
 	// ï`âÊëŒè€Çå≥Ç…ñﬂÇ∑
 	gl::Fbo::unbindFramebuffer();
 	gl::setViewport(getWindowBounds());

@@ -13,6 +13,7 @@ MapChipBreak::MapChipBreak(ci::Vec3f _pos, ci::Vec3f _scale, EffectManager * _ef
 	effectmanager = _effectmanager;
 	SoundM.CreateSE("haretu.wav");
 	tex = TextureM.getTexture("Map/renga.png");
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 void MapChipBreak::draw()
@@ -51,11 +52,13 @@ void MapChipBreak::DownCollisionEnter(CharacterBase * characterbase)
 void MapChipBreak::RightCollisionEnter(CharacterBase * characterbase)
 {
 	characterbase->setPosX(pos.x + (scale.x / 2.f + characterbase->getScale().x / 2.f));
+	characterbase->onRightWall();
 }
 
 void MapChipBreak::LeftCollisionEnter(CharacterBase * characterbase)
 {
 	characterbase->setPosX(pos.x - (scale.x / 2.f + characterbase->getScale().x / 2.f));
+	characterbase->onLeftWall();
 }
 
 void MapChipBreak::BulletCollison(BulletBase * bulletbase, bool isbreak)
@@ -65,6 +68,7 @@ void MapChipBreak::BulletCollison(BulletBase * bulletbase, bool isbreak)
 		int damagetobullet = 3;
 		bulletbase->AddHpValue(-damagetobullet);
 		isactive = false;
+		iscollision = false;
 		effectmanager->CreateEffect(EffectExplodeburst(pos,scale,ci::Vec3f(0,0,0),ci::ColorA(1,1,0.5f,1),0.3f));
 		SoundM.PlaySE("haretu.wav");
 	}

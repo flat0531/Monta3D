@@ -12,6 +12,7 @@ MapChipNormal::MapChipNormal(ci::Vec3f _pos, ci::Vec3f _scale, EffectManager * _
 	effectmanager = _effectmanager;
 	SoundM.CreateSE("haretu.wav");
 	tex = TextureM.getTexture("Map/normalbox.png");
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 void MapChipNormal::draw()
@@ -48,11 +49,13 @@ void MapChipNormal::DownCollisionEnter(CharacterBase * characterbase)
 void MapChipNormal::RightCollisionEnter(CharacterBase * characterbase)
 {
 	characterbase->setPosX(pos.x + (scale.x / 2.f + characterbase->getScale().x / 2.f));
+	characterbase->onRightWall();
 }
 
 void MapChipNormal::LeftCollisionEnter(CharacterBase * characterbase)
 {
 	characterbase->setPosX(pos.x - (scale.x / 2.f + characterbase->getScale().x / 2.f));
+	characterbase->onLeftWall();
 }
 
 void MapChipNormal::BulletCollison(BulletBase * bulletbase, bool isbreak)

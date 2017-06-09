@@ -6,6 +6,7 @@
 #include"../WorldObject/Player.h"
 #include"../WorldObject/Enemy.h"
 #include"../Top/EasingManager.h"
+#include"../WorldCreater/ItemManager.h"
 #include <filesystem>
 using namespace ci;
 using namespace ci::app;
@@ -17,6 +18,8 @@ MainWindow::MainWindow()
 	TextureM.CreateTexture("UI/hpbarframe.png");
 	TextureM.CreateTexture("UI/hpbarframered.png");
 	TextureM.CreateTexture("UI/hpbarframebase.png");
+	itemwindow = TextureM.CreateTexture("UI/itemwindow.png");
+	pallettex = TextureM.CreateTexture("UI/itemicon.png");
 	zankiicontex = TextureM.CreateTexture("UI/montaicon.png");
 	font = Font("Comic Sans MS", 65.0f);
 	easing_hp_rate = 1.0f;
@@ -31,6 +34,7 @@ void MainWindow::draw()
 	drawPlayerStatus();
 	drawPlayerHp();
 	drawZanki();
+	drawItemWindow();
 	if (enemyid == 0)return;
 	drawEnemyTexture();
 	drawEnemyName();
@@ -50,13 +54,21 @@ void MainWindow::setCharacterManagerPtr(CharacterManager * _charactermanager)
 	charactermanager = _charactermanager;
 }
 
+void MainWindow::setItemManagerPtr(ItemManager * _itemmanager)
+{
+	itemmanager = _itemmanager;
+}
+
 void MainWindow::setSelectTextureNum(const int num)
 {
 	TextureM.eraseTexture(playertexturepath);
+	TextureM.eraseTexture(playerframepath);
 	selecttexturenum = num;
 	std::string name = charactermanager->getPlayer()->getName();
-	playertexturepath = "Draw/" + name + "/play/play" + std::to_string(selecttexturenum)+".png";
+	playertexturepath = "UserPlay/" + name + "/play" + std::to_string(selecttexturenum)+".png";
+	playerframepath = "Draw/" + name + "/frame.png";
 	TextureM.CreateTexture(playertexturepath);
+	TextureM.CreateTexture(playerframepath);
 }
 
 void MainWindow::setEnemyStatuts(std::string _enemyname, int _maxhp, int _hp, int id, ci::ColorA _uniquecolor)
@@ -107,6 +119,29 @@ void MainWindow::updateEnemyHpBar()
 	}
 }
 
+void MainWindow::drawItemWindow()
+{
+	Vec2f pos = Vec2f(1400,800);
+	Vec2f size = Vec2f(400, 150);
+
+	DrawM.drawTextureBox(pos, size, 0.0f, itemwindow, ColorA(1, 1, 1, 1));
+	Vec2f iconsize = Vec2f(75, 75);
+	float rate = 1.3f;
+
+
+	for (int i = 0;i < itemmanager->isGetItem().size();i++) {
+		ColorA color;
+		if (itemmanager->isGetItem()[i]) {
+			color = ColorA(1, 1, 1, 1);
+		}
+		else {
+			color = ColorA(0.2, 0.2, 0.2, 1);
+		}
+		Vec2f trancepos = Vec2f(-(float(itemmanager->isGetItem().size()))*(iconsize.x / 2.f)*rate + iconsize.x / 2.f*rate + i*iconsize.x*rate,0);
+		DrawM.drawTextureBox(pos + trancepos, iconsize, 0.0f, pallettex, color);
+	}
+}
+
 void MainWindow::setEnemyHp(const int _hp)
 {
 	enemyhp = _hp;
@@ -153,18 +188,19 @@ void MainWindow::drawPlayerTexture()
 {
 	Vec2f size = Vec2f(200, 200);
 	Vec2f pos = Vec2f(10, WINDOW_HEIGHT - size.y);
+
 	DrawM.drawTextureBoxEdge(pos, size, TextureM.getTexture(playertexturepath), ColorA(1, 1, 1, 1));
+	DrawM.drawTextureBoxEdge(pos, size, TextureM.getTexture(playerframepath), ColorA(1, 1, 1, 1));
 }
 void MainWindow::drawEnemyTexture()
 {
-              //エネミーが誰も登録されてなければリターン
 	Vec2f size = Vec2f(180, 180);
-	Vec2f pos = Vec2f(WINDOW_WIDTH-515, WINDOW_HEIGHT - size.y-20);
+	Vec2f pos = Vec2f(WINDOW_WIDTH-915, WINDOW_HEIGHT - size.y-20);
 	DrawM.drawTextureBoxEdge(pos, size, TextureM.getTexture(enemytexturepath), ColorA(1, 1, 1, 1));
 }
 void MainWindow::drawEnemyName()
 {
-	Vec2f pos = Vec2f(1270, WINDOW_HEIGHT - 180);
+	Vec2f pos = Vec2f(870, WINDOW_HEIGHT - 180);
 	Vec2f size = Vec2f(1, 1);
 	DrawM.drawFont(enemyname, pos + Vec2f(1.5, -1.5), size, 0.0f, ColorA(0, 0, 0, 1), font);
 	DrawM.drawFont(enemyname, pos, size, 0.0f, enemyuniquecolor, font);
@@ -172,7 +208,7 @@ void MainWindow::drawEnemyName()
 }
 void MainWindow::drawEnemyHp()
 {
-	Vec2f pos = Vec2f(1270, WINDOW_HEIGHT - 50);
+	Vec2f pos = Vec2f(870, WINDOW_HEIGHT - 50);
 	Vec2f scale = Vec2f(0.5, 0.6);
 	float hp_rate = std::max(float(enemyhp) / float(enemymaxhp),0.0f);
 

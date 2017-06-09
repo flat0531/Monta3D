@@ -1,7 +1,7 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
-class Player;
+class CharacterBase;
 enum CamaraUpdateType {
 	PLAYER_CAMERA,EVENT_CAMERA,X_LOCK_CAMERA, Y_LOCK_CAMERA, XY_LOCK_CAMERA,CAMERA_TYPE_MAX
 };
@@ -14,12 +14,11 @@ public:
 	void unitPrevCenterOfInterestPoint(const ci::Vec3f prevpos);
 	ci::Vec3f getSetEyePoint();
 	ci::Vec3f getSetCenterofinterestPoint();
-	void setPlayerPos(const ci::Vec3f _pos);
 	void setCameraUpdateType(const CamaraUpdateType _cameratype);
-	void setPlayerSpeed(const ci::Vec3f _speed);
     bool getDeathCameraEnd();
 	void setDeatCameraT(float _t);
 	CamaraUpdateType getCameraUpdateType();
+	void setPlayerPtr(class CharacterBase* _playerptr);
 	CamaraUpdateType JsonReadCameraType(const int worldnum, const int stagenum, const int floornum);
 	ci::Vec3f getSetEyePointTrance();
 	ci::Vec3f getSetCenterofinterestPointTrance();
@@ -29,9 +28,8 @@ private:
 	ci::Vec3f prevcenterrofinterstpoint;
 	ci::Vec2f minvalue;
 	ci::Vec2f maxvalue;
-	ci::Vec3f playerpos;
-	ci::Vec3f playerspeed;
 	CamaraUpdateType cameraupdatetype;
+	CharacterBase* playerptr;
 	ci::Vec3f seteyepoint;
 	ci::Vec3f setcenterofinterestpoint;
 	ci::Vec3f seteyepointtrance = ci::Vec3f(0, 0, 0);

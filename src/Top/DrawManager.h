@@ -18,6 +18,7 @@ public:
 	void drawSphere(const ci::Vec3f pos, const ci::Vec3f size, const ci::Vec3f rotate, const float segment, const ci::ColorA color);
 	void drawTextureSphere(const ci::Vec3f pos, const ci::Vec3f size, const ci::Vec3f rotate, const float segment, const ci::gl::Texture& texture, const ci::ColorA color);
 	void drawTaurus(const ci::Vec3f pos, const float sizeout, const float sizein, const ci::Vec3f rotate, const ci::ColorA color, const float segmentout=12, const float segmentin=12 );
+	void drawTextureAreaCube(const cinder::Vec3f pos, const ci::Vec3f scale,const ci::Vec3f rotate, const ci::gl::Texture&tex,const ci::Vec2i begin,const ci::Vec2i end);
 	//2D
 	void drawBox(const ci::Vec2f pos,const ci::Vec2f size,const float angle, const ci::ColorA color);
 	void drawBox(const ci::Vec2f pos, const  ci::Vec2f size, const float angle, const ci::ColorA color,float sort);

@@ -51,6 +51,30 @@
     {
       "texturename": "doorin.png",
       "isalpha": true
+    },
+    {
+      "texturename": "forest1.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "forest2.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "trees.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "forestroad.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "forestground.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "kanban_w_l.png",
+      "isalpha": true
     }
   ]
 }

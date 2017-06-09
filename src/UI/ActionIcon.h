@@ -11,6 +11,7 @@ public:
 	void update();
 	void draw();
 	void setIsSelected(const bool _isselected);
+	std::string getName();
 private:
 	ci::Vec2f pos;
 	ci::Vec2f size;

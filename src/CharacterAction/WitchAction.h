@@ -6,8 +6,7 @@ class CharacterBase;
 class WitchAction :public ActionBase {
 public:
 	WitchAction();
-	WitchAction(CharacterBase* _enemy);
-	void setup() override;
+	WitchAction(CharacterBase* _enemy);;
 	void update() override;
 	void draw()  override;
 	void jump() override;

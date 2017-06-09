@@ -19,7 +19,7 @@ CatBullet::CatBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _angle, ci::Vec3f _
 	color = _color;
 	playerptr = _playerptr;
 	hp = 100;
-	atackpoint = 5;
+	atackpoint = 6;
 	ismapcollision_endddelet = false;
 }
 
@@ -38,7 +38,7 @@ void CatBullet::update()
 		ci::toRadians(playerptr->getRotate().z))*ci::Vec3f::xAxis();
 	Vec3f crossvec = speed.cross(Vec3f::yAxis());
 
-	pos = playerptr->getPos() + Quatf(crossvec, angle) *  speed *WorldScale;
+	pos = playerptr->getPos() + Quatf(crossvec, angle) *  speed *WorldScale*1.4f;
 	rotate = playerptr->getRotate();
 	angle += 0.2f;
 	//pos = parent->getDrawPos();
@@ -46,7 +46,7 @@ void CatBullet::update()
 
 void CatBullet::draw()
 {
-	DrawM.drawSphere(pos,scale*Vec3f(0.8,0.8,0.25f),rotate,12,color);
+	DrawM.drawSphere(pos,scale*Vec3f(0.6,0.6,0.1f),rotate,12,color);
 	//DrawM.drawCube(pos,scale,rotate,color);
 }
 

@@ -30,10 +30,6 @@ RattonAction::RattonAction(CharacterBase * _enemy)
 	TextureM.CreateTexture("Mesh/Rat.png");
 }
 
-void RattonAction::setup()
-{
-}
-
 void RattonAction::update()
 {
 	float g = 0.012f*WorldScale;

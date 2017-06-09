@@ -8,12 +8,13 @@ ShiftFloorObject::ShiftFloorObject()
 {
 }
 
-ShiftFloorObject::ShiftFloorObject(const ci::Vec3f _pos, const ci::Vec3f _size, const int _nextfloornum, const ci::Vec3f _nextplayerpos)
+ShiftFloorObject::ShiftFloorObject(const ci::Vec3f _pos, const ci::Vec3f _size, const int _nextfloornum, const ci::Vec3f _nextplayerpos, const ci::Vec3f _nextplayerrotate)
 {
 	pos = _pos;
 	size = _size;
 	nextfloornum = _nextfloornum;
 	nextplayerpos = _nextplayerpos;
+	nextplayerrotate = _nextplayerrotate;
 }
 
 ci::Vec3f ShiftFloorObject::getPos()
@@ -34,6 +35,11 @@ int ShiftFloorObject::getNextFloorNum()
 ci::Vec3f ShiftFloorObject::getNextPlayerPos()
 {
 	return nextplayerpos;
+}
+
+ci::Vec3f ShiftFloorObject::getNextPlayerRotate()
+{
+	return nextplayerrotate;
 }
 
 void ShiftFloorObject::draw()

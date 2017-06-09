@@ -11,5 +11,6 @@ GoalCube::GoalCube(CubeObject * ptr)
 
 void GoalCube::draw()
 {
+	console() << cubeobjectptr->getPos() << std::endl;
 	DrawM.drawStrokeCube(cubeobjectptr->getPos(), cubeobjectptr->getScale(), ci::Vec3f(0, 0, 0), ci::ColorA(0, 0, 1, 1));
 }

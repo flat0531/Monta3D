@@ -1,0 +1,84 @@
+{
+  "line": [
+    {
+      "pos1": [ 0.0, -2, 0 ],
+      "pos2": [ -15.0, -2, 0 ],
+      "scale": [ 0, 0, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png"
+    }
+  ],
+  "lineandwall": [
+    {
+      "pos1": [ -4, -1, 0 ],
+      "pos2": [ 4, -1, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    },
+    {
+      "pos1": [ -6, 1.01, 0 ],
+      "pos2": [ -20.1, 1.01, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    },
+     {
+      "pos1": [ -23, -2, 0 ],
+      "pos2": [ -50, -2, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    },
+     {
+      "pos1": [ -55, 3, 0 ],
+      "pos2": [ -73, 3, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    }
+  ],
+   "lineslope": [
+    {
+      "pos1": [ -4, -1, 0 ],
+      "pos2": [ -6, 1.01, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "slopetexture": "rect.png",
+      "slopecolor": [ 1, 1, 1, 1 ],
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    },
+    {
+      "pos1": [ -20, 1.0, 0 ],
+      "pos2": [ -23.01, -2.01, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "slopetexture": "rect.png",
+      "slopecolor": [ 1, 1, 1, 1 ],
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    },
+    {
+      "pos1": [ -50, -2, 0 ],
+      "pos2": [ -55, 3, 0 ],
+      "scale": [ 0, 5, 5 ],
+      "color": [ 1, 1, 1, 1 ],
+      "texture": "roadgreen.png",
+      "slopetexture": "rect.png",
+      "slopecolor": [ 1, 1, 1, 1 ],
+      "walltexture": "wallgreen.png",
+      "wallcolor": [ 1, 1, 1, 1 ]
+    }
+  ]
+}

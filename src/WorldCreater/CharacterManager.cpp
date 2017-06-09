@@ -6,6 +6,7 @@
 #include"../Top/Top.h"
 #include"../Top/CollisionManager.h"
 #include"../WorldCreater/EffectManager.h"
+#include"../WorldCreater/ShadowManager.h"
 #include"../WorldObject/Effect/EffectExplosion.h"
 #include"../Top/EasingManager.h"
 #include"../Top/SoundManager.h"
@@ -30,7 +31,7 @@ void CharacterManager::CreateCharacter(CharacterBase character)
 
 void CharacterManager::CreatePlayer(ci::Vec3f pos)
 {
-	player = std::make_shared<Player>(pos,ActionType::NONE);
+	player = std::make_shared<Player>(pos,ActionType::NONE,shadowmanager->getThisPtr());
 }
 
 void CharacterManager::setBulletManagerPointer(BulletManager * _bulletmanager)
@@ -41,6 +42,11 @@ void CharacterManager::setBulletManagerPointer(BulletManager * _bulletmanager)
 void CharacterManager::setEffectManagerPointer(EffectManager * _effectmanager)
 {
 	effectmanager = _effectmanager;
+}
+
+void CharacterManager::setShadowManagerPointer(ShadowManager * _shadowmanager)
+{
+	shadowmanager = _shadowmanager;
 }
 
 void CharacterManager::setMainWindowPointer(MainWindow * _mainwindow)
@@ -81,13 +87,12 @@ void CharacterManager::setup()
 	CreateEnemys(1,1,1);//////////////
 }
 
-void CharacterManager::update()
+void CharacterManager::update(const ci::CameraPersp camera)
 {
 	player->update();
-	SelectPlayerFolm();
 	for (auto itr = enemys.begin();itr != enemys.end();) {
 		if ((*itr)->getIsAlive()) {
-		     //ci::app::console() << (*itr)->getHp() << std::endl;
+			//ci::app::console() << (*itr)->getHp() << std::endl;
 			itr++;
 		}
 		else
@@ -106,19 +111,29 @@ void CharacterManager::update()
 	}
 	for (auto& itr : enemys) {
 		if ((itr)->getIsAlive()) {
-			itr->update();
+			Vec2f screen_position = camera.worldToScreen(itr->getPos(),
+				WINDOW_WIDTH, WINDOW_HEIGHT);
+			if (CollisionM.isBoxPoint(screen_position, Vec2f(-WINDOW_WIDTH*0.2f, -WINDOW_HEIGHT*0.2f), Vec2f(WINDOW_WIDTH*1.4f, WINDOW_HEIGHT*1.4f))) {
+				itr->update();
+			}
+			
 		}
 	}
 	CollisionPlayerToEnemy();
 }
 
-void CharacterManager::draw()
+void CharacterManager::draw(const ci::CameraPersp camera)
 {
 	player->draw();
 	for (auto& itr : enemys) {
-		itr->draw();
+		Vec2f screen_position = camera.worldToScreen(itr->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(-WINDOW_WIDTH*0.2f, -WINDOW_HEIGHT*0.2f), Vec2f(WINDOW_WIDTH*1.4f, WINDOW_HEIGHT*1.4f))) {
+			itr->draw();
+		}
 	}
 }
+
 
 void CharacterManager::CreateEnemys(const int worldnum, const int stagenum, const int floornum)
 {
@@ -135,15 +150,6 @@ void CharacterManager::CreateEnemys(const int worldnum, const int stagenum, cons
 		std::string enemytype = child.getValueForKey<std::string>("enemytype");
 		enemys.push_back(std::make_shared<Enemy>(pos, stringToActionType(enemytype), i + 1));
 	}
-
-
-
-	/*ci::Vec3f pos2 = ci::Vec3f(-30.5, 10, 0.1)*WorldScale;
-	enemys.push_back(std::make_shared<Enemy>(pos2, ActionType::WITCH));
-	ci::Vec3f pos = ci::Vec3f(-60.5, 10, 0.1)*WorldScale;
-	enemys.push_back(std::make_shared<Enemy>(pos,ActionType::RATTON));
-	ci::Vec3f pos3 = ci::Vec3f(-17.5, 2, 0.1)*WorldScale;
-	enemys.push_back(std::make_shared<Enemy>(pos3, ActionType::SPARROW));*/
 }
 
 CharacterManager * CharacterManager::getThisPointer()
@@ -201,6 +207,9 @@ void CharacterManager::updateActionSelectMode()
 	}
 	if ((!isbeginselectmode)&&(!isendselectmode)) {
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_i)) {
+			////////////////////////////////ここでアクション変更
+			SelectPlayerFolm(stringToActionType(getActionName()));
+			mainwondow->setSelectTextureNum(getPlayTextureNum());
 			isendselectmode = true;
 			SoundM.PlaySE("actionselectend.wav");
 		}
@@ -252,6 +261,16 @@ bool CharacterManager::getIsEnd()
 	return isendselectmode;
 }
 
+int CharacterManager::getPlayTextureNum()
+{
+	return selectaction->getPlayTextureNum();
+}
+
+std::string CharacterManager::getActionName()
+{
+	return selectaction->getActionName();
+}
+
 void CharacterManager::CollisionPlayerToEnemy()
 {
 	for (auto enemy_itr = enemys.begin();
@@ -295,6 +314,21 @@ void CharacterManager::CollisionPlayerToEnemy()
 
 ActionType CharacterManager::stringToActionType(const std::string name)
 {
+	if (name == "slime") {
+		return ActionType::SLIME;
+	}
+	if (name == "cat") {
+		return ActionType::CAT;
+	}
+	if (name == "bird") {
+		return ActionType::BIRD;
+	}
+	if (name == "angel") {
+		return ActionType::ENJEL;
+	}
+	if (name == "mogura") {
+		return ActionType::MOGURA;
+	}
 	if (name=="ratton") {
 		return ActionType::RATTON;
 	}
@@ -304,26 +338,23 @@ ActionType CharacterManager::stringToActionType(const std::string name)
 	if (name == "sparrow") {
 		return ActionType::SPARROW;
 	}
+	if (name == "ghost") {
+		return ActionType::GHOST;
+	}
+	if (name == "pumpman") {
+		return ActionType::PUMPMAN;
+	}
 	console() << "バグです" << std::endl;
 	return ActionType::RATTON;
 }
 
-void CharacterManager::SelectPlayerFolm()
+void CharacterManager::SelectPlayerFolm(const ActionType _actiontype)
 {
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_m)) {
-		if (player->getActiontype() != SLIME) {
-			player->decideAction(SLIME);
-			player->setActionType(SLIME);
-		}
-
-	}
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_n)) {
-		if (player->getActiontype() != CAT) {
-			player->decideAction(CAT);
-			player->setActionType(CAT);
-		}
-	}
+	if (_actiontype == player->getActiontype())return;
+	player->decideAction(_actiontype);
+	player->setActionType(_actiontype);
 }
+
 
 void CharacterManager::updateBackGround()
 {

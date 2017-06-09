@@ -15,7 +15,7 @@ SlimeBullet::SlimeBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci:
 	scale = _scale;
 	speed = _speed;
 	rotate = _rotate;
-	atackpoint = 5;
+	atackpoint = 6;
 	hp = 12;
 	bullettype = BulletType::PLAYER_BULLET;
 	toras.push_back(MyToras(scale,rotate,ci::Vec3f(5,0,10),0.f,ColorA(1,1,1,1)));
@@ -52,5 +52,5 @@ void SlimeBullet::draw()
 
 bool SlimeBullet::deleteThis()
 {
-	return timecount >= 200|| compulsiondelete;
+	return timecount >= 150|| compulsiondelete;
 }

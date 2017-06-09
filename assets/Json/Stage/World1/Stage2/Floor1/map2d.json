@@ -1,0 +1,380 @@
+[
+   {
+      "isalpha" : false,
+      "pos" : [ -550, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -1750, 150, 200 ],
+      "rotate" : [ 0, 270, 180 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -2950, 150, 200 ],
+      "rotate" : [ 0, 270, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4050, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1000 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -340, 350, 570 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -823, 350, 567 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -1308, 350, 572 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -1798, 350, 567 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -2273, 350, 562 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -2763, 350, 557 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -3923, 350, 557 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -4258, 350, 552 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -3330, 151, 1045 ],
+      "rotate" : [ 0, 270, 0 ],
+      "scale" : [ 1200, 0, 700 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -2630, 151, 1045 ],
+      "rotate" : [ 0, 270, 0 ],
+      "scale" : [ 1200, 0, 700 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4030, 151, 1045 ],
+      "rotate" : [ 0, 270, 0 ],
+      "scale" : [ 1200, 0, 700 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -3950, -150, -400 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -2750, -150, -400 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -1550, -150, -400 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -450, -150, -400 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 1000 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -2663, 410, 1547 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -3303, 410, 1537 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -3973, 410, 1547 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4550, -150, 200 ],
+      "rotate" : [ 0, 0, 90 ],
+      "scale" : [ 600, 0, 1200 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -7400, -150, 800 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 900 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -8450, -150, 200 ],
+      "rotate" : [ 0, 0, 90 ],
+      "scale" : [ 600, 0, 1200 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -8150, -150, 800 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4875, 150, 1225 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 850, 0, 1000 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -5875, 150, 1225 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 850, 0, 1000 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -6875, 150, 1225 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 850, 0, 1000 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -7900, 150, 1225 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 850, 0, 1100 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -6500, -150, 800 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 900 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -5600, -150, 800 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 900 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4850, -150, 800 ],
+      "rotate" : [ 90, 90, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -4823, 410, 1557 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -5453, 410, 1487 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -6093, 410, 1497 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -6723, 410, 1467 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -7353, 410, 1437 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -8003, 410, 1457 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 800, 0, 800 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -8003, 345, 837 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -7313, 345, 1017 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -6708, 345, 867 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -6108, 345, 1187 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -5438, 345, 1047 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 600, 0, 600 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -6450, 50, 0 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 400, 200, 300 ],
+      "texturename" : "Map/forestground.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -9050, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -10250, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -11450, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -12650, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -13850, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -15050, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -16250, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -17450, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1200 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -18550, 150, 200 ],
+      "rotate" : [ 0, 90, 0 ],
+      "scale" : [ 1200, 0, 1000 ],
+      "texturename" : "Map/forestroad.png"
+   }
+]

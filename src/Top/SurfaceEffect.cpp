@@ -99,6 +99,12 @@ void SurfaceEffect::draw2D()
 	DrawM.drawTextureBox(Vec2f(drawpos.x,drawpos.y), Vec2f(drawsize.x, drawsize.y),drawrotate.z, tex, color);
 }
 
+void SurfaceEffect::draw2D(const ci::Vec2f pos, const ci::Vec2f size)
+{
+	gl::Texture tex = surface;
+	DrawM.drawTextureBox(pos, size, drawrotate.z, tex, color);
+}
+
 void SurfaceEffect::setDrawtPos(const ci::Vec3f _pos)
 {
 	drawpos = _pos;
@@ -160,10 +166,11 @@ void SurfaceEffect::ChangeColor(const ci::ColorA _color)
 	color = _color;
 }
 
- ci::gl::Texture SurfaceEffect::getTexture()
+const ci::gl::Texture SurfaceEffect::getTexture()
 {
 	return surface;
 }
+
 
 
 

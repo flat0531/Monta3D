@@ -80,6 +80,7 @@ void TextureObj::setRotate(const ci::Vec3f _rotate)
 void TextureObj::setPath(const std::string _path)
 {
 	path = _path;
+	tex = TextureM.CreateTexture(path);
 }
 
 void TextureObj::setColor(const ci::ColorA _color)

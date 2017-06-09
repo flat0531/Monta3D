@@ -9,6 +9,7 @@ MapChipHalfFloor::MapChipHalfFloor(ci::Vec3f _pos, ci::Vec3f _scale)
 	pos = _pos;
 	scale = _scale;
 	iscollision = true;
+	aabb = ci::AxisAlignedBox3f(pos - scale / 2.f, pos + scale / 2.f);
 }
 
 void MapChipHalfFloor::draw()

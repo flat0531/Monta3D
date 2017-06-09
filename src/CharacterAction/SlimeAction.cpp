@@ -11,6 +11,7 @@
 #include"../WorldObject/Bullet/MyToras.h"
 #include"../Top/DrawManager.h"
 #include"../Top/TextureManager.h"
+#include"../WorldObject/PlayerDirection.h"
 using namespace ci;
 using namespace ci::app;
 SlimeAction::SlimeAction()
@@ -23,6 +24,7 @@ SlimeAction::SlimeAction(CharacterBase * _player)
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
 	atackdelaytime = 45;
+	playerptr->setScale(Vec3f(1,1,1)*WorldScale);
 	playerptr->setName("slime");
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	SoundM.CreateSE("slime_skil.wav");
@@ -36,9 +38,25 @@ SlimeAction::SlimeAction(CharacterBase * _player)
 	playerptr->setUniqueColor(ColorA(0, 1, 1, 1));
 }
 
-
-void SlimeAction::setup()
+void SlimeAction::setup(ci::Vec3f rotate)
 {
+	playerptr->setRotate(rotate);
+	if (rotate.y == -180.f) {
+		playerptr->setPlayerDirection(PlayerDirection::RIGHT_DIRECTION);
+	}
+	else {
+		playerptr->setPlayerDirection(PlayerDirection::LEFT_DIRECTION);
+	}
+	
+	playerptr->setT(1.0f);
+
+	playerptr->setSpeed(Vec3f(0,0,0));
+	playerptr->setCanJump(false);
+	playerptr->setIsStun(false);
+	playerptr->setIsinvincible(false);
+	playerptr->SetIsOpetate(true);
+
+	atackdelaycount = 0;
 }
 
 void SlimeAction::update()
@@ -110,12 +128,12 @@ void SlimeAction::attack()
 	atackdelaycount = atackdelaytime;
 	SoundM.PlaySE("slime_skil.wav", 0.3f);
 	playerptr->setT(1.0f);
+	playerptr->setRotate(Vec3f(playerptr->getRotate().x, playerptr->getAttackRotate(), playerptr->getRotate().z));
 	playerptr->setJumming(false);
 	if(playerptr->getSpeed().y>0)
 	playerptr->setSpeedY(playerptr->getSpeed().y/2.f);
 	jumppower = maxjumppower;
 	rotateangle = 0.0f;
-	playerptr->setRotate(Vec3f(playerptr->getRotate().x,playerptr->getAttackRotate(),playerptr->getRotate().z));
 	ci::Vec3f speed = ci::Quatf(ci::toRadians(playerptr->getRotate().x),
 		ci::toRadians(playerptr->getRotate().y),
 		ci::toRadians(playerptr->getRotate().z))*ci::Vec3f::xAxis();

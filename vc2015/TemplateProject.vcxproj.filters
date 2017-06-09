@@ -76,9 +76,6 @@
     <Filter Include="Source Files\WorldObjct\MapChip">
       <UniqueIdentifier>{b596c46c-a4e9-4f28-a96c-71859a76fc1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\CharacterAction\PlayerAction">
-      <UniqueIdentifier>{60628f07-e685-43f7-bfcc-625691115e7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\WorldObjct\Enemy">
       <UniqueIdentifier>{fa27b863-b3d8-4d26-b4fb-be4e5148799d}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,9 @@
     </Filter>
     <Filter Include="Source Files\Top\Data">
       <UniqueIdentifier>{e3c9ebef-53ba-4a19-bcd8-31bff2f4bbe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CharacterAction\PlayerAction">
+      <UniqueIdentifier>{60628f07-e685-43f7-bfcc-625691115e7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +407,57 @@
     </ClCompile>
     <ClCompile Include="..\src\UI\PlayTexture.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\BirdBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\EnjelAction.cpp">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\AngelBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\MoguraAction.cpp">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\MoguraBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\ItemManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\ItemObject.cpp">
+      <Filter>Source Files\WorldObjct\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectItem.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\InformationWindow.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\GhostAction.cpp">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\InformationWindowList.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\PumpmanAction.cpp">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\UICreater.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\UIObject.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\FolmSelect\FolmSelect.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldCreater\ShadowManager.cpp">
+      <Filter>Source Files\Creater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\BirdAction.cpp">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -718,6 +769,57 @@
     </ClInclude>
     <ClInclude Include="..\src\UI\PlayTexture.h">
       <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\BirdAction.h">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\BirdBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\EnjelAction.h">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\AngelBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\MoguraAction.h">
+      <Filter>Source Files\CharacterAction\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\MoguraBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\ItemManager.h">
+      <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\ItemObject.h">
+      <Filter>Source Files\WorldObjct\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectItem.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\InformationWindow.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\InformationWindowList.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\GhostAction.h">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\PumpmanAction.h">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\UICreater.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\UIObject.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\FolmSelect\FolmSelect.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldCreater\ShadowManager.h">
+      <Filter>Source Files\Creater</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

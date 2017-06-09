@@ -14,6 +14,7 @@
 #include"../../Top/FadeManager.h"
 #include"../GameMain/GameMain.h"
 #include"../StageSelect/StageSelect.h"
+#include"../../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 void Title::setup()
@@ -90,9 +91,10 @@ void Title::update()
 		FadeM.StartFadeIn();
 	}
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_o)) {
-		TextureM.CreateTexture("UI/montaicon.png");
+		//DataM.saveStageData(1, 2, true);
+		/*TextureM.CreateTexture("UI/montaicon.png");
 		Surface test = TextureM.getTexture("UI/montaicon.png");
-		scaledown.WirteImage(test, 4, "../assets/SaveData/UserPlay/testttttttt.png");
+		scaledown.WirteImage(test, 4, "testttttttttttttttttttttttt.png");*/
 	}
 }
 
