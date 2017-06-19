@@ -15,6 +15,7 @@
 #include"cinder\TriMesh.h"
 #include"cinder\gl\Texture.h"
 #include"cinder\gl/Fbo.h"
+#include"../../UI/UICreater.h"
 class Player;
 class BulletManager;
 class EffectManager;
@@ -43,6 +44,7 @@ private:
 	ci::CameraPersp camera;
 	ci::CameraOrtho ortho;
 	Information information;
+	UICretaer uicreater;
 	std::string bgmname;
 	int worldnum;
 	int stagenum;
@@ -68,7 +70,6 @@ private:
 	bool isshiftdeath = false;
 	bool isdeathshifttitle = false;
 	bool starteffect_isend;
-
 	void shiftNextFloor();
 	void shiftGoal();
 	void ReCreateStage();

@@ -1,5 +1,9 @@
 #include "DataManager.h"
 #include"MyJson.h"
+#include"cinder/ImageIo.h"
+#include"cinder\Surface.h"
+#include <filesystem>
+#include"TextureManager.h"
 using namespace ci;
 using namespace ci::app;
 DataManager::DataManager()
@@ -139,6 +143,20 @@ bool DataManager::isCheckFolm(const std::string name, const std::string type)
 	return false;
 }
 
+void DataManager::WriteImage(const Surface surface, const std::string name)
+{
+	int createnum = 0;
+	for (std::tr2::sys::directory_iterator it(app::getAssetPath("Texture/UserPlay/" + name).string()), end; it != end; it++)
+	{
+		createnum++;
+	}
+	std::string path = "assets/Texture/UserPlay/" + name + "/play" + std::to_string(createnum+1)+".png";
+
+	auto datasourceref = DataTargetPath::createRef(getAppPath().string() + path);
+
+	ci::writeImage(datasourceref, surface);
+}
+
 ci::ColorA DataManager::getColor(const std::string name)
 {
 	std::string path = "SaveData/Color/releasecolor.json";
@@ -169,4 +187,92 @@ std::vector<bool> DataManager::diffGetItems()
 		diff.push_back(!(buff[i] == getitems[i]));
 	}
 	return diff;
+}
+
+std::string DataManager::getSelectActionName()
+{
+	return selectactionname;
+}
+
+void DataManager::setSelectActionName(const std::string name)
+{
+	selectactionname = name;
+}
+
+ActionType DataManager::stringToActionType(const std::string name)
+{
+	if (name == "slime") {
+		return ActionType::SLIME;
+	}
+	if (name == "cat") {
+		return ActionType::CAT;
+	}
+	if (name == "bird") {
+		return ActionType::BIRD;
+	}
+	if (name == "angel") {
+		return ActionType::ENJEL;
+	}
+	if (name == "mogura") {
+		return ActionType::MOGURA;
+	}
+	if (name == "ratton") {
+		return ActionType::RATTON;
+	}
+	if (name == "witch") {
+		return ActionType::WITCH;
+	}
+	if (name == "sparrow") {
+		return ActionType::SPARROW;
+	}
+	if (name == "ghost") {
+		return ActionType::GHOST;
+	}
+	if (name == "pumpman") {
+		return ActionType::PUMPMAN;
+	}
+	if (name == "walkratton") {
+		return ActionType::WALKRATTON;
+	}
+	console() << "ƒoƒO‚Å‚·" << std::endl;
+	return ActionType::RATTON;
+}
+
+bool DataManager::getIsTutorial(const std::string name)
+{
+	std::string path = "SaveData/Tutorial/tutorial.json";
+	JsonTree tutorial(loadAsset(path));
+	for (int i = 0;i < tutorial.getNumChildren();i++) {
+		if (tutorial.getChild(i).getValueForKey<std::string>("name") == name) {
+
+			return tutorial.getChild(i).getValueForKey<bool>("clear");
+		}
+	}
+
+	return false;
+}
+
+void DataManager::saveIsTutorial(const std::string name)
+{
+	std::string path = "SaveData/Tutorial/tutorial.json";
+	JsonTree tutorial(loadAsset(path));
+	for (int i = 0;i < tutorial.getNumChildren();i++) {
+		JsonTree child = tutorial.getChild(i);
+		if (child.getValueForKey<std::string>("name") == name)
+		{
+			tutorial.getChild(i).getChild("clear") = JsonTree("clear", true);
+		}
+	}
+	tutorial.write(getAssetPath(path).string());
+}
+
+ci::gl::Texture DataManager::getLastSaveTexture(const std::string name)
+{
+	int createnum = 0;
+	for (std::tr2::sys::directory_iterator it(app::getAssetPath("Texture/UserPlay/" + name).string()), end; it != end; it++)
+	{
+		createnum++;
+	}
+	std::string path = "UserPlay/" + name + "/play" + std::to_string(createnum) + ".png";
+	return TextureM.CreateTexture(path);
 }

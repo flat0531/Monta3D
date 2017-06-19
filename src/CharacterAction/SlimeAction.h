@@ -14,11 +14,16 @@ public:
 	void jump() override;
 	void attack()  override;
 	void operate();
+
+	
 private:
 	Player* playerptr;
 	int atackdelaycount;
 	int atackdelaytime = 60;
 	bool IsAtackDelay();
 	float rotateangle = 0.0f;
+	int prevoperate = 0;
+	void setPrevOperate();
+	ci::Vec3f getPrevOperateRotate();
 	ci::Vec3f drawrotate;
 };

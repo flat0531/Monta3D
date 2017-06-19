@@ -32,7 +32,7 @@ void ItemObject::draw()
 	if (isget)return;
 	float scalerate = 1.0f / 60.f;
 	gl::pushModelView();
-	gl::translate(pos);
+	gl::translate(pos-Vec3f(0,scale.y/2.f,0));
 	gl::rotate(rotate);
 	gl::scale(scale*scalerate);
 	gl::color(ColorA(1, 1, 1, 1));

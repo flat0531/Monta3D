@@ -19,7 +19,7 @@ EffectItem::EffectItem(const ci::Vec2f _pos, const ci::Vec2f _endpos, const ci::
 	endpos = _endpos;
 	itemeffecttex = TextureM.CreateTexture("UI/itemeffect.png");
 	icontex = TextureM.CreateTexture("UI/itemicon.png");
-	SoundM.CreateSE("itemget.wav");
+
 	SoundM.PlaySE("itemget.wav");
 	CreateParticles();
 }
@@ -45,7 +45,7 @@ void EffectItem::update()
 	EasingManager::tCount(t, 1.8f);
 }
 
-void EffectItem::draw()
+void EffectItem::draw(const ci::CameraPersp camera)
 {
 	float addcolor = 0.8f*t;
 	DrawM.drawTextureBox(endpos, scale2f*(1.1f+0.1f*sin(t*50.f)), 0, icontex, ColorA(0.2f + addcolor, 0.2f + addcolor, 0.2f + addcolor, 1));

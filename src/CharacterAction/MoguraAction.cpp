@@ -21,7 +21,7 @@ MoguraAction::MoguraAction()
 
 MoguraAction::MoguraAction(CharacterBase * _player)
 {
-	playerptr = reinterpret_cast<Player*>(_player);
+	playerptr = dynamic_cast<Player*>(_player);
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	playerptr->setScale(Vec3f(1.2, 1.2, 1.2)*WorldScale);
 	maxjumppower = 0.085f*WorldScale;
@@ -49,7 +49,7 @@ void MoguraAction::setup(ci::Vec3f rotate)
 	else {
 		playerptr->setPlayerDirection(PlayerDirection::LEFT_DIRECTION);
 	}
-
+	prevoperate = 0;
 	playerptr->setT(1.0f);
 	playerptr->setSpeed(Vec3f(0, 0, 0));
 	playerptr->setCanJump(false);
@@ -66,6 +66,7 @@ void MoguraAction::setup(ci::Vec3f rotate)
 void MoguraAction::update()
 {
 	float g = 0.015f*WorldScale;
+	setPrevOperate();
 	playerptr->setSpeed(Vec3f(0, playerptr->getSpeed().y, playerptr->getSpeed().z));
 	playerptr->AddForth(Vec3f(0, -g, 0));
 	playerptr->setCanJump(playerptr->getjumpCount()<4);
@@ -159,7 +160,7 @@ void MoguraAction::jump()
 
 void MoguraAction::attack()
 {
-	playerptr->setRotate(Vec3f(playerptr->getRotate().x, playerptr->getAttackRotate(), playerptr->getRotate().z));
+	playerptr->setRotate(getPrevOperateRotate());
 	playerptr->setT(1.0f);
 
 	float createnum = 3.f;
@@ -219,5 +220,34 @@ void MoguraAction::operate()
 	}
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_l) && (!IsAtackDelay())) {
 		attack();
+	}
+}
+
+ci::Vec3f MoguraAction::getPrevOperateRotate()
+{
+	switch (prevoperate)
+	{
+	case 0:
+		return playerptr->getRotate();
+	case 1:
+		return Vec3f(playerptr->getRotate().x, -90, playerptr->getRotate().z);
+	case 2:
+		return Vec3f(playerptr->getRotate().x, 0.f, playerptr->getRotate().z);
+	case 3:
+		return Vec3f(playerptr->getRotate().x, -180.f, playerptr->getRotate().z);
+	}
+	return playerptr->getRotate();
+}
+
+void MoguraAction::setPrevOperate()
+{
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_w)) {
+		prevoperate = 1;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_a)) {
+		prevoperate = 2;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_d)) {
+		prevoperate = 3;
 	}
 }

@@ -8,7 +8,7 @@ public:
 	EffectItem();
 	EffectItem(const ci::Vec2f _pos, const ci::Vec2f _endpos, const ci::Vec2f _scale);
 	void update() override;
-	void draw() override;
+	void draw(const ci::CameraPersp camera) override;
 	bool deleteThis()override;
 private:
 	struct Particle

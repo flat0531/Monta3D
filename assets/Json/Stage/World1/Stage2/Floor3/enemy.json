@@ -1,14 +1,3 @@
 [
-  {
-    "enemytype": "ratton",
-    "pos" : [ -60.5, 10, 0.1 ]
-  },
-  {
-    "enemytype": "witch",
-    "pos": [ -30.5, 10, 0.1 ]
-  },
-  {
-    "enemytype": "sparrow",
-    "pos": [ -80.5, 10, 0.1 ]
-  }
+
 ]

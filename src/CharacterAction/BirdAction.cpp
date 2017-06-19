@@ -22,7 +22,7 @@ BirdAction::BirdAction()
 
 BirdAction::BirdAction(CharacterBase * _player)
 {
-	playerptr = reinterpret_cast<Player*>(_player);
+	playerptr = dynamic_cast<Player*>(_player);
 	maxjumppower = 0.15f*WorldScale;
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
@@ -59,7 +59,7 @@ void BirdAction::setup(ci::Vec3f rotate)
 	playerptr->setIsStun(false);
 	playerptr->setIsinvincible(false);
 	playerptr->SetIsOpetate(true);
-
+	prevoperate = 0;
 	atackdelaycount = 0;
 	rotateangle = 0.0f;
 	wingangle = 0.0f;
@@ -151,7 +151,7 @@ void BirdAction::attack()
 	atackdelaycount = atackdelaytime;
 	playerptr->setT(1.0f);
 
-	playerptr->setRotate(Vec3f(playerptr->getRotate().x, playerptr->getAttackRotate(), playerptr->getRotate().z));
+	playerptr->setRotate(getPrevOperateRotate());
 	ci::Vec3f speed = ci::Quatf(ci::toRadians(playerptr->getRotate().x),
 		ci::toRadians(playerptr->getRotate().y),
 		ci::toRadians(playerptr->getRotate().z))*ci::Vec3f::xAxis();
@@ -172,7 +172,7 @@ void BirdAction::operate()
 	if (IsAtackDelay() || playerptr->getIsStan())return;
 
 	float dashspeed = 0.09f*WorldScale;
-
+	setPrevOperate();
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k)) {
 		playerptr->setCanJump(false);
 		playerptr->setSpeedY(0.0f);
@@ -196,4 +196,33 @@ void BirdAction::operate()
 bool BirdAction::IsAtackDelay()
 {
 	return atackdelaycount != 0;
+}
+
+ci::Vec3f BirdAction::getPrevOperateRotate()
+{
+	switch (prevoperate)
+	{
+	case 0:
+		return playerptr->getRotate();
+	case 1:
+		return Vec3f(playerptr->getRotate().x, -90, playerptr->getRotate().z);
+	case 2:
+		return Vec3f(playerptr->getRotate().x, 0.f, playerptr->getRotate().z);
+	case 3:
+		return Vec3f(playerptr->getRotate().x, -180.f, playerptr->getRotate().z);
+	}
+	return playerptr->getRotate();
+}
+
+void BirdAction::setPrevOperate()
+{
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_w)) {
+		prevoperate = 1;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_a)) {
+		prevoperate = 2;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_d)) {
+		prevoperate = 3;
+	}
 }

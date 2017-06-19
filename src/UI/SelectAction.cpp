@@ -6,6 +6,7 @@
 #include"../Top/TextureManager.h"
 #include"../Top/EasingManager.h"
 #include"../Top/DrawManager.h"
+#include"../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 SelectAction::SelectAction()
@@ -13,6 +14,7 @@ SelectAction::SelectAction()
 	SoundM.CreateSE("cursor.wav");
 	push_a_tex = TextureM.CreateTexture("UI/push_a.png");
 	push_d_tex = TextureM.CreateTexture("UI/push_d.png");
+	TextureM.CreateTexture("UI/Button/Lkettei.png");
 	selectnum = 0;
 	CreateActionICons();
 	iconsize = Vec2f(115, 115);
@@ -49,6 +51,8 @@ void SelectAction::draw()
 		
 		trancex, 0), Vec2f(80, 80)*(0.9f + 0.1f*sin(cursorsinangle)), 0.f, push_a_tex, ColorA(1, 1, 0.5f + 0.5f*sin(cursorsinangle), (selectnum == 0) ? 0.1f : 1.0f));
 	DrawM.drawTextureBox(cursorpos + Vec2f(trancex, 0), Vec2f(80, 80)*(0.9f + 0.1f*sin(cursorsinangle)), 0.f, push_d_tex, ColorA(1, 1, 0.5f + 0.5f*sin(cursorsinangle), (selectnum == (actionaicons.size() - 1)) ? 0.1f : 1.0f));
+
+	drawLTexture();
 }
 
 std::string SelectAction::getActionName()
@@ -93,6 +97,8 @@ void SelectAction::ChoiceAction()
 			cursorbeginpos.x = cursorpos.x;
 			cursorendpos.x = leftedge + iconsize.x*selectnum;
 			playtexturelist.CreatePlayTextures(actionaicons[selectnum].getName());
+			DataM.setSelectActionName(actionaicons[selectnum].getName());
+
 		}
 	}
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_d)) {
@@ -103,6 +109,14 @@ void SelectAction::ChoiceAction()
 			cursorendpos.x = leftedge + iconsize.x*selectnum;
 			SoundM.PlaySE("cursor.wav");
 			playtexturelist.CreatePlayTextures(actionaicons[selectnum].getName());
+			DataM.setSelectActionName(actionaicons[selectnum].getName());
 		}
 	}
+}
+
+void SelectAction::drawLTexture()
+{
+	Vec2f pos = Vec2f(800, 870);
+	Vec2f size = Vec2f(180, 45);
+	DrawM.drawTextureBox(pos, size, 0.0f, TextureM.getTexture("UI/Button/Lkettei.png"));
 }

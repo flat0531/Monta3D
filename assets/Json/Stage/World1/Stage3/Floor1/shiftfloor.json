@@ -1,9 +1,23 @@
 [
-   {
-      "pos" : [-10600,200,0],
-      "size" : [ 100, 100, 100 ],
-      "next" : 2,
-    "nextplayerpos": [ -500, 600, 0 ],
-    "nextplayerrotate" : [ 0, 180, 0 ]
-   }
+  {
+    "pos": [ -74, 4, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 2,
+    "nextplayerpos": [ -18, 2, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  },
+  {
+    "pos": [ -75, 4, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 2,
+    "nextplayerpos": [ -18, 2, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  },
+    {
+    "pos": [ -76, 4, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 2,
+    "nextplayerpos": [ -18, 2, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  }
 ]

@@ -1,0 +1,16 @@
+[
+  {
+    "pos": [ 800, 450 ],
+    "size": [ 1600, 900 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/canvas.png"
+  },
+  {
+    "pos": [ 620, 450 ],
+    "size": [ 1200, 650 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/book.png"
+  }
+  ]

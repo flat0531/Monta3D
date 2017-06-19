@@ -15,13 +15,14 @@ SparrowAction::SparrowAction()
 
 SparrowAction::SparrowAction(CharacterBase * _enemy)
 {
-	enemyptr = reinterpret_cast<Enemy*>(_enemy);
+	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
 	int maxhp = 10;
 	enemyptr->setQuat(Quatf(0, M_PI / 2.f, 0));
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setHp(maxhp);
+	enemyptr->setColor(ColorA(1, 1, 1, 1));
 	enemyptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	enemyptr->setUniqueColor(ColorA(153.f / 256.f, 86.f / 256.f, 51.f / 256.f, 1));
 	wingangle = 0.0f;

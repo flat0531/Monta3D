@@ -1,20 +1,21 @@
 [
   {
-    "floor": 1,
-   "pos": [ -15, 7,0 ],
+    "floor": 2,
+   "pos": [ -11, 27,12 ],
     "type": "color",
     "name": "tea"
   },
   {
     "floor": 2,
-   "pos": [ -15, 7,0 ],
+   "pos": [ -16.5, 66,5 ],
+   "type": "color",
+    "name": "black"
+  },
+  {
+    "floor": 3,
+    "pos": [ -29, 8, 0 ],
     "type": "folm",
     "name": "mogura"
-  },
-   {
-    "floor": 2,
-   "pos": [ -20, 7,0 ],
-    "type": "color",
-    "name": "black"
   }
+ 
 ]

@@ -45,7 +45,7 @@ void EffectExplodeburst::update()
 		CountUp();
 }
 
-void EffectExplodeburst::draw()
+void EffectExplodeburst::draw(const ci::CameraPersp camera)
 {
 	for (int i = 0;i < cubes.size();i++) {
 		DrawM.drawCube(pos+cubes[i].trancepos, cubes[i].scale,cubes[i].rotate,color);

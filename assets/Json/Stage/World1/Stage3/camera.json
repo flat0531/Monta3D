@@ -1,11 +1,16 @@
 [
   {
-    "cameratype": "player"
+    "cameratype": "ylock",
+    "eyepos": 6,
+    "center": 4
   },
   {
-    "cameratype": "player"
+    "cameratype": "xlock",
+      "pos": -11.5
   },
   {
-    "cameratype": "player"
+    "cameratype": "ylock",
+    "eyepos": 6,
+    "center": 4
   }
 ]

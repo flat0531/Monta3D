@@ -1,9 +1,37 @@
 [
+  {
+    "pos": [ -29, 3, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 1,
+    "nextplayerpos": [ -185, 2, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  },
+  {
+    "pos": [ -5, 3, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 3,
+    "nextplayerpos": [ -29, 3, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  },
+  {
+    "pos": [ -12.5, 9, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 2,
+    "nextplayerpos": [ -29, 3, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  },
+  {
+    "pos": [ -45.5, 9, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 2,
+    "nextplayerpos": [ -29, 3, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  },
    {
-      "pos" : [ -500, 300, 0 ],
-      "size" : [ 100, 100, 100 ],
-      "next" : 1,
-    "nextplayerpos": [ -900, 800, 0 ],
-     "nextplayerrotate" : [ 0, 180, 0 ]
-   }
+    "pos": [ -52, 3, 0 ],
+    "size": [ 1, 1, 1 ],
+    "next": 2,
+    "nextplayerpos": [ -29, 3, 0 ],
+    "nextplayerrotate": [ 0, 0, 0 ]
+  }
 ]

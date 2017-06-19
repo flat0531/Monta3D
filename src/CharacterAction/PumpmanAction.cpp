@@ -23,6 +23,7 @@ PumpmanAction::PumpmanAction(CharacterBase * _enemy)
 	enemyptr->setScale(Vec3f(1,1,1)*WorldScale);
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setHp(maxhp);
+	enemyptr->setColor(ColorA(1, 1, 1, 1));
 	enemyptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	enemyptr->setName("pumpman");
 	enemyptr->setUniqueColor(DataM.getColor("orange"));

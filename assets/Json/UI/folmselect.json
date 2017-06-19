@@ -1,0 +1,52 @@
+[
+  {
+    "pos": [ 800, 450 ],
+    "size": [ 2500, 1200 ],
+    "rotate": 180,
+    "color": [ 1, 1, 1,1],
+    "texture": "UI/drawmenu.png"
+  },
+  {
+    "pos": [ 800, 450 ],
+    "size": [ 1600, 900 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 0.5 ],
+    "texture": "UI/book.png"
+  },
+  {
+    "pos": [ 800, 450 ],
+    "size": [ 1600, 900 ],
+    "rotate": 0,
+    "color": [ 1, 1, 0, 0.3 ],
+    "texture": "UI/drawmenu.png"
+  },
+  {
+    "pos": [ 240, 70 ],
+    "size": [ 512, 128 ],
+    "rotate": -10,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/folmselect.png"
+  },
+  {
+    "pos": [ 600, 75 ],
+    "size": [ 200, 50 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/sentaku.png"
+  },
+  {
+    "pos": [ 500, 150 ],
+    "size": [ 160, 40 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/Kmodoru.png"
+  },
+  {
+    "pos": [ 700, 150 ],
+    "size": [ 160, 40 ],
+    "rotate": -0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/Lkettei.png"
+  }
+
+]

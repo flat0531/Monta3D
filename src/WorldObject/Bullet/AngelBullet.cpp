@@ -21,6 +21,7 @@ AngelBullet::AngelBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _y_rotate, floa
 	y_rotate = _y_rotate;
 	z_rotate = _z_rotate;
 	texturepath = _texturepath;
+	uniquecolor = ColorA(255.f / 255.f, 153.f / 255.f, 237.f / 255.f, 1);
 }
 
 

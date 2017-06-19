@@ -41,6 +41,7 @@ void GameMain::setup()
 
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
+	uicreater.CreateUI("Json/UI/gamemain.json");
 	isshiting = false;
 	starteffect_isend = false;
 	worldnum = DataM.getWorldNum();
@@ -71,7 +72,7 @@ void GameMain::setup()
 	charactermanager->setBulletManagerPtrToEnemys();
 	charactermanager->setMainWindowPointer(mainwindow->getThisPtr());
 
-	charactermanager->setPlayerAction(ActionType::SLIME);
+	charactermanager->setPlayerAction(DataM.stringToActionType(DataM.getSelectActionName()));
 	charactermanager->getPlayer()->Reset(nextplayerrotate);///
 	charactermanager->setEnemysAction();
 
@@ -197,13 +198,49 @@ void GameMain::draw()
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 	gl::enableAlphaBlending();
+
+	
+
+
+
+
+
+
+
+
 	gl::setMatrices(camera);
 
 	gl::pushModelView();
 
 	if (!charactermanager->getActionSelectMode()) {
+
+		gl::disable(GL_FOG);
 		mapmanager.drawSky();
+		
 		//mapmanager.drawMap2d();
+
+		gl::enable(GL_FOG);
+		// モード: GL_LINEAR、GL_EXP、GL_EXP2のいずれか
+		glFogi(GL_FOG_MODE, GL_LINEAR);
+
+		// GL_EXP、GL_EXP2で使う密度係数
+		glFogf(GL_FOG_DENSITY, 1.0f);
+
+		// GL_LINEARで使用する近景位置
+		glFogf(GL_FOG_START, 7*WorldScale);
+		// GL_LINEARで使用する遠景位置
+		glFogf(GL_FOG_END, 100 * WorldScale);
+
+		// 色指定
+		GLfloat fog_color[] = { 1.0f, 1.0f, 1.0f, 0.5f };
+		glFogfv(GL_FOG_COLOR, fog_color);
+
+
+
+
+		
+
+
 
 		mapchipmanager->draw();
 		charactermanager->draw(camera);
@@ -211,7 +248,7 @@ void GameMain::draw()
 		itemmanager->draw();
 
 		drawShiftFloorObject();
-		effectmanager->draw();
+		effectmanager->draw(camera);
 		
 		mapmanager.drawTexureObjct(camera);
 		drawShadow();
@@ -238,12 +275,16 @@ void GameMain::draw2D()
 	if (charactermanager->getActionSelectMode()) {
 		charactermanager->drawActionSelecBackGround();
 	}
+	
 	mainwindow->draw();
-	effectmanager->draw2D();
+	uicreater.draw();
+	effectmanager->draw2D(camera);
+
 	information.draw();
 	if (isgoal) {
 		information.drawClearTexture();
 	}
+	
 	if (charactermanager->getActionSelectMode()) {
 		charactermanager->drawActionSelectMode();
 	}
@@ -330,6 +371,7 @@ void GameMain::cretateShiftFloorObject()
 void GameMain::updateShiftFloorObject()
 {
 	if (isshiting)return;
+	if (FadeM.getIsFading())return;
 	for (int i = 0;i < shiftfloorobjects.size();i++) {
 		if (KeyManager::getkey().isPress(KeyEvent::KEY_w)) {
 			if (CollisionM.isBoxPoint(charactermanager->getPlayer()->getPos2f(),
@@ -564,15 +606,34 @@ ci::gl::Texture GameMain::ofScrean(const float rate)
 	gl::enableDepthWrite();
 	gl::enableAlphaBlending();
 	gl::setMatrices(camera);
-	mapmanager.drawSky();
 	//mapmanager.drawMap2d();
+	gl::disable(GL_FOG);
+	mapmanager.drawSky();
+
+	//mapmanager.drawMap2d();
+
+	gl::enable(GL_FOG);
+	// モード: GL_LINEAR、GL_EXP、GL_EXP2のいずれか
+	glFogi(GL_FOG_MODE, GL_LINEAR);
+
+	// GL_EXP、GL_EXP2で使う密度係数
+	glFogf(GL_FOG_DENSITY, 1.0f);
+
+	// GL_LINEARで使用する近景位置
+	glFogf(GL_FOG_START, 7 * WorldScale);
+	// GL_LINEARで使用する遠景位置
+	glFogf(GL_FOG_END, 100 * WorldScale);
+
+	// 色指定
+	GLfloat fog_color[] = { 1.0f, 1.0f, 1.0f, 0.5f };
+	glFogfv(GL_FOG_COLOR, fog_color);
 
 	mapchipmanager->draw();
 	charactermanager->draw(camera);
 	bulletmanager->draw();
 	itemmanager->draw();
 	drawShiftFloorObject();
-	effectmanager->draw();
+	effectmanager->draw(camera);
 
 	mapmanager.drawTexureObjct(camera);
 	drawShadow();

@@ -5,6 +5,7 @@
 #include"../../Input/KeyManager.h"
 #include"../../GameScene/Title/Title.h"
 #include"../../GameScene/GameMain/GameMain.h"
+#include"../../GameScene/FolmSelect/FolmSelect.h"
 #include"../../Top/TextureManager.h"
 #include"../../Top/MyJson.h"
 #include"../../Top/SoundManager.h"
@@ -29,8 +30,15 @@ void StageSelect::setup()
 	TextureM.CreateTexture("UI/montaicon.png");
 	TextureM.CreateTexture("UI/moveicon1.png");
 	TextureM.CreateTexture("UI/moveicon2.png");
+
+	TextureM.CreateTexture("UI/push_a.png");
+	TextureM.CreateTexture("UI/push_d.png");
+
 	SoundM.CreateSE("stagecursor.wav");
 	SoundM.CreateSE("moveicon.wav");
+	SoundM.CreateSE("change.wav");
+	SoundM.CreateSE("actionselectbegin.wav");
+	SoundM.CreateSE("actionselectend.wav");
 	SoundM.PlayBGM("stageselectworld1.wav",0.3f);
 	SoundM.SetLoopBGM("stageselectworld1.wav", true);
 	stagenum = DataM.getStageNum();
@@ -50,7 +58,7 @@ void StageSelect::setup()
 	if (DataM.getPrevscene() == SceneType::GANEMAIN_SCENE) {
 		informationwindowlist.CreateInformationWindows();
 	}
-
+	front.CreateUI("Json/UI/stageselect.json");
 
 	FadeM.StartFadeOut(false);
 	gl::enableDepthRead();
@@ -71,12 +79,23 @@ void StageSelect::update()
 	selectStage();
 	updatePlayerIcon();
 	stagenameplate.update();
+	if (!FadeM.getIsFading()&&informationwindowlist.isEnd()&&isselect) {
+		stageselectmenu.update();
+	}
 	if (!FadeM.getIsFading()) {
 		informationwindowlist.update();
 	}
-	FadeInGameMain();
-
+	FadeIn();
+	decideStage();
+	updateMenu();
+	if (isselect&&(!FadeM.getIsFading())) {
+		if (KeyManager::getkey().isPush(KeyEvent::KEY_k)) {
+			isselect = false;
+			SoundM.PlaySE("actionselectend.wav");
+		}
+	}
 	playericonspeed = buffplayericonpos - playericonpos;
+
 	animation_count++;
 }
 
@@ -112,18 +131,22 @@ void StageSelect::draw2D()
 	drawPlayerIcon();
 	stagenameplate.draw();
 	drawTitle();
+	if (isselect) {
+		stageselectmenu.draw(uipos[stagenum - 1]);
+	}
+	front.draw();
 	informationwindowlist.draw();
 }
 
 void StageSelect::shift()
 {
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_t)) {
-		SceneManager::createScene(Title());
-	}
 	if (FadeM.getIsfadeinEnd()) {
 		if (DataM.getNextscene() == SceneType::GANEMAIN_SCENE) {
 			DataM.roadGetItems(worldnum, stagenum);
 			SceneManager::createScene(GameMain());
+		}
+		if (DataM.getNextscene() == SceneType::FOLMSELECT_SCENE) {
+			SceneManager::createScene(FolmSelect());
 		}
 	}
 }
@@ -147,6 +170,7 @@ void StageSelect::createpointRoads()
 	
 		JsonTree child = roadpos.getChild(i);
 		Vec2f pos = JsonM.getVec2(child, "pos");
+		uipos.push_back(JsonM.getVec2(child, "uipos"));
 		if (child.hasChild("easingtype")) {
 			Vec2i easigtype = JsonM.getVec2(child, "easingtype");
 			easingtypes.push_back(Vec2i(easigtype));
@@ -219,6 +243,7 @@ void StageSelect::selectStage()
 	if (FadeM.getIsFading())return;
 	if (isiconmoving)return;//
 	if (!informationwindowlist.isEnd())return;
+	if (isselect)return;
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_d)&&(!(stagenum == stagepos.size()))) {
 		easing_icon_beginpos = playericonpos;
 		easing_icon_endpos = stagepos[stagenum];
@@ -281,6 +306,12 @@ void StageSelect::drawPlayerIcon()
 	if (!isiconmoving) {
 		DrawM.drawTextureBox(playericonpos, Vec2f(65, 65), 0.f,
 			TextureM.getTexture("UI/montaicon.png"), ColorA(1, 1, 1, 1));
+		if(stagenum != 1&&(!isselect))
+		DrawM.drawTextureBox(playericonpos + Vec2f(-100, 20), Vec2f(80, 80), 0.0f,
+			TextureM.getTexture("UI/push_a.png"), ColorA(255.f/255.f, 153.f/255.f, 237/255.f , 1));
+		if (stagenum != stageicons.size() && (!isselect))
+			DrawM.drawTextureBox(playericonpos + Vec2f(100, 20), Vec2f(80, 80), 0.0f,
+				TextureM.getTexture("UI/push_d.png"), ColorA(255.f / 255.f, 153.f / 255.f, 237 / 255.f, 1));
 		return;
 	}
 	int animationspeed = 10;
@@ -291,21 +322,33 @@ void StageSelect::drawPlayerIcon()
 		TextureM.getTexture(texturepath), ColorA(1, 1, 1, 1));
 }
 
-void StageSelect::FadeInGameMain()
+void StageSelect::FadeIn()
 {
-	if (isiconmoving)return;
-	if (!informationwindowlist.isEnd())return;
+	if (!isselect)return;
 	if (FadeM.getIsFading())return;
+	
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_l)) {
+		if (!DataM.isCheckFolm("slime", "release")&&stageselectmenu.getSelectNum()==0) {
+			SoundM.PlaySE("change.wav", 0.7f);
+			return;
+		}
 		FadeM.StartFadeIn();
 		DataM.setStageNum(stagenum);
 		DataM.setWorldNum(worldnum);
+		if (stageselectmenu.getSelectNum() == 0) {
+			DataM.setNextScene(SceneType::GANEMAIN_SCENE);
+		}
+		if (stageselectmenu.getSelectNum() == 1) {
+			DataM.setNextScene(SceneType::FOLMSELECT_SCENE);
+		}
 		DataM.setPrevScene(SceneType::STAGESELECT_SCENE);
-		DataM.setNextScene(SceneType::GANEMAIN_SCENE);
+
 		DataM.setStageName(stagename[stagenum - 1]);
-		SoundM.FadeNowBGM(0.0f,1.5f);
+		SoundM.FadeNowBGM(0.0f, 1.5f);
 	}
 }
+
+
 
 void StageSelect::roadStageName()
 {
@@ -323,4 +366,29 @@ void StageSelect::ShiftDrawScene()
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_q)) {
 
 	}
+}
+
+void StageSelect::decideStage()
+{
+	if (isiconmoving)return;
+	if (!informationwindowlist.isEnd())return;
+	if (FadeM.getIsFading())return;
+	if (isselect)return;
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_l)) {
+		SoundM.PlaySE("actionselectbegin.wav");
+		isselect = true;
+	}
+}
+
+void StageSelect::updateMenu()
+{
+	if (isiconmoving)return;
+	if (!informationwindowlist.isEnd())return;
+	if (FadeM.getIsFading())return;
+	if (!isselect)return;
+	stageselectmenu.update();
+}
+
+void StageSelect::drawArrow()
+{
 }

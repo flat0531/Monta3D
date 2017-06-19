@@ -51,6 +51,8 @@ public:
 	bool getismapcollision_endddelet() {
 		return ismapcollision_endddelet;
 	}
+	ci::ColorA getUniqueColor();
+	void setUniqueColor(const ci::ColorA color);
 protected:
 	
 	ci::Vec3f pos;
@@ -64,6 +66,7 @@ protected:
 	bool compulsiondelete = false;
 	bool ismapcollision_endddelet = true;
 	ci::AxisAlignedBox3f aabb;
+	ci::ColorA uniquecolor;
 };
 
 template<class T>

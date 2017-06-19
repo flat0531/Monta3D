@@ -44,5 +44,5 @@ ci::Vec3f ShiftFloorObject::getNextPlayerRotate()
 
 void ShiftFloorObject::draw()
 {
-	DrawM.drawStrokeCube(pos, size, Vec3f(0, 0, 0), ColorA(0, 1, 0, 1));
+	//DrawM.drawStrokeCube(pos, size, Vec3f(0, 0, 0), ColorA(0, 1, 0, 1));
 }

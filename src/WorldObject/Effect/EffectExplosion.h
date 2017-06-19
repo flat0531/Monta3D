@@ -5,7 +5,7 @@ public:
 	EffectExplosion();
 	EffectExplosion(const ci::Vec3f _pos,const ci::Vec3f _scale,const ci::Vec3f _rotate);
 	void update() override;
-	void draw() override;
+	void draw(const ci::CameraPersp camera) override;
 	bool deleteThis()override;
 private:
 	float t;

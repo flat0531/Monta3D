@@ -75,6 +75,26 @@
     {
       "texturename": "kanban_w_l.png",
       "isalpha": true
+    },
+    {
+      "texturename": "concrete.png",
+      "isalpha": false
+    },
+    {
+      "texturename": "fallkanban.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "goal.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "flag.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "mayoikanban.png",
+      "isalpha": true
     }
   ]
 }

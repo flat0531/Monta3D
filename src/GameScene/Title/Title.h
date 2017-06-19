@@ -23,13 +23,16 @@ private:
 	SurfaceEffect surfaceeffect;
 	SurfaceEffect backsurface;
 	SurfaceEffect framesurface;
+	ci::gl::Texture buttontex;
 	void updateSky();
 	void drawSky();
 	void CreateMap2d();
 	void drawmap2d();
 	void drawmap2dFront();
+	void drawButton();
 	int delay=120;
 	int delaycount = 0;
 	int testtexturenum = 3;
 	int testtexturecount = 0;
+	float buttonsinangle = 0.0f;
 };

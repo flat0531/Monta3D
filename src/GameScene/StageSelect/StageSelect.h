@@ -9,6 +9,8 @@
 #include"../../StageSelectObject/StageNamePlate.h"
 #include"../../StageSelectObject/StageSelectLogo.h"
 #include"../../StageSelectObject/InformationWindowList.h"
+#include"../../StageSelectObject/StageSelectMenu.h"
+#include"../../UI/UICreater.h"
 class StageSelect :public SceneBase {
 public:
 	void setup() override;
@@ -31,9 +33,12 @@ private:
 	ci::CameraOrtho ortho;
 	std::vector<PointRoad>pointroads;
 	std::vector<StageIcon>stageicons;
+	std::vector<ci::Vec2f>uipos;
 	std::vector<std::string>stagename;
+	UICretaer front;
 	StageNamePlate stagenameplate;
 	StageSelectLogo stageselectlogo;
+	StageSelectMenu stageselectmenu;
 	InformationWindowList informationwindowlist;
 	void drawBackGround();
 	void createpointRoads();
@@ -48,8 +53,12 @@ private:
 	void selectStage();
 	void updatePlayerIcon();
 	void drawPlayerIcon();
-	void FadeInGameMain();
+	void FadeIn();
 	void roadStageName();
 	void ShiftDrawScene();
 	int animation_count = 0;
+	bool isselect = false;
+	void decideStage();
+	void updateMenu();
+	void drawArrow();
 };

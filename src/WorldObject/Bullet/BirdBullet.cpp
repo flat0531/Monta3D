@@ -15,6 +15,7 @@ BirdBullet::BirdBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::V
 	speed = _speed;
 	rotate = _rotate;
 	atackpoint = 3;
+	uniquecolor = ColorA(0, 1, 0, 1);
 	hp = 5;
 	int createnum = 12;
 	for (int i = 0;i < createnum;i++) {

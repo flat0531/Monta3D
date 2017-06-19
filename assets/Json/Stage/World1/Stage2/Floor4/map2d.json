@@ -1,0 +1,184 @@
+[
+   {
+      "isalpha" : false,
+      "pos" : [ -2900, 350, 155 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 300, 200, 200 ],
+      "texturename" : "Map/renga.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -2900, 315, 50 ],
+      "rotate" : [ 0, 0, 180 ],
+      "scale" : [ 200, 200, 0 ],
+      "texturename" : "Map/door.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -550, 250, 50 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -1750, 250, 50 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -2950, 250, 50 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4150, 250, 50 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -5200, 250, 50 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 900, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -5200, -50, -250 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 900, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4150, -50, -250 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -2950, -50, -250 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -1750, -50, -250 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -550, -50, -250 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 1200, 600, 0 ],
+      "texturename" : "Map/forestroad.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -1230, 640, 100 ],
+      "rotate" : [ 180, 0, 0 ],
+      "scale" : [ 1200, 1200, 0 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -765, 545, 60 ],
+      "rotate" : [ 180, 0, 0 ],
+      "scale" : [ 900, 900, 0 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -1805, 545, 60 ],
+      "rotate" : [ 180, 0, 0 ],
+      "scale" : [ 900, 900, 0 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -4545, 640, 100 ],
+      "rotate" : [ 180, 0, 0 ],
+      "scale" : [ 1200, 1200, 0 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -4040, 545, 60 ],
+      "rotate" : [ 180, 0, 0 ],
+      "scale" : [ 900, 900, 0 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -5060, 545, 60 ],
+      "rotate" : [ 180, 0, 0 ],
+      "scale" : [ 900, 900, 0 ],
+      "texturename" : "Map/trees.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -1250, 945, 95 ],
+      "rotate" : [ 0, 0, 44 ],
+      "scale" : [ 300, 200, 50 ],
+      "texturename" : "Map/renga.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -4550, 950, 95 ],
+      "rotate" : [ 0, 0, 46 ],
+      "scale" : [ 300, 200, 50 ],
+      "texturename" : "Map/renga.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -5200, 350, 155 ],
+      "rotate" : [ 0, 0, 135 ],
+      "scale" : [ 300, 200, 200 ],
+      "texturename" : "Map/renga.png"
+   },
+   {
+      "isalpha" : false,
+      "pos" : [ -500, 350, 155 ],
+      "rotate" : [ 0, 0, 46 ],
+      "scale" : [ 300, 200, 200 ],
+      "texturename" : "Map/renga.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -5200, 315, 50 ],
+      "rotate" : [ 0, 0, 180 ],
+      "scale" : [ 200, 200, 0 ],
+      "texturename" : "Map/door.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -4550, 915, 50 ],
+      "rotate" : [ 0, 0, 180 ],
+      "scale" : [ 200, 200, 0 ],
+      "texturename" : "Map/door.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -1250, 915, 50 ],
+      "rotate" : [ 0, 0, 180 ],
+      "scale" : [ 200, 200, 0 ],
+      "texturename" : "Map/door.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -500, 315, 50 ],
+      "rotate" : [ 0, 0, 180 ],
+      "scale" : [ 200, 200, 0 ],
+      "texturename" : "Map/door.png"
+   }
+]

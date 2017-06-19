@@ -10,6 +10,7 @@
 #include"../CharacterAction/SparrowAction.h"
 #include"../CharacterAction/GhostAction.h"
 #include"../CharacterAction/PumpmanAction.h"
+#include"../CharacterAction/WalkRattonAction.h"
 #include"../Top/EasingManager.h"
 using namespace ci;
 using namespace ci::app;
@@ -205,6 +206,9 @@ void CharacterBase::decideAction(ActionType folm)
 		break;
 	case PUMPMAN:
 		setCharacterAction(PumpmanAction());
+		break;
+	case WALKRATTON:
+		setCharacterAction(WalkRattonAction());
 		break;
 	case NONE:
 		break;
@@ -422,7 +426,7 @@ void CharacterBase::setMaxHp(int _maxhp)
 void CharacterBase::addHpValue(int value)
 {
 	hp += value;
-	if (hp >= 100)hp = 100;
+	if (hp >= maxhp)hp = maxhp;
 	if (hp < 0)hp = 0;
 }
 

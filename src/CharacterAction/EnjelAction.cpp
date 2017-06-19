@@ -23,7 +23,7 @@ EnjelAction::EnjelAction()
 
 EnjelAction::EnjelAction(CharacterBase * _player)
 {
-	playerptr = reinterpret_cast<Player*>(_player);
+	playerptr = dynamic_cast<Player*>(_player);
 	maxjumppower = 0.10f*WorldScale;
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
@@ -45,7 +45,7 @@ EnjelAction::EnjelAction(CharacterBase * _player)
 	TextureM.CreateMesh("angelhaneL.obj");
 	TextureM.CreateMesh("angelhaneR.obj");
 	TextureM.CreateMesh("angelHontai.obj");
-	playerptr->setUniqueColor(ColorA(157.f / 255.f, 76.f / 255.f, 229.f / 255.f, 1));
+	playerptr->setUniqueColor(ColorA(255.f / 255.f, 153.f / 255.f, 237.f / 255.f, 1));
 	playerptr->SetIsOpetate(true);
 }
 
@@ -65,7 +65,7 @@ void EnjelAction::setup(ci::Vec3f rotate)
 	playerptr->setIsStun(false);
 	playerptr->setIsinvincible(false);
 	playerptr->SetIsOpetate(true);
-
+	prevoperate = 0;
 	atackdelaycount=0;
 	cursorangle = 0.0f;
 	ischarge = false;
@@ -159,32 +159,7 @@ void EnjelAction::draw()
 
 	drawAttackcursor();
 
-	//Vec3f drawleftwingposcorrection = Vec3f(-0.4, 2.0, -1.5)*20.f;
-	//gl::pushModelView();
-	//gl::translate(playerptr->getPos() + Vec3f(0, drawposcorrection, 0));
-	//gl::rotate(playerptr->getRotate() + Vec3f(0, 90, 0));
-	//gl::scale(playerptr->getScale() / drawscalecorrection);
-	//gl::translate(drawleftwingposcorrection);
-	//gl::rotate(Vec3f(20 * sin(wingangle), 0,0 ));
-	//gl::color(playerptr->getColor());
-	//TextureM.getTexture("Mesh/angelhaneL.png").enableAndBind();
-	//gl::draw(TextureM.getMesh("angelhaneL.obj"));
-	//TextureM.getTexture("Mesh/angelhaneL.png").disable();
 
-	//gl::popModelView();
-
-	/*Vec3f drawrightwingposcorrection = Vec3f(0.4, 2.0, -1.5)*20.f;
-	gl::pushModelView();
-	gl::translate(playerptr->getPos() + Vec3f(0, drawposcorrection, 0));
-	gl::rotate(playerptr->getRotate() + Vec3f(0, 90, 0));
-	gl::scale(playerptr->getScale() / drawscalecorrection);
-	gl::translate(drawrightwingposcorrection);
-	gl::rotate(Vec3f(0 , -20 * sin(wingangle),0 ));
-	gl::color(playerptr->getColor());
-	TextureM.getTexture("Mesh/angelhaneL.png").enableAndBind();
-	gl::draw(TextureM.getMesh("angelhaneL.obj"));
-	TextureM.getTexture("Mesh/angelhaneL.png").disable();
-	gl::popModelView();*/
 }
 
 void EnjelAction::jump()
@@ -197,7 +172,7 @@ void EnjelAction::attack()
 	atackdelaycount = atackdelaytime;
 	playerptr->setT(1.0f);
 
-	playerptr->setRotate(Vec3f(playerptr->getRotate().x, playerptr->getAttackRotate(), playerptr->getRotate().z));
+	playerptr->setRotate(getPrevOperateRotate());
 	ci::Vec3f speed = ci::Quatf(ci::toRadians(playerptr->getRotate().x),
 		ci::toRadians(playerptr->getRotate().y),
 		ci::toRadians(playerptr->getRotate().z))*ci::Vec3f::xAxis();
@@ -212,10 +187,10 @@ void EnjelAction::attack()
 
 void EnjelAction::operate()
 {
-	if (IsAtackDelay() || playerptr->getIsStan())return;
+	if (playerptr->getIsStan())return;
 
 	float dashspeed = 0.09f*WorldScale;
-
+	setPrevOperate();
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k)) {
 		playerptr->setCanJump(false);
 		playerptr->setSpeedY(0.0f);
@@ -243,6 +218,7 @@ void EnjelAction::operate()
 	}
 	if (ischarge&&KeyManager::getkey().isPull(KeyEvent::KEY_l)) {
 		attack();
+		iscursorup = true;
 		ischarge = false;
 	}
 }
@@ -272,9 +248,9 @@ void EnjelAction::updateAttackcursor()
 			iscursorup = true;
 		}
 	}
-	ci::Vec3f speed = ci::Quatf(ci::toRadians(playerptr->getRotate().x),
-		ci::toRadians(playerptr->getRotate().y),
-		ci::toRadians(playerptr->getRotate().z))*ci::Vec3f::xAxis();
+	ci::Vec3f speed = ci::Quatf(ci::toRadians(getPrevOperateRotate().x),
+		ci::toRadians(getPrevOperateRotate().y),
+		ci::toRadians(getPrevOperateRotate().z))*ci::Vec3f::xAxis();
 	Vec3f crossvec = speed.cross(Vec3f::yAxis());
 
 	cursorpos = playerptr->getPos() + Quatf(crossvec, cursorangle) *  speed *WorldScale*4.0f;
@@ -285,4 +261,33 @@ void EnjelAction::updateAttackcursor()
 bool EnjelAction::IsAtackDelay()
 {
 	return atackdelaycount != 0;
+}
+
+ci::Vec3f EnjelAction::getPrevOperateRotate()
+{
+	switch (prevoperate)
+	{
+	case 0:
+		return playerptr->getRotate();
+	case 1:
+		return Vec3f(playerptr->getRotate().x, -90, playerptr->getRotate().z);
+	case 2:
+		return Vec3f(playerptr->getRotate().x, 0.f, playerptr->getRotate().z);
+	case 3:
+		return Vec3f(playerptr->getRotate().x, -180.f, playerptr->getRotate().z);
+	}
+	return playerptr->getRotate();
+}
+
+void EnjelAction::setPrevOperate()
+{
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_w)) {
+		prevoperate = 1;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_a)) {
+		prevoperate = 2;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_d)) {
+		prevoperate = 3;
+	}
 }

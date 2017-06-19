@@ -31,4 +31,7 @@ private:
 	float wingangle = 0.0f;
 	float easingwing_t = 1.0f;
 	float easingwing_rotate = 0.0f;
+	int prevoperate = 0;
+	ci::Vec3f getPrevOperateRotate();
+	void setPrevOperate();
 };

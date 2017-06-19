@@ -1,13 +1,13 @@
 [
   {
     "floor": 1,
-   "pos": [ -15, 7,0 ],
+   "pos": [ -64.5, 2,0 ],
     "type": "color",
-    "name": "green"
+    "name": "blue"
   },
   {
-    "floor": 2,
-   "pos": [ -15, 7,0 ],
+    "floor": 5,
+   "pos": [ -9.5, 20.5,0 ],
     "type": "folm",
     "name": "angel"
   }

@@ -3,7 +3,19 @@
     "cameratype": "player"
   },
   {
-    "cameratype": "player"
+    "cameratype": "ylock",
+    "eyepos": 4,
+    "center": 4
+  },
+  {
+    "cameratype": "ylock",
+    "eyepos": 4,
+    "center": 4
+  },
+  {
+    "cameratype": "ylock",
+    "eyepos": 4,
+    "center": 4
   },
   {
     "cameratype": "player"

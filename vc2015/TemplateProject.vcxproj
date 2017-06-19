@@ -114,6 +114,7 @@
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\CharacterAction\ActionBase.cpp" />
     <ClCompile Include="..\src\CharacterAction\BirdAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\CatAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\EnjelAction.cpp" />
@@ -123,9 +124,11 @@
     <ClCompile Include="..\src\CharacterAction\Ratton.cpp" />
     <ClCompile Include="..\src\CharacterAction\SlimeAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\SparrowAction.cpp" />
+    <ClCompile Include="..\src\CharacterAction\WalkRattonAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\WitchAction.cpp" />
     <ClCompile Include="..\src\EditerObject\AppleCube.cpp" />
     <ClCompile Include="..\src\EditerObject\BreakCube.cpp" />
+    <ClCompile Include="..\src\EditerObject\ColoedCube.cpp" />
     <ClCompile Include="..\src\EditerObject\CubeBase.cpp" />
     <ClCompile Include="..\src\EditerObject\CubeObject.cpp" />
     <ClCompile Include="..\src\EditerObject\GoalCube.cpp" />
@@ -138,6 +141,7 @@
     <ClCompile Include="..\src\GameScene\Draw\Draw.cpp" />
     <ClCompile Include="..\src\GameScene\EffectEdit\EffectEdit.cpp" />
     <ClCompile Include="..\src\GameScene\FolmSelect\FolmSelect.cpp" />
+    <ClCompile Include="..\src\GameScene\FreeDraw\FreeDraw.cpp" />
     <ClCompile Include="..\src\GameScene\GameMain\GameMain.cpp" />
     <ClCompile Include="..\src\GameScene\StageSelect\StageSelect.cpp" />
     <ClCompile Include="..\src\GameScene\Title\Title.cpp" />
@@ -152,6 +156,7 @@
     <ClCompile Include="..\src\StageSelectObject\StageIcon.cpp" />
     <ClCompile Include="..\src\StageSelectObject\StageNamePlate.cpp" />
     <ClCompile Include="..\src\StageSelectObject\StageSelectLogo.cpp" />
+    <ClCompile Include="..\src\StageSelectObject\StageSelectMenu.cpp" />
     <ClCompile Include="..\src\StageSelectObject\StringLogo.cpp" />
     <ClCompile Include="..\src\TemplateProjectApp.cpp" />
     <ClCompile Include="..\src\Top\BGMPlayer.cpp" />
@@ -175,6 +180,9 @@
     <ClCompile Include="..\src\UI\ColorObject.cpp" />
     <ClCompile Include="..\src\UI\DrawMenu.cpp" />
     <ClCompile Include="..\src\UI\DrawPointer.cpp" />
+    <ClCompile Include="..\src\UI\FolmScenePlayTexture.cpp" />
+    <ClCompile Include="..\src\UI\FolmTexture.cpp" />
+    <ClCompile Include="..\src\UI\FolmTextureList.cpp" />
     <ClCompile Include="..\src\UI\MainWindow.cpp" />
     <ClCompile Include="..\src\UI\Pallet.cpp" />
     <ClCompile Include="..\src\UI\PalletManager.cpp" />
@@ -196,6 +204,7 @@
     <ClCompile Include="..\src\WorldCreater\ShadowManager.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\AngelBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\BirdBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\BulletBase.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\CatBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\MoguraBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\MyToras.cpp" />
@@ -204,9 +213,11 @@
     <ClCompile Include="..\src\WorldObject\Bullet\SlimeBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\CharacterBase.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectBase.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectColored.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectExplodeburst.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectExplosion.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectItem.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectStar.cpp" />
     <ClCompile Include="..\src\WorldObject\Enemy.cpp" />
     <ClCompile Include="..\src\WorldObject\Information.cpp" />
     <ClCompile Include="..\src\WorldObject\ItemObject.cpp" />
@@ -216,6 +227,7 @@
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipApple.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipBase.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipBreak.cpp" />
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipColored.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipGoal.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipHalfFloor.cpp" />
     <ClCompile Include="..\src\WorldObject\MapChip\MapChipNone.cpp" />
@@ -239,9 +251,11 @@
     <ClInclude Include="..\src\CharacterAction\Ratton.h" />
     <ClInclude Include="..\src\CharacterAction\SlimeAction.h" />
     <ClInclude Include="..\src\CharacterAction\SparrowAction.h" />
+    <ClInclude Include="..\src\CharacterAction\WalkRattonAction.h" />
     <ClInclude Include="..\src\CharacterAction\WitchAction.h" />
     <ClInclude Include="..\src\EditerObject\AppleCube.h" />
     <ClInclude Include="..\src\EditerObject\BreakCube.h" />
+    <ClInclude Include="..\src\EditerObject\ColoedCube.h" />
     <ClInclude Include="..\src\EditerObject\CubeBase.h" />
     <ClInclude Include="..\src\EditerObject\CubeObject.h" />
     <ClInclude Include="..\src\EditerObject\GoalCube.h" />
@@ -254,6 +268,7 @@
     <ClInclude Include="..\src\GameScene\Draw\Draw.h" />
     <ClInclude Include="..\src\GameScene\EffectEdit\EffectEdit.h" />
     <ClInclude Include="..\src\GameScene\FolmSelect\FolmSelect.h" />
+    <ClInclude Include="..\src\GameScene\FreeDraw\FreeDraw.h" />
     <ClInclude Include="..\src\GameScene\GameMain\GameMain.h" />
     <ClInclude Include="..\src\GameScene\StageSelect\StageSelect.h" />
     <ClInclude Include="..\src\GameScene\Title\Title.h" />
@@ -269,6 +284,7 @@
     <ClInclude Include="..\src\StageSelectObject\StageIcon.h" />
     <ClInclude Include="..\src\StageSelectObject\StageNamePlate.h" />
     <ClInclude Include="..\src\StageSelectObject\StageSelectLogo.h" />
+    <ClInclude Include="..\src\StageSelectObject\StageSelectMenu.h" />
     <ClInclude Include="..\src\StageSelectObject\StringLogo.h" />
     <ClInclude Include="..\src\Top\BGMPlayer.h" />
     <ClInclude Include="..\src\Top\CollisionManager.h" />
@@ -293,6 +309,9 @@
     <ClInclude Include="..\src\UI\ColorObject.h" />
     <ClInclude Include="..\src\UI\DrawMenu.h" />
     <ClInclude Include="..\src\UI\DrawPointer.h" />
+    <ClInclude Include="..\src\UI\FolmScenePlayTexture.h" />
+    <ClInclude Include="..\src\UI\FolmTexture.h" />
+    <ClInclude Include="..\src\UI\FolmTextureList.h" />
     <ClInclude Include="..\src\UI\MainWindow.h" />
     <ClInclude Include="..\src\UI\Pallet.h" />
     <ClInclude Include="..\src\UI\PalletManager.h" />
@@ -323,9 +342,11 @@
     <ClInclude Include="..\src\WorldObject\Bullet\SlimeBullet.h" />
     <ClInclude Include="..\src\WorldObject\CharacterBase.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectBase.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectColored.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectExplodeburst.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectExplosion.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectItem.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectStar.h" />
     <ClInclude Include="..\src\WorldObject\Enemy.h" />
     <ClInclude Include="..\src\WorldObject\Information.h" />
     <ClInclude Include="..\src\WorldObject\ItemObject.h" />
@@ -336,6 +357,7 @@
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipApple.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipBase.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipBreak.h" />
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipColored.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipGoal.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipHalfFloor.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipNone.h" />

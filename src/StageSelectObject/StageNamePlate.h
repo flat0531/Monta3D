@@ -1,6 +1,7 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include"cinder/gl/Texture.h"
 #include"StageData.h"
 class StageNamePlate {
 public:
@@ -35,6 +36,8 @@ private:
 	float begincoloralfa;
 	float endcoloralfa;
 	StageData stagedata;
+	ci::gl::Texture stagenametex;
+	ci::gl::Texture stagesnaptex;
 	void setItemData();
 
 };

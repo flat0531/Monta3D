@@ -12,6 +12,6 @@ public:
 	void update() override;
 	void draw()override;
 	void setup(ci::Vec3f _pos)override;
-
+	int getjumpCount();
 private:
 };

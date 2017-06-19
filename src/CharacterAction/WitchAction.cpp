@@ -16,14 +16,15 @@ WitchAction::WitchAction()
 
 WitchAction::WitchAction(CharacterBase * _enemy)
 {
-	enemyptr = reinterpret_cast<Enemy*>(_enemy);
+	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
-	int maxhp = 10;
+	int maxhp = 5;
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setScale(Vec3f(1.5,1.5,1.5)*WorldScale);
 	enemyptr->setQuat(Quatf(0, M_PI, 0));
 	enemyptr->setHp(maxhp);
+	enemyptr->setColor(ColorA(1, 1, 1, 1));
 	atackdelay = 60;
 	actioncount = atackdelay;
 	enemyptr->setDefalutColor(ColorA(1,1,1,1));

@@ -722,7 +722,7 @@
    },
    {
       "isalpha" : true,
-      "pos" : [ -4690, 550, 330 ],
+      "pos" : [ -4653, 550, 330 ],
       "rotate" : [ 90, 0, 0 ],
       "scale" : [ 300, 0, 300 ],
       "texturename" : "Map/kanban_w_l.png"
@@ -824,5 +824,19 @@
       "rotate" : [ 0, 0, 180 ],
       "scale" : [ 194, 169, 0 ],
       "texturename" : "Map/door.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -9070, 1675, 30 ],
+      "rotate" : [ 90, 0, 0 ],
+      "scale" : [ 300, 0, 300 ],
+      "texturename" : "Map/fallkanban.png"
+   },
+   {
+      "isalpha" : true,
+      "pos" : [ -12299, 1741, 57 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 439.00003051757813, 209.99998474121094, 0 ],
+      "texturename" : "Map/flag.png"
    }
 ]

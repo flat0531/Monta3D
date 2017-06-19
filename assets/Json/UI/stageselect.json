@@ -1,0 +1,16 @@
+[
+  {
+    "pos": [ 1430, 830 ],
+    "size": [ 200, 50 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/Lkettei.png"
+  },
+  {
+    "pos": [ 1200, 830 ],
+    "size":  [ 200, 50 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/Kmodoru.png"
+  }
+]

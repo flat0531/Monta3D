@@ -9,11 +9,14 @@ StageNamePlate::StageNamePlate()
 }
 StageNamePlate::StageNamePlate(const int worldnum, const int stagenum, const StageData _stagedata)
 {
-	TextureM.CreateTexture("UI/stagenameplate.png");
+	TextureM.CreateTexture("UI/itemwindow.png");
 	TextureM.CreateTexture("UI/itemicon.png");
+	TextureM.CreateTexture("UI/itemplate.png");
+	stagenametex = TextureM.CreateTexture("UI/stagename/stagename" + std::to_string(worldnum) + "_" + std::to_string(stagenum) + ".png");
+	stagesnaptex = TextureM.CreateTexture("UI/stagesnap/" + std::to_string(worldnum) + "_" + std::to_string(stagenum) + "snap.png");
 	float rate = 0.5f;
 	pos = Vec2f(285, 350);
-	size = rate*TextureM.getTexture("UI/stagenameplate.png").getSize();
+	size = rate*TextureM.getTexture("UI/itemwindow.png").getSize();
 	slide_t = 1.0f;
 	begincoloralfa = 1.0f;
 	endcoloralfa = 1.0f;
@@ -34,7 +37,11 @@ void StageNamePlate::update()
 
 void StageNamePlate::draw()
 {
-	DrawM.drawTextureBox(pos,size,0.f, TextureM.getTexture("UI/stagenameplate.png"),ColorA(1,1,1, coloralpha));
+	DrawM.drawTextureBox(pos,size,0.f, TextureM.getTexture("UI/itemwindow.png"),ColorA(1,1,1, coloralpha));
+	DrawM.drawTextureBox(pos, Vec2f(430,250), 0.f, stagesnaptex, ColorA(1, 1, 1, coloralpha));
+	DrawM.drawTextureBox(pos+Vec2f(65,92), Vec2f(300, 70), 0.f, TextureM.getTexture("UI/itemplate.png"), ColorA(1, 1, 1, coloralpha));
+	DrawM.drawTextureBox(pos + Vec2f(2, -48), Vec2f(460, 115), 0.f, stagenametex, ColorA(0, 0, 0, coloralpha));
+	DrawM.drawTextureBox(pos+Vec2f(0,-50), Vec2f(460,115), 0.f,stagenametex, ColorA(1, 1, 1, coloralpha));
 	drawItemIcon();
 }
 
@@ -59,6 +66,8 @@ void StageNamePlate::SlideIn(const int worldnum, const int stagenum, const Stage
 	begincoloralfa = coloralpha;
 	endcoloralfa = 1.f;
 	stagedata = _stagedata;
+	stagesnaptex = TextureM.CreateTexture("UI/stagesnap/" + std::to_string(worldnum) + "_" + std::to_string(stagenum) + "snap.png");
+	stagenametex = TextureM.CreateTexture("UI/stagename/stagename" + std::to_string(worldnum) + "_" + std::to_string(stagenum) + ".png");
 	setItemData();
 }
 
@@ -117,7 +126,7 @@ void StageNamePlate::setItemData()
 		ItemIcon buff;
 	    buff.size = Vec2f(75, 75);
 		float rate = 1.3f;
-		buff.trancepos = Vec2f(-(float(stagedata.getIsItem().size()))*(buff.size.x / 2.f)*rate+buff.size.x/2.f*rate+i*buff.size.x*rate, 72);
+		buff.trancepos = Vec2f(65-(float(stagedata.getIsItem().size()))*(buff.size.x / 2.f)*rate+buff.size.x/2.f*rate+i*buff.size.x*rate, 92);
 		buff.isget = stagedata.getIsClear();
 		itemicons.push_back(buff);
 	}

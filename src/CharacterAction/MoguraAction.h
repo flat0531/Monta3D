@@ -25,4 +25,7 @@ private:
 	bool IsAtackDelay();
 	float rotateangle = 0.0f;
 	void operate();
+	int prevoperate = 0;
+	ci::Vec3f getPrevOperateRotate();
+	void setPrevOperate();
 };

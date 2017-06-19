@@ -26,7 +26,7 @@ void Enemy::update()
 
 	pos += speed;
 	drawpos = pos;
-
+	jumpcount++;
 	updateStun();
 	if (isstun) {
 		action->damaged();
@@ -44,4 +44,9 @@ void Enemy::draw()
 void Enemy::setup(ci::Vec3f _pos)
 {
 	
+}
+
+int Enemy::getjumpCount()
+{
+	return jumpcount;
 }

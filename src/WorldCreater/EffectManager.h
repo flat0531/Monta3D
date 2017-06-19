@@ -6,8 +6,8 @@ class EffectManager {
 public:
 	EffectManager();
 	void update();
-	void draw();
-	void draw2D();
+	void draw(const ci::CameraPersp camera);
+	void draw2D(const ci::CameraPersp camera);
 	template<class T>
 	void CreateEffect(T effect);
 	template<class T>

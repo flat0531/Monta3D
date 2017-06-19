@@ -10,6 +10,7 @@
 #include"../../EditerObject/GoalCube.h"
 #include"../../EditerObject/BreakCube.h"
 #include"../../EditerObject/AppleCube.h"
+#include"../../EditerObject/ColoedCube.h"
 #include"../../Top/DrawManager.h"
 #include"../../Input/MouseMamager.h"
 #include"../../Input/KeyManager.h"
@@ -289,6 +290,9 @@ void CourseEditer::setCube(std::shared_ptr<CubeObject> _cubeobj, MapChipType typ
 		break;
 	case APPLE_CHIP:
 		_cubeobj->setCubeType(AppleCube(_cubeobj->getThisPtr()));
+		break;
+	case COLORED_CHIP:
+		_cubeobj->setCubeType(ColoredCube(_cubeobj->getThisPtr()));
 		break;
 	case MAP_CHIP_MAX:
 		break;

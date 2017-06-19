@@ -27,4 +27,5 @@ private:
 	float leftedge = 0.0f;
 	float cursorsinangle = 0.0f;
 	float cursor_t = 1.0f;
+	void drawLTexture();
 };

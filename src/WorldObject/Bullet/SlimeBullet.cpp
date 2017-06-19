@@ -17,6 +17,7 @@ SlimeBullet::SlimeBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci:
 	rotate = _rotate;
 	atackpoint = 6;
 	hp = 12;
+	uniquecolor = ColorA(0, 1, 1, 1);
 	bullettype = BulletType::PLAYER_BULLET;
 	toras.push_back(MyToras(scale,rotate,ci::Vec3f(5,0,10),0.f,ColorA(1,1,1,1)));
 	toras.push_back(MyToras(scale, rotate, ci::Vec3f(5, 10, 10), 1.5f, ColorA(0, 1, 1, 1)));

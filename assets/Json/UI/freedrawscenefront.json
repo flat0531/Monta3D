@@ -1,0 +1,58 @@
+[
+  {
+    "pos": [ 240, 70 ],
+    "size": [ 512, 128 ],
+    "rotate": -10,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/freedraw.png"
+  },
+  {
+    "pos": [ 1350, 250 ],
+    "size": [ 200, 100 ],
+    "rotate": 0,
+    "color": [ 1, 0, 0, 1 ],
+    "texture": "UI/scale.png"
+  },
+  {
+    "pos": [ 1400, 500 ],
+    "size": [ 200, 100 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/decide.png"
+  },
+  {
+    "pos": [ 1400, 500 ],
+    "size": [ 170, 100 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/kettei.png"
+  },
+   {
+    "pos": [ 1400, 670 ],
+    "size": [ 200, 100 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/backbase.png"
+  },
+  {
+    "pos": [ 1400, 670 ],
+    "size": [ 170, 100 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/back.png"
+  },
+   {
+    "pos": [ 1220, 830 ],
+    "size": [ 240, 60 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/hidarikuriNULL.png"
+  },
+   {
+    "pos": [ 1470, 830 ],
+    "size": [ 240, 60 ],
+    "rotate": 0,
+    "color": [ 1, 1, 1, 1 ],
+    "texture": "UI/Button/migikuriCase.png"
+  }
+]

@@ -19,7 +19,7 @@ SlimeAction::SlimeAction()
 }
 SlimeAction::SlimeAction(CharacterBase * _player)
 {
-	playerptr = reinterpret_cast<Player*>(_player);
+	playerptr = dynamic_cast<Player*>(_player);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
@@ -55,7 +55,7 @@ void SlimeAction::setup(ci::Vec3f rotate)
 	playerptr->setIsStun(false);
 	playerptr->setIsinvincible(false);
 	playerptr->SetIsOpetate(true);
-
+	prevoperate = 0;
 	atackdelaycount = 0;
 }
 
@@ -128,7 +128,7 @@ void SlimeAction::attack()
 	atackdelaycount = atackdelaytime;
 	SoundM.PlaySE("slime_skil.wav", 0.3f);
 	playerptr->setT(1.0f);
-	playerptr->setRotate(Vec3f(playerptr->getRotate().x, playerptr->getAttackRotate(), playerptr->getRotate().z));
+	playerptr->setRotate(getPrevOperateRotate());
 	playerptr->setJumming(false);
 	if(playerptr->getSpeed().y>0)
 	playerptr->setSpeedY(playerptr->getSpeed().y/2.f);
@@ -151,7 +151,7 @@ void SlimeAction::operate()
 	if (IsAtackDelay() || playerptr->getIsStan())return;
 
 	float dashspeed = 0.1f*WorldScale;
-
+	setPrevOperate();
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k) && playerptr->getCanJump()) {
 		playerptr->setCanJump(false);
 		playerptr->setJumming(true);
@@ -180,7 +180,36 @@ void SlimeAction::operate()
 	}
 }
 
+void SlimeAction::setPrevOperate()
+{
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_w)) {
+		prevoperate = 1;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_a)) {
+		prevoperate = 2;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_d)) {
+		prevoperate = 3;
+	}
+}
+
 bool SlimeAction::IsAtackDelay()
 {
 	return atackdelaycount != 0;
+}
+
+ci::Vec3f SlimeAction::getPrevOperateRotate()
+{
+	switch (prevoperate)
+	{
+	case 0:
+		return playerptr->getRotate();
+	case 1:
+		return Vec3f(playerptr->getRotate().x, -90, playerptr->getRotate().z);
+	case 2:
+		return Vec3f(playerptr->getRotate().x, 0.f, playerptr->getRotate().z);
+	case 3:
+		return Vec3f(playerptr->getRotate().x, -180.f, playerptr->getRotate().z);
+	}
+	return playerptr->getRotate();
 }

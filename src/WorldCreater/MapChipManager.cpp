@@ -16,6 +16,7 @@
 #include"../WorldObject/MapChip/MapChipGoal.h"
 #include"../WorldObject/MapChip/MapChipBreak.h"
 #include"../WorldObject/MapChip/MapChipApple.h"
+#include"../WorldObject/MapChip/MapChipColored.h"
 #include"../Top/CollisionManager.h"
 #include"../Top/TextureManager.h"
 #include"../Top/SoundManager.h"
@@ -148,6 +149,10 @@ void MapChipManager::CreateMap(const int worldnum, const int stagenum, const int
 			case MapChipType::APPLE_CHIP:
 				buf.push_back(std::make_shared<MapChipApple>
 					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale));
+				break;
+			case MapChipType::COLORED_CHIP:
+				buf.push_back(std::make_shared<MapChipColored>
+					(Vec3f(-x, (mapdata.size() - (y + 1)), zvalue)*WorldScale, Vec3f(1, 1, 1)*WorldScale, effectmanagerptr));
 				break;
 			default:
 				break;

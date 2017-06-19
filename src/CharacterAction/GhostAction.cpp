@@ -21,6 +21,7 @@ GhostAction::GhostAction(CharacterBase * _enemy)
 	enemyptr->setRotate(Vec3f(0, M_PI / 2.f, 0));
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setHp(maxhp);
+	enemyptr->setColor(ColorA(1, 1, 1, 1));
 	enemyptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	enemyptr->setName("ghost");
 	enemyptr->setUniqueColor(ColorA(1, 1, 1, 1));

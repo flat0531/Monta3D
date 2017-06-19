@@ -6,7 +6,7 @@ public:
 	EffectExplodeburst(const ci::Vec3f _pos, const ci::Vec3f _scale, const ci::Vec3f _rotate,
 		const ci::ColorA _color,float _easingtime);
 	void update() override;
-	void draw() override;
+	void draw(const ci::CameraPersp camera) override;
 	bool deleteThis()override;
 private:
 	struct BurstCube

@@ -31,8 +31,9 @@ void Title::setup()
 	skyrotate = Vec3f(0, 0, 0);
 	skypos = Vec3f(0,0,0);
 	TextureM.CreateTexture("titlesky.png");
-	//SoundM.PlayBGM("title.wav",0.5f);
-	//SoundM.SetLoopTimeBGM("title.wav", 11.670, 58.266);
+	buttontex = TextureM.CreateTexture("UI/Button/StartLButton.png");
+	SoundM.PlayBGM("title.wav",0.5f);
+	SoundM.SetLoopTimeBGM("title.wav", 11.670, 58.266);
 	CreateMap2d();
 	for (int i = 0;i < testtexturenum;i++) {
 		TextureM.CreateTexture("Draw/slime/slimecolorplay"+std::to_string(i)+".png");
@@ -55,6 +56,7 @@ void Title::setup()
 		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
 		-M_PI / 4.f, 0.0f, 0.2f, frameeffect.getSize().x*0.4f*1.414f, 2.0f);
 	delaycount = 0;
+	DataM.setSelectActionName("slime");
 }
 
 void Title::update()
@@ -87,9 +89,16 @@ void Title::update()
 		}
 		
 	}
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_g)&&(!FadeM.getIsFading())) {
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_l)&&(!FadeM.getIsFading())) {
+		SoundM.FadeNowBGM(0.0f, 1.5f, true);
 		FadeM.StartFadeIn();
 	}
+	float anglespeed = 0.1f;
+	if (FadeM.getIsfadeIn()) {
+		anglespeed = 1.0f;
+	}
+	buttonsinangle += anglespeed;
+
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_o)) {
 		//DataM.saveStageData(1, 2, true);
 		/*TextureM.CreateTexture("UI/montaicon.png");
@@ -122,6 +131,7 @@ void Title::draw2D()
 	gl::setMatrices(ortho);
 	gl::pushModelView();
 
+	drawButton();
 
 	gl::popModelView();
 }
@@ -134,17 +144,6 @@ void Title::shift()
 	}
 	if (FadeM.getIsfadeinEnd()) {
 		//SoundM.eraseBGM("title.wav");
-		SceneManager::createScene(StageSelect());
-	}
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_q)) {
-		//SoundM.eraseBGM("title.wav");
-		SceneManager::createScene(Draw());
-	}
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_e)) {
-		//SoundM.eraseBGM("title.wav");
-		SceneManager::createScene(EffectEdit());
-	}
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_s)) {
 		SceneManager::createScene(StageSelect());
 	}
 }
@@ -242,4 +241,11 @@ void Title::drawmap2dFront()
 	for (auto itr : map2dfront) {
 		itr.draw();
 	}
+}
+
+void Title::drawButton()
+{
+	Vec2f pos = Vec2f(WINDOW_WIDTH / 2.f, 2.5f*WINDOW_HEIGHT / 3.f);
+	Vec2f size = Vec2f(700, 175);
+	DrawM.drawTextureBox(pos, size, 0.0f, buttontex, ColorA(1, 1, 1, 0.7f + 0.3f*sin(buttonsinangle)));
 }

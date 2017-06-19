@@ -15,6 +15,7 @@ CatBullet::CatBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _angle, ci::Vec3f _
 	scale = _scale;
 	angle = _angle;
 	rotate = _rotate;
+	uniquecolor = ColorA(1, 1, 1, 1);
 	bullettype = BulletType::PLAYER_BULLET;
 	color = _color;
 	playerptr = _playerptr;

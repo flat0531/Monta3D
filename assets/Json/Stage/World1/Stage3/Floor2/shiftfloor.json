@@ -1,9 +1,9 @@
 [
    {
-      "pos" : [ -500, 300, 0 ],
-      "size" : [ 100, 100, 100 ],
-      "next" : 1,
-    "nextplayerpos": [ -900, 800, 0 ],
-     "nextplayerrotate" : [ 0, 180, 0 ]
+      "pos" : [ -12, 72, 0 ],
+      "size" : [ 1, 1, 1 ],
+      "next" : 3,
+    "nextplayerpos": [ -4, 4, 0 ],
+     "nextplayerrotate" : [ 0, -180, 0 ]
    }
 ]

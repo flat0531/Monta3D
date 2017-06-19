@@ -82,7 +82,7 @@ void CameraManager::updatePlayerCameraType()
 {
 	/////////y軸徐々にプレイヤーのポスに近づける///////////
 	float cameraposy;
-	cameraposy = 2.f * WorldScale + playerptr->getPos().y;
+	cameraposy = 1.5f * WorldScale + playerptr->getPos().y;
 	cameraposy = std::min(cameraposy, maxvalue.y - 3.f * WorldScale);//上限
 	cameraposy = std::max(cameraposy, 2.f * WorldScale);//下限
 	float trancespeed = 40.f;//プレイヤーがカメラから上に向かっているとき遅く
@@ -146,7 +146,7 @@ void CameraManager::updateEventCameraType()
 void CameraManager::updateXLockCameraType()
 {
 	float cameraposy;
-	cameraposy = 2 * WorldScale + playerptr->getPos().y;
+	cameraposy = 1.5 * WorldScale + playerptr->getPos().y;
 	cameraposy = std::min(cameraposy, maxvalue.y - 3 * WorldScale);//上限
 	cameraposy = std::max(cameraposy, 2 * WorldScale);//下限
 	float trancespeed = 40.f;//プレイヤーがカメラから上に向かっているとき遅く

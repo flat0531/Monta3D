@@ -16,7 +16,7 @@ RattonAction::RattonAction()
 
 RattonAction::RattonAction(CharacterBase * _enemy)
 {
-	enemyptr = reinterpret_cast<Enemy*>(_enemy);
+	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
 	int maxhp = 10;

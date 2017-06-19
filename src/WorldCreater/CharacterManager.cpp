@@ -8,6 +8,7 @@
 #include"../WorldCreater/EffectManager.h"
 #include"../WorldCreater/ShadowManager.h"
 #include"../WorldObject/Effect/EffectExplosion.h"
+#include"../WorldObject/Effect/EffectStar.h"
 #include"../Top/EasingManager.h"
 #include"../Top/SoundManager.h"
 #include"../WorldCreater/EffectManager.h"
@@ -99,7 +100,8 @@ void CharacterManager::update(const ci::CameraPersp camera)
 		{
 			(*itr)->updateDeath(0.75f);
 			if ((*itr)->updateDeathEnd()) {
-				effectmanager->CreateEffect(EffectExplosion((*itr)->getPos(), (*itr)->getScale(), ci::Vec3f(0, 0, 0)));
+				//effectmanager->CreateEffect(EffectExplosion((*itr)->getPos(), (*itr)->getScale(), ci::Vec3f(0, 0, 0)));
+				effectmanager->CreateEffect2D(EffectStar((*itr)->getPos(), (*itr)->getScale(),(*itr)->getUniqueColor()));
 				itr = enemys.erase(itr);
 				SoundM.PlaySE("enemy_die.wav", 0.5f);
 			}
@@ -206,7 +208,7 @@ void CharacterManager::updateActionSelectMode()
 		}
 	}
 	if ((!isbeginselectmode)&&(!isendselectmode)) {
-		if (KeyManager::getkey().isPush(KeyEvent::KEY_i)) {
+		if (KeyManager::getkey().isPush(KeyEvent::KEY_l)) {
 			////////////////////////////////ここでアクション変更
 			SelectPlayerFolm(stringToActionType(getActionName()));
 			mainwondow->setSelectTextureNum(getPlayTextureNum());
@@ -344,6 +346,9 @@ ActionType CharacterManager::stringToActionType(const std::string name)
 	if (name == "pumpman") {
 		return ActionType::PUMPMAN;
 	}
+	if (name == "walkratton") {
+		return ActionType::WALKRATTON;
+	}
 	console() << "バグです" << std::endl;
 	return ActionType::RATTON;
 }
@@ -351,8 +356,12 @@ ActionType CharacterManager::stringToActionType(const std::string name)
 void CharacterManager::SelectPlayerFolm(const ActionType _actiontype)
 {
 	if (_actiontype == player->getActiontype())return;
+	float begin_scale_y = player->getScale().y;
 	player->decideAction(_actiontype);
 	player->setActionType(_actiontype);
+	float next_scale_y = player->getScale().y;
+	float trance_y = next_scale_y - begin_scale_y;
+	player->setPosY(player->getPos().y + trance_y/2.f);
 }
 
 

@@ -30,7 +30,7 @@ Player::Player(ci::Vec3f _pos, ActionType _actiontype, ShadowManager * _shadowma
 	actiontype = _actiontype;
 	direction_t = 0.0f;
 	isoperate = true;
-	maxhp = 100;
+	maxhp = 75;
 	hp = maxhp;
 	shadowmanager = _shadowmanager;
 }
@@ -50,7 +50,7 @@ void Player::update()
 	}
 	RotateEasing();
 	
-	EasingManager::tCount(direction_t, 0.15f);
+	EasingManager::tCount(direction_t, 0.4f);
 	jumpcount++;
 
 
@@ -99,7 +99,7 @@ void Player::setJumming(const bool is)
 
 void Player::RotateEasing()
 {
-	rotate.y = EasingLinear(direction_t, easing_start_rotate, getAttackRotate());
+	rotate.y = EasingCubicOut(direction_t, easing_start_rotate, getAttackRotate());
 }
 
 
@@ -160,26 +160,18 @@ PlayerDirection Player::disideDirection()
 	bool isright = KeyManager::getkey().isPress(KeyEvent::KEY_d);
 	bool isup = KeyManager::getkey().isPress(KeyEvent::KEY_w);
 
-	if (isup&&isright&&isleft) {
-		return PlayerDirection::UP_DIRECTION;
+	
+	if (isright) {
+		return PlayerDirection::RIGHT_DIRECTION;
 	}
-	if (isright&&isup) {
-		return PlayerDirection::RIGHT_UP_DIRECTION;
-	}
-	if (isleft&&isup) {
-		return PlayerDirection::LEFT_UP_DIRECTION;
+	if (isleft) {
+		return PlayerDirection::LEFT_DIRECTION;
 	}
 	if (isup) {
 		return PlayerDirection::UP_DIRECTION;
 	}
-	if (isright) {
-		return PlayerDirection::RIGHT_DIRECTION;
-	}
 	
-	if (isleft) {
-		return PlayerDirection::LEFT_DIRECTION;
-	}
-	return PlayerDirection::NONE_DIRECTION;
+	return playerdirection;
 }
 
 

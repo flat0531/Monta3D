@@ -17,6 +17,7 @@ MoguraBullet::MoguraBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, c
 	speed = _speed;
 	rotate = _rotate;
 	atackpoint = 5;
+	uniquecolor = ColorA(1, 88.f / 255.f, 0, 1);
 	hp = 10;
 	bullettype = BulletType::PLAYER_BULLET;
 	int createnum = 6;

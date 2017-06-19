@@ -95,7 +95,7 @@ void InformationWindow::updateOpen()
 	if (isclose)return;
 	if (!playedse) {
 		playedse = true;
-		SoundM.PlaySE("itemwindow.wav");
+		SoundM.PlaySE("itemwindow.wav",0.3f);
 	}
 	EasingManager::tCount(t, 1.0f);
 	sizerate = EasingElasticOut(t, 0.0f, 1.0f);

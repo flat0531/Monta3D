@@ -1,5 +1,6 @@
 #include "SurfaceScaleDown.h"
 #include"cinder/ImageIo.h"
+
 using namespace ci;
 using namespace ci::app;
 SurfaceScaleDown::SurfaceScaleDown()

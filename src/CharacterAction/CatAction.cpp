@@ -19,7 +19,7 @@ CatAction::CatAction()
 }
 CatAction::CatAction(CharacterBase * _player)
 {
-	playerptr = reinterpret_cast<Player*>(_player);
+	playerptr = dynamic_cast<Player*>(_player);
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	playerptr->setScale(Vec3f(1.2,1.2,1.2)*WorldScale);
 	maxjumppower = 0.085f*WorldScale;
@@ -47,7 +47,7 @@ void CatAction::setup(ci::Vec3f rotate)
 	else {
 		playerptr->setPlayerDirection(PlayerDirection::LEFT_DIRECTION);
 	}
-
+	prevoperate = 0;
 	playerptr->setT(1.0f);
 	playerptr->setSpeed(Vec3f(0, 0, 0));
 	playerptr->setCanJump(false);
@@ -162,6 +162,7 @@ void CatAction::jump()
 
 void CatAction::attack()
 {
+	playerptr->setRotate(getPrevOperateRotate());
 	ci::Vec3f speed = ci::Quatf(ci::toRadians(playerptr->getRotate().x),
 		ci::toRadians(playerptr->getRotate().y),
 		ci::toRadians(playerptr->getRotate().z))*ci::Vec3f::xAxis();
@@ -197,7 +198,7 @@ bool CatAction::IsAtackDelay()
 void CatAction::operate()
 {
 	if (playerptr->getIsStan())return;
-
+	setPrevOperate();
 	float dashspeed = 0.1f*WorldScale;
 
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k) && playerptr->getCanJump()) {
@@ -225,5 +226,34 @@ void CatAction::operate()
 	}
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_l)&& (!IsAtackDelay())) {
 		attack();
+	}
+}
+
+ci::Vec3f CatAction::getPrevOperateRotate()
+{
+	switch (prevoperate)
+	{
+	case 0:
+		return playerptr->getRotate();
+	case 1:
+		return Vec3f(playerptr->getRotate().x, -90, playerptr->getRotate().z);
+	case 2:
+		return Vec3f(playerptr->getRotate().x, 0.f, playerptr->getRotate().z);
+	case 3:
+		return Vec3f(playerptr->getRotate().x, -180.f, playerptr->getRotate().z);
+	}
+	return playerptr->getRotate();
+}
+
+void CatAction::setPrevOperate()
+{
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_w)) {
+		prevoperate = 1;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_a)) {
+		prevoperate = 2;
+	}
+	if (KeyManager::getkey().isPress(KeyEvent::KEY_d)) {
+		prevoperate = 3;
 	}
 }

@@ -1,14 +1,42 @@
 [
   {
-    "enemytype": "ratton",
-    "pos" : [ -60.5, 10, 0.1 ]
+    "enemytype": "walkratton",
+    "pos" : [ -54, 4, 1 ]
   },
   {
     "enemytype": "witch",
-    "pos": [ -30.5, 10, 0.1 ]
+    "pos": [ -25.5, 5.5, 0.2 ]
   },
   {
     "enemytype": "sparrow",
-    "pos": [ -80.5, 10, 0.1 ]
+    "pos": [ -45, 10, 4 ]
+  },
+  {
+    "enemytype": "sparrow",
+    "pos": [ -46, 10, 5 ]
+  },
+  {
+    "enemytype": "sparrow",
+    "pos": [ -47, 10, 6 ]
+  },
+  {
+    "enemytype": "sparrow",
+    "pos": [ -48, 10, 7 ]
+  },
+  {
+    "enemytype": "sparrow",
+    "pos": [ -49, 10, 8 ]
+  },
+  {
+    "enemytype": "pumpman",
+    "pos": [ -89, 5, 0 ]
+  },
+  {
+    "enemytype": "pumpman",
+    "pos": [ -91, 5, 0 ]
+  },
+   {
+    "enemytype": "pumpman",
+    "pos": [ -93, 5, 0 ]
   }
 ]

@@ -24,7 +24,7 @@ void EffectExplosion::update()
 	CountUp();
 }
 
-void EffectExplosion::draw()
+void EffectExplosion::draw(const ci::CameraPersp camera)
 {
 	DrawM.drawSphere(pos, scale, rotate, 12, ci::ColorA(1, 0.5, 0, 1));
 }

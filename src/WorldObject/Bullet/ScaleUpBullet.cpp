@@ -2,6 +2,8 @@
 #include "../../WorldObject/Enemy.h"
 #include"MyToras.h"
 #include"../../Top/EasingManager.h"
+#include"../../WorldCreater/CharacterManager.h"
+#include"../Player.h"
 using namespace ci;
 using namespace ci::app;
 ScaleUpBullet::ScaleUpBullet()
@@ -39,6 +41,27 @@ void ScaleUpBullet::update()
 {
 	timecount++;
 	if (!EasingManager::tCountEnd(scale_t)) {
+		ci::Vec3f playerpos = enemyptr->getCharacterManager()->getPlayer()->getPos();
+		ci::Vec3f trancepos = ((enemyptr->getQuat()*Vec3f::zAxis())*enemyptr->getScale().x / 2.f) + Vec3f(0, enemyptr->getScale().y / 4.f, 0);
+		Vec3f d = playerpos - (enemyptr->getPos() + trancepos);
+		d.normalize();
+
+		Vec3f cross = enemyptr->getPos().cross(d);
+
+		enemyptr->setBulletQuat(Quatf(ci::Matrix44f::createRotation(Vec3f::zAxis(), d, Vec3f::yAxis())));
+
+		ci::Vec3f vec = enemyptr->getBulletQuat()*Vec3f::zAxis();
+
+
+		pos = enemyptr->getPos() + trancepos;
+
+		speed = vec*100.f*0.15f;
+
+
+
+
+
+
 		EasingManager::tCount(scale_t, (float(delay)) / 60.f);
 		scale.x = EasingLinear(scale_t, startscale.x, endscale.x);
 		scale.y = EasingLinear(scale_t, startscale.y, endscale.y);

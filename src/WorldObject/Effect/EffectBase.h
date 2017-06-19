@@ -1,10 +1,11 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include"cinder/Camera.h"
 class EffectBase {
 public:
 	EffectBase();
-	virtual void draw() {};
+	virtual void draw(const ci::CameraPersp camera) {};
 	virtual void update() {};
 	virtual bool deleteThis() { return false; };
 	void CountUp();

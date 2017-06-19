@@ -459,6 +459,42 @@
     <ClCompile Include="..\src\CharacterAction\BirdAction.cpp">
       <Filter>Source Files\CharacterAction\PlayerAction</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\WalkRattonAction.cpp">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\MapChip\MapChipColored.cpp">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditerObject\ColoedCube.cpp">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\BulletBase.cpp">
+      <Filter>Source Files\WorldObjct\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectColored.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectStar.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StageSelectObject\StageSelectMenu.cpp">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\FolmTexture.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\FolmTextureList.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\UI\FolmScenePlayTexture.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameScene\FreeDraw\FreeDraw.cpp">
+      <Filter>Source Files\Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\ActionBase.cpp">
+      <Filter>Source Files\CharacterAction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -785,9 +821,6 @@
     <ClInclude Include="..\src\CharacterAction\MoguraAction.h">
       <Filter>Source Files\CharacterAction\PlayerAction</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\WorldObject\Bullet\MoguraBullet.h">
-      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\WorldCreater\ItemManager.h">
       <Filter>Source Files\Creater</Filter>
     </ClInclude>
@@ -820,6 +853,39 @@
     </ClInclude>
     <ClInclude Include="..\src\WorldCreater\ShadowManager.h">
       <Filter>Source Files\Creater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\WalkRattonAction.h">
+      <Filter>Source Files\CharacterAction\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\MapChip\MapChipColored.h">
+      <Filter>Source Files\WorldObjct\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EditerObject\ColoedCube.h">
+      <Filter>Source Files\EditerObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectColored.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectStar.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StageSelectObject\StageSelectMenu.h">
+      <Filter>Source Files\StageSelectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\FolmTexture.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\FolmTextureList.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\MoguraBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\PlayerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UI\FolmScenePlayTexture.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameScene\FreeDraw\FreeDraw.h">
+      <Filter>Source Files\Scene\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

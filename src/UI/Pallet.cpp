@@ -38,7 +38,7 @@ void Pallet::update()
 void Pallet::addColorObject(ci::ColorA _color, bool _isnecessary, int _num)
 {
 	Vec2f size = 1.5f*TextureM.getTexture("UI/paintpen.png").getSize();
-	Vec2f trancepos = Vec2f(colorobjects.size()*size.x-(_num-1)*size.x/2.f,0);
+	Vec2f trancepos = Vec2f(colorobjects.size()*size.x-(_num-1)*size.x/2.f-200.f,0);
 	
 	colorobjects.push_back(ColorObject(trancepos, palletpos, size, _color, _isnecessary));
 }

@@ -18,18 +18,23 @@ ShadowManager * ShadowManager::getThisPtr()
 
 void ShadowManager::draw(const ci::Vec3f pos, const ci::Vec3f scale)
 {
+	if (pos.z >= WorldScale*8.f)return;
 	std::vector<std::vector<std::shared_ptr<MapChipBase>>>buff = mapchipmanagerptr->getMapChips();
 	
 	int WorldScaleInt = int(WorldScale);
 	int index_x = (int(-(pos.x-WorldScale/2.f)) / WorldScaleInt);
 	int index_y = (int(pos.y) / WorldScaleInt);
+
+	if (index_x >= mapchipmanagerptr->getChipsSize().x - 1)return;
+	if (index_x < 0)return;
+	if (index_y >= mapchipmanagerptr->getChipsSize().y - 1)return;
+	if (index_y < 0)return;
+
 	Vec3f centerpos = Vec3f(pos.x, pos.y, pos.z);
 	Ray ray(centerpos, Vec3f(0, -WorldScale * 10, 0));
 
 	bool ishit = false;
 		
-	if (index_x >= mapchipmanagerptr->getChipsSize().x - 1)return;
-	if (index_x < 0)return;
 
 		float length = std::numeric_limits<float>::max();
 		int ray_y_index = -1;

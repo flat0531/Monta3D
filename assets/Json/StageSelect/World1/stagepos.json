@@ -2,6 +2,7 @@
   {
     "name": "Hello World",
     "pos": [ 150, 650 ],
+    "uipos": [ 300, 800 ],
     "easingtype": [ 18, 0 ],
     "size": [ 90, 70 ],
     "color": [ 1, 1, 0, 1 ]
@@ -9,6 +10,7 @@
   {
     "name": "Beat Jungle",
     "pos": [ 800, 450 ],
+    "uipos": [ 800, 550 ],
     "easingtype": [ 18, 11 ],
     "size": [ 90, 70 ],
     "color": [ 1, 1, 0, 1 ]
@@ -16,6 +18,7 @@
   {
     "name": "Twilight Tower",
     "pos": [ 1300, 750 ],
+    "uipos": [ 1300, 650 ],
     "easingtype": [ 1, 18 ],
     "size": [ 90, 70 ],
     "color": [ 1, 1, 0, 1 ]
@@ -23,6 +26,7 @@
   {
     "name": "Hello World",
     "pos": [ 1225, 450 ],
+       "uipos": [ 1225, 550 ],
     "easingtype": [ 18, 18 ],
     "size": [ 110, 80 ],
     "color": [ 1, 0, 0, 1 ]

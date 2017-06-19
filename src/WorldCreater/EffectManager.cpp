@@ -1,8 +1,10 @@
 #include "EffectManager.h"
-
+#include"../Top/SoundManager.h"
 EffectManager::EffectManager()
 {
-
+	SoundM.CreateSE("cubecolored.wav");
+	SoundM.CreateSE("itemget.wav");
+	
 }
 
 void EffectManager::update()
@@ -29,17 +31,18 @@ void EffectManager::update()
 	}
 }
 
-void EffectManager::draw()
+void EffectManager::draw(const ci::CameraPersp camera)
 {
 	for (auto itr : effects) {
-		itr->draw();
+		itr->draw(camera);
 	}
 }
 
-void EffectManager::draw2D()
+
+void EffectManager::draw2D(const ci::CameraPersp camera)
 {
 	for (auto itr : effects2d) {
-		itr->draw();
+		itr->draw(camera);
 	}
 }
 
