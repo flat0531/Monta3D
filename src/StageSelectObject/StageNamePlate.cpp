@@ -39,7 +39,10 @@ void StageNamePlate::draw()
 {
 	DrawM.drawTextureBox(pos,size,0.f, TextureM.getTexture("UI/itemwindow.png"),ColorA(1,1,1, coloralpha));
 	DrawM.drawTextureBox(pos, Vec2f(430,250), 0.f, stagesnaptex, ColorA(1, 1, 1, coloralpha));
-	DrawM.drawTextureBox(pos+Vec2f(65,92), Vec2f(300, 70), 0.f, TextureM.getTexture("UI/itemplate.png"), ColorA(1, 1, 1, coloralpha));
+	if (!(itemicons.size() == 0)) {
+		DrawM.drawTextureBox(pos + Vec2f(65, 92), Vec2f(300, 70), 0.f, TextureM.getTexture("UI/itemplate.png"), ColorA(1, 1, 1, coloralpha));
+	}
+	
 	DrawM.drawTextureBox(pos + Vec2f(2, -48), Vec2f(460, 115), 0.f, stagenametex, ColorA(0, 0, 0, coloralpha));
 	DrawM.drawTextureBox(pos+Vec2f(0,-50), Vec2f(460,115), 0.f,stagenametex, ColorA(1, 1, 1, coloralpha));
 	drawItemIcon();

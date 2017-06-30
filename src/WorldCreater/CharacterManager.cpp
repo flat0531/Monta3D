@@ -3,6 +3,7 @@
 #include"../WorldObject/Player.h"
 #include"../CharacterAction/ActionBase.h"
 #include"../WorldObject/Enemy.h"
+#include"../WorldObject/Boss.h"
 #include"../Top/Top.h"
 #include"../Top/CollisionManager.h"
 #include"../WorldCreater/EffectManager.h"
@@ -11,23 +12,19 @@
 #include"../WorldObject/Effect/EffectStar.h"
 #include"../Top/EasingManager.h"
 #include"../Top/SoundManager.h"
+#include"../Top/TextureManager.h"
 #include"../WorldCreater/EffectManager.h"
 #include"../Input/KeyManager.h"
 #include"../Top/MyJson.h"
+#include"../Top/DataManager.h"
 #include"../UI/MainWindow.h"
 #include"../Top/DrawManager.h"
 using namespace ci;
 using namespace ci::app;
 CharacterManager::CharacterManager()
 {
-	SoundM.CreateSE("enemy_die.wav");
-	SoundM.CreateSE("actionselectend.wav");
+	createAsset();
 	selectaction = std::make_shared<SelectAction>();
-}
-
-void CharacterManager::CreateCharacter(CharacterBase character)
-{
-	
 }
 
 void CharacterManager::CreatePlayer(ci::Vec3f pos)
@@ -50,6 +47,16 @@ void CharacterManager::setShadowManagerPointer(ShadowManager * _shadowmanager)
 	shadowmanager = _shadowmanager;
 }
 
+void CharacterManager::setCameraManagerPointer(CameraManager * _cameramanager)
+{
+	cameramanager = _cameramanager;
+}
+
+void CharacterManager::setMapChipManagerPointer(MapChipManager * _mapchipmanager)
+{
+	mapchipmanager = _mapchipmanager;
+}
+
 void CharacterManager::setMainWindowPointer(MainWindow * _mainwindow)
 {
 	mainwondow = _mainwindow;
@@ -64,6 +71,34 @@ void CharacterManager::setBulletManagerPtrToEnemys()
 {
 	for (auto& itr : enemys) {
 		itr->SetBulletManagerPointer(bulletmanager);
+	}
+}
+
+void CharacterManager::setBulletManagerPtrToBoss()
+{
+	for (auto& itr :boss) {
+		itr->SetBulletManagerPointer(bulletmanager);
+	}
+}
+
+void CharacterManager::setCameratManagerPtrToBoss()
+{
+	for (auto& itr : boss) {
+		itr->setCameraManagerPointer(cameramanager);
+	}
+}
+
+void CharacterManager::setEffectManagerPtrToBoss()
+{
+	for (auto& itr : boss) {
+		itr->SetEffectManagerPointer(effectmanager);
+	}
+}
+
+void CharacterManager::setMapChipManagerPtrToBoss()
+{
+	for (auto& itr : boss) {
+		itr->setMapChipManagerPointer(mapchipmanager);
 	}
 }
 
@@ -82,15 +117,27 @@ void CharacterManager::setEnemysAction()
 	}
 }
 
-
-void CharacterManager::setup()
+void CharacterManager::setBossAction()
 {
-	CreateEnemys(1,1,1);//////////////
+	for (auto& itr : boss) {
+		itr->decideAction(itr->getActiontype());
+		itr->setCharacterManagerPointer(this);
+		bosshpbuff = itr->getMaxHp();
+	}
 }
+
 
 void CharacterManager::update(const ci::CameraPersp camera)
 {
-	player->update();
+	if (getIsBossFloor()) {
+		if ((isbossbegineffectend)) {
+			player->update();
+		}
+	}
+	else {
+		player->update();
+	}
+	
 	for (auto itr = enemys.begin();itr != enemys.end();) {
 		if ((*itr)->getIsAlive()) {
 			//ci::app::console() << (*itr)->getHp() << std::endl;
@@ -111,6 +158,22 @@ void CharacterManager::update(const ci::CameraPersp camera)
 
 		}
 	}
+	for (auto itr = boss.begin();itr != boss.end();) {
+		if ((*itr)->getIsBeginEffectEnd()) {
+			isbossbegineffectend = true;
+		}
+		if ((*itr)->getIsAlive()) {
+			//ci::app::console() << (*itr)->getHp() << std::endl;
+			itr++;
+			
+			isbossdeath = true;
+		}
+		else
+		{
+			itr++;
+		}
+		
+	}
 	for (auto& itr : enemys) {
 		if ((itr)->getIsAlive()) {
 			Vec2f screen_position = camera.worldToScreen(itr->getPos(),
@@ -121,7 +184,13 @@ void CharacterManager::update(const ci::CameraPersp camera)
 			
 		}
 	}
+	for (auto& itr : boss) {
+		itr->update();
+	}
+
+	updatebossGage();
 	CollisionPlayerToEnemy();
+	CollisionPlayerToBoss();
 }
 
 void CharacterManager::draw(const ci::CameraPersp camera)
@@ -133,6 +202,9 @@ void CharacterManager::draw(const ci::CameraPersp camera)
 		if (CollisionM.isBoxPoint(screen_position, Vec2f(-WINDOW_WIDTH*0.2f, -WINDOW_HEIGHT*0.2f), Vec2f(WINDOW_WIDTH*1.4f, WINDOW_HEIGHT*1.4f))) {
 			itr->draw();
 		}
+	}
+	for (auto& itr : boss) {
+		itr->draw();
 	}
 }
 
@@ -150,7 +222,36 @@ void CharacterManager::CreateEnemys(const int worldnum, const int stagenum, cons
 		JsonTree child = enemyjson.getChild(i);
 		Vec3f pos = JsonM.getVec3(child, "pos")*WorldScale;
 		std::string enemytype = child.getValueForKey<std::string>("enemytype");
-		enemys.push_back(std::make_shared<Enemy>(pos, stringToActionType(enemytype), i + 1));
+		enemys.push_back(std::make_shared<Enemy>(pos,DataM.stringToActionType(enemytype), i + 1));
+	}
+}
+
+void CharacterManager::CreateBoss(const int worldnum, const int stagenum, const int floornum)
+{
+	boss.clear();
+	bossgage_t = 0.0f;
+	isbossdeath = false;
+	isbossbegineffectend = false;
+	isbossfloor = false;
+	isfirstgage = true;
+	bossgagebeginrate = 0.0f;
+	bossgagerate = 0.0f;
+	bossgageendrate = 1.0f;
+
+
+
+	std::string path = "Json/Stage/World" + std::to_string(worldnum) +
+		"/Stage" + std::to_string(stagenum) +
+		"/Floor" + std::to_string(floornum);
+	JsonTree bossjson(loadAsset(path + "/boss.json"));
+
+
+	for (int i = 0;i <bossjson.getNumChildren();i++) {
+		JsonTree child = bossjson.getChild(i);
+		Vec3f pos = JsonM.getVec3(child, "pos")*WorldScale;
+		std::string enemytype = child.getValueForKey<std::string>("enemytype");
+		boss.push_back(std::make_shared<Boss>(pos, DataM.stringToActionType(enemytype), i + 1));
+		isbossfloor = true;
 	}
 }
 
@@ -172,6 +273,11 @@ std::shared_ptr<CharacterBase> CharacterManager::getPlayer()
 std::list<std::shared_ptr<CharacterBase>>& CharacterManager::getEnemys()
 {
 	return enemys;
+}
+
+std::list<std::shared_ptr<CharacterBase>>& CharacterManager::getBoss()
+{
+	return boss;
 }
 
 void CharacterManager::setActionSelectMode(const bool is)
@@ -210,14 +316,14 @@ void CharacterManager::updateActionSelectMode()
 	if ((!isbeginselectmode)&&(!isendselectmode)) {
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_l)) {
 			////////////////////////////////ここでアクション変更
-			SelectPlayerFolm(stringToActionType(getActionName()));
+			SelectPlayerFolm(DataM.stringToActionType(getActionName()));
 			mainwondow->setSelectTextureNum(getPlayTextureNum());
 			isendselectmode = true;
 			SoundM.PlaySE("actionselectend.wav");
 		}
 	}
 	if ((!isbeginselectmode) && (!isendselectmode)) {
-		selectaction->update();////////////ここ
+		selectaction->update();
 	}
 }
 
@@ -248,6 +354,27 @@ void CharacterManager::setActionSelectBackGround(const ci::gl::Texture & tex)
 	background = tex;
 }
 
+void CharacterManager::drawBossHpGage()
+{
+	if (!isbossbegineffectend)return;
+	for (auto& itr : boss) {
+		Vec2f pos = Vec2f(1500, 600);
+		Vec2f size = Vec2f(50, -500);
+		float hprate = (float(itr->getHp()) / float(itr->getMaxHp()));
+		DrawM.drawBoxEdge(pos + Vec2f(-5, 5), size + Vec2f(10, -10), ColorA(1, 1, 1, 1));
+		DrawM.drawBoxEdge(pos, Vec2f(size.x, size.y), ColorA(0, 0, 0, 1));
+		if (isfirstgage) {
+			DrawM.drawBoxEdge(pos, Vec2f(size.x, size.y*bossgagerate), ColorA(0, 1, 0, 1));
+		}
+		else {
+			DrawM.drawBoxEdge(pos, Vec2f(size.x, size.y*bossgagerate), ColorA(0.5, 0.5, 0.5, 1));
+			DrawM.drawBoxEdge(pos, Vec2f(size.x, hprate*size.y), ColorA(hprate > 0.5f ? 0 : 1, hprate > 0.33f ? 1 : 0, 0, 1));
+		}
+		DrawM.drawTextureBoxEdge(Vec2f(pos.x-5,35), Vec2f(60,60), TextureM.getTexture("UI/dokuro.png"),ColorA(1, 1, 1, 1));
+	}
+	
+}
+
 float CharacterManager::getBackGround_T()
 {
 	return background_t;
@@ -266,6 +393,16 @@ bool CharacterManager::getIsEnd()
 int CharacterManager::getPlayTextureNum()
 {
 	return selectaction->getPlayTextureNum();
+}
+
+bool CharacterManager::getIsBossDeath()
+{
+	return isbossdeath;
+}
+
+bool CharacterManager::getIsBossFloor()
+{
+	return isbossfloor;
 }
 
 std::string CharacterManager::getActionName()
@@ -314,43 +451,20 @@ void CharacterManager::CollisionPlayerToEnemy()
 	}
 }
 
-ActionType CharacterManager::stringToActionType(const std::string name)
+void CharacterManager::CollisionPlayerToBoss()
 {
-	if (name == "slime") {
-		return ActionType::SLIME;
+	for (auto boss_itr = boss.begin();
+	boss_itr != boss.end();boss_itr++) {
+
+		if (CollisionM.isAABBAABB(player->getAABB(), (*boss_itr)->getAABB())) {
+			if (!player->getIsInvincible()) {
+				player->addHpValue(-10);
+				player->setIsStun(true);
+				player->setIsinvincible(true);
+				SoundM.PlaySE("damage.wav", 0.5f);
+			}
+		}
 	}
-	if (name == "cat") {
-		return ActionType::CAT;
-	}
-	if (name == "bird") {
-		return ActionType::BIRD;
-	}
-	if (name == "angel") {
-		return ActionType::ENJEL;
-	}
-	if (name == "mogura") {
-		return ActionType::MOGURA;
-	}
-	if (name=="ratton") {
-		return ActionType::RATTON;
-	}
-	if (name == "witch") {
-		return ActionType::WITCH;
-	}
-	if (name == "sparrow") {
-		return ActionType::SPARROW;
-	}
-	if (name == "ghost") {
-		return ActionType::GHOST;
-	}
-	if (name == "pumpman") {
-		return ActionType::PUMPMAN;
-	}
-	if (name == "walkratton") {
-		return ActionType::WALKRATTON;
-	}
-	console() << "バグです" << std::endl;
-	return ActionType::RATTON;
 }
 
 void CharacterManager::SelectPlayerFolm(const ActionType _actiontype)
@@ -364,11 +478,32 @@ void CharacterManager::SelectPlayerFolm(const ActionType _actiontype)
 	player->setPosY(player->getPos().y + trance_y/2.f);
 }
 
-
-void CharacterManager::updateBackGround()
+void CharacterManager::createAsset()
 {
+	SoundM.CreateSE("enemy_die.wav");
+	SoundM.CreateSE("actionselectend.wav");
+	TextureM.CreateTexture("UI/dokuro.png");
 }
 
-void CharacterManager::drawBackGround()
+void CharacterManager::updatebossGage()
 {
+	if (!isbossbegineffectend)return;
+	for (auto& itr : boss) {
+		if (!(bosshpbuff == itr->getHp())) {
+			bossgage_t = 0.0f;
+			bossgagebeginrate = bossgagerate;
+			bossgageendrate = float(itr->getHp()) / float(itr->getMaxHp());
+			bosshpbuff = itr->getHp();
+		}
+		EasingManager::tCount(bossgage_t, isfirstgage ? 2.0f : 0.5f);
+		if (isfirstgage) {
+			bossgagerate = EasingLinear(bossgage_t, bossgagebeginrate, bossgageendrate);
+		}else{
+			bossgagerate = EasingCubicIn(bossgage_t, bossgagebeginrate, bossgageendrate);
+		}
+	
+		if (EasingManager::tCountEnd(bossgage_t)) {
+			isfirstgage = false;
+		}
+	}
 }

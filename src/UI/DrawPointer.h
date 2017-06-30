@@ -16,4 +16,5 @@ private:
 	float circlesize;
 	bool iscircledraw;
 	ci::ColorA circlecolor;
+	void createAsset();
 };

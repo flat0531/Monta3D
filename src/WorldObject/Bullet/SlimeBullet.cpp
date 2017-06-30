@@ -46,8 +46,6 @@ void SlimeBullet::draw()
 	for (int i = 0;i < toras.size();i++) {
 		toras[i].draw(pos);
 	}
-	//DrawM.drawCube(getAABB().getCenter(), getAABB().getSize(), ci::Vec3f(0, 0, 0), ci::ColorA(0, 0, 0, 1));
-	//DrawM.drawCube(pos,scale,rotate,ColorA(1,0,0,1));
 	gl::popModelView();
 }
 

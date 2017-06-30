@@ -25,10 +25,7 @@ using namespace ci;
 using namespace ci::app;
 MapChipManager::MapChipManager()
 {
-	TextureM.CreateTexture("Map/normalbox.png");
-	TextureM.CreateTexture("Map/hulffloor.png");
-	TextureM.CreateTexture("Map/renga.png");
-	SoundM.CreateSE("onground.wav");
+	createAsset();
 }
 
 void MapChipManager::setup(const int worldnum, const int stagenum, const int floornum)
@@ -45,7 +42,7 @@ void MapChipManager::update()
 	CollisionEnemysToMap();
 	CollisionPlayerBulletToMap();
 	CollisionEnemyBulletToMap();
-
+	CollisionBossBulletToMap();
 }
 
 void MapChipManager::draw()
@@ -182,6 +179,15 @@ std::vector<std::vector<std::shared_ptr<MapChipBase>>> MapChipManager::getMapChi
 {
 	return mapchips;
 }
+
+std::vector<std::vector<std::shared_ptr<MapChipBase>>>& MapChipManager::getMapChipsP()
+{
+	return mapchips;
+}
+
+
+
+
 
 void MapChipManager::updateMapChip()
 {
@@ -457,11 +463,74 @@ void MapChipManager::CollisionEnemyBulletToMap()
 	}
 }
 
+void MapChipManager::CollisionBossBulletToMap()
+{
+	int hitscale = 1;
+	int WorldScaleInt = int(WorldScale);
+	for (auto& itr : bulletmanagerptr->getBossBullets()) {
+
+
+		std::vector<HitBox> hitbox;
+
+		int collision_pos_y = (int((itr)->getPos().y) / WorldScaleInt);
+		int collision_pos_x = (int(-(itr)->getPos().x) / WorldScaleInt);
+
+		for (int y = collision_pos_y - hitscale;
+		y <= (collision_pos_y + hitscale);y++) {
+			if ((y < 0) || y >= mapchips.size())continue;
+			for (int x = collision_pos_x - hitscale;
+			x <= collision_pos_x + hitscale;x++) {
+				if ((x < 0) || x >= mapchips[y].size())continue;
+
+				if (!mapchips[y][x]->getIsCollision())continue;
+				if (!mapchips[y][x]->getIsActive())continue;
+				if (CollisionM.isBoxBox(Vec2f(itr->getPos().x, itr->getPos().y), mapchips[y][x]->getPos2f(),
+					Vec2f(itr->getScale().x, itr->getScale().y), mapchips[y][x]->getScale2f()))
+				{
+					float distance = (itr->getPos().x - mapchips[y][x]->getPos2f().x)*
+						(itr->getPos().x - mapchips[y][x]->getPos2f().x)
+						+ (itr->getPos().y - mapchips[y][x]->getPos2f().y)*
+						(itr->getPos().y - mapchips[y][x]->getPos2f().y);
+					hitbox.push_back(HitBox(mapchips[y][x]->getPos2f(), mapchips[y][x]->getScale2f(), distance, mapchips[y][x]->getThisPointer()));
+				}
+			}
+
+		}
+		std::sort(hitbox.begin(), hitbox.end(), [&](HitBox& a, HitBox& b) {return a.getDistance() < b.getDistance();});
+
+		for (int i = 0;i < hitbox.size();i++) {
+
+			AxisAlignedBox3f hitbox_aabb(Vec3f(hitbox[i].getPos().x - hitbox[i].getSize().x / 2.f,
+				hitbox[i].getPos().y - hitbox[i].getSize().y / 2.f,
+				0 - hitbox[i].getSize().x / 2.f),
+				Vec3f(hitbox[i].getPos().x + hitbox[i].getSize().x / 2.f,
+					hitbox[i].getPos().y + hitbox[i].getSize().y / 2.f,
+					0 + hitbox[i].getSize().x / 2.f));
+
+			if (CollisionM.isAABBAABB(itr->getAABB(), hitbox_aabb)) {
+				hitbox[i].getMapChipPtr()->BulletCollison(itr->getThisPointer(), false);
+			}
+
+
+		}
+		hitbox.clear();
+
+	}
+}
+
 std::string MapChipManager::getPath(const int worldnum, const int stagenum, const int floornum)
 {
 	std::string path = "MapData/World" + std::to_string(worldnum) +
 		"/Stage" + std::to_string(stagenum) +
 		"/Floor" + std::to_string(floornum) + "/";
 	return path;
+}
+
+void MapChipManager::createAsset()
+{
+	TextureM.CreateTexture("Map/normalbox.png");
+	TextureM.CreateTexture("Map/hulffloor.png");
+	TextureM.CreateTexture("Map/renga.png");
+	SoundM.CreateSE("onground.wav");
 }
 

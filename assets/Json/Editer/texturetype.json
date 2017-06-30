@@ -95,6 +95,26 @@
     {
       "texturename": "mayoikanban.png",
       "isalpha": true
+    },
+    {
+      "texturename": "cloud.png",
+      "isalpha": true
+    },
+    {
+      "texturename": "load1.png",
+      "isalpha": false
+    },
+    {
+       "texturename": "load2.png",
+      "isalpha": false
+    },
+    {
+       "texturename": "load3.png",
+      "isalpha": false
+    },
+     {
+      "texturename": "rainbow.png",
+      "isalpha": true
     }
   ]
 }

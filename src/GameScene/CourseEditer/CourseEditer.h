@@ -86,4 +86,7 @@ private:
 	std::string getPath();
 	void drawStageNum();
 	void changeStageNum();
+	void createVar();
+	void setUpButtons();
+	void ViewNowTextureObject();
 };

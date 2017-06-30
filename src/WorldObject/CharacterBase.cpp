@@ -11,6 +11,7 @@
 #include"../CharacterAction/GhostAction.h"
 #include"../CharacterAction/PumpmanAction.h"
 #include"../CharacterAction/WalkRattonAction.h"
+#include"../CharacterAction/BigPumpkin.h"
 #include"../Top/EasingManager.h"
 using namespace ci;
 using namespace ci::app;
@@ -173,6 +174,16 @@ BulletManager * CharacterBase::getBulletManagerPointer()
 	return bulletmanager;
 }
 
+EffectManager * CharacterBase::getEffectManagerPointer()
+{
+	return effectmanager;
+}
+
+MapChipManager * CharacterBase::getMapChipManagerPointer()
+{
+	return mapchipmanagerptr;
+}
+
 void CharacterBase::decideAction(ActionType folm)
 {
 	switch (folm)
@@ -210,6 +221,9 @@ void CharacterBase::decideAction(ActionType folm)
 	case WALKRATTON:
 		setCharacterAction(WalkRattonAction());
 		break;
+	case BIGPUMPKIN:
+		setCharacterAction(BigPumpkin());
+		break;
 	case NONE:
 		break;
 	default:
@@ -225,6 +239,11 @@ CharacterType CharacterBase::getCharacterType()
 void CharacterBase::SetBulletManagerPointer(BulletManager * _bulletmanager)
 {
 	bulletmanager = _bulletmanager;
+}
+
+void CharacterBase::SetEffectManagerPointer(EffectManager * _effectmanager)
+{
+	effectmanager = _effectmanager;
 }
 
 ci::AxisAlignedBox3f CharacterBase::getAABB()
@@ -253,9 +272,24 @@ void CharacterBase::setCharacterManagerPointer(CharacterManager * charactermanag
 	charactermanagerptr = charactermanager;
 }
 
+void CharacterBase::setCameraManagerPointer(CameraManager * cameramanager)
+{
+	cameramanagerptr = cameramanager;
+}
+
+void CharacterBase::setMapChipManagerPointer(MapChipManager * mapchipmanager)
+{
+	mapchipmanagerptr = mapchipmanager;
+}
+
 CharacterManager * CharacterBase::getCharacterManager()
 {
 	return charactermanagerptr;
+}
+
+CameraManager * CharacterBase::getCameraManager()
+{
+	return cameramanagerptr;
 }
 
 void CharacterBase::setQuat(ci::Quatf _quat)
@@ -357,6 +391,26 @@ void CharacterBase::setCanJump(const bool is)
 void CharacterBase::onRightWall()
 {
 	action->onRightWall();
+}
+
+bool CharacterBase::getIsBeginEffectEnd()
+{
+	return isbegineffectend;
+}
+
+void CharacterBase::setIsBeginEffectEnd(const bool is)
+{
+	isbegineffectend = is;
+}
+
+bool CharacterBase::getIsBossDeath()
+{
+	return isbossbeath;
+}
+
+void CharacterBase::setIsBossDeath(const bool is)
+{
+	isbossbeath = is;
 }
 
 void CharacterBase::onLeftWall()

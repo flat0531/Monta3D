@@ -46,9 +46,6 @@
     <Filter Include="Source Files\Top\Collision">
       <UniqueIdentifier>{728b7cb5-f612-4170-877c-9d9234c536c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Top\Font">
-      <UniqueIdentifier>{4c01c915-88cb-4e81-a024-92992aa8040d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\WorldObjct">
       <UniqueIdentifier>{58d162f5-b5c4-4d23-b5d1-499f9da42f70}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,15 @@
     </Filter>
     <Filter Include="Source Files\CharacterAction\PlayerAction">
       <UniqueIdentifier>{60628f07-e685-43f7-bfcc-625691115e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Boss">
+      <UniqueIdentifier>{9d47d36e-c70a-48be-bc14-0c6ad4934d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CharacterAction\BossAction">
+      <UniqueIdentifier>{dbe5a757-7ca5-42fd-91bd-6de82ff6270a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObjct\Bullet\BossBullet">
+      <UniqueIdentifier>{6c4fab40-4973-4231-aafa-f28f7c7b401d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +188,6 @@
     </ClCompile>
     <ClCompile Include="..\src\GameScene\EffectEdit\EffectEdit.cpp">
       <Filter>Source Files\Scene\GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Top\FontManager.cpp">
-      <Filter>Source Files\Top\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\src\WorldCreater\MapManager.cpp">
       <Filter>Source Files\Creater</Filter>
@@ -495,6 +498,36 @@
     <ClCompile Include="..\src\CharacterAction\ActionBase.cpp">
       <Filter>Source Files\CharacterAction</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Boss.cpp">
+      <Filter>Source Files\WorldObjct\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CharacterAction\BigPumpkin.cpp">
+      <Filter>Source Files\CharacterAction\BossAction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBlackBox.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBossName.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\WideShotBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\ColorShotBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectColorShot.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\FireBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\BarrierBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Bullet\BlackScaleBullet.cpp">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -563,9 +596,6 @@
     <ClInclude Include="..\src\GameScene\EffectEdit\EffectEdit.h">
       <Filter>Source Files\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Top\FontManager.h">
-      <Filter>Source Files\Top\Font</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\WorldCreater\MapManager.h">
       <Filter>Source Files\Creater</Filter>
     </ClInclude>
@@ -577,9 +607,6 @@
     </ClInclude>
     <ClInclude Include="..\src\WorldObject\Sky.h">
       <Filter>Source Files\WorldObjct</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\WorldObject\Map2dFront.h">
-      <Filter>Source Files\WorldObjct\Map2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\UI\MainWindow.h">
       <Filter>Source Files\UI</Filter>
@@ -886,6 +913,36 @@
     </ClInclude>
     <ClInclude Include="..\src\GameScene\FreeDraw\FreeDraw.h">
       <Filter>Source Files\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Boss.h">
+      <Filter>Source Files\WorldObjct\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CharacterAction\BigPumpkin.h">
+      <Filter>Source Files\CharacterAction\BossAction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBlackBox.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBossName.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\WideShotBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\ColorShotBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectColorShot.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\FireBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\BarrierBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Bullet\BlackScaleBullet.h">
+      <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,6 @@ MapChipHalfFloor::MapChipHalfFloor(ci::Vec3f _pos, ci::Vec3f _scale)
 void MapChipHalfFloor::draw()
 {
 	ci::Vec3f drawscale = scale*ci::Vec3f(1, 0.25f, 1);
-	//DrawM.drawCube(pos+ci::Vec3f(0,scale.y/2.f-drawscale.y/2.f,0),drawscale , ci::Vec3f(0, 0, 0), ci::ColorA(0, 1, 0, 1));
 	DrawM.drawTextureCube(pos + ci::Vec3f(0, scale.y / 2.f - drawscale.y / 2.f, 0), drawscale, ci::Vec3f(0, 0, 0),TextureM.getTexture("Map/hulffloor.png"), ci::ColorA(1, 1, 1, 1));
 }
 

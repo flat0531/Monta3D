@@ -18,6 +18,11 @@ private:
 	SurfaceScaleDown scaledown;
 	ci::Vec3f skyrotate;
 	ci::Vec3f skypos;
+	int delay = 120;
+	int delaycount = 0;
+	int testtexturenum = 3;
+	int testtexturecount = 0;
+	float buttonsinangle = 0.0f;
 	std::vector<Map2d> map2d;
 	std::vector<Map2d> map2dfront;
 	SurfaceEffect surfaceeffect;
@@ -30,9 +35,7 @@ private:
 	void drawmap2d();
 	void drawmap2dFront();
 	void drawButton();
-	int delay=120;
-	int delaycount = 0;
-	int testtexturenum = 3;
-	int testtexturecount = 0;
-	float buttonsinangle = 0.0f;
+	void createSurfaceEffect();
+	void createAsset();
+	
 };

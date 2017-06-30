@@ -47,7 +47,7 @@ void GameMain::setup()
 	worldnum = DataM.getWorldNum();
 	stagenum = DataM.getStageNum();
 	floornum = 1;
-	mapmanager.ReadData(worldnum, stagenum, 1);
+	mapmanager.ReadData(worldnum, stagenum, floornum);
 	cameramanager = std::make_shared<CameraManager>();
 
 	bulletmanager = std::make_shared<BulletManager>();
@@ -62,24 +62,29 @@ void GameMain::setup()
 	charactermanager->setBulletManagerPointer(bulletmanager->getThisPointer());
 	charactermanager->setEffectManagerPointer(effectmanager->getThisPointer());
 	charactermanager->setShadowManagerPointer(shadowmanager->getThisPtr());
+	charactermanager->setCameraManagerPointer(cameramanager->getThisPtr());
+	charactermanager->setMapChipManagerPointer(mapchipmanager->getThisPtr());
 	setStartPos();
 	charactermanager->CreatePlayer(nextplayerpos);
 
-
 	charactermanager->CreateEnemys(worldnum, stagenum, floornum);//
-
+	charactermanager->CreateBoss(worldnum, stagenum, floornum);
 	charactermanager->setBulletManagerPtrToPlayer();
 	charactermanager->setBulletManagerPtrToEnemys();
+	charactermanager->setBulletManagerPtrToBoss();
+	charactermanager->setCameratManagerPtrToBoss();
+	charactermanager->setEffectManagerPtrToBoss();
+	charactermanager->setMapChipManagerPtrToBoss();
 	charactermanager->setMainWindowPointer(mainwindow->getThisPtr());
 
 	charactermanager->setPlayerAction(DataM.stringToActionType(DataM.getSelectActionName()));
 	charactermanager->getPlayer()->Reset(nextplayerrotate);///
 	charactermanager->setEnemysAction();
-
+	charactermanager->setBossAction();
 	bulletmanager->setCharacterManagerPtr(charactermanager->getThisPointer());
 	bulletmanager->setEffectManagerPtr(effectmanager->getThisPointer());
 	bulletmanager->setMainWindowPtr(mainwindow->getThisPtr());
-
+	
 	mapchipmanager->setBulletManagerPointer(bulletmanager->getThisPointer());
 	mapchipmanager->setCharacterManagerPointer(charactermanager->getThisPointer());
 	mapchipmanager->setEffectManagerPointer(effectmanager->getThisPointer());
@@ -89,12 +94,12 @@ void GameMain::setup()
 
 	mapchipmanager->setGoal(std::bind(&GameMain::shiftGoal, this));
 	mapchipmanager->setup(worldnum, stagenum, floornum);
-
+	
 	itemmanager->SetCharacterManagerPtr(charactermanager->getThisPointer());
 	itemmanager->SetEffectManagerPtr(effectmanager->getThisPointer());
 	itemmanager->SetBulletManagerPtr(bulletmanager->getThisPointer());
 	itemmanager->CreateItem(worldnum,stagenum,floornum);
-
+	
 	shadowmanager->setMapChipManager(mapchipmanager->getThisPtr());
 	
 	cameramanager->unitPrevCenterOfInterestPoint(charactermanager->getPlayer()->getPos());
@@ -107,23 +112,17 @@ void GameMain::setup()
 	FadeM.StartFadeOut(false);
 
 	cretateShiftFloorObject();
-
+	
 	mainwindow->setSelectTextureNum(1);
 
-	SoundM.CreateSE("stageclear.wav");
-	SoundM.CreateSE("deathse.wav");
-	SoundM.CreateSE("haretu.wav");
-	SoundM.CreateSE("actionselectbegin.wav");
-	TextureM.CreateTexture("UI/montaicon.png");
-	TextureM.CreateTexture("UI/nisemonta.png");
-	font = Font("Comic Sans MS", 65.0f);
-	
+	createAsset();
+
 	playBGM();
 
 	charactermanager->update(camera);
-
+	
 	bulletmanager->update();
-
+	
 	mapchipmanager->update();
 }
 
@@ -145,6 +144,8 @@ void GameMain::update()
 		}
 		
 		if (!charactermanager->getActionSelectMode()) {
+			if(stagenum==4&&(floornum==2))
+			mapmanager.rotateSky(Vec3f(0,0.12,0));
 			charactermanager->update(camera);
 
 			bulletmanager->update();
@@ -188,11 +189,11 @@ void GameMain::update()
 void GameMain::draw()
 {
 
-	camera.setEyePoint(cameramanager->getSetEyePoint()+cameramanager->getSetEyePointTrance());
-	camera.setCenterOfInterestPoint(cameramanager->getSetCenterofinterestPoint()+cameramanager->getSetCenterofinterestPointTrance());
-	/*camera.setCenterOfInterestPoint(Vec3f(charactermanager->getPlayer()->getPos().x - WorldScale*2.f, 
-		charactermanager->getPlayer()->getPos().y / 1.5f + camerapos.y*WorldScale,
-		charactermanager->getPlayer()->getPos().z));*/
+	camera.setEyePoint(cameramanager->getSetEyePoint()+cameramanager->getSetEyePointTrance()+
+		cameramanager->getShakeCenterPoint());
+	camera.setCenterOfInterestPoint(cameramanager->getSetCenterofinterestPoint()
+		+cameramanager->getSetCenterofinterestPointTrance()+
+		cameramanager->getShakeCenterPoint());
 
 	gl::enable(GL_CULL_FACE);
 	gl::enableDepthRead();
@@ -279,7 +280,7 @@ void GameMain::draw2D()
 	mainwindow->draw();
 	uicreater.draw();
 	effectmanager->draw2D(camera);
-
+	charactermanager->drawBossHpGage();
 	information.draw();
 	if (isgoal) {
 		information.drawClearTexture();
@@ -325,10 +326,17 @@ void GameMain::ReCreateStage()
 {
 	if (isshiting&&FadeM.getIsfadeinEnd()) {
 		bulletmanager->ClearBullets();
+		effectmanager->clearEffects();
 		mapmanager.ReadData(worldnum, stagenum, floornum);
 		charactermanager->CreateEnemys(worldnum, stagenum, floornum);
+		charactermanager->CreateBoss(worldnum, stagenum, floornum);
 		charactermanager->setBulletManagerPtrToEnemys();
+		charactermanager->setBulletManagerPtrToBoss();
+		charactermanager->setEffectManagerPtrToBoss();
+		charactermanager->setMapChipManagerPtrToBoss();
+		charactermanager->setCameratManagerPtrToBoss();
 		charactermanager->setEnemysAction();
+		charactermanager->setBossAction();
 		mapchipmanager->setup(worldnum, stagenum, floornum);
 		charactermanager->getPlayer()->setPos(nextplayerpos);
 		charactermanager->getPlayer()->Reset(nextplayerrotate);
@@ -500,7 +508,7 @@ void GameMain::DeathFadeInend()
 {
 	if (isshiftdeath&&FadeM.getIsfadeinEnd()) {
 		if (mainwindow->getZankiNum() >= 0){
-
+			playBGM();
 			FadeM.StartFadeOut(false);
 			isshiftdeath = false;
 			playerdead = false;
@@ -512,10 +520,17 @@ void GameMain::DeathFadeInend()
 			zankisizerate = 1.0f;
 			zanki_trancepos_y = 0.0f;
 			bulletmanager->ClearBullets();
+			effectmanager->clearEffects();
 			mapmanager.ReadData(worldnum, stagenum, floornum);
 			charactermanager->CreateEnemys(worldnum, stagenum, floornum);
+			charactermanager->CreateBoss(worldnum, stagenum, floornum);
 			charactermanager->setBulletManagerPtrToEnemys();
+			charactermanager->setBulletManagerPtrToBoss();
+			charactermanager->setCameratManagerPtrToBoss();
+			charactermanager->setEffectManagerPtrToBoss();
+			charactermanager->setMapChipManagerPtrToBoss();
 			charactermanager->setEnemysAction();
+			charactermanager->setBossAction();
 			mapchipmanager->setup(worldnum, stagenum, floornum);
 			charactermanager->getPlayer()->setPos(nextplayerpos);
 			itemmanager->CreateItem(worldnum, stagenum, floornum);
@@ -530,7 +545,7 @@ void GameMain::DeathFadeInend()
 			charactermanager->getPlayer()->RsetDeathColorT();
 			charactermanager->getPlayer()->Reset(nextplayerrotate);
 			cameramanager->ResetT();
-			playBGM();
+			
 		}
 	}
 }
@@ -559,6 +574,7 @@ void GameMain::drawShadow()
 		}
 	}
 	for (auto it : bulletmanager->getPlayerBullets()) {
+		if (it->getPos().z >= WorldScale*8.f)continue;
 		Vec2f screen_position = camera.worldToScreen(it->getPos(),
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
@@ -566,6 +582,14 @@ void GameMain::drawShadow()
 		}
 	}
 	for (auto it : bulletmanager->getEnemyBullets()) {
+		if (it->getPos().z >= WorldScale*8.f)continue;
+		Vec2f screen_position = camera.worldToScreen(it->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
+			shadowmanager->draw(it->getPos(), it->getScale());
+		}
+	}
+	for (auto it : bulletmanager->getBossBullets()) {
 		Vec2f screen_position = camera.worldToScreen(it->getPos(),
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
@@ -573,11 +597,19 @@ void GameMain::drawShadow()
 		}
 	}
 	for (auto it : itemmanager->getIteObjects()) {
+		if (it.getPos().z >= WorldScale*8.f)continue;
 		if (it.getIsGet())continue;
 		Vec2f screen_position = camera.worldToScreen(it.getPos(),
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
 			shadowmanager->draw(it.getPos(), it.getScale());
+		}
+	}
+	for (auto it : charactermanager->getBoss()) {
+		Vec2f screen_position = camera.worldToScreen(it->getPos(),
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+		if (CollisionM.isBoxPoint(screen_position, Vec2f(0, 0), Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT))) {
+			shadowmanager->draw(it->getPos(), it->getScale());
 		}
 	}
 	shadowmanager->draw(charactermanager->getPlayer()->getPos(), charactermanager->getPlayer()->getScale());
@@ -591,6 +623,17 @@ void GameMain::setStartPos()
 	JsonTree child = set.getChild(stagenum - 1);
 	nextplayerpos = JsonM.getVec3(child,"pos")*WorldScale;
 	nextplayerrotate = JsonM.getVec3(child, "rotate");
+}
+
+void GameMain::createAsset()
+{
+	SoundM.CreateSE("stageclear.wav");
+	SoundM.CreateSE("deathse.wav");
+	SoundM.CreateSE("haretu.wav");
+	SoundM.CreateSE("actionselectbegin.wav");
+	TextureM.CreateTexture("UI/montaicon.png");
+	TextureM.CreateTexture("UI/nisemonta.png");
+	font = Font("Comic Sans MS", 65.0f);
 }
 
 ci::gl::Texture GameMain::ofScrean(const float rate)

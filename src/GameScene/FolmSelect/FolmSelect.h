@@ -24,5 +24,6 @@ private:
 	void updateButton();
 	void drawButton();
 	void drawWindow();
+	void createAsset();
 	FolmTextureList folmtexturelist;
 };

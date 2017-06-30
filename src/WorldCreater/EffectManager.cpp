@@ -2,8 +2,7 @@
 #include"../Top/SoundManager.h"
 EffectManager::EffectManager()
 {
-	SoundM.CreateSE("cubecolored.wav");
-	SoundM.CreateSE("itemget.wav");
+	createAsset();
 	
 }
 
@@ -49,4 +48,18 @@ void EffectManager::draw2D(const ci::CameraPersp camera)
 EffectManager * EffectManager::getThisPointer()
 {
 	return this;
+}
+
+void EffectManager::clearEffects()
+{
+	effects.clear();
+	effects2d.clear();
+}
+
+void EffectManager::createAsset()
+{
+	SoundM.CreateSE("cubecolored.wav");
+	SoundM.CreateSE("itemget.wav");
+	SoundM.CreateSE("namesound.wav");
+	
 }

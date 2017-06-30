@@ -53,10 +53,6 @@ void Pallet::setPos(ci::Vec2f _pos)
 	palletpos = _pos;
 }
 
-void Pallet::drawline()
-{
-
-}
 
 int Pallet::getSelectNum()
 {

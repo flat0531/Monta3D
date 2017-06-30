@@ -16,7 +16,7 @@ Sky::Sky(const ci::Vec3f _pos, const ci::Vec3f _scale, const ci::Vec3f _rotate, 
 	color = _color;
 	texturepath = _texturepath;
 	TextureM.CreateTexture(texturepath);
-	isrotate = false;
+	isrotate = true;
 }
 
 void Sky::setup()
@@ -25,6 +25,7 @@ void Sky::setup()
 
 void Sky::update()
 {
+
 }
 
 void Sky::draw()
@@ -38,6 +39,15 @@ void Sky::Rotate(const ci::Vec3f _rotate)
 {
 	if(isrotate)
 	rotate += _rotate;
+	if (rotate.x >= 360.f) {
+		rotate.x -= 360.f;
+	}
+	if (rotate.y >= 360.f) {
+		rotate.y -= 360.f;
+	}
+	if (rotate.z >= 360.f) {
+		rotate.z -= 360.f;
+	}
 }
 
 void Sky::setIsRotate(const bool _is)

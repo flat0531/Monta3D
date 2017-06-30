@@ -21,6 +21,7 @@ public:
 	void setGoal(const std::function<void()> func);
 	MapChipManager* getThisPtr();
 	std::vector<std::vector<std::shared_ptr<MapChipBase>>> getMapChips();
+	std::vector<std::vector<std::shared_ptr<MapChipBase>>>& getMapChipsP();
 private:
 	//std::vector<std::shared_ptr<MapChipBase>> mapchips;
 	std::function<void()> goal;
@@ -33,5 +34,7 @@ private:
 	void CollisionEnemysToMap();
 	void CollisionPlayerBulletToMap();
 	void CollisionEnemyBulletToMap();
+	void CollisionBossBulletToMap();
 	std::string getPath(const int worldnum,const int stagenum,const int floornum);
+	void createAsset();
 };

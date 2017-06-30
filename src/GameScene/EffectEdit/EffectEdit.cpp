@@ -22,32 +22,35 @@ void EffectEdit::setup()
 	ortho = CameraOrtho(0, WINDOW_WIDTH,
 		WINDOW_HEIGHT, 0,
 		1, 101);
-	//createname = "nurie.png";
-	//TextureM.CreateTexture(createname);
-	//texturesize = TextureM.getTexture(createname).getSize();
 
-	//surface = Surface(texturesize.x, texturesize.y, true);
-	//for (int y = 0; y <texturesize.y; y++)
-	//{
-	//	for (int x = 0; x < texturesize.x; x++)
-	//	{
-	//		surface.setPixel(Vec2i(x, y), ColorA(1, 1, 1, 0.2f));
-	//	}
-	//}
-	//texturesurface = Surface(TextureM.getTexture(createname));
-	//for (int y = 0; y <texturesize.y; y++)
-	//{
-	//	for (int x = 0; x < texturesize.x; x++)
-	//	{
-	//		surface.setPixel(Vec2i(x, y), ColorA(1, 1, 1, 0.2f));
-	//	}
-	//}
-	//replaycount = 0;
+
+
+	createname = "nurie.png";
+	TextureM.CreateTexture(createname);
+	texturesize = TextureM.getTexture(createname).getSize();
+
+	surface = Surface(texturesize.x, texturesize.y, true);
+	for (int y = 0; y <texturesize.y; y++)
+	{
+		for (int x = 0; x < texturesize.x; x++)
+		{
+			surface.setPixel(Vec2i(x, y), ColorA(1, 1, 1, 0.2f));
+		}
+	}
+	texturesurface = Surface(TextureM.getTexture(createname));
+	for (int y = 0; y <texturesize.y; y++)
+	{
+		for (int x = 0; x < texturesize.x; x++)
+		{
+			surface.setPixel(Vec2i(x, y), ColorA(1, 1, 1, 0.2f));
+		}
+	}
+	replaycount = 0;
 }
 
 void EffectEdit::update()
 {
-	/*updateSurface();
+	updateSurface();
 	if (!isreplay&&KeyManager::getkey().isPush(KeyEvent::KEY_s)){
 		startReplay();
 	}
@@ -75,7 +78,7 @@ void EffectEdit::update()
 			console() << savepos[i].pos.y << "y" << i << std::endl;
 			console() << savepos[i].ispress << "is" << i << std::endl;
 		}
-	}*/
+	}
 	
 }
 
@@ -106,12 +109,12 @@ void EffectEdit::shift()
 
 void EffectEdit::baseDraw()
 {
-	//DrawM.drawTextureBoxEdge(Vec2f(0,0), texturesize, TextureM.getTexture(createname),ColorA(1,1,1,0.5f));
+	DrawM.drawTextureBoxEdge(Vec2f(0,0), texturesize, TextureM.getTexture(createname),ColorA(1,1,1,0.5f));
 }
 
 void EffectEdit::Drawsurface()
 {
-	//DrawM.drawSurface(Vec2f(0,0),texturesize, surface);
+	DrawM.drawSurface(Vec2f(0,0),texturesize, surface);
 }
 
 void EffectEdit::updateSurface()

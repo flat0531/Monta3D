@@ -35,10 +35,6 @@ void Point::update()
 
 void Point::draw()
 {
-	//float sizerate = 1 + 0.05f*cos(sizeangle);
 	DrawM.drawBox(pos,(size),angle,ColorA(1,1,0,1));
 	DrawM.drawBox(pos, size*Vec2f(0.75f,1.f), angle, color);
-	//DrawM.drawTextureBox(pos, size, angle, TextureM.getTexture("UI/road.png"), color);
-	//DrawM.drawTextureBox(pos, (size*1.2f), 0, TextureM.getTexture("UI/circlrepoint.png"), ColorA(1,1,0,1));
-	//DrawM.drawTextureBox(pos, size, 0, TextureM.getTexture("UI/circlrepoint.png"), color);
 }

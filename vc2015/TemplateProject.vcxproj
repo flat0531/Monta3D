@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CharacterAction\ActionBase.cpp" />
+    <ClCompile Include="..\src\CharacterAction\BigPumpkin.cpp" />
     <ClCompile Include="..\src\CharacterAction\BirdAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\CatAction.cpp" />
     <ClCompile Include="..\src\CharacterAction\EnjelAction.cpp" />
@@ -167,7 +168,6 @@
     <ClCompile Include="..\src\Top\EasingObj.cpp" />
     <ClCompile Include="..\src\Top\EasingStream.cpp" />
     <ClCompile Include="..\src\Top\FadeManager.cpp" />
-    <ClCompile Include="..\src\Top\FontManager.cpp" />
     <ClCompile Include="..\src\Top\MyJson.cpp" />
     <ClCompile Include="..\src\Top\MyMesh.cpp" />
     <ClCompile Include="..\src\Top\MyTexture.cpp" />
@@ -202,18 +202,27 @@
     <ClCompile Include="..\src\WorldCreater\MapChipManager.cpp" />
     <ClCompile Include="..\src\WorldCreater\MapManager.cpp" />
     <ClCompile Include="..\src\WorldCreater\ShadowManager.cpp" />
+    <ClCompile Include="..\src\WorldObject\Boss.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\AngelBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\BarrierBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\BirdBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\BlackScaleBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\BulletBase.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\CatBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\ColorShotBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\FireBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\MoguraBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\MyToras.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\NormalEnemyBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\ScaleUpBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\Bullet\SlimeBullet.cpp" />
+    <ClCompile Include="..\src\WorldObject\Bullet\WideShotBullet.cpp" />
     <ClCompile Include="..\src\WorldObject\CharacterBase.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectBase.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBlackBox.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBossName.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectColored.cpp" />
+    <ClCompile Include="..\src\WorldObject\Effect\EffectColorShot.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectExplodeburst.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectExplosion.cpp" />
     <ClCompile Include="..\src\WorldObject\Effect\EffectItem.cpp" />
@@ -241,6 +250,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
+    <ClInclude Include="..\src\CharacterAction\BigPumpkin.h" />
     <ClInclude Include="..\src\CharacterAction\BirdAction.h" />
     <ClInclude Include="..\src\CharacterAction\CatAction.h" />
     <ClInclude Include="..\src\CharacterAction\ActionBase.h" />
@@ -294,7 +304,6 @@
     <ClInclude Include="..\src\Top\EasingObj.h" />
     <ClInclude Include="..\src\Top\EasingStream.h" />
     <ClInclude Include="..\src\Top\FadeManager.h" />
-    <ClInclude Include="..\src\Top\FontManager.h" />
     <ClInclude Include="..\src\Top\MyJson.h" />
     <ClInclude Include="..\src\Top\MyMesh.h" />
     <ClInclude Include="..\src\Top\MyTexture.h" />
@@ -331,18 +340,27 @@
     <ClInclude Include="..\src\WorldCreater\MapChipManager.h" />
     <ClInclude Include="..\src\WorldCreater\MapManager.h" />
     <ClInclude Include="..\src\WorldCreater\ShadowManager.h" />
+    <ClInclude Include="..\src\WorldObject\Boss.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\AngelBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\BarrierBullet.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\BirdBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\BlackScaleBullet.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\BulletBase.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\CatBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\ColorShotBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\FireBullet.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\MoguraBullet.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\MyToras.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\NormalEnemyBullet.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\ScaleUpBullet.h" />
     <ClInclude Include="..\src\WorldObject\Bullet\SlimeBullet.h" />
+    <ClInclude Include="..\src\WorldObject\Bullet\WideShotBullet.h" />
     <ClInclude Include="..\src\WorldObject\CharacterBase.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectBase.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBlackBox.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBossName.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectColored.h" />
+    <ClInclude Include="..\src\WorldObject\Effect\EffectColorShot.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectExplodeburst.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectExplosion.h" />
     <ClInclude Include="..\src\WorldObject\Effect\EffectItem.h" />
@@ -352,7 +370,6 @@
     <ClInclude Include="..\src\WorldObject\ItemObject.h" />
     <ClInclude Include="..\src\WorldObject\Line.h" />
     <ClInclude Include="..\src\WorldObject\Map2d.h" />
-    <ClInclude Include="..\src\WorldObject\Map2dFront.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\HitBox.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipApple.h" />
     <ClInclude Include="..\src\WorldObject\MapChip\MapChipBase.h" />

@@ -9,7 +9,6 @@ using namespace ci::app;
 DrawMenu::DrawMenu()
 {
 	TextureM.CreateTexture("UI/drawmenu.png");
-	
 	size = Vec2f(350,620);
 	pos = Vec2f(WINDOW_WIDTH-size.x/2.0f*1.1f, WINDOW_HEIGHT/2);
 	sizerange = Range(Vec2f(WINDOW_WIDTH - size.x / 2.0f*1.1f,350), 300, Vec2f(40, 40), "UI/bar.png", "UI/circlrepoint.png", 1.f, 70.f, 0.5f);

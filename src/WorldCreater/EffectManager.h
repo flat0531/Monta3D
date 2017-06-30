@@ -13,9 +13,11 @@ public:
 	template<class T>
 	void CreateEffect2D(T effect);
 	EffectManager* getThisPointer();
+	void clearEffects();
 private:
 	std::list<std::shared_ptr<EffectBase>>effects;
 	std::list<std::shared_ptr<EffectBase>>effects2d;
+	void createAsset();
 };
 
 template<class T>

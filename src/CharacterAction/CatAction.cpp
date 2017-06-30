@@ -21,7 +21,7 @@ CatAction::CatAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
-	playerptr->setScale(Vec3f(1.2,1.2,1.2)*WorldScale);
+	playerptr->setScale(Vec3f(1,1,1)*WorldScale);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
 	SoundM.CreateSE("cat_skil.wav");
@@ -94,7 +94,7 @@ void CatAction::update()
 void CatAction::draw()
 {
 
-	float sizerate = 1.f / 90.f;
+	float sizerate = 1.f / 80.f;
 	Vec3f drawrate = Vec3f(playerptr->getScale().x*sizerate*1.2f, playerptr->getScale().y*sizerate, playerptr->getScale().z*sizerate*1.5f);
 	gl::pushModelView();
 	gl::translate(playerptr->getPos() - Vec3f(0, playerptr->getScale().y / 2.f, 0));

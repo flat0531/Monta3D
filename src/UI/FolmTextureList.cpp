@@ -6,6 +6,7 @@
 #include"../Top/TextureManager.h"
 #include"../Top/DrawManager.h"
 #include"../Top/DataManager.h"
+#include"../Top/SoundManager.h"
 #include <filesystem>
 using namespace ci;
 using namespace ci::app;
@@ -14,6 +15,7 @@ FolmTextureList::FolmTextureList()
 	CreateFolmTextures();
 	CreatePlayTextures();
 	cursortex = TextureM.CreateTexture("UI/uzu.png");
+	SoundM.CreateSE("stagecursor.wav");
 	
 }
 
@@ -75,21 +77,25 @@ void FolmTextureList::selectFolm()
 	if (!FadeM.getIsFading()) {
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_a)&&(!((selectnum%3)==0))) {
 			selectnum--;
+			SoundM.PlaySE("stagecursor.wav");
 			DataM.setSelectActionName(folmtextures[selectnum]->getName());
 			CreatePlayTextures();
 		}
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_d) && (!((selectnum % 3) == 2))&& (selectnum + 1) <= (int(folmtextures.size() - 1))) {
 			selectnum++;
+			SoundM.PlaySE("stagecursor.wav");
 			DataM.setSelectActionName(folmtextures[selectnum]->getName());
 			CreatePlayTextures();
 		}
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_w) && ((selectnum - 3) >= 0)) {
 			selectnum -= 3;
+			SoundM.PlaySE("stagecursor.wav");
 			DataM.setSelectActionName(folmtextures[selectnum]->getName());
 			CreatePlayTextures();
 		}
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_s) && (selectnum +3)<= (int(folmtextures.size()-1))) {
 			selectnum += 3;
+			SoundM.PlaySE("stagecursor.wav");
 			DataM.setSelectActionName(folmtextures[selectnum]->getName());
 			CreatePlayTextures();
 		}

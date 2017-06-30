@@ -46,11 +46,12 @@ private:
 	float savewinodw_t = 0.0f;
 	float delay_t = 0.0f;
 	bool isshift = false;
-	bool isCirclePointvalue(ci::Vec2f circlepos, ci::Vec2f pointpos, float circlesize, float& value, float underlimit = 0.0f);
 	void updateEraceCanvas();
 	void updateDrawCanvas();
 	void updateSave();
 	void updateBack();
 	void updateSaveWindow();
 	void drawSaveWindow();
+	void createAsset();
+	void playBGM();
 };

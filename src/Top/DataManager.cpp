@@ -84,11 +84,14 @@ void DataManager::roadGetItems(int worldnum, int stagenum)
 	std::string path = "SaveData/StageSelect/World" + std::to_string(worldnum) + "/save.json";
 	JsonTree item(loadAsset(path));
 	JsonTree child = item.getChild(stagenum - 1);
-	JsonTree gchild = child.getChild("getitem");
-	for (int i = 0;i < gchild.getNumChildren();i++) {
-		bool isget = gchild.getValueAtIndex<bool>(i);
-		getitems.push_back(isget);
+	if (child.hasChild("getitem")) {
+		JsonTree gchild = child.getChild("getitem");
+		for (int i = 0;i < gchild.getNumChildren();i++) {
+			bool isget = gchild.getValueAtIndex<bool>(i);
+			getitems.push_back(isget);
+		}
 	}
+	
 }
 
 void DataManager::saveGetItems(int worldnum, int stagenum, std::vector<bool> _getitems)
@@ -233,6 +236,9 @@ ActionType DataManager::stringToActionType(const std::string name)
 	}
 	if (name == "walkratton") {
 		return ActionType::WALKRATTON;
+	}
+	if (name == "PumpkyDumpty") {
+		return ActionType::BIGPUMPKIN;
 	}
 	console() << "ƒoƒO‚Å‚·" << std::endl;
 	return ActionType::RATTON;

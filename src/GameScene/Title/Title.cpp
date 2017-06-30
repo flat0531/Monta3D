@@ -30,31 +30,11 @@ void Title::setup()
 
 	skyrotate = Vec3f(0, 0, 0);
 	skypos = Vec3f(0,0,0);
-	TextureM.CreateTexture("titlesky.png");
-	buttontex = TextureM.CreateTexture("UI/Button/StartLButton.png");
+	createAsset();
 	SoundM.PlayBGM("title.wav",0.5f);
 	SoundM.SetLoopTimeBGM("title.wav", 11.670, 58.266);
 	CreateMap2d();
-	for (int i = 0;i < testtexturenum;i++) {
-		TextureM.CreateTexture("Draw/slime/slimecolorplay"+std::to_string(i)+".png");
-	}
-	gl::Texture effecttex = TextureM.CreateTexture("Draw/slime/slimecolorplay0.png");
-	surfaceeffect= SurfaceEffect(effecttex, effecttex.getSize() / 7.f, effecttex.getSize()*(1.f - (1.f / 7.f)),
-		Vec3f(-6.9, 2, 9.85), Vec3f(0, 8, 8), Vec3f(90, 15, -50),
-		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
-		-M_PI / 4.f, 0.0f, 0.2f, effecttex.getSize().x*0.4f*1.414f, 2.0f);
-
-	gl::Texture backeefect= TextureM.CreateTexture("Draw/white.png");
-	backsurface = SurfaceEffect(backeefect, backeefect.getSize() / 7.f, backeefect.getSize()*(1.f - (1.f / 7.f)),
-		Vec3f(-6.9, 2, 9.9), Vec3f(0, 8, 8), Vec3f(90, 15, -50),
-		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
-		-M_PI / 4.f, 0.0f, 0.2f, backeefect.getSize().x*0.4f*1.414f, 2.0f,0.0f,ColorA(0,1,0,0.5f));
-
-	gl::Texture frameeffect = TextureM.CreateTexture("Draw/slime/slimeframe.png");
-	framesurface = SurfaceEffect(frameeffect, frameeffect.getSize() / 7.f, frameeffect.getSize()*(1.f - (1.f / 7.f)),
-		Vec3f(-6.9, 2, 9.8), Vec3f(0, 8, 8), Vec3f(90, 15, -50),
-		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
-		-M_PI / 4.f, 0.0f, 0.2f, frameeffect.getSize().x*0.4f*1.414f, 2.0f);
+	createSurfaceEffect();
 	delaycount = 0;
 	DataM.setSelectActionName("slime");
 }
@@ -98,13 +78,6 @@ void Title::update()
 		anglespeed = 1.0f;
 	}
 	buttonsinangle += anglespeed;
-
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_o)) {
-		//DataM.saveStageData(1, 2, true);
-		/*TextureM.CreateTexture("UI/montaicon.png");
-		Surface test = TextureM.getTexture("UI/montaicon.png");
-		scaledown.WirteImage(test, 4, "testttttttttttttttttttttttt.png");*/
-	}
 }
 
 void Title::draw()
@@ -139,11 +112,9 @@ void Title::draw2D()
 void Title::shift()
 {
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_c)) {
-		//SoundM.eraseBGM("title.wav");
 		SceneManager::createScene(CourseEditer());
 	}
 	if (FadeM.getIsfadeinEnd()) {
-		//SoundM.eraseBGM("title.wav");
 		SceneManager::createScene(StageSelect());
 	}
 }
@@ -248,4 +219,34 @@ void Title::drawButton()
 	Vec2f pos = Vec2f(WINDOW_WIDTH / 2.f, 2.5f*WINDOW_HEIGHT / 3.f);
 	Vec2f size = Vec2f(700, 175);
 	DrawM.drawTextureBox(pos, size, 0.0f, buttontex, ColorA(1, 1, 1, 0.7f + 0.3f*sin(buttonsinangle)));
+}
+
+void Title::createSurfaceEffect()
+{
+	gl::Texture effecttex = TextureM.CreateTexture("Draw/slime/slimecolorplay0.png");
+	surfaceeffect = SurfaceEffect(effecttex, effecttex.getSize() / 7.f, effecttex.getSize()*(1.f - (1.f / 7.f)),
+		Vec3f(-6.9, 2, 9.85), Vec3f(0, 8, 8), Vec3f(90, 15, -50),
+		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
+		-M_PI / 4.f, 0.0f, 0.2f, effecttex.getSize().x*0.4f*1.414f, 2.0f);
+
+	gl::Texture backeefect = TextureM.CreateTexture("Draw/white.png");
+	backsurface = SurfaceEffect(backeefect, backeefect.getSize() / 7.f, backeefect.getSize()*(1.f - (1.f / 7.f)),
+		Vec3f(-6.9, 2, 9.9), Vec3f(0, 8, 8), Vec3f(90, 15, -50),
+		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
+		-M_PI / 4.f, 0.0f, 0.2f, backeefect.getSize().x*0.4f*1.414f, 2.0f, 0.0f, ColorA(0, 1, 0, 0.5f));
+
+	gl::Texture frameeffect = TextureM.CreateTexture("Draw/slime/slimeframe.png");
+	framesurface = SurfaceEffect(frameeffect, frameeffect.getSize() / 7.f, frameeffect.getSize()*(1.f - (1.f / 7.f)),
+		Vec3f(-6.9, 2, 9.8), Vec3f(0, 8, 8), Vec3f(90, 15, -50),
+		EasingManager::EasType::Linear, EasingManager::EasType::Return, 70.f,
+		-M_PI / 4.f, 0.0f, 0.2f, frameeffect.getSize().x*0.4f*1.414f, 2.0f);
+}
+
+void Title::createAsset()
+{
+	TextureM.CreateTexture("titlesky.png");
+	buttontex = TextureM.CreateTexture("UI/Button/StartLButton.png");
+	for (int i = 0;i < testtexturenum;i++) {
+		TextureM.CreateTexture("Draw/slime/slimecolorplay" + std::to_string(i) + ".png");
+	}
 }

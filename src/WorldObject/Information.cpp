@@ -171,7 +171,7 @@ void Information::CreateBlackBox()
 	BlackBox down;
 	down.pos = Vec2f(0, WINDOW_HEIGHT);
 	down.beginsize = Vec2f(WINDOW_WIDTH, 0);
-	down.endsize = Vec2f(WINDOW_WIDTH, -150);
+	down.endsize = Vec2f(WINDOW_WIDTH, -235);
 	down.size = down.beginsize;
 	blackboxs.push_back(down);
 }

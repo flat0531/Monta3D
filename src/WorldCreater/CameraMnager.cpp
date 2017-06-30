@@ -4,6 +4,7 @@
 #include"../Top/MyJson.h"
 #include"../Top/SoundManager.h"
 #include"../WorldObject/CharacterBase.h"
+#include"cinder\Rand.h"
 using namespace ci;
 using namespace ci::app;
 CameraManager::CameraManager()
@@ -45,11 +46,15 @@ void CameraManager::update()
 	case XY_LOCK_CAMERA:
 		updateXYLockCameraType();
 		break;
+	case BOSS_CAMERA:
+		updateBossCameraType();
+		break;
 	case CAMERA_TYPE_MAX:
 		break;
 	default:
 		break;
 	}
+	updateShake();
 }
 
 void CameraManager::setMinValue(const ci::Vec2f _minvalue)
@@ -76,6 +81,22 @@ bool CameraManager::getDeathCameraEnd()
 void CameraManager::setDeatCameraT(float _t)
 {
 	deathcamera_t = _t;
+}
+
+void CameraManager::updateShake()
+{
+	if (isshake) {
+		EasingManager::tCount(shaketime_t,shaketime);
+		shakeeyepoint = Vec3f(randFloat(-shakevalue,shakevalue), randFloat(-shakevalue, shakevalue),0);
+		shakecenterpoint = Vec3f(randFloat(-shakevalue, shakevalue), randFloat(-shakevalue, shakevalue), 0);
+		if (EasingManager::tCountEnd(shaketime_t)) {
+			isshake = false;
+		}
+	}
+	else {
+		shakeeyepoint = Vec3f(0, 0, 0);
+		shakecenterpoint = Vec3f(0, 0, 0);
+	}
 }
 
 void CameraManager::updatePlayerCameraType()
@@ -221,6 +242,40 @@ void CameraManager::updateXYLockCameraType()
 	prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
+void CameraManager::updateBossCameraType()
+{
+
+	for (int i = 0;i < event_t.size();i++) {
+		if (!EasingManager::tCountEnd(event_t[i])) {
+			EasingManager::tCount(event_t[i],easingtime[i]);
+			seteyepoint.x = EasingManager::getEas[easingtypeseye[i].x](event_t[i], eyebeginpos[i].x, eyeendpos[i].x);
+			seteyepoint.y = EasingManager::getEas[easingtypeseye[i].y](event_t[i], eyebeginpos[i].y, eyeendpos[i].y);
+			seteyepoint.z = EasingManager::getEas[easingtypeseye[i].z](event_t[i], eyebeginpos[i].z, eyeendpos[i].z);
+
+			setcenterofinterestpoint.x = EasingManager::getEas[easingtypescenter[i].x](event_t[i], eyecenterbeginpos[i].x, eyecenterendpos[i].x);
+			setcenterofinterestpoint.y = EasingManager::getEas[easingtypescenter[i].y](event_t[i], eyecenterbeginpos[i].y, eyecenterendpos[i].y);
+			setcenterofinterestpoint.z = EasingManager::getEas[easingtypescenter[i].z](event_t[i], eyecenterbeginpos[i].z, eyecenterendpos[i].z);
+			break;
+		}
+		
+	}
+
+
+
+	//seteyepoint = Vec3f(cameralockpos_x,
+	//	cameralockeyepos_y,
+	//	-10.5*WorldScale);
+	//setcenterofinterestpoint = Vec3f(cameralockpos_x,
+	//	lockcenterofinterestpoint_y,
+	//	playerptr->getPos().z);
+	//prevcenterrofinterstpoint = setcenterofinterestpoint;
+}
+
+void CameraManager::updateBlackWall()
+{
+
+}
+
 void CameraManager::updateCameraTrance()
 {
 	if (EasingManager::tCountEnd(deathdelay_t))return;
@@ -253,7 +308,39 @@ void CameraManager::ResetT()
 	deathcamera_t = 0.0f;
 	deathdelay_t = 0.0f;
 	deathcameraend = false;
+	shaketime_t = 0.0f;
+	isshake = false;
 }
+
+void CameraManager::drawBlackWall()
+{
+
+
+}
+
+CameraManager * CameraManager::getThisPtr()
+{
+	return this;
+}
+
+void CameraManager::Shake(const float value, const float time)
+{
+	isshake = true;
+	shaketime_t = 0.0f;
+	shakevalue = value;
+	shaketime = time;
+}
+
+ci::Vec3f CameraManager::getShakeEyePoint()
+{
+	return shakeeyepoint;
+}
+
+ci::Vec3f CameraManager::getShakeCenterPoint()
+{
+	return shakecenterpoint;
+}
+
 
 CamaraUpdateType CameraManager::stringToCameraType(const std::string type)
 {
@@ -270,9 +357,85 @@ CamaraUpdateType CameraManager::stringToCameraType(const std::string type)
 	if (type == "xylock") {
 		return XY_LOCK_CAMERA;
 	}
+	if (type == "boss") {
+		return BOSS_CAMERA;
+	}
 	console() << "Ž¸”s" << std::endl;
 	return PLAYER_CAMERA;
 }
+
+void CameraManager::setupBossCamera(const ci::JsonTree tree)
+{
+	easingtime.clear();
+	event_t.clear();
+	eyebeginpos.clear();
+	eyeendpos.clear();
+	eyecenterbeginpos.clear();
+	eyecenterendpos.clear();
+	easingtypeseye.clear();
+	easingtypescenter.clear();
+	{
+		JsonTree easingtimes = tree.getChild("easingtime");
+		for (size_t i = 0; i < easingtimes.getNumChildren(); i++)
+		{
+			easingtime.push_back(easingtimes.getValueAtIndex<float>(i));
+			event_t.push_back(0.0f);
+		}
+	}
+	{
+		JsonTree easingeyebehgin_s = tree.getChild("easingbegin");
+		for (size_t i = 0; i < easingeyebehgin_s.getNumChildren(); i++)
+		{
+			JsonTree easingeyebegin = easingeyebehgin_s.getChild(i);
+			eyebeginpos.push_back(JsonM.getVec3(easingeyebegin, "")*WorldScale);
+		}
+	}
+	
+	{
+		JsonTree easingeyeend_s = tree.getChild("easingend");
+		for (size_t i = 0; i < easingeyeend_s.getNumChildren(); i++)
+		{
+			JsonTree easingeyeend = easingeyeend_s.getChild(i);
+			eyeendpos.push_back(JsonM.getVec3(easingeyeend, "")*WorldScale);
+		}
+	}
+	
+	{
+		JsonTree easingeyecenterbegin_s = tree.getChild("easingcenterbegin");
+		for (size_t i = 0; i <easingeyecenterbegin_s.getNumChildren(); i++)
+		{
+			JsonTree easingeycenterbegin = easingeyecenterbegin_s.getChild(i);
+			eyecenterbeginpos.push_back(JsonM.getVec3(easingeycenterbegin, "")*WorldScale);
+		}
+	}
+
+	{
+		JsonTree easingcenterend_s = tree.getChild("easingcenterend");
+		for (size_t i = 0; i < easingcenterend_s.getNumChildren(); i++)
+		{
+			JsonTree easingeyecenterend = easingcenterend_s.getChild(i);
+			eyecenterendpos.push_back(JsonM.getVec3(easingeyecenterend, "")*WorldScale);
+		}
+	}
+
+	{
+		JsonTree easingtype = tree.getChild("easingtypeeye");
+		for (size_t i = 0; i <easingtype.getNumChildren(); i++)
+		{
+			JsonTree easingeycenterbegin = easingtype.getChild(i);
+			easingtypeseye.push_back(JsonM.getVec3i(easingeycenterbegin, ""));
+		}
+	}
+	{
+		JsonTree easingtype = tree.getChild("easingtypecenter");
+		for (size_t i = 0; i <easingtype.getNumChildren(); i++)
+		{
+			JsonTree easingeycenterbegin = easingtype.getChild(i);
+			easingtypescenter.push_back(JsonM.getVec3i(easingeycenterbegin, ""));
+		}
+	}
+}
+
 
 CamaraUpdateType CameraManager::JsonReadCameraType(const int worldnum, const int stagenum, const int floornum)
 {
@@ -326,6 +489,9 @@ CamaraUpdateType CameraManager::JsonReadCameraType(const int worldnum, const int
 		else {
 			lockcenterofinterestpoint_y = maxvalue.y / 2.f;
 		}
+		break;
+	case BOSS_CAMERA:
+		setupBossCamera(child);
 		break;
 	default:
 		break;

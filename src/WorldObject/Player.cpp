@@ -56,6 +56,9 @@ void Player::update()
 
 
 	updateStun();
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_y)) {
+		hp = 0.0f;
+	}
 	if (pos.y <= -WorldScale*5.f) {
 		hp = 0.0f;
 	}
@@ -173,40 +176,3 @@ PlayerDirection Player::disideDirection()
 	
 	return playerdirection;
 }
-
-
-
-
-
-
-
-
-
-
-
-//std::string run = "Armature|run", walk = "walk.001";
-//if (KeyManager::getkey().isPress(KeyEvent::KEY_a)) {
-//	player_p->speed += Vec3f(speed, 0, 0);
-//	player_p->rotate.y -= 10.0f;
-//	player_p->rotate.y = std::max(player_p->rotate.y, -180.f);
-//	if (current_animation_stack_string != run) {
-//		setAnimation(run);
-//	}
-//	//console() << player_p->rotate.y << std::endl;
-//}
-//
-//if ((!KeyManager::getkey().isPress(KeyEvent::KEY_a)) && (!KeyManager::getkey().isPress(KeyEvent::KEY_d))) {
-//	if (current_animation_stack_string != walk) {
-//		setAnimation(walk);
-//	}
-//}
-//
-//if (KeyManager::getkey().isPress(KeyEvent::KEY_d)) {
-//	player_p->rotate.y += 10.0f;
-//	player_p->rotate.y = std::min(player_p->rotate.y, 0.f);
-//	player_p->speed += Vec3f(-speed, 0, 0);
-//	//console() << player_p->rotate.y << std::endl;
-//	if (current_animation_stack_string != run) {
-//		setAnimation(run);
-//	}
-//}

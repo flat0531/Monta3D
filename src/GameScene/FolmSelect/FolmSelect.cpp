@@ -31,11 +31,8 @@ void FolmSelect::setup()
 	uicreater.CreateUI("Json/UI/folmselect.json");
 	SoundM.PlayBGM("drawscene.wav", 0.3f);
 	SoundM.SetLoopBGM("drawscene.wav", true);
-	
-	TextureM.CreateTexture("UI/donurie.png");
-	TextureM.CreateTexture("UI/dofreenurie.png");
-	TextureM.CreateTexture("UI/Button/hai.png");
-	TextureM.CreateTexture("UI/Button/iie.png");
+	DataM.setSelectActionName("slime");
+	createAsset();
 
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
@@ -132,10 +129,12 @@ void FolmSelect::select()
 			if (!isyes) {
 				isselect = false;
 				isyes = true;
+				SoundM.PlaySE("change.wav");
 			}
 		}
 		else {
 			isselect = true;
+			SoundM.PlaySE("actionselectbegin.wav");
 		}
 	}
 }
@@ -144,6 +143,7 @@ void FolmSelect::updateWindow()
 {
 	if (!FadeM.getIsFading() && isselect) {
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_k)) {
+			SoundM.PlaySE("change.wav");
 			isselect = false;
 			isyes = true;
 		}
@@ -154,9 +154,12 @@ void FolmSelect::updateButton()
 {
 	if (isselect) {
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_a)) {
+			SoundM.PlaySE("stagecursor.wav");
+		
 			isyes = true;
 		}
 		if (KeyManager::getkey().isPush(KeyEvent::KEY_d)) {
+			SoundM.PlaySE("stagecursor.wav");
 			isyes = false;
 		}
 	}
@@ -186,4 +189,17 @@ void FolmSelect::drawWindow()
 			DrawM.drawTextureBox(pos, size, 0.0f, TextureM.getTexture("UI/donurie.png"));
 		}
 	}
+}
+
+void FolmSelect::createAsset()
+{
+	TextureM.CreateTexture("UI/donurie.png");
+	TextureM.CreateTexture("UI/dofreenurie.png");
+	TextureM.CreateTexture("UI/Button/hai.png");
+	TextureM.CreateTexture("UI/Button/iie.png");
+
+	SoundM.CreateSE("stagecursor.wav");
+	SoundM.CreateSE("change.wav");
+	SoundM.CreateSE("actionselectbegin.wav");
+	SoundM.CreateSE("actionselectend.wav");
 }

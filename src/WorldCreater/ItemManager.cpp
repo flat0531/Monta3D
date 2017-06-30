@@ -7,12 +7,14 @@
 #include"../Top/MyJson.h"
 #include"../Top/Top.h"
 #include"../Top/DataManager.h"
+#include"../Top/SoundManager.h"
 #include"../WorldObject/Player.h"
 #include"../WorldObject/Effect/EffectItem.h"
 using namespace ci;
 using namespace ci::app;
 ItemManager::ItemManager()
 {
+	SoundM.CreateSE("itemget.wav");
 	ItemInit();
 }
 

@@ -16,8 +16,6 @@ void PlayerCanvas::setup(ci::Vec2f _pos, ci::Vec2f _size, std::string _character
 	characterframepath = "Draw/" + charactername + "/"  + "frame.png";
 	TextureM.CreateTexture(characterframepath);
 	SetupdrawCanvas();
-
-
 }
 
 ci::Vec2f PlayerCanvas::getPos()

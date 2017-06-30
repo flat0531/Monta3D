@@ -24,6 +24,8 @@ private:
 	bool isiconmoving;
 	bool is_move_to_next;
 	bool is_move_to_back;
+	int animation_count = 0;
+	bool isselect = false;
 	float icon_move_t;
 	ci::Vec2f easing_icon_beginpos;
 	ci::Vec2f easing_icon_endpos;
@@ -56,9 +58,8 @@ private:
 	void FadeIn();
 	void roadStageName();
 	void ShiftDrawScene();
-	int animation_count = 0;
-	bool isselect = false;
 	void decideStage();
 	void updateMenu();
 	void drawArrow();
+	void createAsset();
 };

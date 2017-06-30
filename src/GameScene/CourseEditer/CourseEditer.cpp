@@ -29,52 +29,24 @@ void CourseEditer::setup()
 	camerapos = Vec3f(0, 0, -10 * WorldScale);
 	cameraseteyepoint = Vec3f(0, 0, 10 * WorldScale);
 	camera.setCenterOfInterestPoint(camerapos);
-
 	ortho = CameraOrtho(0, WINDOW_WIDTH,
 		WINDOW_HEIGHT, 0,
 		1,101);
+
 	ortho.setEyePoint(Vec3f(0.0f, 0.0f, 0.0f));
 	ortho.setCenterOfInterestPoint(Vec3f(0.0f, 0.0f, -1000.0f));
+
 	font = Font("Comic Sans MS", 50.0f);
+
 	select_mapchip_type = MapChipType::NORMAL_NOTDRAW_CHIP;
-	gl::enableDepthRead();
-	gl::enableDepthWrite();
 	prevmousepos = MouseManager::getMouse().getmousepos();
 	CreateTextureTypeString();
 	CreateFrontMap();
-	{
-		TextureM.CreateTexture("UI/bar.png");
-		TextureM.CreateTexture("UI/circlrepoint.png");
-		float centerx = WINDOW_WIDTH - 150.f;
-		float length = 250.f;
-		float space = 100;
-		Vec2f iconsize = Vec2f(40,40);
+	createVar();
+	setUpButtons();
 
-		rotate_x_range = Range(Vec2f(centerx, space), length, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 360.f, 0.0f);
-		rotate_y_range = Range(Vec2f(centerx,space * 2), length, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 360.f, 0.0f);
-		rotate_z_range = Range(Vec2f(centerx,space * 3), length, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 360.f, 0.0f);
-		float centerscalepos = WINDOW_WIDTH - 600;
-		float scalelength = 1200;
-		float scalespace = 60.f;
-		scale_x_range = Range(Vec2f(centerscalepos, WINDOW_HEIGHT-3* scalespace), scalelength, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 12.f, 1.f/12.f);
-		scale_y_range = Range(Vec2f(centerscalepos, WINDOW_HEIGHT - 2 * scalespace), scalelength, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 12.f, 1.f / 12.f);
-		scale_z_range = Range(Vec2f(centerscalepos, WINDOW_HEIGHT - 1 * scalespace), scalelength, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 12.f, 1.f / 12.f);
-
-	}
-
-	for (size_t i = 0; i < 6; i++)
-	{
-		if (i % 2 == 0) {
-			buttons[i].pos = Vec2f(WINDOW_WIDTH-225,400+100*(i/2));
-		}
-		else
-		{
-			buttons[i].pos = Vec2f(WINDOW_WIDTH - 125,400+100*(i/2));
-		}
-		buttons[i].size = Vec2f(50,50);
-	}
-	
-
+	gl::enableDepthRead();
+	gl::enableDepthWrite();
 }
 
 void CourseEditer::update()
@@ -107,12 +79,7 @@ void CourseEditer::update()
 		setValueSeletTextureObj();
 		trancerateSelectTextureObj();
 		ChangeAddValue();
-		if (!(textureobjects.size() == 0)) {
-			ColorA color;
-			if (KeyManager::getkey().isPress(KeyEvent::KEY_q))color = ColorA(0.5,0.5,0.5,1);
-			else color = ColorA(1,1,1,1);
-			textureobjects[selecttexturenum]->setColor(color);
-		}
+		ViewNowTextureObject();
 		roadMap2dObject();
 		writeMap2dObjct();
 		break;
@@ -530,21 +497,11 @@ void CourseEditer::drawTextureObj()
 		}
 		}
 	);
-	//std::sort(buf.begin(), buf.end(), [&](TextureObj& left, TextureObj& right)
-	//{return gl::getModelView().transformVec(left.getPos()).z <
-	//	gl::getModelView().transformVec(right.getPos()).z;});
-	//buf.sort([&](const TextureObj& left, const TextureObj& right) {
-	//	return gl::getModelView().transformVec(left.pos).z <
-	//		gl::getModelView().transformVec(right.pos).z;
-	//});
 	for (int i = 0;i < buf.size();i++) {
 		buf[i].draw();
 	}
 	gl::enableAlphaBlending();
 	buf.clear();
-	/*for (auto itr : textureobjects) {
-		itr->draw();
-	}*/
 }
 
 
@@ -929,5 +886,50 @@ void CourseEditer::changeStageNum()
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_0)) {
 		floornum--;
 		floornum = std::max(floornum, 1);
+	}
+}
+
+void CourseEditer::createVar()
+{
+	TextureM.CreateTexture("UI/bar.png");
+	TextureM.CreateTexture("UI/circlrepoint.png");
+	float centerx = WINDOW_WIDTH - 150.f;
+	float length = 250.f;
+	float space = 100;
+	Vec2f iconsize = Vec2f(40, 40);
+
+	rotate_x_range = Range(Vec2f(centerx, space), length, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 360.f, 0.0f);
+	rotate_y_range = Range(Vec2f(centerx, space * 2), length, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 360.f, 0.0f);
+	rotate_z_range = Range(Vec2f(centerx, space * 3), length, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 360.f, 0.0f);
+	float centerscalepos = WINDOW_WIDTH - 600;
+	float scalelength = 1200;
+	float scalespace = 60.f;
+	scale_x_range = Range(Vec2f(centerscalepos, WINDOW_HEIGHT - 3 * scalespace), scalelength, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 12.f, 1.f / 12.f);
+	scale_y_range = Range(Vec2f(centerscalepos, WINDOW_HEIGHT - 2 * scalespace), scalelength, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 12.f, 1.f / 12.f);
+	scale_z_range = Range(Vec2f(centerscalepos, WINDOW_HEIGHT - 1 * scalespace), scalelength, iconsize, "UI/bar.png", "UI/circlrepoint.png", 0.f, 12.f, 1.f / 12.f);
+}
+
+void CourseEditer::setUpButtons()
+{
+	for (size_t i = 0; i < 6; i++)
+	{
+		if (i % 2 == 0) {
+			buttons[i].pos = Vec2f(WINDOW_WIDTH - 225, 400 + 100 * (i / 2));
+		}
+		else
+		{
+			buttons[i].pos = Vec2f(WINDOW_WIDTH - 125, 400 + 100 * (i / 2));
+		}
+		buttons[i].size = Vec2f(50, 50);
+	}
+}
+
+void CourseEditer::ViewNowTextureObject()
+{
+	if (!(textureobjects.size() == 0)) {
+		ColorA color;
+		if (KeyManager::getkey().isPress(KeyEvent::KEY_q))color = ColorA(0.5, 0.5, 0.5, 1);
+		else color = ColorA(1, 1, 1, 1);
+		textureobjects[selecttexturenum]->setColor(color);
 	}
 }

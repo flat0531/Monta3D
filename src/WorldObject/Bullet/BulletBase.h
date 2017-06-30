@@ -2,7 +2,7 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
 enum BulletType {
-	PLAYER_BULLET,ENEMY_BULLET,GIMMICK_BULLET
+	PLAYER_BULLET,ENEMY_BULLET,BOSS_BULLET,GIMMICK_BULLET
 };
 class BulletBase {
 public:

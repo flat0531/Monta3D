@@ -127,16 +127,16 @@
    },
    {
       "isalpha" : false,
-      "pos" : [ -1250, 945, 95 ],
-      "rotate" : [ 0, 0, 46 ],
+      "pos" : [ -1255, 945, 95 ],
+      "rotate" : [ 0, 0, 135 ],
       "scale" : [ 300, 200, 50 ],
       "texturename" : "Map/renga.png"
    },
    {
       "isalpha" : false,
-      "pos" : [ -4578, 967, 95 ],
-      "rotate" : [ 0, 0, 135 ],
-      "scale" : [ 300, 200, 50 ],
+      "pos" : [ -4553, 942, 95 ],
+      "rotate" : [ 0, 0, 0 ],
+      "scale" : [ 300, 200, 88 ],
       "texturename" : "Map/renga.png"
    },
    {
@@ -148,8 +148,8 @@
    },
    {
       "isalpha" : false,
-      "pos" : [ -500, 350, 155 ],
-      "rotate" : [ 0, 0, 44 ],
+      "pos" : [ -505, 350, 155 ],
+      "rotate" : [ 0, 0, 135 ],
       "scale" : [ 300, 200, 200 ],
       "texturename" : "Map/renga.png"
    },

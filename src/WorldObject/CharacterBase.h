@@ -9,6 +9,9 @@ enum CharacterType {
 };
 class BulletManager;
 class CharacterManager;
+class CameraManager;
+class EffectManager;
+class MapChipManager;
 class CharacterBase {
 public:
 	CharacterBase();
@@ -55,15 +58,21 @@ public:
 	void setCanJumpCount(const int count);
 	void decideAction(ActionType folm);
 	void SetBulletManagerPointer(BulletManager* _bulletmanager);
+	void SetEffectManagerPointer(EffectManager* _effectmanager);
 	void setActionType(ActionType _actiontype);
 	void setCharacterManagerPointer(CharacterManager* charactermanager);
+	void setCameraManagerPointer(CameraManager* cameramanager);
+	void setMapChipManagerPointer(MapChipManager* mapchipmanager);
 	void setQuat(ci::Quatf _quat);
 	void setBulletQuat(ci::Quatf _quat);
 	void setJumpPower();
 	void RsetDeathColorT();
 	void updateDeath(float time);
 	CharacterManager* getCharacterManager();
+	CameraManager* getCameraManager();
 	BulletManager* getBulletManagerPointer();
+	EffectManager* getEffectManagerPointer();
+	MapChipManager* getMapChipManagerPointer();
 	CharacterType getCharacterType();
 	ci::AxisAlignedBox3f getAABB();
 	CharacterBase* getThisPointer();
@@ -85,6 +94,12 @@ public:
 	void setCanJump(const bool is);
 	void onLeftWall();
 	void onRightWall();
+	//////ボス専用
+	bool getIsBeginEffectEnd();
+	void setIsBeginEffectEnd(const bool is);
+	bool getIsBossDeath();
+	void setIsBossDeath(const bool is);
+	////
 	template<class T>
 	void setCharacterAction(T);
 protected:
@@ -109,16 +124,22 @@ protected:
 	int stuncount = 0;
 	int jumpcount = 0;
 	int id = 0;//識別番号
+	bool isbegineffectend = false;
+	bool isbossbeath = false;
+
 	ci::ColorA color;
 	ci::ColorA defaultcolor;
 	ci::ColorA uniquecolor;//そのキャラの代名詞的な色
 	BulletManager* bulletmanager;
+	EffectManager* effectmanager;
 	ActionType playerfolm = NONE;
 	CharacterType charactertype= CHARACTER_NONE;
 	std::shared_ptr<ActionBase> action;
 	ci::AxisAlignedBox3f aabbbox;
 	ActionType actiontype;
 	CharacterManager* charactermanagerptr;
+	CameraManager* cameramanagerptr;
+	MapChipManager* mapchipmanagerptr;
 	void updateStun();
 };
 

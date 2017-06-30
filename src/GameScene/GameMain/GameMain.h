@@ -87,5 +87,6 @@ private:
 	void StartActionSelectMode();
 	void drawShadow();
 	void setStartPos();
+	void createAsset();
 	ci::gl::Texture ofScrean(const float rate);
 };

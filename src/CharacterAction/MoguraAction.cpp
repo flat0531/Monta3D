@@ -23,7 +23,7 @@ MoguraAction::MoguraAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
-	playerptr->setScale(Vec3f(1.2, 1.2, 1.2)*WorldScale);
+	playerptr->setScale(Vec3f(1, 1, 1)*WorldScale);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
 	SoundM.CreateSE("cat_skil.wav");

@@ -11,6 +11,7 @@ public:
    }
    ci::Vec2f getVec2(const ci::JsonTree & _json, const std::string key);
    ci::Vec3f getVec3(const ci::JsonTree & _json, const std::string key);
+   ci::Vec3i getVec3i(const ci::JsonTree & _json, const std::string key);
    ci::ColorA getColor(const ci::JsonTree & _json, const std::string key);
 
    ci::JsonTree Vec2fToJson(const ci::Vec2f vec, const std::string key);

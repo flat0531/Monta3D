@@ -19,8 +19,8 @@ CatBullet::CatBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _angle, ci::Vec3f _
 	bullettype = BulletType::PLAYER_BULLET;
 	color = _color;
 	playerptr = _playerptr;
-	hp = 100;
-	atackpoint = 6;
+	hp = 30;
+	atackpoint = 10;
 	ismapcollision_endddelet = false;
 }
 

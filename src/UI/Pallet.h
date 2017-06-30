@@ -12,7 +12,6 @@ public:
 	void addColorObject(ci::ColorA _color, bool _isnecessary, int _num);
 	int getColorObjectNum();
 	void setPos(ci::Vec2f _pos);
-	void drawline();
 	int getSelectNum();
 	ci::ColorA getSelectColor();
 	void selectcolor();

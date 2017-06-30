@@ -151,7 +151,6 @@ void FadeManager::updateFadeIn()
 			EasingManager::tCount(t[FadeInStep::FADEIN_SCALEUP], easingtime[FadeInStep::FADEIN_SCALEUP]);
 			texturescale.x =EasingCubicOut(t[FadeInStep::FADEIN_SCALEUP], 0.0f, maxtexturescale.x);
 			texturescale.y = EasingCubicOut(t[FadeInStep::FADEIN_SCALEUP], 0.0f, maxtexturescale.y);
-			//texturerotate = EasingManager::getEas[easingtype](t[FadeInStep::FADEIN_SCALEUP], 0.0f, 720.f);
 			texturerotate = EasingQuartOut(t[FadeInStep::FADEIN_SCALEUP], 0.0f, 720.f);
 		}
 		if ((!EasingManager::tCountEnd(t[FadeInStep::FADEIN_SURFACE])&&

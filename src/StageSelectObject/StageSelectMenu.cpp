@@ -9,7 +9,6 @@ using namespace ci::app;
 
 StageSelectMenu::StageSelectMenu()
 {
-	//DataM.isCheckFolm("slime", "candraw");
 	Vec2f size = Vec2f(240,60);
 	{
 		Menu gamestart;
@@ -27,10 +26,7 @@ StageSelectMenu::StageSelectMenu()
 		characterdraw.tex = TextureM.CreateTexture("UI/Button/CharacterDraw.png");
 		menus.push_back(characterdraw);
 	}
-	SoundM.CreateSE("cursor.wav");
-	TextureM.CreateTexture("UI/push_a.png");
-	TextureM.CreateTexture("UI/push_d.png");
-	icontex = TextureM.CreateTexture("UI/uzu.png");
+	createAsset();
 }
 
 void StageSelectMenu::update()
@@ -88,7 +84,11 @@ void StageSelectMenu::drawCursor(const ci::Vec2f menupos)
 	DrawM.drawTextureBox(menupos +trancepos,Vec2f(menus[0].size.y*1.05f,menus[0].size.y*1.05f), 0.0f, icontex, ColorA(1, 1, 1, 1));
 }
 
-void StageSelectMenu::updateCursor()
-{
 
+void StageSelectMenu::createAsset()
+{
+	SoundM.CreateSE("cursor.wav");
+	TextureM.CreateTexture("UI/push_a.png");
+	TextureM.CreateTexture("UI/push_d.png");
+	icontex = TextureM.CreateTexture("UI/uzu.png");
 }

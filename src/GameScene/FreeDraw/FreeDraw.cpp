@@ -28,20 +28,21 @@ void FreeDraw::setup()
 	ortho = CameraOrtho(0, WINDOW_WIDTH,
 		WINDOW_HEIGHT, 0,
 		1, 101);
+
 	FadeM.StartFadeOut(false);
     uiback.CreateUI("Json/UI/freedrawsceneback.json");
 	uifront.CreateUI("Json/UI/freedrawscenefront.json");
-	SoundM.PlayBGM("drawscene.wav", 0.3f);
-	SoundM.SetLoopBGM("drawscene.wav", true);
-	SoundM.CreateSE("rappa.wav");
+
+	playBGM();
+	createAsset();	
 	charactername = DataM.getSelectActionName();
+
 	Vec2f playercanvaspos = Vec2f(WINDOW_WIDTH / 2  - 440, WINDOW_HEIGHT / 2.0 - 256);
 	playercanvas.setup(playercanvaspos, Vec2f(512, 512), charactername);
-	
-	TextureM.CreateTexture("UI/texturesavewindowpng.png");
 
 	savewindowpos = Vec2f(WINDOW_WIDTH, WINDOW_HEIGHT) / 2.f;
 	savewindowsize = Vec2f(0,0);
+
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 }
@@ -185,4 +186,16 @@ void FreeDraw::drawSaveWindow()
 		DrawM.drawTextureBox(savewindowpos + Vec2f(0, -100), savewinodw_t*Vec2f(350, 350), 0.0f, TextureM.getTexture("Draw/" + charactername + "/" + "frame.png"));
 		
 	}
+}
+
+void FreeDraw::createAsset()
+{
+	SoundM.CreateSE("rappa.wav");
+	TextureM.CreateTexture("UI/texturesavewindowpng.png");
+}
+
+void FreeDraw::playBGM()
+{
+	SoundM.PlayBGM("drawscene.wav", 0.3f);
+	SoundM.SetLoopBGM("drawscene.wav", true);
 }

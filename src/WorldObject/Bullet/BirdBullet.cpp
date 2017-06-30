@@ -76,7 +76,7 @@ bool BirdBullet::deleteThis()
 void BirdBullet::arrangeStaus()
 {
 	if (isshiftup) {
-		atackpoint = 10;
+		atackpoint = 8;
 		hp = 20;
 		speed = Vec3f(0, 0.12f, 0)*WorldScale;
 		speedeasing = 1.0f;

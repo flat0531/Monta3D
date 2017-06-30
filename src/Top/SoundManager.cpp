@@ -50,7 +50,9 @@ void SoundManager::StopBGM(std::string name)
 
 void SoundManager::StopNowBGM()
 {
-	bgmmap[nowplaybgmname].stop();
+	if (bgmmap.find(nowplaybgmname) != bgmmap.end()) {
+		bgmmap[nowplaybgmname].stop();
+	}
 }
 
 void SoundManager::GainBGM(std::string name, float value)

@@ -25,20 +25,7 @@ void StageSelect::setup()
 		WINDOW_HEIGHT, 0,
 		1, 101);
 	backgroundpath = "UI/world1.png";
-	TextureM.CreateTexture(backgroundpath);
-	TextureM.CreateTexture("UI/stageselect.png");
-	TextureM.CreateTexture("UI/montaicon.png");
-	TextureM.CreateTexture("UI/moveicon1.png");
-	TextureM.CreateTexture("UI/moveicon2.png");
-
-	TextureM.CreateTexture("UI/push_a.png");
-	TextureM.CreateTexture("UI/push_d.png");
-
-	SoundM.CreateSE("stagecursor.wav");
-	SoundM.CreateSE("moveicon.wav");
-	SoundM.CreateSE("change.wav");
-	SoundM.CreateSE("actionselectbegin.wav");
-	SoundM.CreateSE("actionselectend.wav");
+	createAsset();
 	SoundM.PlayBGM("stageselectworld1.wav",0.3f);
 	SoundM.SetLoopBGM("stageselectworld1.wav", true);
 	stagenum = DataM.getStageNum();
@@ -183,8 +170,6 @@ void StageSelect::createpointRoads()
 		pointroads.push_back(PointRoad(stagepos[i], stagepos[i+1],
 			(EasingManager::EasType)easingtypes[i].x, (EasingManager::EasType)easingtypes[i].y));
 	}
-	//pointroads.push_back(PointRoad(Vec2f(100, 700), Vec2f(1100, 200),
-	//	EasingManager::EasType::Linear, EasingManager::EasType::Linear));
 }
 
 void StageSelect::createStageIcon()
@@ -391,4 +376,21 @@ void StageSelect::updateMenu()
 
 void StageSelect::drawArrow()
 {
+}
+
+void StageSelect::createAsset()
+{
+	TextureM.CreateTexture(backgroundpath);
+	TextureM.CreateTexture("UI/stageselect.png");
+	TextureM.CreateTexture("UI/montaicon.png");
+	TextureM.CreateTexture("UI/moveicon1.png");
+	TextureM.CreateTexture("UI/moveicon2.png");
+	TextureM.CreateTexture("UI/push_a.png");
+	TextureM.CreateTexture("UI/push_d.png");
+
+	SoundM.CreateSE("stagecursor.wav");
+	SoundM.CreateSE("moveicon.wav");
+	SoundM.CreateSE("change.wav");
+	SoundM.CreateSE("actionselectbegin.wav");
+	SoundM.CreateSE("actionselectend.wav");
 }

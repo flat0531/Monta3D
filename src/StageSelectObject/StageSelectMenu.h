@@ -26,4 +26,5 @@ private:
 	int selectnum = 0;
 	void drawCursor(const ci::Vec2f menupos);
 	void updateCursor();
+	void createAsset();
 };
