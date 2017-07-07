@@ -52,7 +52,8 @@ void SparrowAction::draw()
 	gl::scale(enemyptr->getScale() / drawscalecorrection);
 	gl::color(enemyptr->getColor());
 	TextureM.getTexture("Mesh/sparrow.png").enableAndBind();
-	gl::draw(TextureM.getMesh("sparrow.obj"));            // ˆÜ“x‚Ì•ªŠ„”
+	gl::draw(TextureM.getMesh("sparrow.obj"));           
+
 	TextureM.getTexture("Mesh/sparrow.png").disable();
 	gl::popModelView();
 
@@ -65,7 +66,7 @@ void SparrowAction::draw()
 	gl::rotate(Vec3f(180,0,90+15*sin(wingangle)));
 	gl::color(enemyptr->getColor());
 	TextureM.getTexture("Mesh/sparrowlw.png").enableAndBind();
-	gl::draw(TextureM.getMesh("sparrowlw.obj"));            // ˆÜ“x‚Ì•ªŠ„”
+	gl::draw(TextureM.getMesh("sparrowlw.obj"));           
 	TextureM.getTexture("Mesh/sparrowlw.png").disable();
 	gl::popModelView();
 
@@ -78,7 +79,7 @@ void SparrowAction::draw()
 	gl::rotate(Vec3f(180, 0, -90 - 15 * sin(wingangle)));
 	gl::color(enemyptr->getColor());
 	TextureM.getTexture("Mesh/sparrowrw.png").enableAndBind();
-	gl::draw(TextureM.getMesh("sparrowrw.obj"));            // ˆÜ“x‚Ì•ªŠ„”
+	gl::draw(TextureM.getMesh("sparrowrw.obj"));           
 	TextureM.getTexture("Mesh/sparrowrw.png").disable();
 	gl::popModelView();
 

@@ -8,9 +8,8 @@ class ShadowManager {
 public:
 	ShadowManager();
 	ShadowManager* getThisPtr();
-	void draw(const ci::Vec3f pos,const ci::Vec3f scale);
+	void draw(const ci::Vec3f pos,const ci::Vec3f scale);///オブジェクトのPOSとSCALEを取得して影を描画
 	void setMapChipManager(MapChipManager* mapchipmanager);
 private:
 	MapChipManager* mapchipmanagerptr;
-
 };

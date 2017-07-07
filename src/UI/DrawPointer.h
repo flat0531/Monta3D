@@ -1,6 +1,7 @@
 #pragma once
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+//////マウスに追従するカーソル
 class DrawPointer {
 public:
 	DrawPointer();

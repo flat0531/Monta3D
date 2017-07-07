@@ -16,7 +16,7 @@ public:
 	void CreateWorld(const ci::JsonTree& _json);
 	void CreateSky(const ci::JsonTree& _json);
 	std::string getPath(const int world, const int stage, const int floor);
-	void CreateTexutreObj(const ci::JsonTree& _json);
+	void CreateTexutreObj(const ci::JsonTree& _json);////2Dテクスチャーを３D座標に生成
 	void drawSky();
 	void rotateSky(const ci::Vec3f _rotate);
 	void drawTexureObjct(const ci::CameraPersp& camera);

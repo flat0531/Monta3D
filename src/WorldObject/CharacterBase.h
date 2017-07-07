@@ -20,6 +20,7 @@ public:
 	virtual void setup(ci::Vec3f _pos) {};
 	virtual void Reset(ci::Vec3f rotate) {};
 	int getHp();
+	int getDefense();
 	int getMaxHp();
 	int getId();
 	ci::Vec3f getPos();
@@ -35,6 +36,7 @@ public:
 	void setHp(int _hp);
 	void setMaxHp(int _maxhp);
 	void addHpValue(int value);
+	void setDefense(int _defence);
 	void setPos(const ci::Vec3f _pos);
 	void setPosX(const float posx);
 	void setPosY(const float posy);
@@ -81,7 +83,7 @@ public:
 	ci::Quatf getBulletQuat();
 	bool getIsStan();
 	bool updateDeathEnd();
-	void setIsStun(const bool is);
+	void setIsStun(const bool is);//動けない状態にする
 	void setIsinvincible(const bool is);
 	bool getIsInvincible();
 	void setDefalutColor(const ci::ColorA _color);
@@ -123,13 +125,14 @@ protected:
 	int invinciblecount = 0;
 	int stuncount = 0;
 	int jumpcount = 0;
+	int defense = 0;
 	int id = 0;//識別番号
 	bool isbegineffectend = false;
 	bool isbossbeath = false;
 
 	ci::ColorA color;
 	ci::ColorA defaultcolor;
-	ci::ColorA uniquecolor;//そのキャラの代名詞的な色
+	ci::ColorA uniquecolor;//そのキャラの代名詞の色
 	BulletManager* bulletmanager;
 	EffectManager* effectmanager;
 	ActionType playerfolm = NONE;

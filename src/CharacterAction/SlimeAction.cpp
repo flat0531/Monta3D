@@ -12,6 +12,7 @@
 #include"../Top/DrawManager.h"
 #include"../Top/TextureManager.h"
 #include"../WorldObject/PlayerDirection.h"
+#include"../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 SlimeAction::SlimeAction()
@@ -20,7 +21,17 @@ SlimeAction::SlimeAction()
 SlimeAction::SlimeAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
+
+
+
+	addpower = int(DataM.getPlayPowerRate()*4.5f);
+	
+	addspeed = 0.07f*WorldScale*DataM.getPlaySpeedRate();
+
+	playerptr->setDefense(int(DataM.getPlayDefenseRate()*3.5f));
+
 	maxjumppower = 0.085f*WorldScale;
+
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
 	atackdelaytime = 45;
@@ -62,12 +73,8 @@ void SlimeAction::setup(ci::Vec3f rotate)
 void SlimeAction::update()
 {
 	float g = 0.015f*WorldScale;
-	float dashspeed = 0.1f*WorldScale;
 	playerptr->setSpeed(Vec3f(0, playerptr->getSpeed().y, 0));
 	playerptr->AddForth(Vec3f(0, -g, 0));
-	//if (KeyManager::getkey().isPush(KeyEvent::KEY_r)) {
-	//	playerptr->setPos(Vec3f(-300, 700, 0));
-	//}
 	playerptr->setCanJump(playerptr->getjumpCount() < 4);
 	playerptr->SetIsOpetate(!IsAtackDelay());
 	operate();
@@ -113,8 +120,6 @@ void SlimeAction::draw()
 	TextureM.getTexture("Mesh/montaKahansin.png").disable();
 	gl::popModelView();
 
-
-	//DrawM.drawCube(playerptr->getPos(),playerptr->getScale(),playerptr->getRotate(),playerptr->getColor());
 }
 
 void SlimeAction::jump()
@@ -142,7 +147,7 @@ void SlimeAction::attack()
 		(playerptr->getPos()+speed*(WorldScale/2.f),
 		ci::Vec3f(0.95,0.95,0.95)*WorldScale,
 		ci::Vec3f(speed)*WorldScale*0.1f,
-		playerptr->getRotate()+Vec3f(0,0,0)));
+		playerptr->getRotate()+Vec3f(0,0,0),5+addpower));
 	
 }
 
@@ -150,7 +155,8 @@ void SlimeAction::operate()
 {
 	if (IsAtackDelay() || playerptr->getIsStan())return;
 
-	float dashspeed = 0.1f*WorldScale;
+	float dashspeed = 0.07f*WorldScale+addspeed;
+
 	setPrevOperate();
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k) && playerptr->getCanJump()) {
 		playerptr->setCanJump(false);

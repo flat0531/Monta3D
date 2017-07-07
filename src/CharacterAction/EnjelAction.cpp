@@ -13,6 +13,7 @@
 #include"../Top/EasingManager.h"
 #include"../WorldObject/Bullet/AngelBullet.h"
 #include"../WorldObject/PlayerDirection.h"
+#include"../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 
@@ -24,7 +25,15 @@ EnjelAction::EnjelAction()
 EnjelAction::EnjelAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
+
+	addpower = int(DataM.getPlayPowerRate()*4.5f);
+
+	playerptr->setDefense(int(DataM.getPlayDefenseRate()*3.5f));
+
+	addspeed = 0.05f*WorldScale*DataM.getPlaySpeedRate();
+
 	maxjumppower = 0.10f*WorldScale;
+
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
 	atackdelaytime = 25;
@@ -33,7 +42,7 @@ EnjelAction::EnjelAction(CharacterBase * _player)
 	playerptr->setName("angel");
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	SoundM.CreateSE("birdwing.wav");
-	//SoundM.CreateSE("bird_skil.wav");
+
 	TextureM.CreateTexture("Mesh/angelhaneL.png");
 	TextureM.CreateTexture("Mesh/angelhaneR.png");
 	TextureM.CreateTexture("Mesh/angelHontai.png");
@@ -66,7 +75,7 @@ void EnjelAction::setup(ci::Vec3f rotate)
 	playerptr->setIsinvincible(false);
 	playerptr->SetIsOpetate(true);
 	prevoperate = 0;
-	atackdelaycount=0;
+	atackdelaycount = 0;
 	cursorangle = 0.0f;
 	ischarge = false;
 	iscursorup = true;
@@ -182,14 +191,14 @@ void EnjelAction::attack()
 	playerptr->getBulletManagerPointer()->CreatePlayerBullet(AngelBullet
 		(playerptr->getPos(),
 			ci::Vec3f(0.75, 0.75, 0.75)*WorldScale,playerptr->getRotate().y,cursorangle,
-			Quatf(crossvec, cursorangle)*  speed *WorldScale*0.3f,chargecount+20, bullettexturepath));
+			Quatf(crossvec, cursorangle)*  speed *WorldScale*0.3f,chargecount+20, bullettexturepath,4+addpower));
 }
 
 void EnjelAction::operate()
 {
 	if (playerptr->getIsStan())return;
 
-	float dashspeed = 0.09f*WorldScale;
+	float dashspeed = 0.07f*WorldScale+addspeed;
 	setPrevOperate();
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k)) {
 		playerptr->setCanJump(false);

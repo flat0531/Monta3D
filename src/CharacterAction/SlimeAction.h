@@ -14,8 +14,6 @@ public:
 	void jump() override;
 	void attack()  override;
 	void operate();
-
-	
 private:
 	Player* playerptr;
 	int atackdelaycount;

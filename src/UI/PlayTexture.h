@@ -8,6 +8,7 @@ public:
 	PlayTexture(const ci::Vec2f _pos,const std::string _actionname,const int _number);
 	void update(const int selectnum);
 	void draw(const ci::Vec2f trancepos);
+	ci::Surface getSurface();
 private:
 	ci::Vec2f pos;
 	ci::gl::Texture tex;

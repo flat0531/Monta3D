@@ -19,7 +19,7 @@ RattonAction::RattonAction(CharacterBase * _enemy)
 	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
-	int maxhp = 10;
+	int maxhp = 8;
 	enemyptr->setQuat(Quatf(0,M_PI/2.f,0));
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setHp(maxhp);

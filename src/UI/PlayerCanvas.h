@@ -2,6 +2,7 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
 #include"cinder\Surface.h"
+//////プレイヤーが塗ることのできるキャンバス
 class PlayerCanvas {
 public:
 	PlayerCanvas();

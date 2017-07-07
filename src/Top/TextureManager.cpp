@@ -17,10 +17,7 @@ ci::gl::Texture const& TextureManager::CreateTexture(std::string name)
 	}
 	return getTexture(name);
 }
-void TextureManager::quickCreateTexture(std::string name)
-{
-	texture[name] = MyTexture(name);
-}
+
 
 ci::gl::Texture const& TextureManager::getTexture(std::string name)
 {

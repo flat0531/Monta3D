@@ -9,7 +9,7 @@ CatBullet::CatBullet()
 {
 }
 
-CatBullet::CatBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _angle, ci::Vec3f _rotate, ci::ColorA _color, Player * _playerptr)
+CatBullet::CatBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _angle, ci::Vec3f _rotate, ci::ColorA _color, Player * _playerptr, int power)
 {
 	pos = _pos;
 	scale = _scale;
@@ -20,10 +20,9 @@ CatBullet::CatBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _angle, ci::Vec3f _
 	color = _color;
 	playerptr = _playerptr;
 	hp = 30;
-	atackpoint = 10;
+	atackpoint = power;
 	ismapcollision_endddelet = false;
 }
-
 
 
 void CatBullet::setup()

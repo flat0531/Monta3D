@@ -21,7 +21,6 @@ public:
 	void SetCharacterManagerPtr(CharacterManager* charactermanager);
 	void SetBulletManagerPtr(BulletManager* bulletmanager);
 	void SetEffectManagerPtr(EffectManager*  effectmanager);
-
 	void ItemInit();
 	void saveItems(int worldnum, int stagenum);
 	std::vector<bool>& const isGetItem();

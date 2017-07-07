@@ -456,6 +456,11 @@ int CharacterBase::getHp()
 	return hp;
 }
 
+int CharacterBase::getDefense()
+{
+	return defense;
+}
+
 int CharacterBase::getMaxHp()
 {
 	return maxhp;
@@ -482,6 +487,11 @@ void CharacterBase::addHpValue(int value)
 	hp += value;
 	if (hp >= maxhp)hp = maxhp;
 	if (hp < 0)hp = 0;
+}
+
+void CharacterBase::setDefense(int _defence)
+{
+	defense = _defence;
 }
 
 bool CharacterBase::getIsAlive()

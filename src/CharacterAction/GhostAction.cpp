@@ -39,7 +39,7 @@ void GhostAction::update()
 	if (sinrotate >= 2.f*M_PI)sinrotate -= 2.f*M_PI;
 
 	enemyptr->setRotateY((90.f*direction_left) + 25.f*sin(sinrotate));
-	if (updatecount % 250<125) {
+	if (updatecount % 250<125) {/////Œü‚«‚ð•Ï‚¦‚é
 		direction_left = 1;
 	}
 	else {

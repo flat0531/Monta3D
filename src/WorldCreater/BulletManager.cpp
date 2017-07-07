@@ -218,7 +218,11 @@ void BulletManager::CollisionEnemyBulletsToPlayer()
 		if (CollisionM.isAABBAABB(charactermanagerptr->getPlayer()->getAABB(), (*enemybullet_itr)->getAABB())){
 
 			(*enemybullet_itr)->AddHpValue(-10);
-			(charactermanagerptr->getPlayer()->addHpValue(-((*enemybullet_itr)->getAttackPoint())));
+			int damagevalue = ((*enemybullet_itr)->getAttackPoint()) - charactermanagerptr->getPlayer()->getDefense();
+			if (damagevalue <= 0)damagevalue = 1;
+
+
+			(charactermanagerptr->getPlayer()->addHpValue(-damagevalue));
 			charactermanagerptr->getPlayer()->setIsStun(true);
 			charactermanagerptr->getPlayer()->setIsinvincible(true);
 			SoundM.PlaySE("damage.wav", 0.5f);
@@ -248,7 +252,9 @@ void BulletManager::CollisionBossBulletToPlayer()
 		if (CollisionM.isAABBAABB(charactermanagerptr->getPlayer()->getAABB(), (*bossbullet_itr)->getAABB())) {
 
 			(*bossbullet_itr)->AddHpValue(-10);
-			(charactermanagerptr->getPlayer()->addHpValue(-((*bossbullet_itr)->getAttackPoint())));
+			int damagevalue = ((*bossbullet_itr)->getAttackPoint()) - charactermanagerptr->getPlayer()->getDefense();
+			if (damagevalue <= 0)damagevalue = 1;
+			(charactermanagerptr->getPlayer()->addHpValue(-damagevalue));
 			charactermanagerptr->getPlayer()->setIsStun(true);
 			charactermanagerptr->getPlayer()->setIsinvincible(true);
 			SoundM.PlaySE("damage.wav", 0.5f);

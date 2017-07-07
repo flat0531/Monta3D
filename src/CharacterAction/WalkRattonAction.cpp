@@ -15,7 +15,7 @@ WalkRattonAction::WalkRattonAction(CharacterBase * _enemy)
 	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
-	int maxhp = 10;
+	int maxhp = 7;
 	enemyptr->setRotate(Vec3f(0, 180, 0));
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setHp(maxhp);

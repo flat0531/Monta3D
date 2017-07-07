@@ -11,7 +11,7 @@
 #include"../Top/EasingManager.h"
 #include"../WorldObject/Bullet/BirdBullet.h"
 #include"../WorldObject/PlayerDirection.h"
-
+#include"../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 
@@ -23,7 +23,14 @@ BirdAction::BirdAction()
 BirdAction::BirdAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
+	addpower = int(DataM.getPlayPowerRate()*5.5f);
+
+	playerptr->setDefense(int(DataM.getPlayDefenseRate()*3.5f));
+
+	addspeed = 0.05f*WorldScale*DataM.getPlaySpeedRate();
+
 	maxjumppower = 0.15f*WorldScale;
+
 	jumppower = maxjumppower;
 	atackdelaycount = 0;
 	atackdelaytime = 25;
@@ -162,7 +169,7 @@ void BirdAction::attack()
 		(playerptr->getPos() + speed*(WorldScale / 2.f),
 			ci::Vec3f(0.95, 0.95, 0.95)*WorldScale,
 			ci::Vec3f(speed)*WorldScale*0.1f,
-			playerptr->getRotate() + Vec3f(0, 0, 0)));
+			playerptr->getRotate() + Vec3f(0, 0, 0), 7 + addpower));
 
 	SoundM.PlaySE("bird_skil.wav",0.5f);
 }
@@ -171,7 +178,7 @@ void BirdAction::operate()
 {
 	if (IsAtackDelay() || playerptr->getIsStan())return;
 
-	float dashspeed = 0.09f*WorldScale;
+	float dashspeed = 0.07f*WorldScale + addspeed;
 	setPrevOperate();
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k)) {
 		playerptr->setCanJump(false);

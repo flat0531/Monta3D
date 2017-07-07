@@ -9,17 +9,17 @@ SlimeBullet::SlimeBullet()
 	console() << "¶‚Ü‚ê‚Ä‚µ‚Ü‚Á‚½" << std::endl;
 }
 
-SlimeBullet::SlimeBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::Vec3f _rotate)
+SlimeBullet::SlimeBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::Vec3f _rotate, int _power)
 {
 	pos = _pos;
 	scale = _scale;
 	speed = _speed;
 	rotate = _rotate;
-	atackpoint = 6;
+	atackpoint = _power;
 	hp = 12;
 	uniquecolor = ColorA(0, 1, 1, 1);
 	bullettype = BulletType::PLAYER_BULLET;
-	toras.push_back(MyToras(scale,rotate,ci::Vec3f(5,0,10),0.f,ColorA(1,1,1,1)));
+	toras.push_back(MyToras(scale, rotate, ci::Vec3f(5, 0, 10), 0.f, ColorA(1, 1, 1, 1)));
 	toras.push_back(MyToras(scale, rotate, ci::Vec3f(5, 10, 10), 1.5f, ColorA(0, 1, 1, 1)));
 	toras.push_back(MyToras(scale, rotate, ci::Vec3f(5, 10, 10), 3.f, ColorA(1, 1, 1, 1)));
 	toras.push_back(MyToras(scale, rotate, ci::Vec3f(0, 5, 15), 1.f, ColorA(0, 1, 1, 1)));

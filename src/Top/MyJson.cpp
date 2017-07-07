@@ -82,33 +82,3 @@ ci::JsonTree MyJson::Vec3fToJson(const ci::Vec3f vec, const std::string key)
 	return json;
 }
 
-void MyJson::test()
-{
-	JsonTree a;
-	std::vector<JsonTree>jsons;
-	JsonTree kansei;
-	for (int i = 0;i < 3;i++)
-	{
-		JsonTree buf;
-		buf.pushBack(JsonM.Vec3fToJson(Vec3f(50, 60, 50), "pos"));
-		buf.pushBack(JsonM.Vec3fToJson(Vec3f(50, 50, 70), "rotate"));
-		buf.pushBack(JsonTree("texture", "uuuu.png"));
-		jsons.push_back(buf);
-	}
-	for (int i = 0;i < jsons.size();i++) {
-		kansei.pushBack(jsons[i]);
-	}
-	//a.write("");
-	//struct MyStruct
-	//{
-
-	//};
-	//a.pushBack(JsonM.Vec3fToJson(Vec3f(50,50,50),"pos"));
-	//a.pushBack(JsonM.Vec3fToJson(Vec3f(150, 50, 150.1f), "rotate"));
-	//a.addChild(JsonTree("texture","uuuu.png"));
-
-	//kansei.pushBack(a);
-	//kansei.pushBack(a);
-
-	//kansei.write("../assets/Json/test2.json");
-}

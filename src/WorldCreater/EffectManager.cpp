@@ -1,5 +1,6 @@
 #include "EffectManager.h"
 #include"../Top/SoundManager.h"
+#include"../Top/TextureManager.h"
 EffectManager::EffectManager()
 {
 	createAsset();
@@ -61,5 +62,6 @@ void EffectManager::createAsset()
 	SoundM.CreateSE("cubecolored.wav");
 	SoundM.CreateSE("itemget.wav");
 	SoundM.CreateSE("namesound.wav");
-	
+	TextureM.CreateTexture("UI/worldclear" + std::to_string(1) + ".png");
+	TextureM.CreateTexture("UI/blood.png");
 }

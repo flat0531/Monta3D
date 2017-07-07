@@ -6,6 +6,7 @@
 #include"../Top/EasingManager.h"
 #include"../Top/TextureManager.h"
 #include"../Top/DrawManager.h"
+#include"../Top/DataManager.h"
 #include <filesystem>
 using namespace ci;
 using namespace ci::app;
@@ -21,6 +22,7 @@ PlayTextureList::PlayTextureList()
 void PlayTextureList::update()
 {
 	selectUserTexture();
+	statusbar.update();
 	EasingTranxePos();
 	for (int i = 0;i < playtextures.size();i++) {
 		playtextures[i]->update(selectnum);
@@ -31,15 +33,18 @@ void PlayTextureList::update()
 
 void PlayTextureList::draw()
 {
+	statusbar.draw();
 	for (auto it : playtextures) {
 		it->draw(trancepos);
 	}
 	drawCursor();
+	
 }
 
 void PlayTextureList::CreatePlayTextures(std::string actionname)
 {
 	playtextures.clear();
+	name = actionname;
 	selectnum = 1;
 	trancepos = Vec2f(0, 0);
 	trance_t = 1.0f;
@@ -52,6 +57,8 @@ void PlayTextureList::CreatePlayTextures(std::string actionname)
 	for (int i = 0;i < createnum;i++) {
 		playtextures.push_back(std::make_shared<PlayTexture>(Vec2f(1250,WINDOW_HEIGHT/2.3f + span_y * i), actionname, i + 1));
 	}
+	DataM.setPlayTextureStatus(playtextures[selectnum - 1]->getSurface());
+	statusbar.setEaing(name);
 }
 
 void PlayTextureList::selectUserTexture()
@@ -60,6 +67,8 @@ void PlayTextureList::selectUserTexture()
 		if (!(selectnum == 1)) {
 			selectnum--;
 			SoundM.PlaySE("cursor.wav");
+			DataM.setPlayTextureStatus(playtextures[selectnum - 1]->getSurface());
+			statusbar.setEaing(name);
 			setEasing(trancepos, Vec2f(0, -span_y*(selectnum - 1)));
 		}
 	}
@@ -67,6 +76,8 @@ void PlayTextureList::selectUserTexture()
 		if (!(selectnum == playtextures.size())) {
 			selectnum++;
 			SoundM.PlaySE("cursor.wav");
+			DataM.setPlayTextureStatus(playtextures[selectnum - 1]->getSurface());
+			statusbar.setEaing(name);
 			setEasing(trancepos, Vec2f(0, -span_y*(selectnum - 1)));
 		}
 	}

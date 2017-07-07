@@ -4,6 +4,10 @@
 #include"../Top/MyJson.h"
 #include"../Top/SoundManager.h"
 #include"../WorldObject/CharacterBase.h"
+#include"../WorldCreater/EffectManager.h"
+#include"../WorldObject/Effect/EffectBossDeath.h"
+#include"../WorldObject/Effect/EffectWorldClear.h"
+#include"../Top/DataManager.h"
 #include"cinder\Rand.h"
 using namespace ci;
 using namespace ci::app;
@@ -23,6 +27,8 @@ CameraManager::CameraManager()
 	trancex_t = 0.0f;
 	isplayerrightmove = true;
 	SoundM.CreateSE("montavoice.wav");
+	SoundM.CreateSE("enemy_die.wav");
+	SoundM.CreateSE("stageclear.wav");
 }
 
 void CameraManager::update()
@@ -48,6 +54,9 @@ void CameraManager::update()
 		break;
 	case BOSS_CAMERA:
 		updateBossCameraType();
+		break;
+	case BOSS_EFFECT_END:
+		updateBossDeathEffectCamera();
 		break;
 	case CAMERA_TYPE_MAX:
 		break;
@@ -271,9 +280,65 @@ void CameraManager::updateBossCameraType()
 	//prevcenterrofinterstpoint = setcenterofinterestpoint;
 }
 
+void CameraManager::updateBossDeathEffectCamera()
+{
+	if (!EasingManager::tCountEnd(bossrotate_t)) {
+		EasingManager::tCount(bossrotate_t, 5.0f);
+		bosssinrotateangle += 0.11f;
+		CreateBossEffect();
+		seteyepoint = Vec3f(-11.25*WorldScale + 10.f*cos(bosssinrotateangle)*WorldScale,
+			8 * WorldScale,
+			35.f*WorldScale + 10.f*sin(bosssinrotateangle)*WorldScale);
+		setcenterofinterestpoint = Vec3f(-11.25*WorldScale,
+			3 * WorldScale,
+			35.f * WorldScale);
+		prevcenterrofinterstpoint = setcenterofinterestpoint;
+		if (EasingManager::tCountEnd(bossrotate_t)) {
+			rotateeyepoint = seteyepoint;
+			rotateeyecenterpoint = setcenterofinterestpoint;
+			SoundM.StopSE("rope.wav");
+		}
+	}
+	else {
+		if (!EasingManager::tCountEnd(bosstoplayer_t)) {
+			EasingManager::tCount(bosstoplayer_t, 2.0f);
+			seteyepoint.x = EasingCubicOut(bosstoplayer_t, rotateeyepoint.x, -15.25*WorldScale);
+			seteyepoint.y = EasingCubicOut(bosstoplayer_t, rotateeyepoint.y, 4.f*WorldScale);
+			seteyepoint.z = EasingCubicOut(bosstoplayer_t, rotateeyepoint.z, 4.5f*WorldScale);
+
+			setcenterofinterestpoint.x = EasingCubicOut(bosstoplayer_t, rotateeyecenterpoint.x, -10.25*WorldScale);
+			setcenterofinterestpoint.y = EasingCubicOut(bosstoplayer_t, rotateeyecenterpoint.y, 2.f*WorldScale);
+			setcenterofinterestpoint.z = EasingCubicOut(bosstoplayer_t, rotateeyecenterpoint.z, 0.f*WorldScale);
+			if (EasingManager::tCountEnd(bosstoplayer_t)) {
+				SoundM.PlaySE("stageclear.wav");
+				effectmanager->CreateEffect2D(EffectWorldClear(DataM.getWorldNum()));
+			}
+		}
+		
+	}
+	if (EasingManager::tCountEnd(bosstoplayer_t)) {
+		EasingManager::tCount(bossdelay_t, 7.5f);
+	}
+}
+
 void CameraManager::updateBlackWall()
 {
+	
+}
 
+void CameraManager::CreateBossEffect()
+{
+	createbosseffectcount++;
+	
+	if (createbosseffectcount % 5 == 0) {
+		float scale = randFloat(2.f*WorldScale, 4.f*WorldScale);
+		SoundM.PlaySE("enemy_die.wav");
+		effectmanager->CreateEffect(EffectBossDeath(Vec3f(-11.25*WorldScale, 5.f*WorldScale, 35.f*WorldScale)
+			+ Vec3f(randFloat(-8.f*WorldScale, 8.f*WorldScale),
+				randFloat(-3.f*WorldScale, 3.f*WorldScale),
+				randFloat(-8.f*WorldScale, 8.f*WorldScale)),
+			Vec3f(scale, scale, scale), randFloat(0.5f, 1.0f)));
+	}
 }
 
 void CameraManager::updateCameraTrance()
@@ -310,12 +375,11 @@ void CameraManager::ResetT()
 	deathcameraend = false;
 	shaketime_t = 0.0f;
 	isshake = false;
-}
-
-void CameraManager::drawBlackWall()
-{
-
-
+	bosssinrotateangle = 0.0f;
+	createbosseffectcount = 0;
+	bossrotate_t = 0.0f;
+	bosstoplayer_t = 0.0f;
+	bossdelay_t = 0.0f;
 }
 
 CameraManager * CameraManager::getThisPtr()
@@ -339,6 +403,11 @@ ci::Vec3f CameraManager::getShakeEyePoint()
 ci::Vec3f CameraManager::getShakeCenterPoint()
 {
 	return shakecenterpoint;
+}
+
+bool CameraManager::getIsBossDelayEnd()
+{
+	return EasingManager::tCountEnd(bossdelay_t);
 }
 
 
@@ -519,11 +588,14 @@ ci::Vec3f CameraManager::getSetCenterofinterestPoint()
 	return setcenterofinterestpoint;
 }
 
-
-
 void CameraManager::setCameraUpdateType(const CamaraUpdateType _cameratype)
 {
 	cameraupdatetype = _cameratype;
+}
+
+void CameraManager::setEffectManagerPtr(EffectManager * _effectmanager)
+{
+	effectmanager = _effectmanager;
 }
 
 CamaraUpdateType CameraManager::getCameraUpdateType()

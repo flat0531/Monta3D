@@ -39,7 +39,7 @@ public:
 	bool GetLoopSE(const std::string name);
 	void eraseSE(const std::string name);
 	void CreateSE(const std::string name);
-	void FadeNowBGM(float _endgain,float _fadetime, const bool isenderace = true);
+	void FadeNowBGM(float _endgain,float _fadetime, const bool isenderace = true);//////¡—¬‚ê‚Ä‚¢‚éBGM‚ğFADE‚µ‚Ü‚·
 	float getPlayStartGain();
 private:
 	std::string nowplaybgmname = "";

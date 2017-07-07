@@ -28,8 +28,10 @@ private:
 	bool getIsHpHalf();
 	int begineffectcount;
 	void createAsset();
+
 	void mainUpdate();
-	/////////////////
+
+	/////////////////各アップデート
 	void updateDrop();
 	void updateWideshot();
 	void updateStandby();

@@ -18,12 +18,12 @@ public:
 	}
 	void draw();
 	void update();
-	void StartFadeIn();
-	void StartFadeOut(const bool isplayse);
-	bool getIsFading();
+	void StartFadeIn();////フェードインスタート
+	void StartFadeOut(const bool isplayse);///フェードアウトスタート
+	bool getIsFading();///フェード中かどうか
 	void setup();
-	bool getIsfadeinEnd();
-	bool getIsfadeoutEnd();
+	bool getIsfadeinEnd();///フェードエンドが終わったフレームだけ呼ばれる
+	bool getIsfadeoutEnd();///フェードインが終わったフレームだけ呼ばれる
 	bool getIsfadeIn();
 private:
 	ci::CameraOrtho ortho;

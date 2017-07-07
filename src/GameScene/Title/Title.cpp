@@ -41,7 +41,6 @@ void Title::setup()
 
 void Title::update()
 {
-	updateSky();
 	for (auto& itr : map2d) {
 		itr.update();
 	}
@@ -119,10 +118,6 @@ void Title::shift()
 	}
 }
 
-void Title::updateSky()
-{
-
-}
 
 void Title::drawSky()
 {

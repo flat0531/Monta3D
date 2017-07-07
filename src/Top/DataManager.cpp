@@ -25,10 +25,6 @@ std::string DataManager::getStageName()
 	return stagename;
 }
 
-void DataManager::ReadNowData()
-{
-}
-
 void DataManager::setWorldNum(const int _worldnum)
 {
 	worldnum = _worldnum;
@@ -281,4 +277,103 @@ ci::gl::Texture DataManager::getLastSaveTexture(const std::string name)
 	}
 	std::string path = "UserPlay/" + name + "/play" + std::to_string(createnum) + ".png";
 	return TextureM.CreateTexture(path);
+}
+
+void DataManager::setPlayTextureStatus(const ci::Surface surface)
+{
+	float r_rate = 0.0f;
+	float g_rate = 0.0f;
+	float b_rate = 0.0f;
+	float a_rate = 0.0f;
+	float max = surface.getSize().x*surface.getSize().y;
+	float half = max / 2.f;
+	for (int y = 0; y <surface.getSize().y; y++)
+	{
+		for (int x = 0; x < surface.getSize().x; x++)
+		{
+			int r = surface.getPixel(Vec2i(x, y)).r;
+			int g = surface.getPixel(Vec2i(x, y)).g;
+			int b = surface.getPixel(Vec2i(x, y)).b;
+			int a = surface.getPixel(Vec2i(x, y)).a;
+		
+			if (r == g&&g == b) {
+				a_rate++;
+				continue;
+			}
+			if (r > g&&r > b) {
+				r_rate++;
+				continue;
+			}
+			if (g > r&&g > b) {
+				g_rate++;
+				continue;
+			}
+			if (b > r&&b > g) {
+				b_rate++;
+				continue;
+			}
+			if (r == g&&r > b) {
+				r_rate += 0.5f;
+				g_rate += 0.5f;
+				continue;
+			}
+			if (r == b&&r > g) {
+				r_rate += 0.5f;
+				b_rate += 0.5f;
+				continue;
+			}
+			if (g == b&&g > r) {
+				g_rate += 0.5f;
+				b_rate += 0.5f;
+				continue;
+			}
+			
+		}
+	}
+
+	float r_value = 0.7f*std::min(r_rate / half, 1.0f) + 0.3f*std::min(1.5f*( a_rate / half), 1.0f);
+	float g_value = 0.7f*std::min(g_rate / half, 1.0f) + 0.3f*std::min(1.5f*(a_rate / half), 1.0f);
+	float b_value = 0.7f*std::min(b_rate / half, 1.0f) + 0.3f*std::min(1.5f*(a_rate / half), 1.0f);
+
+	play_power_rate = r_value;
+	play_speed_rate = g_value;
+	play_defense_rate = b_value;
+}
+
+ci::Vec3i DataManager::getBaseStatus(std::string name)
+{
+	ActionType  type = stringToActionType(name);
+
+	switch (type)
+	{
+	case SLIME:
+		return Vec3i(4, 3, 2);
+	case CAT:
+		return Vec3i(5, 3, 4);
+	case BIRD:
+		return Vec3i(3, 1, 5);
+	case ENJEL:
+		return Vec3i(2, 1, 5);
+	case MOGURA:
+		return Vec3i(2, 5, 2);
+	}
+
+	return ci::Vec3i(1, 1, 1);
+}
+
+
+
+float DataManager::getPlayPowerRate()
+{
+	return play_power_rate;
+}
+
+float DataManager::getPlayDefenseRate()
+{
+	return play_defense_rate;
+}
+
+float DataManager::getPlaySpeedRate()
+{
+	return play_speed_rate;
 }

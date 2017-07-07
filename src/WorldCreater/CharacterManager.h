@@ -79,13 +79,17 @@ private:
 	bool isbossdeath = false;
 	bool isbossfloor = false;
 	bool isbossbegineffectend = false;
-	///////////////////////////////////////
+	///////////////////////////////////////ƒ{ƒXŠÖ˜A
 	int bosshpbuff;
 	float bossgage_t = 0.0f;
 	float bossgagebeginrate=0.0f;
 	float bossgagerate = 0.0f;
 	float bossgageendrate = 1.0f;
+	float bossdeatheffecte_t = 0.0f;
+	bool isbossdeatheffect = false;
+	bool isbossdeatheffectend = false;
 	bool isfirstgage = true;
+	bool ismove = false;
 	///////////////////////////////
 	void CollisionPlayerToEnemy();
 	void CollisionPlayerToBoss();

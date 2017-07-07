@@ -59,6 +59,7 @@ private:
 	bool isshiftstageselect = false;
 	bool playerdead = false;
 	bool isdeathblackboxstart = false;
+	bool isbossdeathshift = false;
 	float deathblackbox_t = 0.0f;
 	float zankicolor_t = 0.0f;
 	float zanki_delay_t = 0.0f;
@@ -83,7 +84,7 @@ private:
 	void drawZankiIcon();
 	void updateDeathBlackBox();
 	void updateZanki();
-	void DeathFadeInend();
+	void DeathFadeInend();////死んだときのにステージを生成しなおす
 	void StartActionSelectMode();
 	void drawShadow();
 	void setStartPos();

@@ -6,7 +6,7 @@ class Player;
 class MoguraBullet : public BulletBase {
 public:
 	MoguraBullet();
-	MoguraBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::Vec3f _rotate);
+	MoguraBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::Vec3f _rotate,int power);
 	void update()override;
 	void draw()override;
 	bool deleteThis()override;

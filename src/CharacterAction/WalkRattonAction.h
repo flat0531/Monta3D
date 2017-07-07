@@ -14,7 +14,7 @@ public:
 	void damaged()override;
 private:
 	Enemy* enemyptr;
-	void updateOnload();
+	void updateOnload();///プレイヤーのZ座標まで移動
 	bool isonload = false;
 	int direction = 1;
 	float sinrotate = 0.0f;

@@ -46,6 +46,7 @@ void GameMain::setup()
 	starteffect_isend = false;
 	worldnum = DataM.getWorldNum();
 	stagenum = DataM.getStageNum();
+	DataM.setSelectActionName("slime");
 	floornum = 1;
 	mapmanager.ReadData(worldnum, stagenum, floornum);
 	cameramanager = std::make_shared<CameraManager>();
@@ -102,6 +103,7 @@ void GameMain::setup()
 	
 	shadowmanager->setMapChipManager(mapchipmanager->getThisPtr());
 	
+	cameramanager->setEffectManagerPtr(effectmanager->getThisPointer());
 	cameramanager->unitPrevCenterOfInterestPoint(charactermanager->getPlayer()->getPos());
 	cameramanager->setMaxValue(mapchipmanager->getChipsSize()*WorldScale);
 	cameramanager->setMinValue(Vec2f(0, 0));
@@ -166,6 +168,7 @@ void GameMain::update()
 		updateGoal();
 		ReCreateStage();
 		DeathFadeInend();
+	
 	}
 	else {
 		if (charactermanager->getIsBegin() || charactermanager->getIsEnd()) {
@@ -180,9 +183,18 @@ void GameMain::update()
 			charactermanager->setActionSelectBackGround(ofScrean(rate));
 		}
 		charactermanager->updateActionSelectMode();
+		if (KeyManager::getkey().isPush(KeyEvent::KEY_ESCAPE) && (!FadeM.getIsFading())) {
+			isshiftstageselect = true;
+			FadeM.StartFadeIn();
+			SoundM.FadeNowBGM(0.0f, 0.5f, true);
+		}
 	}
 
-	
+	if (cameramanager->getIsBossDelayEnd()&&(!isbossdeathshift)) {
+		isbossdeathshift = true;
+		FadeM.StartFadeIn();
+		DataM.saveStageData(worldnum, stagenum, true);
+	}
 
 }
 
@@ -296,10 +308,13 @@ void GameMain::draw2D()
 
 void GameMain::shift()
 {
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_t)) {
-		SceneManager::createScene(Title());
-	}
 	if (FadeM.getIsfadeinEnd()&&isshiftstageselect) {
+		DataM.setPrevScene(SceneType::GANEMAIN_SCENE);
+		DataM.setNextScene(SceneType::STAGESELECT_SCENE);
+		SceneManager::createScene(StageSelect());
+	}
+	if (FadeM.getIsfadeinEnd() && isbossdeathshift) {
+		effectmanager->clearEffects();
 		DataM.setPrevScene(SceneType::GANEMAIN_SCENE);
 		DataM.setNextScene(SceneType::STAGESELECT_SCENE);
 		SceneManager::createScene(StageSelect());
@@ -552,7 +567,7 @@ void GameMain::DeathFadeInend()
 
 void GameMain::StartActionSelectMode()
 {
-	if (KeyManager::getkey().isPush(KeyEvent::KEY_i)) {
+	if (KeyManager::getkey().isPush(KeyEvent::KEY_i)&&(!charactermanager->getIsBossDeath())) {
 		if (charactermanager->getPlayer()->getCanJump()) {
 			charactermanager->setActionSelectMode(true);
 			SoundM.FadeNowBGM(0.05f, 0.5f, false);

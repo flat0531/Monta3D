@@ -18,13 +18,12 @@ public:
 	void setEffectManagerPointer(EffectManager* _effectmanager);
 	void CreateMap(const int worldnum, const int stagenum,const int floornum ,const int zvalue);
 	ci::Vec2f getChipsSize();
-	void setGoal(const std::function<void()> func);
+	void setGoal(const std::function<void()> func);////ƒS[ƒ‹‚µ‚½‚ÌŠÖ”‚ğƒQ[ƒ€ƒƒCƒ“‚©‚çæ“¾
 	MapChipManager* getThisPtr();
 	std::vector<std::vector<std::shared_ptr<MapChipBase>>> getMapChips();
 	std::vector<std::vector<std::shared_ptr<MapChipBase>>>& getMapChipsP();
 private:
-	//std::vector<std::shared_ptr<MapChipBase>> mapchips;
-	std::function<void()> goal;
+	std::function<void()> goal;////ƒS[ƒ‹‚µ‚½‚ÌŠÖ”
 	std::vector<std::vector<std::shared_ptr<MapChipBase>>> mapchips;
 	BulletManager* bulletmanagerptr;
 	CharacterManager* characterManagerptr;

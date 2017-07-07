@@ -22,7 +22,6 @@ private:
 	enum UpdateType {
 		CUBE_UPDATE,MAP2D_UPDATE,UPDATETYPE_MAX
 	};
-	//std::string texturetype[TEXTURE_TYPE_MAX];
 	std::vector<std::string> texturetype;
 	std::vector<bool>textureisalphas;
 	struct Buttuon
@@ -44,6 +43,7 @@ private:
 	Range scale_x_range;Range scale_y_range;Range scale_z_range;
 	Range rotate_x_range;Range rotate_y_range;Range rotate_z_range;
 	Buttuon buttons[6];
+	ci::Ray getCameraRay();
 	int worldnum = 1;
 	int stagenum = 1;
 	int floornum = 1;
@@ -53,7 +53,6 @@ private:
 	void CreateFrontMap();
 	void updateCamera();
 	void setCubeType();
-	ci::Ray getCameraRay();
 	void setCube(std::shared_ptr<CubeObject> _cubeobj,MapChipType type);
 	void ChangeSelectCubeType();
 	void ChangeCubeVector();
@@ -81,8 +80,8 @@ private:
 	void CreateTextureTypeString();
 	void setTextureSelectTextureObj();
 	void selectTextureType();
-	void writeMap2dObjct();
-	void roadMap2dObject();
+	void writeMap2dObjct();///セーブ
+	void roadMap2dObject();//ロード
 	std::string getPath();
 	void drawStageNum();
 	void changeStageNum();

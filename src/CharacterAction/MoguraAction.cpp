@@ -13,6 +13,7 @@
 #include"../Top/EasingManager.h"
 #include"../WorldObject/PlayerDirection.h"
 #include"../WorldObject/Bullet/MoguraBullet.h"
+#include"../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 MoguraAction::MoguraAction()
@@ -22,10 +23,20 @@ MoguraAction::MoguraAction()
 MoguraAction::MoguraAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
+
+	addpower = int(DataM.getPlayPowerRate()*4.5f);
+
+	playerptr->setDefense(int(DataM.getPlayDefenseRate()*3.5f));
+
+	addspeed = 0.07f*WorldScale*DataM.getPlaySpeedRate();
+
+	maxjumppower = 0.085f*WorldScale;
+
+	jumppower = maxjumppower;
+
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	playerptr->setScale(Vec3f(1, 1, 1)*WorldScale);
-	maxjumppower = 0.085f*WorldScale;
-	jumppower = maxjumppower;
+
 	SoundM.CreateSE("cat_skil.wav");
 	playerptr->setName("mogura");
 	foottex = TextureM.CreateTexture("Mesh/moguraAsi.png");
@@ -177,7 +188,7 @@ void MoguraAction::attack()
 			(playerptr->getPos() + speed*(WorldScale / 2.f),
 				ci::Vec3f(0.95, 0.95, 0.95)*WorldScale,
 				ci::Vec3f(speed)*WorldScale*0.25f,
-				playerptr->getRotate()));
+				playerptr->getRotate(),4+addpower));
 	}
 	atacck_t = 0.0f;
 	atackdelaycount = atackdelaytime;
@@ -193,7 +204,7 @@ void MoguraAction::operate()
 {
 	if (playerptr->getIsStan())return;
 
-	float dashspeed = 0.12f*WorldScale;
+	float dashspeed = 0.09f*WorldScale+addspeed;
 
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k) && playerptr->getCanJump()) {
 		playerptr->setCanJump(false);

@@ -10,8 +10,7 @@ public:
 	virtual void update() {};
 	virtual void draw() {};
 	virtual bool deleteThis() { return compulsiondelete; };
-	
-	
+
 	void setPos(ci::Vec3f _pos) {
 		pos = _pos;
 	}

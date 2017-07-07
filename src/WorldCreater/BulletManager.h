@@ -49,18 +49,21 @@ private:
 	
 };
 
+////エネミーのバレットを生成
 template<class T>
 inline void BulletManager::CreateEnemyBullet(T enemybullet)
 {
 	enemybullets.push_back(std::make_shared<T>(enemybullet));
 }
 
+////プレイヤーのバレットを生成
 template<class T>
 inline void BulletManager::CreatePlayerBullet(T playerbullet)
 {
 	playerbullets.push_back(std::make_shared<T>(playerbullet));
 }
 
+////ボスのバレットを生成
 template<class T>
 inline void BulletManager::CreateBossBullet(T bossbullet)
 {

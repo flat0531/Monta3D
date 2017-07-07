@@ -94,9 +94,6 @@
     <Filter Include="Source Files\EditerObject\Cube">
       <UniqueIdentifier>{52b40eb0-625b-4ff7-bfdb-19057a7087ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\EditerObject\System">
-      <UniqueIdentifier>{ce1b9742-f861-44d2-bd51-13a4b5b8de49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\EditerObject\TextureObj">
       <UniqueIdentifier>{274b6ea8-2d49-46a6-87d9-0085402e85b4}</UniqueIdentifier>
     </Filter>
@@ -528,6 +525,15 @@
     <ClCompile Include="..\src\WorldObject\Bullet\BlackScaleBullet.cpp">
       <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectFlashBack.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectBossDeath.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldObject\Effect\EffectWorldClear.cpp">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -943,6 +949,15 @@
     </ClInclude>
     <ClInclude Include="..\src\WorldObject\Bullet\BlackScaleBullet.h">
       <Filter>Source Files\WorldObjct\Bullet\BossBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectFlashBack.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectBossDeath.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldObject\Effect\EffectWorldClear.h">
+      <Filter>Source Files\WorldObjct\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

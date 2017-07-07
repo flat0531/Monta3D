@@ -2,6 +2,7 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
 #include"../UI/Range.h"
+/////////様々な機能を乗っけるメニュー
 class DrawMenu {
 public:
 	DrawMenu();

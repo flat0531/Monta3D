@@ -18,7 +18,7 @@ PumpmanAction::PumpmanAction(CharacterBase * _enemy)
 	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
-	int maxhp = 12;
+	int maxhp = 11;
 	enemyptr->setRotate(Vec3f(0, M_PI / 2.f, 0));
 	enemyptr->setScale(Vec3f(1,1,1)*WorldScale);
 	enemyptr->setMaxHp(maxhp);

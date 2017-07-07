@@ -36,7 +36,7 @@ BigPumpkin::BigPumpkin(CharacterBase * _enemy)
 	bossptr = dynamic_cast<Boss*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
-	int maxhp = 350;
+	int maxhp = 300;
 	bossptr->setMaxHp(maxhp);
 	basepos = bossptr->getPos();
 	createAsset();
@@ -288,7 +288,7 @@ void BigPumpkin::createNextUpdate()
 		createNextCandidate(BARRIERSHOT, 4);
 		break;
 	case DROP:
-		createNextCandidate(STANDBY, getIsHpHalf()?0:8);
+		createNextCandidate(STANDBY, getIsHpHalf() ? 0 : 8);
 		createNextCandidate(DROP, 0);
 		createNextCandidate(WIDESHOT, 4);
 		createNextCandidate(JUMPROPE, 4);
@@ -316,7 +316,7 @@ void BigPumpkin::createNextUpdate()
 		createNextCandidate(BARRIERSHOT, 4);
 		break;
 	case BARRIERSHOT:
-		createNextCandidate(STANDBY, getIsHpHalf() ? 0 : 8);
+		createNextCandidate(STANDBY, getIsHpHalf() ? 2 : 8);
 		createNextCandidate(DROP, 4);
 		createNextCandidate(WIDESHOT, 4);
 		createNextCandidate(JUMPROPE, 4);
@@ -326,7 +326,7 @@ void BigPumpkin::createNextUpdate()
 		createNextCandidate(BARRIERSHOT, 0);
 		break;
 	case JUMPROPE:
-		createNextCandidate(STANDBY, getIsHpHalf() ? 0 : 8);
+		createNextCandidate(STANDBY, getIsHpHalf() ? 2 : 8);
 		createNextCandidate(DROP, 4);
 		createNextCandidate(WIDESHOT, 4);
 		createNextCandidate(JUMPROPE, 0);

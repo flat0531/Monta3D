@@ -10,10 +10,13 @@
 #include"../WorldCreater/ShadowManager.h"
 #include"../WorldObject/Effect/EffectExplosion.h"
 #include"../WorldObject/Effect/EffectStar.h"
+#include"../WorldObject/Effect/EffectFlashBack.h"
 #include"../Top/EasingManager.h"
 #include"../Top/SoundManager.h"
 #include"../Top/TextureManager.h"
 #include"../WorldCreater/EffectManager.h"
+#include"../WorldCreater/BulletManager.h"
+#include"../WorldCreater/CameraMnager.h"
 #include"../Input/KeyManager.h"
 #include"../Top/MyJson.h"
 #include"../Top/DataManager.h"
@@ -130,7 +133,7 @@ void CharacterManager::setBossAction()
 void CharacterManager::update(const ci::CameraPersp camera)
 {
 	if (getIsBossFloor()) {
-		if ((isbossbegineffectend)) {
+		if ((isbossbegineffectend)&&(!isbossdeath)) {
 			player->update();
 		}
 	}
@@ -146,6 +149,7 @@ void CharacterManager::update(const ci::CameraPersp camera)
 		else
 		{
 			(*itr)->updateDeath(0.75f);
+		
 			if ((*itr)->updateDeathEnd()) {
 				//effectmanager->CreateEffect(EffectExplosion((*itr)->getPos(), (*itr)->getScale(), ci::Vec3f(0, 0, 0)));
 				effectmanager->CreateEffect2D(EffectStar((*itr)->getPos(), (*itr)->getScale(),(*itr)->getUniqueColor()));
@@ -166,10 +170,21 @@ void CharacterManager::update(const ci::CameraPersp camera)
 			//ci::app::console() << (*itr)->getHp() << std::endl;
 			itr++;
 			
-			isbossdeath = true;
+			
 		}
 		else
 		{
+			(*itr)->updateDeath(1.5f);
+			bulletmanager->ClearBullets();
+			if ((*itr)->updateDeathEnd()&&(!isbossdeath)) {
+				isbossdeath = true;
+				bossdeatheffecte_t = 0.0f;
+				isbossdeatheffect = true;
+				isbossdeatheffectend = false;
+				SoundM.FadeNowBGM(0.0f,1.0f);
+				effectmanager->CreateEffect2D(EffectFlashBack(1.0f, ColorA(1, 1, 1, 1)));
+			}
+			
 			itr++;
 		}
 		
@@ -185,12 +200,34 @@ void CharacterManager::update(const ci::CameraPersp camera)
 		}
 	}
 	for (auto& itr : boss) {
-		itr->update();
+		if ((itr)->getIsAlive()) {
+			itr->update();
+		}
 	}
 
 	updatebossGage();
 	CollisionPlayerToEnemy();
 	CollisionPlayerToBoss();
+	if (isbossdeatheffect) {
+		EasingManager::tCount(bossdeatheffecte_t, 1.0f);
+		if (bossdeatheffecte_t >= 0.5f&&(!ismove)) {
+			ismove = true;
+			SoundM.PlaySE("rope.wav");
+			cameramanager->setCameraUpdateType(BOSS_EFFECT_END);
+			player->setPos(Vec3f(-11.25*WorldScale, 2 * WorldScale, 0));
+			player->Reset(Vec3f(0, 0, 0));
+			player->setRotate(Vec3f(0, 225, 0));
+			player->setColor(player->getDefaultColor());
+			cameramanager->Shake(50, 5.f);
+			
+			for (auto& itr : boss) {
+				itr->setPos(Vec3f(-11.25*WorldScale,5.f*WorldScale,35.f*WorldScale));
+				itr->setRotate(Vec3f(0,180,0));
+			}
+			
+		}
+	}
+
 }
 
 void CharacterManager::draw(const ci::CameraPersp camera)
@@ -234,6 +271,10 @@ void CharacterManager::CreateBoss(const int worldnum, const int stagenum, const 
 	isbossbegineffectend = false;
 	isbossfloor = false;
 	isfirstgage = true;
+	bossdeatheffecte_t = 0.0f;
+	isbossdeatheffect = false;
+	isbossdeatheffectend = false;
+
 	bossgagebeginrate = 0.0f;
 	bossgagerate = 0.0f;
 	bossgageendrate = 1.0f;
@@ -421,7 +462,9 @@ void CharacterManager::CollisionPlayerToEnemy()
 				continue;
 			}
 			if (!player->getIsInvincible()) {
-				player->addHpValue(-10);
+				int damage = 10 - player->getDefense();
+				if (damage <= 0)damage = 1;
+				player->addHpValue(-damage);
 				player->setIsStun(true);
 				player->setIsinvincible(true);
 				SoundM.PlaySE("damage.wav", 0.5f);
@@ -455,10 +498,13 @@ void CharacterManager::CollisionPlayerToBoss()
 {
 	for (auto boss_itr = boss.begin();
 	boss_itr != boss.end();boss_itr++) {
-
+		if (isbossdeatheffect)continue;
+		if (!(*boss_itr)->getIsAlive())continue;
 		if (CollisionM.isAABBAABB(player->getAABB(), (*boss_itr)->getAABB())) {
 			if (!player->getIsInvincible()) {
-				player->addHpValue(-10);
+				int damage = 10 - player->getDefense();
+				if (damage <= 0)damage = 1;
+				player->addHpValue(-damage);
 				player->setIsStun(true);
 				player->setIsinvincible(true);
 				SoundM.PlaySE("damage.wav", 0.5f);
@@ -469,7 +515,6 @@ void CharacterManager::CollisionPlayerToBoss()
 
 void CharacterManager::SelectPlayerFolm(const ActionType _actiontype)
 {
-	if (_actiontype == player->getActiontype())return;
 	float begin_scale_y = player->getScale().y;
 	player->decideAction(_actiontype);
 	player->setActionType(_actiontype);

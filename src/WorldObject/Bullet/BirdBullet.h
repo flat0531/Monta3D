@@ -4,7 +4,7 @@
 class BirdBullet : public BulletBase {
 public:
 	BirdBullet();
-	BirdBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::Vec3f _rotate);
+	BirdBullet(ci::Vec3f _pos, ci::Vec3f _scale, ci::Vec3f _speed, ci::Vec3f _rotate,int _power);
 	void update()override;
 	void draw()override;
 	bool deleteThis()override;
@@ -23,6 +23,7 @@ private:
 	bool isshiftup = false;
 	void arrangeStaus();
 	float speedeasing;
+	int endpower;
 	float speedeasing_t = 0.0f;
 	int switchtime = 30;
 };

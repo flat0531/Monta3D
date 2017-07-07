@@ -5,7 +5,7 @@ class MyToras;
 class SlimeBullet : public BulletBase {
 public:
 	SlimeBullet();
-	SlimeBullet(ci::Vec3f _pos,ci::Vec3f _scale,ci::Vec3f _speed,ci::Vec3f _rotate);
+	SlimeBullet(ci::Vec3f _pos,ci::Vec3f _scale,ci::Vec3f _speed,ci::Vec3f _rotate,int _power);
 	void setup()override;
 	void update()override;
 	void draw()override;

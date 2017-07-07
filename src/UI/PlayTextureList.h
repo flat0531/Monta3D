@@ -3,6 +3,7 @@
 #include "cinder/gl/gl.h"
 #include"cinder/gl/Texture.h"
 #include"PlayTexture.h"
+#include"StatusBars.h"
 #include<vector>
 #include<memory>
 class PlayTextureList {
@@ -15,9 +16,11 @@ public:
 	int getSelectNum();
 private:
 	std::vector<std::shared_ptr<PlayTexture>> playtextures;
+	StatusBars statusbar;
 	ci::Vec2f trancepos;
 	ci::Vec2f beginpos;
 	ci::Vec2f endpos;
+	std::string name;
 	float span_y = 350.f;
 	ci::gl::Texture push_w;
 	ci::gl::Texture push_s;

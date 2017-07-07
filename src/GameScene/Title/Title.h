@@ -29,7 +29,6 @@ private:
 	SurfaceEffect backsurface;
 	SurfaceEffect framesurface;
 	ci::gl::Texture buttontex;
-	void updateSky();
 	void drawSky();
 	void CreateMap2d();
 	void drawmap2d();

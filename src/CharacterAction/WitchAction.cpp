@@ -19,7 +19,7 @@ WitchAction::WitchAction(CharacterBase * _enemy)
 	enemyptr = dynamic_cast<Enemy*>(_enemy);
 	maxjumppower = 0.085f*WorldScale;
 	jumppower = maxjumppower;
-	int maxhp = 5;
+	int maxhp = 6;
 	enemyptr->setMaxHp(maxhp);
 	enemyptr->setScale(Vec3f(1.5,1.5,1.5)*WorldScale);
 	enemyptr->setQuat(Quatf(0, M_PI, 0));
@@ -100,7 +100,7 @@ void WitchAction::draw()
 	gl::color(enemyptr->getColor());
 
 	TextureM.getTexture("Mesh/witch.png").enableAndBind();
-	gl::draw(TextureM.getMesh("witch.obj"));            // 緯度の分割数
+	gl::draw(TextureM.getMesh("witch.obj"));           
 	TextureM.getTexture("Mesh/witch.png").disable();
 
 	gl::popModelView();
@@ -117,16 +117,11 @@ void WitchAction::draw()
 	gl::color(enemyptr->getColor());
 
 	TextureM.getTexture("Mesh/houki.png").enableAndBind();
-	gl::draw(TextureM.getMesh("houki.obj"));            // 緯度の分割数
+	gl::draw(TextureM.getMesh("houki.obj"));           
 	TextureM.getTexture("Mesh/houki.png").disable();
 
 	gl::popModelView();
 
-
-
-
-
-	//DrawM.drawColorCube(enemyptr->getPos(), enemyptr->getScale(), enemyptr->getRotate());
 }
 
 void WitchAction::jump()
@@ -153,7 +148,6 @@ void WitchAction::attack()
 			enemyptr->getRotate() + Vec3f(0, 0, 0),enemyptr,15,8,atackdelay,ColorA(1,0,0),180));
 	actioncount = 0;
 	atackstart = true;
-	//SoundM.PlaySE("slime_skil.wav", 0.3f);
 }
 
 bool WitchAction::isCanAtack()
@@ -165,26 +159,3 @@ bool WitchAction::isDlay()
 {
 	return actioncount > (atackdelay*2);
 }
-
-//ci::Vec3f playerpos = enemyptr->getCharacterManager()->getPlayer()->getPos();
-//Vec3f d = playerpos - enemyptr->getPos();
-//// 目標までの向きベクトルを正規化
-//d.normalize();
-//// 自分の向きベクトルと目標までの向きベクトルの外積
-//// →クオータニオンの回転軸
-//Vec3f cross = enemyptr->getPos().cross(d);
-//
-//float rotate_x = toDegrees(std::atan2(Vec2f(d.x, d.z).length(), d.y));
-//float rotate_y = toDegrees(std::atan2(d.x, d.z));
-//float rotate_z = toDegrees(std::atan2(d.y, d.x));
-//d.y = 0.f;
-//enemyptr->setQuat(Quatf(ci::Matrix44f::createRotation(Vec3f::zAxis(), d, Vec3f::yAxis())));
-//
-//enemyptr->setRotate(Vec3f(rotate_x, rotate_y, rotate_z));
-//
-//
-//float g = 0.012f*WorldScale;
-//enemyptr->AddForth(Vec3f(0, -g, 0));
-//if (actioncount % 150 == 50) {
-//	Attack();
-//}

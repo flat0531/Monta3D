@@ -3,6 +3,7 @@
 #include "cinder/gl/gl.h"
 #include "../UI/ColorObject.h"
 #include <vector>
+//////カラーオブジェクトと束ねるもの
 class Pallet {
 public:
 	Pallet();

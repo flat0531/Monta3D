@@ -19,13 +19,13 @@ private:
 	std::list<std::shared_ptr<EffectBase>>effects2d;
 	void createAsset();
 };
-
+/////３D用のエフェクトを生成
 template<class T>
 inline void EffectManager::CreateEffect(T effect)
 {
 	effects.push_back(std::make_shared<T>(effect));
 }
-
+/////２D用のエフェクトを生成
 template<class T>
 inline void EffectManager::CreateEffect2D(T effect)
 {

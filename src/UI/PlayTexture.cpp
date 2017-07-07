@@ -38,3 +38,8 @@ void PlayTexture::draw(const ci::Vec2f trancepos)
 	DrawM.drawTextureBox(pos + trancepos, size, 0.0f, tex, ColorA(1, 1, 1, coloralfa));
 	DrawM.drawTextureBox(pos + trancepos, size, 0.0f, frametex, ColorA(1, 1, 1, coloralfa));
 }
+
+ci::Surface PlayTexture::getSurface()
+{
+	return tex;
+}

@@ -70,7 +70,6 @@ void StageSelectLogo::updateMontaIcon()
 		montaiconpos.y = EasingReturn(monta_t, startposy, -20.f);
 		montaiconsize.x = EasingReturn(monta_t, 120.f, 10.f);
 		montaiconsize.y = EasingReturn(monta_t, 120.f, 10.f);
-		//montaiconangle = EasingLinear(monta_t, 0.f, 360.f);
 		if (EasingManager::tCountEnd(monta_t)) {
 			monta_delay_t = 0.0f;
 			monta_t = 0.0f;

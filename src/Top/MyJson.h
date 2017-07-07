@@ -16,6 +16,5 @@ public:
 
    ci::JsonTree Vec2fToJson(const ci::Vec2f vec, const std::string key);
    ci::JsonTree Vec3fToJson(const ci::Vec3f vec, const std::string key);
-   void test();
 };
 #define JsonM (MyJson::getJson().getJson())

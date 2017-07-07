@@ -12,6 +12,7 @@
 #include"../Top/TextureManager.h"
 #include"../Top/EasingManager.h"
 #include"../WorldObject/PlayerDirection.h"
+#include"../Top/DataManager.h"
 using namespace ci;
 using namespace ci::app;
 CatAction::CatAction()
@@ -20,10 +21,20 @@ CatAction::CatAction()
 CatAction::CatAction(CharacterBase * _player)
 {
 	playerptr = dynamic_cast<Player*>(_player);
+
+	addpower = int(DataM.getPlayPowerRate()*4.5f);
+	playerptr->setDefense(int(DataM.getPlayDefenseRate()*3.5f));
+
+	addspeed = 0.07f*WorldScale*DataM.getPlaySpeedRate();
+
+	maxjumppower = 0.082f*WorldScale;
+
+	jumppower = maxjumppower;
+
+
 	playerptr->setDefalutColor(ColorA(1, 1, 1, 1));
 	playerptr->setScale(Vec3f(1,1,1)*WorldScale);
-	maxjumppower = 0.085f*WorldScale;
-	jumppower = maxjumppower;
+
 	SoundM.CreateSE("cat_skil.wav");
 	playerptr->setName("cat");
 	foottex = TextureM.CreateTexture("Mesh/nekoAsi.png");
@@ -175,11 +186,11 @@ void CatAction::attack()
 		if (i % 3 == 1)color = ColorA(0, 1, 0, 1);
 		if (i % 3 == 2)color = ColorA(1, 1, 0, 1);
 		atacck_t = 0.0f;
-	playerptr->getBulletManagerPointer()->CreatePlayerBullet(CatBullet(playerptr->getPos()
-		+ Quatf(crossvec,angle)*  speed *WorldScale*1.4f,
-		ci::Vec3f(1, 1, 1)*WorldScale,
-		angle,
-		playerptr->getRotate(), color,playerptr));
+		playerptr->getBulletManagerPointer()->CreatePlayerBullet(CatBullet(playerptr->getPos()
+			+ Quatf(crossvec, angle)*  speed *WorldScale*1.4f,
+			ci::Vec3f(1, 1, 1)*WorldScale,
+			angle,
+			playerptr->getRotate(), color, playerptr, 8 + addpower));
 	}
 	atackdelaycount = atackdelaytime;
 	SoundM.PlaySE("cat_skil.wav",0.5f);
@@ -199,7 +210,7 @@ void CatAction::operate()
 {
 	if (playerptr->getIsStan())return;
 	setPrevOperate();
-	float dashspeed = 0.1f*WorldScale;
+	float dashspeed = 0.07f*WorldScale + addspeed;
 
 	if (KeyManager::getkey().isPush(KeyEvent::KEY_k) && playerptr->getCanJump()) {
 		playerptr->setCanJump(false);

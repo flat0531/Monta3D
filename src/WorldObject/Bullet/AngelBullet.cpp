@@ -9,13 +9,13 @@ AngelBullet::AngelBullet()
 {
 }
 
-AngelBullet::AngelBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _y_rotate, float _z_rotate, ci::Vec3f _speed, int _deletetime, std::string _texturepath)
+AngelBullet::AngelBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _y_rotate, float _z_rotate, ci::Vec3f _speed, int _deletetime, std::string _texturepath, int _power)
 {
 	pos = _pos;
 	scale = _scale;
 	speed = _speed;
 	rotate = Vec3f(0, 0, 0);
-	atackpoint = 5;
+	atackpoint = _power;
 	hp = 30;
 	deletetime = _deletetime;
 	y_rotate = _y_rotate;
@@ -23,6 +23,8 @@ AngelBullet::AngelBullet(ci::Vec3f _pos, ci::Vec3f _scale, float _y_rotate, floa
 	texturepath = _texturepath;
 	uniquecolor = ColorA(255.f / 255.f, 153.f / 255.f, 237.f / 255.f, 1);
 }
+
+
 
 
 

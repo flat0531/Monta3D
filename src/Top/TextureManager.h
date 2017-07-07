@@ -15,15 +15,12 @@ public:
 	ci::gl::Texture const& CreateTexture(std::string name);
 	ci::gl::Texture const& getTexture(std::string name);
 	void eraseTexture(std::string name);
-	void quickCreateTexture(std::string name);
 	void Clear();
-
 	ci::TriMesh const& CreateMesh(std::string name);
 	ci::TriMesh const& getMesh(std::string name);
 	void eraseMesh(std::string name);
 
 private:
-
 	std::map<std::string, MyTexture> texture;
 	std::map<std::string, MyMesh> mesh;
 
