@@ -37,21 +37,21 @@
    {
       "color" : [ 0, 0, 255 ],
       "name" : "blue",
-      "release" : true
+      "release" : false
    },
    {
       "color" : [ 0, 255, 0 ],
       "name" : "green",
-      "release" : true
+      "release" : false
    },
    {
       "color" : [ 153, 86, 51 ],
       "name" : "tea",
-      "release" : true
+      "release" : false
    },
    {
       "color" : [ 0, 0, 0 ],
       "name" : "black",
-      "release" : true
+      "release" : false
    }
 ]

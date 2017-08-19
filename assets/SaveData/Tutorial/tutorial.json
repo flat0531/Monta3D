@@ -1,6 +1,6 @@
 [
    {
-      "clear" : true,
+      "clear" : false,
       "name" : "draw"
    }
 ]

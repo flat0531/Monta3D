@@ -1,17 +1,17 @@
 [
    {
-      "getitem" : [ true, true, true ],
-      "isclear" : true
+      "getitem" : [ false,false, false ],
+      "isclear" : false
    },
    {
-      "getitem" : [ true, true ],
-      "isclear" : true
+      "getitem" : [ false, false ],
+      "isclear" : false
    },
    {
-      "getitem" : [ true, true, true ],
-      "isclear" : true
+      "getitem" : [ false, false, false ],
+      "isclear" : false
    },
    {
-      "isclear" : true
+      "isclear" : false
    }
 ]

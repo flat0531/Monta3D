@@ -2,27 +2,27 @@
    {
       "candraw" : true,
       "name" : "slime",
-      "release" : true
+      "release" : false
    },
    {
-      "candraw" : true,
+      "candraw" : false,
       "name" : "cat",
-      "release" : true
+      "release" : false
    },
    {
-      "candraw" : true,
+      "candraw" : false,
       "name" : "bird",
-      "release" : true
+      "release" : false
    },
    {
-      "candraw" : true,
+      "candraw" : false,
       "name" : "angel",
-      "release" : true
+      "release" : false
    },
    {
-      "candraw" : true,
+      "candraw" : false,
       "name" : "mogura",
-      "release" : true
+      "release" : false
    },
    {
       "candraw" : false,
